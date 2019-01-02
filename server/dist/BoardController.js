@@ -8,5 +8,18 @@ class BoardController {
     get board() {
         return this.currentBoard;
     }
+    get player() {
+        return this.currentPlayer;
+    }
+    place(piece) {
+        this.currentBoard.fill(piece, piece.row, piece.col);
+    }
+    log() {
+        console.log('Name:', this.currentPlayer.username);
+    }
+    run() {
+        setTimeout(() => this.run(), 1 * 1000);
+        this.log();
+    }
 }
 exports.default = BoardController;

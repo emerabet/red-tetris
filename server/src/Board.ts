@@ -1,4 +1,4 @@
-import Player from './Player';
+import Piece from "./Piece";
 
 class Board {
     private score:number;
@@ -25,6 +25,15 @@ class Board {
             arr.length = width;
             arr.fill(0);
             this.playfield.push(arr);
+        }
+    }
+
+    public fill(piece: Piece, row: number, col: number): void {
+        let startRow = row;
+        let startCol = col;
+
+        for (let i = 0; i < piece.shape.length; i += 1) {
+
         }
     }
 }

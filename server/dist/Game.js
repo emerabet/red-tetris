@@ -10,6 +10,9 @@ class Game {
         this.isStarted = false;
         this.boards = [];
     }
+    getBoards() {
+        return this.boards;
+    }
     createBoard(player, height, width) {
         if (!this.isStarted) {
             const board = new Board_1.default(height, width);

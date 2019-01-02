@@ -19,5 +19,11 @@ class Board {
             this.playfield.push(arr);
         }
     }
+    fill(piece, row, col) {
+        let startRow = row;
+        let startCol = col;
+        for (let i = 0; i < piece.shape.length; i += 1) {
+        }
+    }
 }
 exports.default = Board;

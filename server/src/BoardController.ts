@@ -14,6 +14,23 @@ class BoardController {
     get board(): Board {
         return this.currentBoard;
     }
+
+    get player(): Player {
+        return this.currentPlayer;
+    }
+
+    public place(piece: Piece) {
+        this.currentBoard.fill(piece, piece.row, piece.col);
+    }
+
+    public log() {
+        console.log('Name:', this.currentPlayer.username);
+    }
+
+    public run() {
+        setTimeout(() => this.run(), 1 * 1000);
+        this.log();
+    }
 }
 
 export default BoardController;

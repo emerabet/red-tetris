@@ -11,6 +11,10 @@ class Game {
         this.boards = [];
     }
 
+    public getBoards(): BoardController[] {
+        return this.boards;
+    }
+
     public createBoard(player:Player, height:number, width:number): void {
         if (!this.isStarted) {
             const board:Board = new Board(height, width);

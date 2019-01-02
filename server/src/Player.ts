@@ -4,6 +4,10 @@ class Player {
     constructor(name:string) {
         this.name = name;
     }
+
+    get username(): String {
+        return this.name;
+    }
 }
 
 export default Player;
