@@ -19,10 +19,31 @@ class Board {
             this.playfield.push(arr);
         }
     }
-    fill(piece, row, col) {
-        let startRow = row;
-        let startCol = col;
+    clearAll() {
+        for (let i = 0; i < this.playfield.length; i += 1) {
+            for (let j = 0; j < this.playfield[i].length; j += 1) {
+                this.playfield[i][j] = 0;
+            }
+        }
+    }
+    clear(piece) {
+        const startRow = piece.row;
+        const startCol = piece.col;
         for (let i = 0; i < piece.shape.length; i += 1) {
+            for (let j = 0; j < piece.shape[i].length; j += 1) {
+                this.playfield[startRow + i][startCol + j] = 0;
+            }
+        }
+    }
+    fill(piece) {
+        const startRow = piece.row;
+        const startCol = piece.col;
+        for (let i = 0; i < piece.shape.length; i += 1) {
+            for (let j = 0; j < piece.shape[i].length; j += 1) {
+                if (piece.shape[i][j] !== 0) {
+                    this.playfield[startRow + i][startCol + j] = piece.shape[i][j];
+                }
+            }
         }
     }
 }

@@ -14,7 +14,7 @@ class Piece {
         this.index = 0;
         this.max = positions.length;
         this.positionRow = 0;
-        this.positionCol = 5;
+        this.positionCol = 3;
     }
 
     get shape(): number[][] {
@@ -32,9 +32,13 @@ class Piece {
     rotate() {
         this.index = (this.index + 1) % this.max;
     }
-    
-    move(direction:Direction) {
 
+    move(direction:Direction) {
+        switch (direction) {
+        case Direction.Down: this.positionRow += 1;
+        case Direction.Left: this.positionCol -= 1;
+        case Direction.Right: this.positionCol += 1;
+        }
     }
 }
 

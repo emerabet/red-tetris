@@ -1,4 +1,4 @@
-import Piece from "./Piece";
+import Piece from './Piece';
 
 class Board {
     private score:number;
@@ -28,12 +28,35 @@ class Board {
         }
     }
 
-    public fill(piece: Piece, row: number, col: number): void {
-        let startRow = row;
-        let startCol = col;
+    public clearAll() {
+        for (let i = 0; i < this.playfield.length; i += 1) {
+            for (let j = 0; j < this.playfield[i].length; j += 1) {
+                this.playfield[i][j] = 0;
+            }
+        }
+    }
+
+    public clear(piece: Piece): void {
+        const startRow = piece.row;
+        const startCol = piece.col;
 
         for (let i = 0; i < piece.shape.length; i += 1) {
+            for (let j = 0; j < piece.shape[i].length; j += 1) {
+                this.playfield[startRow + i][startCol + j] = 0;
+            }
+        }
+    }
 
+    public fill(piece: Piece): void {
+        const startRow = piece.row;
+        const startCol = piece.col;
+
+        for (let i = 0; i < piece.shape.length; i += 1) {
+            for (let j = 0; j < piece.shape[i].length; j += 1) {
+                if (piece.shape[i][j] !== 0) {
+                    this.playfield[startRow + i][startCol + j] = piece.shape[i][j];
+                }
+            }
         }
     }
 }
