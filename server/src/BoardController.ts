@@ -57,16 +57,10 @@ class BoardController {
 
     private test() {
         console.log(`• Start turn: ${this.nbTick} `);
-        if (this.nbTick === 0 && this.checkCollision(Direction.Top)) {
-            console.log('End game');
-            clearInterval(this.timer);
-            return ;
-        }
+
         if (this.checkCollision(Direction.Down)) {
-            console.log('là');
             this.currentPiece.rollback();
             this.currentBoard.fill(this.currentPiece);
-            console.log('Rollback position: row: ', this.currentPiece.row, ' col:  ', this.currentPiece.col);
             this.currentPiece = PieceFactory.createRandomPiece();
         }
         this.currentBoard.fill(this.currentPiece);
