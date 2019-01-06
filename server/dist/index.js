@@ -15,4 +15,4 @@ game.createBoard(p2, 20, 10);
 // console.log(game.getBoards()[0].board);
 // console.log(game.getBoards()[0].player);
 game.getBoards()[0].run();
-//game.getBoards()[1].run();
+// game.getBoards()[1].run();

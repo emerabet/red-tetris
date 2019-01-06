@@ -2,6 +2,17 @@ export enum Direction {
     Down,
     Left,
     Right,
+    Top,
+}
+
+export enum From {
+    Top,
+    Bottom,
+}
+
+export enum CellState {
+    Empty = 0,
+    Locked = -1,
 }
 
 export const Z:string = 'Z';
@@ -23,6 +34,16 @@ export const SHAPES_Z = [
         [0, 1, 1],
         [0, 1, 0],
     ],
+    [
+        [0, 0, 0],
+        [1, 1, 0],
+        [0, 1, 1],
+    ],
+    [
+        [0, 1, 0],
+        [1, 1, 0],
+        [1, 0, 0],
+    ],
 ];
 
 export const SHAPES_S = [
@@ -36,14 +57,19 @@ export const SHAPES_S = [
         [0, 2, 2],
         [0, 0, 2],
     ],
+    [
+        [0, 0, 0],
+        [0, 2, 2],
+        [2, 2, 0],
+    ],
+    [
+        [2, 0, 0],
+        [2, 2, 0],
+        [0, 2, 0],
+    ],
 ];
 
 export const SHAPES_J = [
-    [
-        [0, 3, 0],
-        [0, 3, 0],
-        [3, 3, 0],
-    ],
     [
         [3, 0, 0],
         [3, 3, 3],
@@ -58,6 +84,11 @@ export const SHAPES_J = [
         [0, 0, 0],
         [3, 3, 3],
         [0, 0, 3],
+    ],
+    [
+        [0, 3, 0],
+        [0, 3, 0],
+        [3, 3, 0],
     ],
 ];
 

@@ -34,8 +34,9 @@ class PieceFactory {
     }
 
     public static createRandomPiece(): Piece {
-        const max: number = Object.keys(this.allPieces).length;
-        const index: number = Math.floor(Math.random() * Math.floor(max));
+        const min = Math.ceil(0);
+        const max: number = Math.floor(Object.keys(this.allPieces).length);
+        const index: number = Math.floor(Math.random() * (max - min + 1)) + min;
         const letter: string = Object.keys(this.allPieces)[index];
         return this.createPiece(letter);
     }

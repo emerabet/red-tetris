@@ -12,8 +12,9 @@ class PieceFactory {
         return piece;
     }
     static createRandomPiece() {
-        const max = Object.keys(this.allPieces).length;
-        const index = Math.floor(Math.random() * Math.floor(max));
+        const min = Math.ceil(0);
+        const max = Math.floor(Object.keys(this.allPieces).length);
+        const index = Math.floor(Math.random() * (max - min + 1)) + min;
         const letter = Object.keys(this.allPieces)[index];
         return this.createPiece(letter);
     }

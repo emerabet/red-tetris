@@ -1,9 +1,10 @@
 import Piece from './Piece';
+import { CellState, From } from './constants';
 
 class Board {
     private score:number;
-    private height: number;
-    private width: number;
+    private readonly height: number;
+    private readonly width: number;
     private playfield: number[][];
 
     constructor(height:number, width:number) {
@@ -12,26 +13,38 @@ class Board {
         this.height = height;
         this.width = width;
 
-        this.createBoard(height, width);
+        this.createBoard();
     }
 
     get grid(): number[][] {
         return this.playfield;
     }
 
-    private createBoard(height:number, width:number): void {
-        for (let i = 0; i < height; i += 1) {
-            const arr:number[] = [];
-            arr.length = width;
-            arr.fill(0);
-            this.playfield.push(arr);
+    get gridHeight(): number {
+        return this.height;
+    }
+
+    get gridWidth(): number {
+        return this.width;
+    }
+
+    private addRow(state: CellState): void {
+        const arr:number[] = [];
+        arr.length = this.width;
+        arr.fill(state);
+        this.playfield.push(arr);
+    }
+
+    private createBoard(): void {
+        for (let i = 0; i < this.height; i += 1) {
+            this.addRow(CellState.Empty);
         }
     }
 
     public clearAll() {
         for (let i = 0; i < this.playfield.length; i += 1) {
             for (let j = 0; j < this.playfield[i].length; j += 1) {
-                this.playfield[i][j] = 0;
+                this.playfield[i][j] = CellState.Empty;
             }
         }
     }
@@ -42,7 +55,9 @@ class Board {
 
         for (let i = 0; i < piece.shape.length; i += 1) {
             for (let j = 0; j < piece.shape[i].length; j += 1) {
-                this.playfield[startRow + i][startCol + j] = 0;
+                if (piece.shape[i][j] !== CellState.Empty) {
+                    this.playfield[startRow + i][startCol + j] = CellState.Empty;
+                }
             }
         }
     }
@@ -53,10 +68,22 @@ class Board {
 
         for (let i = 0; i < piece.shape.length; i += 1) {
             for (let j = 0; j < piece.shape[i].length; j += 1) {
-                if (piece.shape[i][j] !== 0) {
+                if (piece.shape[i][j] !== CellState.Empty) {
                     this.playfield[startRow + i][startCol + j] = piece.shape[i][j];
                 }
             }
+        }
+    }
+
+    public addLockedRow(): void {
+        this.addRow(CellState.Locked);
+    }
+
+    public removeRow(from: From): void {
+        if (from === From.Top) {
+            this.playfield.shift();
+        } else {
+            this.playfield.pop();
         }
     }
 }

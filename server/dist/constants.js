@@ -5,7 +5,18 @@ var Direction;
     Direction[Direction["Down"] = 0] = "Down";
     Direction[Direction["Left"] = 1] = "Left";
     Direction[Direction["Right"] = 2] = "Right";
+    Direction[Direction["Top"] = 3] = "Top";
 })(Direction = exports.Direction || (exports.Direction = {}));
+var From;
+(function (From) {
+    From[From["Top"] = 0] = "Top";
+    From[From["Bottom"] = 1] = "Bottom";
+})(From = exports.From || (exports.From = {}));
+var CellState;
+(function (CellState) {
+    CellState[CellState["Empty"] = 0] = "Empty";
+    CellState[CellState["Locked"] = -1] = "Locked";
+})(CellState = exports.CellState || (exports.CellState = {}));
 exports.Z = 'Z';
 exports.S = 'S';
 exports.J = 'J';
@@ -24,6 +35,16 @@ exports.SHAPES_Z = [
         [0, 1, 1],
         [0, 1, 0],
     ],
+    [
+        [0, 0, 0],
+        [1, 1, 0],
+        [0, 1, 1],
+    ],
+    [
+        [0, 1, 0],
+        [1, 1, 0],
+        [1, 0, 0],
+    ],
 ];
 exports.SHAPES_S = [
     [
@@ -36,13 +57,18 @@ exports.SHAPES_S = [
         [0, 2, 2],
         [0, 0, 2],
     ],
+    [
+        [0, 0, 0],
+        [0, 2, 2],
+        [2, 2, 0],
+    ],
+    [
+        [2, 0, 0],
+        [2, 2, 0],
+        [0, 2, 0],
+    ],
 ];
 exports.SHAPES_J = [
-    [
-        [0, 3, 0],
-        [0, 3, 0],
-        [3, 3, 0],
-    ],
     [
         [3, 0, 0],
         [3, 3, 3],
@@ -57,6 +83,11 @@ exports.SHAPES_J = [
         [0, 0, 0],
         [3, 3, 3],
         [0, 0, 3],
+    ],
+    [
+        [0, 3, 0],
+        [0, 3, 0],
+        [3, 3, 0],
     ],
 ];
 exports.SHAPES_L = [
