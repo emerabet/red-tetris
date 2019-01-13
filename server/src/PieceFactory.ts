@@ -15,6 +15,7 @@ import {
     I,
     O,
 } from './constants';
+import { exists } from 'fs';
 
 class PieceFactory {
     private static readonly allPieces = {
@@ -34,8 +35,8 @@ class PieceFactory {
     }
 
     public static createRandomPiece(): Piece {
-        const min = Math.ceil(0);
-        const max: number = Math.floor(Object.keys(this.allPieces).length);
+        const min = 0;
+        const max: number = Object.keys(this.allPieces).length - 1;
         const index: number = Math.floor(Math.random() * (max - min + 1)) + min;
         const letter: string = Object.keys(this.allPieces)[index];
         return this.createPiece(letter);

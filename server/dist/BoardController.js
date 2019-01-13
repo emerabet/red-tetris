@@ -12,21 +12,19 @@ const strategies = {
     [constants_1.Direction.Top]: new CollisionTopStrategy_1.default(),
 };
 class BoardController {
-    constructor(player, board) {
+    constructor(player, board, socket) {
         this.currentPlayer = player;
         this.currentBoard = board;
-        this.nbTick = 0;
+        this.socket = socket;
         this.currentPiece = PieceFactory_1.default.createRandomPiece();
-        this.test = this.test.bind(this);
+        this.drop = this.drop.bind(this);
+        this.init();
     }
     get board() {
         return this.currentBoard;
     }
     get player() {
         return this.currentPlayer;
-    }
-    place(piece) {
-        this.currentBoard.fill(piece);
     }
     log() {
         console.log('Name:', this.currentPlayer.username);
@@ -40,32 +38,96 @@ class BoardController {
         }
         return false;
     }
-    test() {
-        console.log(`• Start turn: ${this.nbTick} `);
-        if (this.nbTick === 0 && this.checkCollision(constants_1.Direction.Top)) {
-            console.log('End game');
-            clearInterval(this.timer);
-            return;
+    check() {
+        for (let i = 0; i < this.currentPiece.shape.length; i += 1) {
+            for (let j = 0; j < this.currentPiece.shape[i].length; j += 1) {
+                if (this.currentPiece.shape[i][j] !== constants_1.CellState.Empty) {
+                    if (!this.currentBoard.grid[this.currentPiece.row + i]
+                        || this.currentBoard.grid[this.currentPiece.row + i][this.currentPiece.col + j] !== constants_1.CellState.Empty) {
+                        console.log('COLLISION DETECTED!!');
+                        return true;
+                    }
+                }
+            }
         }
-        if (this.checkCollision(constants_1.Direction.Down)) {
-            console.log('là');
-            this.currentPiece.rollback();
+        return false;
+    }
+    newPiece() {
+        console.log('[ACTION] NEW PIECE GENERATED ');
+        this.currentPiece = PieceFactory_1.default.createRandomPiece();
+        if (this.check()) {
+            console.log(' /!\\ END GAME /!\\');
+            console.log(this.currentPiece);
             this.currentBoard.fill(this.currentPiece);
-            console.log('Rollback position: row: ', this.currentPiece.row, ' col:  ', this.currentPiece.col);
-            this.currentPiece = PieceFactory_1.default.createRandomPiece();
+            console.log(this.currentBoard.grid);
+            clearInterval(this.timer);
         }
+    }
+    draw() {
         this.currentBoard.fill(this.currentPiece);
         console.log(this.currentBoard.grid);
-        console.log(' ------------ ');
         this.currentBoard.clear(this.currentPiece);
-        // this.currentPiece.rotate();
+        console.log('------------');
+    }
+    moveDown() {
         this.currentPiece.move(constants_1.Direction.Down);
-        this.nbTick += 1;
-        console.log('New position: row: ', this.currentPiece.row, ' col:  ', this.currentPiece.col);
+        if (this.check()) {
+            this.currentPiece.rollback();
+            this.place();
+            this.newPiece();
+        }
+        else {
+            this.draw();
+        }
+    }
+    place() {
+        this.currentBoard.fill(this.currentPiece);
+    }
+    moveSide(dir) {
+        this.currentPiece.move(dir);
+        if (this.check()) {
+            this.currentPiece.rollback();
+        }
+    }
+    drop() {
+        this.moveDown();
+    }
+    rotate() {
+        this.currentPiece.rotate();
+        if (this.check()) {
+            this.currentPiece.rollback();
+        }
     }
     run() {
-        //const timer = setInterval(() => this.run(), 1 * 1000);
-        this.timer = setInterval(this.test, 200);
+        // const timer = setInterval(() => this.run(), 1 * 1000);
+        // this.currentPiece = PieceFactory.createRandomPiece();
+        // console.log(this.currentPiece);
+        this.timer = setInterval(this.drop, 200);
+    }
+    init() {
+        this.socket.on('init', () => {
+            console.log('First print');
+            this.draw();
+        });
+        this.socket.on('down', () => {
+            console.log('down received');
+            this.moveDown();
+        });
+        this.socket.on('up', () => {
+            console.log('up received, try rotate');
+            this.rotate();
+            this.draw();
+        });
+        this.socket.on('left', () => {
+            console.log('left received');
+            this.moveSide(constants_1.Direction.Left);
+            this.draw();
+        });
+        this.socket.on('right', () => {
+            console.log('right received');
+            this.moveSide(constants_1.Direction.Right);
+            this.draw();
+        });
     }
 }
 exports.default = BoardController;

@@ -13,10 +13,10 @@ class Game {
     getBoards() {
         return this.boards;
     }
-    createBoard(player, height, width) {
+    createBoard(player, height, width, socket) {
         if (!this.isStarted) {
             const board = new Board_1.default(height, width);
-            const boardController = new BoardController_1.default(player, board);
+            const boardController = new BoardController_1.default(player, board, socket);
             this.boards.push(boardController);
         }
     }

@@ -7,8 +7,8 @@ class Piece {
         this.shapeName = shapeName;
         this.index = 0;
         this.max = positions.length;
-        this.positionRow = 0 - this.findFirstRow();
-        this.positionCol = 3 + this.findFirstCol();
+        this.positionRow = 0;
+        this.positionCol = 3;
         this.previous = null;
         this.snapshotPosition();
     }
@@ -43,15 +43,18 @@ class Piece {
     }
     snapshotPosition() {
         this.previous = {
+            index: this.index,
             row: this.positionRow,
             col: this.positionCol,
         };
     }
     rotate() {
+        this.snapshotPosition();
         this.index = (this.index + 1) % this.max;
     }
     rollback() {
         if (this.previous) {
+            this.index = this.previous.index;
             this.positionRow = this.previous.row;
             this.positionCol = this.previous.col;
         }
@@ -59,9 +62,15 @@ class Piece {
     move(direction) {
         this.snapshotPosition();
         switch (direction) {
-            case constants_1.Direction.Down: this.positionRow += 1;
-            case constants_1.Direction.Left: this.positionCol -= 1;
-            case constants_1.Direction.Right: this.positionCol += 1;
+            case constants_1.Direction.Down:
+                this.positionRow += 1;
+                break;
+            case constants_1.Direction.Left:
+                this.positionCol -= 1;
+                break;
+            case constants_1.Direction.Right:
+                this.positionCol += 1;
+                break;
         }
     }
 }

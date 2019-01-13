@@ -15,10 +15,10 @@ class Game {
         return this.boards;
     }
 
-    public createBoard(player:Player, height:number, width:number): void {
+    public createBoard(player:Player, height:number, width:number, socket:any): void {
         if (!this.isStarted) {
             const board:Board = new Board(height, width);
-            const boardController = new BoardController(player, board);
+            const boardController = new BoardController(player, board, socket);
             this.boards.push(boardController);
         }
     }

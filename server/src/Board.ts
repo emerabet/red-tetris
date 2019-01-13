@@ -75,6 +75,16 @@ class Board {
         }
     }
 
+    public isFull(rowIndex: number) {
+        for (let j = 0; j < this.width; j += 1) {
+            if (this.playfield[rowIndex][j] === CellState.Empty
+                || this.playfield[rowIndex][j] === CellState.Locked) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public addLockedRow(): void {
         this.addRow(CellState.Locked);
     }
