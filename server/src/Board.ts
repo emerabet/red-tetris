@@ -28,16 +28,20 @@ class Board {
         return this.width;
     }
 
-    private addRow(state: CellState): void {
+    private addRow(state: CellState, from: From): void {
         const arr:number[] = [];
         arr.length = this.width;
         arr.fill(state);
-        this.playfield.push(arr);
+        if (from === From.Bottom) {
+            this.playfield.push(arr);
+        } else {
+            this.playfield.unshift(arr);
+        }
     }
 
     private createBoard(): void {
         for (let i = 0; i < this.height; i += 1) {
-            this.addRow(CellState.Empty);
+            this.addRow(CellState.Empty, From.Bottom);
         }
     }
 
@@ -86,7 +90,12 @@ class Board {
     }
 
     public addLockedRow(): void {
-        this.addRow(CellState.Locked);
+        this.removeRow(From.Top);
+        this.addRow(CellState.Locked, From.Bottom);
+    }
+
+    public addEmptyRow(): void {
+        this.addRow(CellState.Empty, From.Top);
     }
 
     public removeRow(from: From): void {
@@ -95,6 +104,10 @@ class Board {
         } else {
             this.playfield.pop();
         }
+    }
+
+    public removeRowAt(rowIndex: number) {
+        this.playfield.splice(rowIndex, 1);
     }
 }
 

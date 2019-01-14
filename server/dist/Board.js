@@ -18,15 +18,20 @@ class Board {
     get gridWidth() {
         return this.width;
     }
-    addRow(state) {
+    addRow(state, from) {
         const arr = [];
         arr.length = this.width;
         arr.fill(state);
-        this.playfield.push(arr);
+        if (from === constants_1.From.Bottom) {
+            this.playfield.push(arr);
+        }
+        else {
+            this.playfield.unshift(arr);
+        }
     }
     createBoard() {
         for (let i = 0; i < this.height; i += 1) {
-            this.addRow(constants_1.CellState.Empty);
+            this.addRow(constants_1.CellState.Empty, constants_1.From.Bottom);
         }
     }
     clearAll() {
@@ -58,8 +63,21 @@ class Board {
             }
         }
     }
+    isFull(rowIndex) {
+        for (let j = 0; j < this.width; j += 1) {
+            if (this.playfield[rowIndex][j] === constants_1.CellState.Empty
+                || this.playfield[rowIndex][j] === constants_1.CellState.Locked) {
+                return false;
+            }
+        }
+        return true;
+    }
     addLockedRow() {
-        this.addRow(constants_1.CellState.Locked);
+        this.removeRow(constants_1.From.Top);
+        this.addRow(constants_1.CellState.Locked, constants_1.From.Bottom);
+    }
+    addEmptyRow() {
+        this.addRow(constants_1.CellState.Empty, constants_1.From.Top);
     }
     removeRow(from) {
         if (from === constants_1.From.Top) {
@@ -68,6 +86,9 @@ class Board {
         else {
             this.playfield.pop();
         }
+    }
+    removeRowAt(rowIndex) {
+        this.playfield.splice(rowIndex, 1);
     }
 }
 exports.default = Board;

@@ -19,6 +19,11 @@ class BoardController {
         this.currentPiece = PieceFactory_1.default.createRandomPiece();
         this.drop = this.drop.bind(this);
         this.init();
+        this.currentBoard.clear(this.currentPiece);
+        this.currentBoard.addLockedRow();
+        this.currentBoard.addLockedRow();
+        this.currentBoard.addLockedRow();
+        this.place();
     }
     get board() {
         return this.currentBoard;
@@ -58,13 +63,13 @@ class BoardController {
         if (this.check()) {
             console.log(' /!\\ END GAME /!\\');
             console.log(this.currentPiece);
-            this.currentBoard.fill(this.currentPiece);
+            this.place();
             console.log(this.currentBoard.grid);
             clearInterval(this.timer);
         }
     }
     draw() {
-        this.currentBoard.fill(this.currentPiece);
+        this.place();
         console.log(this.currentBoard.grid);
         this.currentBoard.clear(this.currentPiece);
         console.log('------------');
@@ -74,10 +79,21 @@ class BoardController {
         if (this.check()) {
             this.currentPiece.rollback();
             this.place();
+            this.checkLine();
             this.newPiece();
         }
         else {
             this.draw();
+        }
+    }
+    checkLine() {
+        // Vérifier si des lignes sont pleines
+        for (let i = this.currentBoard.grid.length - 1; i >= 0; i -= 1) {
+            if (this.currentBoard.isFull(i) === true) {
+                this.currentBoard.removeRowAt(i);
+                this.currentBoard.addEmptyRow();
+                console.log('Full row, row removed');
+            }
         }
     }
     place() {
@@ -97,6 +113,8 @@ class BoardController {
         if (this.check()) {
             this.currentPiece.rollback();
         }
+    }
+    addMalus() {
     }
     run() {
         // const timer = setInterval(() => this.run(), 1 * 1000);

@@ -27,6 +27,11 @@ class BoardController {
 
         this.drop = this.drop.bind(this);
         this.init();
+        this.currentBoard.clear(this.currentPiece);
+        this.currentBoard.addLockedRow();
+        this.currentBoard.addLockedRow();
+        this.currentBoard.addLockedRow();
+        this.place();
     }
 
     get board(): Board {
@@ -91,16 +96,26 @@ class BoardController {
         if (this.check()) {
             this.currentPiece.rollback();
             this.place();
+            this.checkLine();
             this.newPiece();
         } else {
             this.draw();
         }
     }
 
+    private checkLine() {
+        // Vérifier si des lignes sont pleines
+        for (let i = this.currentBoard.grid.length - 1; i >= 0; i -= 1) {
+            if (this.currentBoard.isFull(i) === true) {
+                this.currentBoard.removeRowAt(i);
+                this.currentBoard.addEmptyRow();
+                console.log('Full row, row removed');
+            }
+        }
+    }
+
     private place() {
         this.currentBoard.fill(this.currentPiece);
-
-        // Vérifier si des lignes sont pleines
     }
 
     private moveSide(dir:Direction) {
@@ -119,6 +134,10 @@ class BoardController {
         if (this.check()) {
             this.currentPiece.rollback();
         }
+    }
+
+    private addMalus() {
+
     }
 
     public run() {
