@@ -167,7 +167,7 @@ export const SHAPES_I = [
 
 export const SHAPES_O = [
     [
-        [7, 7],
-        [7, 7],
+        [0, 7, 7],
+        [0, 7, 7],
     ],
 ];

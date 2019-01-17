@@ -1,3 +1,4 @@
+import { EventEmitter } from 'events';
 import Player from './Player';
 import Board from './Board';
 import Piece from './Piece';
@@ -6,6 +7,7 @@ import { Direction, From, CellState } from './constants';
 import ICollisionStrategy from './Interfaces/ICollisionStrategy';
 import CollisionDownStrategy from './Strategies/CollisionDownStrategy';
 import CollisionTopStrategy from './Strategies/CollisionTopStrategy';
+import { Socket } from 'socket.io';
 
 const strategies: any = {
     [Direction.Down]: new CollisionDownStrategy(),
@@ -17,12 +19,14 @@ class BoardController {
     private currentBoard: Board;
     private currentPiece: Piece;
     private timer: any;
-    private socket: any;
+    private socket: Socket;
+    private eventEmitter: EventEmitter;
 
-    constructor(player:Player, board:Board, socket:any) {
+    constructor(player:Player, board:Board, socket:Socket, emitter: EventEmitter) {
         this.currentPlayer = player;
         this.currentBoard = board;
         this.socket = socket;
+        this.eventEmitter = emitter;
         this.currentPiece = PieceFactory.createRandomPiece();
 
         this.drop = this.drop.bind(this);
@@ -109,6 +113,7 @@ class BoardController {
             if (this.currentBoard.isFull(i) === true) {
                 this.currentBoard.removeRowAt(i);
                 this.currentBoard.addEmptyRow();
+                this.addMalus();
                 console.log('Full row, row removed');
             }
         }
@@ -137,7 +142,7 @@ class BoardController {
     }
 
     private addMalus() {
-
+        this.eventEmitter.emit('malus', this.socket.id);
     }
 
     public run() {

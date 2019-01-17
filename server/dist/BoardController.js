@@ -12,10 +12,11 @@ const strategies = {
     [constants_1.Direction.Top]: new CollisionTopStrategy_1.default(),
 };
 class BoardController {
-    constructor(player, board, socket) {
+    constructor(player, board, socket, emitter) {
         this.currentPlayer = player;
         this.currentBoard = board;
         this.socket = socket;
+        this.eventEmitter = emitter;
         this.currentPiece = PieceFactory_1.default.createRandomPiece();
         this.drop = this.drop.bind(this);
         this.init();
@@ -123,6 +124,9 @@ class BoardController {
         this.timer = setInterval(this.drop, 1000);
     }
     init() {
+        this.socket.on('testevent', () => {
+            this.eventEmitter.emit('testevent', 56);
+        });
         this.socket.on('init', () => {
             console.log('First print');
             this.draw();
