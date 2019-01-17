@@ -19,11 +19,11 @@ class BoardController {
         this.currentPiece = PieceFactory_1.default.createRandomPiece();
         this.drop = this.drop.bind(this);
         this.init();
-        this.currentBoard.clear(this.currentPiece);
-        this.currentBoard.addLockedRow();
-        this.currentBoard.addLockedRow();
-        this.currentBoard.addLockedRow();
-        this.place();
+        // this.currentBoard.clear(this.currentPiece);
+        // this.currentBoard.addLockedRow();
+        // this.currentBoard.addLockedRow();
+        // this.currentBoard.addLockedRow();
+        // this.place();
     }
     get board() {
         return this.currentBoard;
@@ -120,12 +120,13 @@ class BoardController {
         // const timer = setInterval(() => this.run(), 1 * 1000);
         // this.currentPiece = PieceFactory.createRandomPiece();
         // console.log(this.currentPiece);
-        this.timer = setInterval(this.drop, 200);
+        this.timer = setInterval(this.drop, 1000);
     }
     init() {
         this.socket.on('init', () => {
             console.log('First print');
             this.draw();
+            this.run();
         });
         this.socket.on('down', () => {
             console.log('down received');
