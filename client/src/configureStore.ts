@@ -5,7 +5,7 @@ import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import createSagaMiddleWare from 'redux-saga';
 
 import rootReducer from './reducers';
-import rootSaga from './sagas';
+import rootSaga from './middlewares/sagas';
 
 const persistConfig = {
     key: 'root',

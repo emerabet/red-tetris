@@ -1,5 +1,5 @@
 import { all, fork } from "redux-saga/effects";
-import gameSaga from "../../Pages/GamePage/saga";
+import gameSaga from "./gameSaga";
 
 function* rootSaga() {
     console.log("ROOT SAGA")

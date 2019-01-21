@@ -3,15 +3,21 @@ import Button from '../../components/Button/Button';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import withSocket from '../../Hoc/SocketHoc';
-import { startGameAsync, endGameAsync, startGame, endGame, END_SAGA } from './actions';
+import { startGameAsync, endGameAsync, startGame, endGame, END_SAGA } from '../../actions/gameActions';
 import { getType } from 'typesafe-actions';
-import { GameStore } from './types';
+import { GameStore } from '../../types/gameTypes';
+
+import './style.css';
 
 interface GamePageProps {
     nagivation: any,
+    history: any,
     socket: any,
     match: any,
     started: boolean,
+    room: string,
+    player: string,
+    board: number[][],
     startGame: Function,
     endGame: Function,
 }
@@ -33,6 +39,8 @@ class GamePage extends Component<GamePageProps, GamePageState> {
 
         this.play = this.play.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.end = this.end.bind(this);
+        this.renderBoard = this.renderBoard.bind(this);
     }
 
     componentDidMount() {
@@ -44,11 +52,12 @@ class GamePage extends Component<GamePageProps, GamePageState> {
     play(event: any) {
         event.preventDefault();
         console.log(this.state);
-        this.props.startGame();
+        this.props.startGame(this.state.room, this.state.player);
         console.log("STARTED", this.props.started);
+        this.props.history.push(`/#${this.props.room}[${this.props.player}]`);
     }
 
-    end = () => {
+    end() {
         this.props.endGame();
         console.log("STARTED END?", this.props.started);
     }
@@ -62,18 +71,41 @@ class GamePage extends Component<GamePageProps, GamePageState> {
         }
     }
 
+    renderBoard() {
+        return (
+            <div className="board">
+                {this.props.board.map((d) => {
+                    return (
+                        <div className="boardRow">
+                            {
+                                d.map((c) => {
+                                    return (
+                                        <div className="boardCell">{c}</div>
+                                    )
+                                })
+                            }
+                        </div>
+                    )
+                })}
+
+
+            </div>
+        )
+    }
+
     render() {
         return (
             <div>
-                test Game page {this.props.started && "started"} ad
-                <header className="App-header">
+                test Game page {this.props.started && "started"} ad {this.props.room} {this.props.player}
+                <body>
                     <form onSubmit={this.play}>
                         <input name="room" type="text" placeholder="room" onChange={this.handleChange}></input>
                         <input name="player" type="text" placeholder="player" onChange={this.handleChange}></input>
                         <button type="submit" disabled={this.state.room === "" || this.state.player === ""}> Play </button>
                     </form>
                     <button onClick={this.end}> END </button>
-                </header>
+                    {this.renderBoard()}
+                </body>
             </div>
         )
     }
@@ -82,12 +114,15 @@ class GamePage extends Component<GamePageProps, GamePageState> {
 function mapStateToProps(state: GameStore) {
     return {
         started: state.game.started,
+        room: state.game.room,
+        player: state.game.player,
+        board: state.game.board
     };
 }
 
 function mapDispatchToProps(dispatch: Dispatch) {
     return {
-        startGame: () => dispatch(startGameAsync()),
+        startGame: (room: string, player: string) => dispatch(startGameAsync({ room: room, player: player })),
         endGame: () => dispatch(endGameAsync()),
     }
 }
