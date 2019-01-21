@@ -10,6 +10,8 @@ import { GameStore, position } from '../../types/gameTypes';
 
 import './style.css';
 
+let timer: any = null;
+
 interface GamePageProps {
     nagivation: any,
     history: any,
@@ -32,7 +34,6 @@ interface GamePageProps {
 interface GamePageState {
     room: string,
     player: string,
-    timer: any,
 }
 
 class GamePage extends Component<GamePageProps, GamePageState> {
@@ -42,7 +43,6 @@ class GamePage extends Component<GamePageProps, GamePageState> {
         this.state = {
             room: "",
             player: "",
-            timer: null
         };
 
         this.reset = this.reset.bind(this);
@@ -66,12 +66,14 @@ class GamePage extends Component<GamePageProps, GamePageState> {
         event.preventDefault();
         this.props.startGame(this.state.room, this.state.player);
         this.props.history.push(`/#${this.props.room}[${this.props.player}]`);
-        this.setState({ timer: setInterval(this.moveDown, 1000) });
+        timer = setInterval(() => {
+            this.moveDown()
+        }, 1000)
     }
 
     end() {
         this.props.endGame();
-        clearInterval(this.state.timer);
+        clearInterval(timer);
     }
 
     handleChange(event: any) {
