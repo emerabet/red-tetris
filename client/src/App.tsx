@@ -4,21 +4,34 @@ import logo from './logo.svg';
 import Button from './components/Button/Button';
 import './App.css';
 
-class App extends Component {
+import { Route, Switch, Redirect, BrowserRouter } from 'react-router-dom';
+import HomePage from './Pages/HomePage';
+import GamePage from './Pages/GamePage'
+import withSocket from './Hoc/SocketHoc';
 
-  handleClick = () => {
-    console.log('Cool!');
-  }
+interface AppProps {
+  socket: any
+}
+
+class App extends Component<AppProps> {
 
   render() {
+    let routes = (
+      <Switch>
+        {/* <Route path="/" exact component={HomePage} /> */}
+        <Route path="/" exact component={ GamePage }/>
+        {/* <Redirect from="/" to="/" /> */}
+      </Switch>
+    );
+
     return (
       <div className="App">
-        <header className="App-header">
-            <Button handleClick={this.handleClick}>Le boutton</Button>
-        </header>
+        <BrowserRouter>
+          {routes}
+        </BrowserRouter>
       </div>
     );
   }
 }
 
-export default App;
+export default withSocket(App);
