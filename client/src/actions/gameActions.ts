@@ -1,12 +1,15 @@
 import { createStandardAction, getType, createAsyncAction } from "typesafe-actions";
+import { position } from '../types/gameTypes';
 
 export const START = createStandardAction("START")<void>();
 export const END = createStandardAction("END")<void>();
 export const ROTATE = createStandardAction("ROTATE")<void>();
+export const MOVE_DOWN = createStandardAction("MOVE_DOWN")<void>();
 
 export const START_SAGA = createStandardAction("START_SAGA")<void>();
 export const END_SAGA = createStandardAction("END_SAGA")<void>();
 export const ROTATE_SAGA = createStandardAction("ROTATE_SAGA")<void>();
+export const MOVE_DOWN_SAGA = createStandardAction("MOVE_DOWN_SAGA")<void>();
 
 export const startGame = (room: String, player: String, board: number[][], piece: number[][][]) => {
     return {
@@ -31,6 +34,16 @@ export const rotate = (pieceIndex: number) => {
         type: getType(ROTATE),
         payload: {
             pieceIndex: pieceIndex
+        }
+    }
+}
+
+export const moveDown = (position: position) => {
+    console.log("PP", position)
+    return {
+        type: getType(MOVE_DOWN),
+        payload: {
+            position: position
         }
     }
 }
@@ -61,6 +74,17 @@ interface RotateArgs {
 export const rotateAsync = (payloads: RotateArgs) => {
     return {
         type: getType(ROTATE_SAGA),
+        ...payloads,
+    }
+}
+
+interface MoveDownArgs {
+    position: position,
+}
+
+export const moveDownAsync = (payloads: MoveDownArgs) => {
+    return {
+        type: getType(MOVE_DOWN_SAGA),
         ...payloads,
     }
 }

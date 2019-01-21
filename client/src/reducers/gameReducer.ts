@@ -37,6 +37,13 @@ export default function (state: GameState = initialState, action: any /*GameActi
                 ...state,
                 ...action.payload
             };
+        case getType(gameActions.MOVE_DOWN):
+            console.log("REDUCER MOVE DOWN")
+            console.log("ACTION", action)
+            return {
+                ...state,
+                ...action.payload
+            };
 
         default:
             return state;

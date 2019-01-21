@@ -57,11 +57,22 @@ export function* rotate(action: any) {
     yield put(gameActions.rotate(pieceIndex));
 }
 
+export function* moveDown(action: any) {
+    console.log("MMMMM")
+    const position = {
+        x: action.position.x,
+        y: action.position.y < 19 ? action.position.y + 1 : 19,
+    }
+    //const pieceIndex = yield action.pieceIndex < 3 ? action.pieceIndex + 1 : 0;
+    yield put(gameActions.moveDown(position));
+}
+
 function* gameSaga() {
     //  while (true) {
     yield takeLatest(getType(gameActions.START_SAGA), startGame);
     yield takeLatest(getType(gameActions.END_SAGA), endGame);
     yield takeEvery(getType(gameActions.ROTATE_SAGA), rotate);
+    yield takeEvery(getType(gameActions.MOVE_DOWN_SAGA), moveDown);
     // yield take(actions.END_SAGA);
     // console.log("TOOK")
     //  }

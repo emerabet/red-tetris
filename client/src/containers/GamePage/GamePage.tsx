@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import withSocket from '../../Hoc/SocketHoc';
 import Socket from 'socket.io-client';
-import { startGameAsync, endGameAsync, rotateAsync } from '../../actions/gameActions';
+import { startGameAsync, endGameAsync, rotateAsync, moveDownAsync } from '../../actions/gameActions';
 import { getType } from 'typesafe-actions';
 import { GameStore, position } from '../../types/gameTypes';
 
@@ -25,6 +25,7 @@ interface GamePageProps {
     startGame: Function,
     endGame: Function,
     rotate: Function,
+    moveDown: Function,
 }
 
 interface GamePageState {
@@ -46,6 +47,7 @@ class GamePage extends Component<GamePageProps, GamePageState> {
         this.end = this.end.bind(this);
         this.renderBoard = this.renderBoard.bind(this);
         this.rotate = this.rotate.bind(this);
+        this.moveDown = this.moveDown.bind(this);
     }
 
     componentDidMount() {
@@ -72,15 +74,17 @@ class GamePage extends Component<GamePageProps, GamePageState> {
     }
 
     renderBoard() {
+        let i = 0;
+        let j = 0;
         return (
             <div className="board">
                 {this.props.board.map((d) => {
                     return (
-                        <div className="boardRow">
+                        <div key={i++} className="boardRow">
                             {
                                 d.map((c) => {
                                     return (
-                                        <div className="boardCell">{c}</div>
+                                        <div key={j++} className="boardCell">{c}</div>
                                     )
                                 })
                             }
@@ -95,11 +99,15 @@ class GamePage extends Component<GamePageProps, GamePageState> {
         this.props.rotate(this.props.pieceIndex);
     }
 
+    moveDown() {
+        this.props.moveDown(this.props.position.x, this.props.position.y);
+    }
+
     render() {
         return (
             <div>
                 test Game page {this.props.started && "started"} ad {this.props.room} {this.props.player}
-                <body>
+                <div className="mainDiv">
                     <form onSubmit={this.play}>
                         <input name="room" type="text" placeholder="room" onChange={this.handleChange}></input>
                         <input name="player" type="text" placeholder="player" onChange={this.handleChange}></input>
@@ -112,9 +120,13 @@ class GamePage extends Component<GamePageProps, GamePageState> {
                     <div>
                         {this.props.piece[this.props.pieceIndex]}
                     </div>
+                    <div>
+                        x:{this.props.position.x}/y:{this.props.position.y}
+                    </div>
                     {this.renderBoard()}
                     <button onClick={this.rotate}>UP</button>
-                </body>
+                    <button onClick={this.moveDown}>DOWN</button>
+                </div>
             </div>
         )
     }
@@ -137,6 +149,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
         startGame: (room: string, player: string) => dispatch(startGameAsync({ room: room, player: player })),
         endGame: () => dispatch(endGameAsync()),
         rotate: (pieceIndex: number) => dispatch(rotateAsync({ pieceIndex: pieceIndex })),
+        moveDown: (x: number, y: number) => dispatch(moveDownAsync({ position: { x: x, y: y } })),
     }
 }
 
