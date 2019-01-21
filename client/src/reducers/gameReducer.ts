@@ -7,9 +7,15 @@ const initialState: GameState = {
     room: "",
     player: "",
     board: [],
+    piece: [],
+    pieceIndex: 0,
+    position: {
+        x: 4,
+        y: 0,
+    }
 };
 
-export default function (state: GameState = initialState, action:any /*GameAction*/) {
+export default function (state: GameState = initialState, action: any /*GameAction*/) {
     switch (action.type) {
         case getType(gameActions.START):
             console.log("REDUCER START")
@@ -23,6 +29,13 @@ export default function (state: GameState = initialState, action:any /*GameActio
             return {
                 ...state,
                 started: false
+            };
+        case getType(gameActions.ROTATE):
+            console.log("REDUCER ROTATE")
+            console.log("ACTION", action)
+            return {
+                ...state,
+                ...action.payload
             };
 
         default:
