@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import withSocket from '../../Hoc/SocketHoc';
 import Socket from 'socket.io-client';
-import { startGameAsync, endGameAsync, rotateAsync, moveDownAsync } from '../../actions/gameActions';
+import { startGameAsync, endGameAsync, rotateAsync, moveDownAsync, reset } from '../../actions/gameActions';
 import { getType } from 'typesafe-actions';
 import { GameStore, position } from '../../types/gameTypes';
 
@@ -22,6 +22,7 @@ interface GamePageProps {
     piece: number[][][],
     pieceIndex: number,
     position: position,
+    reset: Function,
     startGame: Function,
     endGame: Function,
     rotate: Function,
@@ -31,6 +32,7 @@ interface GamePageProps {
 interface GamePageState {
     room: string,
     player: string,
+    timer: any,
 }
 
 class GamePage extends Component<GamePageProps, GamePageState> {
@@ -40,8 +42,10 @@ class GamePage extends Component<GamePageProps, GamePageState> {
         this.state = {
             room: "",
             player: "",
+            timer: null
         };
 
+        this.reset = this.reset.bind(this);
         this.play = this.play.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.end = this.end.bind(this);
@@ -54,14 +58,20 @@ class GamePage extends Component<GamePageProps, GamePageState> {
         console.log(window.location.hash)
     }
 
+    reset() {
+        this.props.reset();
+    }
+
     play(event: any) {
         event.preventDefault();
         this.props.startGame(this.state.room, this.state.player);
         this.props.history.push(`/#${this.props.room}[${this.props.player}]`);
+        this.setState({ timer: setInterval(this.moveDown, 1000) });
     }
 
     end() {
         this.props.endGame();
+        clearInterval(this.state.timer);
     }
 
     handleChange(event: any) {
@@ -126,6 +136,7 @@ class GamePage extends Component<GamePageProps, GamePageState> {
                     {this.renderBoard()}
                     <button onClick={this.rotate}>UP</button>
                     <button onClick={this.moveDown}>DOWN</button>
+                    <button onClick={this.reset}>RESET</button>
                 </div>
             </div>
         )
@@ -146,6 +157,7 @@ function mapStateToProps(state: GameStore) {
 
 function mapDispatchToProps(dispatch: Dispatch) {
     return {
+        reset: () => dispatch(reset()),
         startGame: (room: string, player: string) => dispatch(startGameAsync({ room: room, player: player })),
         endGame: () => dispatch(endGameAsync()),
         rotate: (pieceIndex: number) => dispatch(rotateAsync({ pieceIndex: pieceIndex })),

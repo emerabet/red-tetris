@@ -15,13 +15,13 @@ export enum CellState {
     Locked = -1,
 }
 
-export const Z:string = 'Z';
-export const S:string = 'S';
-export const J:string = 'J';
-export const L:string = 'L';
-export const T:string = 'T';
-export const I:string = 'I';
-export const O:string = 'O';
+export const Z: string = 'Z';
+export const S: string = 'S';
+export const J: string = 'J';
+export const L: string = 'L';
+export const T: string = 'T';
+export const I: string = 'I';
+export const O: string = 'O';
 
 export const SHAPES_Z = [
     [
@@ -166,6 +166,18 @@ export const SHAPES_I = [
 ];
 
 export const SHAPES_O = [
+    [
+        [0, 7, 7],
+        [0, 7, 7],
+    ],
+    [
+        [0, 7, 7],
+        [0, 7, 7],
+    ],
+    [
+        [0, 7, 7],
+        [0, 7, 7],
+    ],
     [
         [0, 7, 7],
         [0, 7, 7],

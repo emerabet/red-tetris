@@ -17,6 +17,10 @@ const initialState: GameState = {
 
 export default function (state: GameState = initialState, action: any /*GameAction*/) {
     switch (action.type) {
+        case getType(gameActions.RESET):
+            console.log("REDUCER RESET")
+            console.log("ACTION", action)
+            return initialState;
         case getType(gameActions.START):
             console.log("REDUCER START")
             console.log("ACTION", action)

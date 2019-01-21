@@ -1,6 +1,7 @@
 import { createStandardAction, getType, createAsyncAction } from "typesafe-actions";
 import { position } from '../types/gameTypes';
 
+export const RESET = createStandardAction("RESET")<void>();
 export const START = createStandardAction("START")<void>();
 export const END = createStandardAction("END")<void>();
 export const ROTATE = createStandardAction("ROTATE")<void>();
@@ -10,6 +11,12 @@ export const START_SAGA = createStandardAction("START_SAGA")<void>();
 export const END_SAGA = createStandardAction("END_SAGA")<void>();
 export const ROTATE_SAGA = createStandardAction("ROTATE_SAGA")<void>();
 export const MOVE_DOWN_SAGA = createStandardAction("MOVE_DOWN_SAGA")<void>();
+
+export const reset = () => {
+    return {
+        type: getType(RESET)
+    }
+}
 
 export const startGame = (room: String, player: String, board: number[][], piece: number[][][]) => {
     return {
