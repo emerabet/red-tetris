@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import Button from '../../components/Button/Button';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
@@ -36,65 +36,59 @@ interface GamePageState {
     player: string,
 }
 
-class GamePage extends Component<GamePageProps, GamePageState> {
+const GamePage:any  = (props:any) => {
+    //const [room, setRoom] = useState("");
+    //const [player, setPlayer] = useState("");
+    let room = "te";
+    let player = "pw";
 
-    constructor(props: GamePageProps) {
-        super(props);
-        this.state = {
-            room: "",
-            player: "",
-        };
-
-        this.reset = this.reset.bind(this);
-        this.play = this.play.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.end = this.end.bind(this);
-        this.renderBoard = this.renderBoard.bind(this);
-        this.rotate = this.rotate.bind(this);
-        this.moveDown = this.moveDown.bind(this);
-    }
-
-    componentDidMount() {
-        console.log(window.location.hash)
-    }
-
-    reset() {
-        this.props.reset();
-    }
-
-    play(event: any) {
+    const setRoom = (a:any) => {}    
+    const setPlayer = (a:any) => {}
+    const play = (event: any) => {
         event.preventDefault();
-        this.props.startGame(this.state.room, this.state.player);
-        this.props.history.push(`/#${this.props.room}[${this.props.player}]`);
+        props.startGame(room, player);
+        props.history.push(`/#${props.room}[${props.player}]`);
         timer = setInterval(() => {
-            this.moveDown()
+            moveDown()
         }, 1000)
     }
 
-    end() {
-        this.props.endGame();
+    const end = () => {
+        props.endGame();
         clearInterval(timer);
     }
 
-    handleChange(event: any) {
+    const reset = () => {
+        props.reset();
+    }
+
+    const rotate = () => {
+        props.rotate(props.pieceIndex);
+    }
+
+    const moveDown = () => {
+        props.moveDown(props.position.x, props.position.y, props.board, props.piece, props.pieceIndex);
+    }
+
+    const handleChange = (event: any) => {
         // this.setState({ [event.target.name]: event.target.value });
         if (event.target.name === "room") {
-            this.setState({ room: event.target.value });
+            setRoom(event.target.value);
         } else if (event.target.name = "player") {
-            this.setState({ player: event.target.value });
+            setPlayer(event.target.value);
         }
     }
 
-    renderBoard() {
+    const renderBoard = () => {
         let i = 0;
         let j = 0;
         return (
             <div className="board">
-                {this.props.board.map((d) => {
+                {props.board.map((d:any) => {
                     return (
                         <div key={i++} className="boardRow">
                             {
-                                d.map((c) => {
+                                d.map((c:any) => {
                                     return (
                                         <div key={j++} className={`boardCell c${c}`}>{c}</div>
                                     )
@@ -107,43 +101,142 @@ class GamePage extends Component<GamePageProps, GamePageState> {
         )
     }
 
-    rotate() {
-        this.props.rotate(this.props.pieceIndex);
-    }
-
-    moveDown() {
-        this.props.moveDown(this.props.position.x, this.props.position.y, this.props.board, this.props.piece, this.props.pieceIndex);
-    }
-
-    render() {
-        return (
-            <div>
-                test Game page {this.props.started && "started"} ad {this.props.room} {this.props.player}
-                <div className="mainDiv">
-                    <form onSubmit={this.play}>
-                        <input name="room" type="text" placeholder="room" onChange={this.handleChange}></input>
-                        <input name="player" type="text" placeholder="player" onChange={this.handleChange}></input>
-                        <button type="submit" disabled={this.state.room === "" || this.state.player === ""}> Play </button>
-                    </form>
-                    <button onClick={this.end}> END </button>
-                    <div>
-                        {this.props.piece}
-                    </div>
-                    <div>
-                        {this.props.piece[this.props.pieceIndex]}
-                    </div>
-                    <div>
-                        x:{this.props.position.x}/y:{this.props.position.y}
-                    </div>
-                    {this.renderBoard()}
-                    <button onClick={this.rotate}>UP</button>
-                    <button onClick={this.moveDown}>DOWN</button>
-                    <button onClick={this.reset}>RESET</button>
+    return (
+        <div>
+            test Game page {props.started && "started"} ad {props.room} {props.player}
+            <div className="mainDiv">
+                <form onSubmit={play}>
+                    <input name="room" type="text" placeholder="room" onChange={handleChange}></input>
+                    <input name="player" type="text" placeholder="player" onChange={handleChange}></input>
+                    <button type="submit" disabled={room === "" || player === ""}> Play </button>
+                </form>
+                <button onClick={end}> END </button>
+                <div>
+                    {props.piece}
                 </div>
+                <div>
+                    {props.piece[props.pieceIndex]}
+                </div>
+                <div>
+                    x:{props.position.x}/y:{props.position.y}
+                </div>
+                {renderBoard()}
+                <button onClick={rotate}>UP</button>
+                <button onClick={moveDown}>DOWN</button>
+                <button onClick={reset}>RESET</button>
             </div>
-        )
-    }
+        </div>
+    )
 }
+
+// class GamePage extends Component<GamePageProps, GamePageState> {
+
+//     constructor(props: GamePageProps) {
+//         super(props);
+//         this.state = {
+//             room: "",
+//             player: "",
+//         };
+
+//         this.reset = this.reset.bind(this);
+//         this.play = this.play.bind(this);
+//         this.handleChange = this.handleChange.bind(this);
+//         this.end = this.end.bind(this);
+//         this.renderBoard = this.renderBoard.bind(this);
+//         this.rotate = this.rotate.bind(this);
+//         this.moveDown = this.moveDown.bind(this);
+//     }
+
+//     componentDidMount() {
+//         console.log(window.location.hash)
+//     }
+
+//     reset() {
+//         this.props.reset();
+//     }
+
+//     play(event: any) {
+//         event.preventDefault();
+//         this.props.startGame(this.state.room, this.state.player);
+//         this.props.history.push(`/#${this.props.room}[${this.props.player}]`);
+//         timer = setInterval(() => {
+//             this.moveDown()
+//         }, 1000)
+//     }
+
+//     end() {
+//         this.props.endGame();
+//         clearInterval(timer);
+//     }
+
+//     handleChange(event: any) {
+//         // this.setState({ [event.target.name]: event.target.value });
+//         if (event.target.name === "room") {
+//             this.setState({ room: event.target.value });
+//         } else if (event.target.name = "player") {
+//             this.setState({ player: event.target.value });
+//         }
+//     }
+
+//     renderBoard() {
+//         let i = 0;
+//         let j = 0;
+//         return (
+//             <div className="board">
+//                 {this.props.board.map((d) => {
+//                     return (
+//                         <div key={i++} className="boardRow">
+//                             {
+//                                 d.map((c) => {
+//                                     return (
+//                                         <div key={j++} className={`boardCell c${c}`}>{c}</div>
+//                                     )
+//                                 })
+//                             }
+//                         </div>
+//                     )
+//                 })}
+//             </div>
+//         )
+//     }
+
+//     rotate() {
+//         this.props.rotate(this.props.pieceIndex);
+//     }
+
+//     moveDown() {
+//         this.props.moveDown(this.props.position.x, this.props.position.y, this.props.board, this.props.piece, this.props.pieceIndex);
+//     }
+
+//     render() {
+//         return (
+//             <div>
+//                 test Game page {this.props.started && "started"} ad {this.props.room} {this.props.player}
+//                 <div className="mainDiv">
+//                     <form onSubmit={this.play}>
+//                         <input name="room" type="text" placeholder="room" onChange={this.handleChange}></input>
+//                         <input name="player" type="text" placeholder="player" onChange={this.handleChange}></input>
+//                         <button type="submit" disabled={this.state.room === "" || this.state.player === ""}> Play </button>
+//                     </form>
+//                     <button onClick={this.end}> END </button>
+//                     <div>
+//                         {this.props.piece}
+//                     </div>
+//                     <div>
+//                         {this.props.piece[this.props.pieceIndex]}
+//                     </div>
+//                     <div>
+//                         x:{this.props.position.x}/y:{this.props.position.y}
+//                     </div>
+//                     {this.renderBoard()}
+//                     <button onClick={this.rotate}>UP</button>
+//                     <button onClick={this.moveDown}>DOWN</button>
+//                     <button onClick={this.reset}>RESET</button>
+//                 </div>
+//             </div>
+//         )
+//     }
+// }
 
 function mapStateToProps(state: GameStore) {
     return {
