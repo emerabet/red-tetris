@@ -45,12 +45,13 @@ export const rotate = (pieceIndex: number) => {
     }
 }
 
-export const moveDown = (position: position) => {
+export const moveDown = (position: position, board: number[][]) => {
     console.log("PP", position)
     return {
         type: getType(MOVE_DOWN),
         payload: {
-            position: position
+            position: position,
+            board: board,
         }
     }
 }
@@ -87,6 +88,9 @@ export const rotateAsync = (payloads: RotateArgs) => {
 
 interface MoveDownArgs {
     position: position,
+    board: number[][],
+    piece: number[][][],
+    pieceIndex: number,
 }
 
 export const moveDownAsync = (payloads: MoveDownArgs) => {

@@ -96,7 +96,7 @@ class GamePage extends Component<GamePageProps, GamePageState> {
                             {
                                 d.map((c) => {
                                     return (
-                                        <div key={j++} className="boardCell">{c}</div>
+                                        <div key={j++} className={`boardCell c${c}`}>{c}</div>
                                     )
                                 })
                             }
@@ -112,7 +112,7 @@ class GamePage extends Component<GamePageProps, GamePageState> {
     }
 
     moveDown() {
-        this.props.moveDown(this.props.position.x, this.props.position.y);
+        this.props.moveDown(this.props.position.x, this.props.position.y, this.props.board, this.props.piece, this.props.pieceIndex);
     }
 
     render() {
@@ -163,7 +163,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
         startGame: (room: string, player: string) => dispatch(startGameAsync({ room: room, player: player })),
         endGame: () => dispatch(endGameAsync()),
         rotate: (pieceIndex: number) => dispatch(rotateAsync({ pieceIndex: pieceIndex })),
-        moveDown: (x: number, y: number) => dispatch(moveDownAsync({ position: { x: x, y: y } })),
+        moveDown: (x: number, y: number, board: number[][], piece: number[][][], pieceIndex: number) => dispatch(moveDownAsync({ position: { x: x, y: y }, board: board, piece: piece, pieceIndex: pieceIndex })),
     }
 }
 
