@@ -11,6 +11,7 @@
     "@types/react-router-dom": "^4.3.1",
     "@types/redux-persist": "^4.3.1",
     "@types/socket.io-client": "^1.4.32",
+    "@types/storybook__react": "^4.0.0",
     "events": "^3.0.0",
     "react": "^16.8.0-alpha.1",
     "react-dom": "^16.8.0-alpha.1",
@@ -30,7 +31,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "tslint --project tslint.json 'src/**/*.{ts,tsx}'"
+    "lint": "tslint --project tslint.json 'src/**/*.{ts,tsx}'",
+    "storybook": "start-storybook -p 9001 -c storybook"
   },
   "browserslist": [
     ">0.2%",
@@ -39,6 +41,9 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@storybook/react": "^4.1.7",
+    "babel-loader": "^8.0.5",
     "tslint-config-airbnb": "^5.11.1"
   }
 }
