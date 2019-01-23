@@ -1,4 +1,5 @@
 import React, { Component, useState } from 'react';
+import Button from '../../components/Button/Button';
 import Socket from 'socket.io-client';
 import { position } from '../../types/gameTypes';
 
