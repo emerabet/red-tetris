@@ -5,8 +5,11 @@ import { bindActionCreators, Dispatch } from 'redux';
 import withSocket from '../../Hoc/SocketHoc';
 import Socket from 'socket.io-client';
 import { startGameAsync, endGameAsync, rotateAsync, moveDownAsync, reset } from '../../actions/gameActions';
-import { getType } from 'typesafe-actions';
-import { GameStore, position } from '../../types/gameTypes';
+import { getType, StateType } from 'typesafe-actions';
+import { position } from '../../types/gameTypes';
+import rootReducer from '../../reducers/index'
+var events = require('events');
+var eventEmitter = new events.EventEmitter();
 
 import './style.css';
 
@@ -36,26 +39,18 @@ interface GamePageState {
     player: string,
 }
 
-const GamePage:any  = (props:any) => {
+const GamePage: any = (props: any) => {
     //const [room, setRoom] = useState("");
     //const [player, setPlayer] = useState("");
     let room = "te";
     let player = "pw";
 
-    const setRoom = (a:any) => {}    
-    const setPlayer = (a:any) => {}
-    const play = (event: any) => {
+    const setRoom = (a: any) => { }
+    const setPlayer = (a: any) => { }
+    const play = async (event: any) => {
         event.preventDefault();
-        props.startGame(room, player);
+        await props.startGame(room, player);
         props.history.push(`/#${props.room}[${props.player}]`);
-        timer = setInterval(() => {
-            moveDown()
-        }, 1000)
-    }
-
-    const end = () => {
-        props.endGame();
-        clearInterval(timer);
     }
 
     const reset = () => {
@@ -67,6 +62,7 @@ const GamePage:any  = (props:any) => {
     }
 
     const moveDown = () => {
+        console.log("PROPSSSSSSSSSSSSSS//////////////////////////", props)
         props.moveDown(props.position.x, props.position.y, props.board, props.piece, props.pieceIndex);
     }
 
@@ -84,11 +80,11 @@ const GamePage:any  = (props:any) => {
         let j = 0;
         return (
             <div className="board">
-                {props.board.map((d:any) => {
+                {props.board.map((d: any) => {
                     return (
                         <div key={i++} className="boardRow">
                             {
-                                d.map((c:any) => {
+                                d.map((c: any) => {
                                     return (
                                         <div key={j++} className={`boardCell c${c}`}>{c}</div>
                                     )
@@ -110,7 +106,6 @@ const GamePage:any  = (props:any) => {
                     <input name="player" type="text" placeholder="player" onChange={handleChange}></input>
                     <button type="submit" disabled={room === "" || player === ""}> Play </button>
                 </form>
-                <button onClick={end}> END </button>
                 <div>
                     {props.piece}
                 </div>
@@ -238,7 +233,7 @@ const GamePage:any  = (props:any) => {
 //     }
 // }
 
-function mapStateToProps(state: GameStore) {
+function mapStateToProps(state: StateType<typeof rootReducer>) {
     return {
         started: state.game.started,
         room: state.game.room,

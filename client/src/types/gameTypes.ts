@@ -18,15 +18,3 @@ export interface GameState {
     pieceIndex: number;
     position: position;
 }
-
-export type GameStore = {
-    game: {
-        started: boolean,
-        room: string,
-        player: string,
-        board: number[][],
-        piece: number[][][],
-        pieceIndex: number,
-        position: position,
-    }
-}
