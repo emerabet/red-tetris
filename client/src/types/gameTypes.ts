@@ -1,6 +1,5 @@
 import { ActionType } from "typesafe-actions";
 import * as gameActions from "../actions/gameActions";
-import { posix } from "path";
 
 export type GameAction = ActionType<typeof gameActions>;
 

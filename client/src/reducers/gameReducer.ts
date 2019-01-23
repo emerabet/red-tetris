@@ -19,11 +19,9 @@ export default function (state: GameState = initialState, action: any /*GameActi
     switch (action.type) {
         case getType(gameActions.RESET):
             console.log("REDUCER RESET")
-            console.log("ACTION", action)
             return initialState;
         case getType(gameActions.START):
             console.log("REDUCER START")
-            console.log("ACTION", action)
             return {
                 ...state,
                 ...action.payload
@@ -36,14 +34,12 @@ export default function (state: GameState = initialState, action: any /*GameActi
             };
         case getType(gameActions.ROTATE):
             console.log("REDUCER ROTATE")
-            console.log("ACTION", action)
             return {
                 ...state,
                 ...action.payload
             };
         case getType(gameActions.MOVE_DOWN):
             console.log("REDUCER MOVE DOWN")
-            console.log("ACTION", action)
             return {
                 ...state,
                 ...action.payload
