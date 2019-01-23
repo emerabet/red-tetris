@@ -6,7 +6,7 @@ import './App.css';
 
 import { Route, Switch, Redirect, BrowserRouter } from 'react-router-dom';
 import HomePage from './containers/HomePage';
-import GamePage from './containers/GamePage/GamePage'
+import GamePage from './containers/GamePage/'
 import withSocket from './Hoc/SocketHoc';
 
 interface AppProps {
