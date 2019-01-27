@@ -68,10 +68,15 @@ class BoardController {
             console.log(this.currentBoard.grid);
             clearInterval(this.timer);
         }
+        else {
+            // this.draw();
+        }
     }
     draw() {
         this.place();
         console.log(this.currentBoard.grid);
+        this.socket.emit('state', this.currentBoard.grid);
+        console.log('emitted');
         this.currentBoard.clear(this.currentPiece);
         console.log('------------');
     }
@@ -82,6 +87,7 @@ class BoardController {
             this.place();
             this.checkLine();
             this.newPiece();
+            this.draw();
         }
         else {
             this.draw();
@@ -93,6 +99,7 @@ class BoardController {
             if (this.currentBoard.isFull(i) === true) {
                 this.currentBoard.removeRowAt(i);
                 this.currentBoard.addEmptyRow();
+                this.addMalus();
                 console.log('Full row, row removed');
             }
         }
@@ -116,6 +123,7 @@ class BoardController {
         }
     }
     addMalus() {
+        this.eventEmitter.emit('malus', this.socket.id);
     }
     run() {
         // const timer = setInterval(() => this.run(), 1 * 1000);
@@ -124,9 +132,6 @@ class BoardController {
         this.timer = setInterval(this.drop, 1000);
     }
     init() {
-        this.socket.on('testevent', () => {
-            this.eventEmitter.emit('testevent', 56);
-        });
         this.socket.on('init', () => {
             console.log('First print');
             this.draw();

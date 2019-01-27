@@ -162,7 +162,7 @@ exports.SHAPES_I = [
 ];
 exports.SHAPES_O = [
     [
-        [7, 7],
-        [7, 7],
+        [0, 7, 7],
+        [0, 7, 7],
     ],
 ];

@@ -3,16 +3,19 @@ import Board from './Board';
 import BoardController from './BoardController';
 import { EventEmitter } from 'events';
 import { Socket } from 'socket.io';
+import { stringify } from 'querystring';
 
 class Game {
     private isStarted: boolean;
     private boards: BoardController[];
     private eventEmitter: EventEmitter;
+    private players: Map<string, Player>;
 
     constructor() {
         this.isStarted = false;
         this.boards = [];
         this.eventEmitter = new EventEmitter();
+        this.players = new Map<string, Player>();
 
         this.init();
     }

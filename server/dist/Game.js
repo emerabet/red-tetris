@@ -11,11 +11,12 @@ class Game {
         this.isStarted = false;
         this.boards = [];
         this.eventEmitter = new events_1.EventEmitter();
+        this.players = new Map();
         this.init();
     }
     init() {
-        this.eventEmitter.on('testevent', (number) => {
-            console.log(`je suis iciiiii ${number}`);
+        this.eventEmitter.on('testevent', (id) => {
+            console.log(`Malus added by socketId: ${id}`);
         });
     }
     getBoards() {

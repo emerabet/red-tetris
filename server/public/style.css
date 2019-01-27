@@ -1,0 +1,51 @@
+main {
+    width: 600px;
+    margin: auto;
+}
+
+main:last-child {
+    border-bottom: solid black 1px;
+}
+
+.row {
+    display: flex;
+    border-left: solid black 1px;
+ }
+
+ .row_cell {
+    flex: 1;
+    height: 50px;
+    width: 30px;
+    border-top: solid black 1px;
+    border-right: solid black 1px;
+ }
+
+.empty {
+
+}
+
+.locked {
+    background-color: grey;
+}
+
+.shape-z { 
+    background-color: #FF0200;
+}
+.shape-s { 
+    background-color: #00FF00;
+}
+.shape-j { 
+    background-color: #0A00FF;
+}
+.shape-l { 
+    background-color: #FEA500;
+}
+.shape-t { 
+    background-color: #AA00FF;
+}
+.shape-i { 
+    background-color: #00FFFF;;
+}
+.shape-o { 
+    background-color: #ffff00;
+}

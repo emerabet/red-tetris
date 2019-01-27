@@ -1,3 +1,4 @@
+import crypto from 'crypto';
 import Piece from './Piece';
 import {
     SHAPES_Z,
@@ -34,10 +35,19 @@ class PieceFactory {
         return piece;
     }
 
+    private static randomC(qty:number) {
+        const array:any = crypto.randomBytes(qty).toJSON().data;
+        return parseInt(array.toString('dec'), 10);
+    }
+
+    private static random(min:number, max:number) {
+        return Math.floor((this.randomC(21) / 256 * (max - min + 1)) + min);
+    }
+
     public static createRandomPiece(): Piece {
         const min = 0;
         const max: number = Object.keys(this.allPieces).length - 1;
-        const index: number = Math.floor(Math.random() * (max - min + 1)) + min;
+        const index: number = this.random(min, max);
         const letter: string = Object.keys(this.allPieces)[index];
         return this.createPiece(letter);
     }
