@@ -242,16 +242,25 @@
         </main>
         <script src="/socket.io/socket.io.js"></script>
         <script>
-
             const lookuptable = {
-                1: 'shape-z',
-                2: 'shape-s',
-                3: 'shape-j',
-                4: 'shape-l',
-                5: 'shape-t',
-                6: 'shape-i',
-                7: 'shape-o',
+                '-1': 'filled locked',
+                '0': 'empty',
+                '1': 'filled shape-z',
+                '2': 'filled shape-s',
+                '3': 'filled shape-j',
+                '4': 'filled shape-l',
+                '5': 'filled shape-t',
+                '6': 'filled shape-i',
+                '7': 'filled shape-o',
             };
+
+            var keytable = {
+                32: 'space', // SPACE
+                37: 'left', // LEFT
+                38: 'up', // UP,
+                39: 'right', // RIGHT
+                40: 'down', // DOWN
+            }
 
             const socket = io('http://localhost:4000', { 
                 transports: ['websocket'],
@@ -269,9 +278,8 @@
                 socket.emit('init');
             });
 
-
             function createCell(cell) {
-                const state = cell === 0 ? 'empty' : (lookuptable[cell] || 'shape-z');
+                const state = `${lookuptable[cell]}` || 'shape-z';
                 return `<div class="row_cell ${state}">2/10</div>`;
             }
 
@@ -297,6 +305,22 @@
                 console.log(grid);
                 drawGrid(grid);
             });
+            
+            window.onkeydown = function(e) {
+                const key = e.keyCode ? e.keyCode : e.which;
+                const res = keytable[key];
+                if (res && e.target == document.body) {
+                    e.preventDefault();
+                }
+            }
+
+            window.onkeyup = function(e) {
+                const key = e.keyCode ? e.keyCode : e.which;
+                const res = keytable[key];
+                if (res) {
+                    socket.emit(res);
+                }
+            }
 
         </script>
     </body>

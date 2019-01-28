@@ -14,18 +14,17 @@ main:last-child {
 
  .row_cell {
     flex: 1;
-    height: 50px;
-    width: 30px;
+    height: calc(100vh / 20);
     border-top: solid black 1px;
     border-right: solid black 1px;
  }
 
-.empty {
-
-}
-
 .locked {
     background-color: grey;
+}
+
+.filled {
+    box-shadow: 5px 5px 2px grey, 1px 1px 1px white !important;
 }
 
 .shape-z { 
