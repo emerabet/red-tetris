@@ -11,6 +11,7 @@ class Game {
         this.isStarted = false;
         this.boards = [];
         this.eventEmitter = new events_1.EventEmitter();
+        this.players = new Map();
         this.init();
     }
     init() {

@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const crypto_1 = __importDefault(require("crypto"));
 const Piece_1 = __importDefault(require("./Piece"));
 const constants_1 = require("./constants");
 class PieceFactory {
@@ -11,10 +12,17 @@ class PieceFactory {
         const piece = new Piece_1.default(shape, positions);
         return piece;
     }
+    static randomC(qty) {
+        const array = crypto_1.default.randomBytes(qty).toJSON().data;
+        return parseInt(array.toString('dec'), 10);
+    }
+    static random(min, max) {
+        return Math.floor((this.randomC(21) / 256 * (max - min + 1)) + min);
+    }
     static createRandomPiece() {
         const min = 0;
         const max = Object.keys(this.allPieces).length - 1;
-        const index = Math.floor(Math.random() * (max - min + 1)) + min;
+        const index = this.random(min, max);
         const letter = Object.keys(this.allPieces)[index];
         return this.createPiece(letter);
     }

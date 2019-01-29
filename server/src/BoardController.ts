@@ -85,12 +85,16 @@ class BoardController {
             this.place();
             console.log(this.currentBoard.grid);
             clearInterval(this.timer);
+        } else {
+            // this.draw();
         }
     }
 
     private draw() {
         this.place();
         console.log(this.currentBoard.grid);
+        this.socket.emit('state', this.currentBoard.grid);
+        console.log('emitted');
         this.currentBoard.clear(this.currentPiece);
         console.log('------------');
     }
@@ -102,6 +106,7 @@ class BoardController {
             this.place();
             this.checkLine();
             this.newPiece();
+            this.draw();
         } else {
             this.draw();
         }
@@ -115,6 +120,9 @@ class BoardController {
                 this.currentBoard.addEmptyRow();
                 this.addMalus();
                 console.log('Full row, row removed');
+                i += 1;
+            } else {
+                console.log('not full:: ', i);
             }
         }
     }

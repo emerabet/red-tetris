@@ -68,10 +68,15 @@ class BoardController {
             console.log(this.currentBoard.grid);
             clearInterval(this.timer);
         }
+        else {
+            // this.draw();
+        }
     }
     draw() {
         this.place();
         console.log(this.currentBoard.grid);
+        this.socket.emit('state', this.currentBoard.grid);
+        console.log('emitted');
         this.currentBoard.clear(this.currentPiece);
         console.log('------------');
     }
@@ -82,6 +87,7 @@ class BoardController {
             this.place();
             this.checkLine();
             this.newPiece();
+            this.draw();
         }
         else {
             this.draw();
@@ -93,7 +99,7 @@ class BoardController {
             if (this.currentBoard.isFull(i) === true) {
                 this.currentBoard.removeRowAt(i);
                 this.currentBoard.addEmptyRow();
-                this.addMalus();
+                // this.addMalus();
                 console.log('Full row, row removed');
             }
         }
