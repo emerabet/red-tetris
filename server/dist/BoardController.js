@@ -12,12 +12,17 @@ const strategies = {
     [constants_1.Direction.Top]: new CollisionTopStrategy_1.default(),
 };
 class BoardController {
-    constructor(player, board, socket, emitter) {
+    constructor(player, board, socket, emitter, pieces) {
         this.currentPlayer = player;
         this.currentBoard = board;
         this.socket = socket;
         this.eventEmitter = emitter;
-        this.currentPiece = PieceFactory_1.default.createRandomPiece();
+        this.indexPiece = 0;
+        this.pieces = pieces; // Pass by value the reference to the array of piece created from Game.
+        this.currentPiece = PieceFactory_1.default.createPiece(pieces[this.indexPiece].name);
+        this.speed = 1000;
+        this.score = 0;
+        this.isFinished = false;
         this.drop = this.drop.bind(this);
         this.init();
         // this.currentBoard.clear(this.currentPiece);
@@ -35,15 +40,6 @@ class BoardController {
     log() {
         console.log('Name:', this.currentPlayer.username);
     }
-    checkCollision(direction) {
-        const collision = strategies[direction];
-        if (collision.check(this.currentBoard, this.currentPiece)) {
-            console.log('Collision detected');
-            //clearInterval(this.timer);
-            return true;
-        }
-        return false;
-    }
     check() {
         for (let i = 0; i < this.currentPiece.shape.length; i += 1) {
             for (let j = 0; j < this.currentPiece.shape[i].length; j += 1) {
@@ -60,13 +56,16 @@ class BoardController {
     }
     newPiece() {
         console.log('[ACTION] NEW PIECE GENERATED ');
-        this.currentPiece = PieceFactory_1.default.createRandomPiece();
+        this.askPiece();
+        this.indexPiece += 1;
+        this.currentPiece = PieceFactory_1.default.createPiece(this.pieces[this.indexPiece].name);
         if (this.check()) {
             console.log(' /!\\ END GAME /!\\');
             console.log(this.currentPiece);
             this.place();
             console.log(this.currentBoard.grid);
             clearInterval(this.timer);
+            this.isFinished = true;
         }
         else {
             // this.draw();
@@ -99,8 +98,12 @@ class BoardController {
             if (this.currentBoard.isFull(i) === true) {
                 this.currentBoard.removeRowAt(i);
                 this.currentBoard.addEmptyRow();
-                // this.addMalus();
+                this.addMalus();
                 console.log('Full row, row removed');
+                i += 1;
+            }
+            else {
+                console.log('not full:: ', i);
             }
         }
     }
@@ -125,11 +128,14 @@ class BoardController {
     addMalus() {
         this.eventEmitter.emit('malus', this.socket.id);
     }
+    askPiece() {
+        this.eventEmitter.emit('need', this.indexPiece);
+    }
     run() {
         // const timer = setInterval(() => this.run(), 1 * 1000);
         // this.currentPiece = PieceFactory.createRandomPiece();
         // console.log(this.currentPiece);
-        this.timer = setInterval(this.drop, 1000);
+        this.timer = setInterval(this.drop, this.speed);
     }
     init() {
         this.socket.on('init', () => {
@@ -137,6 +143,11 @@ class BoardController {
             this.draw();
             this.run();
         });
+        // this.socket.on('start', mdw);
+        // this.socket.on('start', () => {
+        //     this.draw();
+        //     this.run();
+        // });
         this.socket.on('down', () => {
             console.log('down received');
             this.moveDown();

@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const constants_1 = require("./constants");
 class Board {
     constructor(height, width) {
-        this.score = 0;
         this.playfield = [];
         this.height = height;
         this.width = width;

@@ -29,7 +29,7 @@ class PieceFactory {
         [O]: [...SHAPES_O],
     };
 
-    private static createPiece(shape:string): Piece {
+    public static createPiece(shape:string): Piece {
         const positions:number[][][] = this.allPieces[shape] || this.allPieces[Z];
         const piece = new Piece(shape, positions);
         return piece;
