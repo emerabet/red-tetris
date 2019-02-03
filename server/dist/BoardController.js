@@ -99,8 +99,12 @@ class BoardController {
             if (this.currentBoard.isFull(i) === true) {
                 this.currentBoard.removeRowAt(i);
                 this.currentBoard.addEmptyRow();
-                // this.addMalus();
+                this.addMalus();
                 console.log('Full row, row removed');
+                i += 1;
+            }
+            else {
+                console.log('not full:: ', i);
             }
         }
     }

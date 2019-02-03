@@ -6,6 +6,7 @@ export const START = createStandardAction("START")<void>();
 export const END = createStandardAction("END")<void>();
 export const ROTATE = createStandardAction("ROTATE")<void>();
 export const MOVE_DOWN = createStandardAction("MOVE_DOWN")<void>();
+export const UPDATE_BOARD = createStandardAction("UPDATE_BOARD")<void>();
 
 export const START_SAGA = createStandardAction("START_SAGA")<void>();
 export const END_SAGA = createStandardAction("END_SAGA")<void>();
@@ -18,14 +19,23 @@ export const reset = () => {
     }
 }
 
-export const startGame = (room: String, player: String, board: number[][], piece: number[][][]) => {
+export const startGame = (room: String, player: String/*, board: number[][], piece: number[][][]*/) => {
     return {
         type: getType(START),
         payload: {
             room: room,
             player: player,
+            // board: board,
+            // piece: piece,
+        }
+    }
+}
+
+export const updateBoard = (board: number[][]) => {
+    return {
+        type: getType(UPDATE_BOARD),
+        payload: {
             board: board,
-            piece: piece,
         }
     }
 }

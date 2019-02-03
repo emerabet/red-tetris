@@ -5,7 +5,6 @@ import GamePage from "./GamePage";
 import { StateType } from "typesafe-actions";
 import rootReducer from "../../reducers/index";
 import { startGameAsync, endGameAsync, rotateAsync, moveDownAsync, reset } from '../../actions/gameActions';
-import withSocket from '../../Hoc/SocketHoc';
 
 const mapStateToProps = (_state: StateType<typeof rootReducer>) => ({
   started: _state.game.started,
@@ -26,7 +25,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   //   onNavigateBtnPress: () => dispatch(NavigationActions.navigate({ routeName: "Home" })),
 });
 
-export default withSocket(connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(GamePage));
+)(GamePage);

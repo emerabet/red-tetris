@@ -24,7 +24,8 @@ export default function (state: GameState = initialState, action: any /*GameActi
             console.log("REDUCER START")
             return {
                 ...state,
-                ...action.payload
+                started: true,
+                ...action.payload,
             };
         case getType(gameActions.END):
             console.log("REDUCER END")
@@ -32,14 +33,20 @@ export default function (state: GameState = initialState, action: any /*GameActi
                 ...state,
                 started: false
             };
-        case getType(gameActions.ROTATE):
-            console.log("REDUCER ROTATE")
-            return {
-                ...state,
-                ...action.payload
-            };
-        case getType(gameActions.MOVE_DOWN):
-            console.log("REDUCER MOVE DOWN")
+        // case getType(gameActions.ROTATE):
+        //     console.log("REDUCER ROTATE")
+        //     return {
+        //         ...state,
+        //         ...action.payload
+        //     };
+        // case getType(gameActions.MOVE_DOWN):
+        //     console.log("REDUCER MOVE DOWN")
+        //     return {
+        //         ...state,
+        //         ...action.payload
+        //     };
+        case getType(gameActions.UPDATE_BOARD):
+            console.log("REDUCER UPDATE BOARD")
             return {
                 ...state,
                 ...action.payload

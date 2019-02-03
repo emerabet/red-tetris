@@ -44,7 +44,7 @@ function randomPiece(): number[][][] {
 export function* startGame(action: any) {
     const board: number[][] = yield createBoard();
     const piece: number[][][] = yield randomPiece();
-    yield put(gameActions.startGame(action.room, action.player, board, piece));
+    yield put(gameActions.startGame(action.room, action.player/*, board, piece*/));
 };
 
 export function* endGame() {
