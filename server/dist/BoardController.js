@@ -3,14 +3,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const events_1 = require("events");
 const PieceFactory_1 = __importDefault(require("./PieceFactory"));
 const constants_1 = require("./constants");
-class BoardController {
-    constructor(player, board, socket, emitter, pieces) {
+class BoardController extends events_1.EventEmitter {
+    constructor(player, board, socket, pieces) {
+        super();
         this.currentPlayer = player;
         this.currentBoard = board;
         this.socket = socket;
-        this.eventEmitter = emitter;
         this.indexPiece = 0;
         this.pieces = pieces; // Pass by value the reference to the array of piece created from Game.
         this.currentPiece = PieceFactory_1.default.createPiece(pieces[this.indexPiece]);
@@ -120,10 +121,10 @@ class BoardController {
         }
     }
     addMalus() {
-        this.eventEmitter.emit('malus', this.socket.id);
+        this.emit('malus', this.socket.id);
     }
     askPiece() {
-        this.eventEmitter.emit('need', this.indexPiece);
+        this.emit('need', this.indexPiece);
     }
     freeBoard(socketId) {
         clearInterval(this.timer);
@@ -134,10 +135,8 @@ class BoardController {
         delete this.currentBoard;
         delete this.currentPlayer;
         delete this.pieces;
-        this.eventEmitter.emit('free', socketId);
-        delete this.eventEmitter;
-        console.log('to free:', socketId);
-        console.log('is freed ?:', this.eventEmitter);
+        this.emit('free', socketId);
+        this.removeAllListeners();
     }
     run() {
         this.timer = setInterval(this.drop, this.speed);
