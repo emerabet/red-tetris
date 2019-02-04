@@ -16,7 +16,6 @@ import {
     I,
     O,
 } from './constants';
-import { exists } from 'fs';
 
 class PieceFactory {
     private static readonly allPieces = {
@@ -44,18 +43,13 @@ class PieceFactory {
         return Math.floor((this.randomC(21) / 256 * (max - min + 1)) + min);
     }
 
-    public static createRandomPiece(): Piece {
+    public static createRandomPiece(): string {
         const min = 0;
         const max: number = Object.keys(this.allPieces).length - 1;
         const index: number = this.random(min, max);
         const letter: string = Object.keys(this.allPieces)[index];
-        return this.createPiece(letter);
-    }
-
-    static print() {
-        const p = this.createRandomPiece();
-        p.rotate();
-        console.log(p.shape);
+        console.log('la lettre:: ', letter);
+        return letter;
     }
 }
 

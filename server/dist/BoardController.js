@@ -5,12 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const PieceFactory_1 = __importDefault(require("./PieceFactory"));
 const constants_1 = require("./constants");
-const CollisionDownStrategy_1 = __importDefault(require("./Strategies/CollisionDownStrategy"));
-const CollisionTopStrategy_1 = __importDefault(require("./Strategies/CollisionTopStrategy"));
-const strategies = {
-    [constants_1.Direction.Down]: new CollisionDownStrategy_1.default(),
-    [constants_1.Direction.Top]: new CollisionTopStrategy_1.default(),
-};
 class BoardController {
     constructor(player, board, socket, emitter, pieces) {
         this.currentPlayer = player;
@@ -19,7 +13,7 @@ class BoardController {
         this.eventEmitter = emitter;
         this.indexPiece = 0;
         this.pieces = pieces; // Pass by value the reference to the array of piece created from Game.
-        this.currentPiece = PieceFactory_1.default.createPiece(pieces[this.indexPiece].name);
+        this.currentPiece = PieceFactory_1.default.createPiece(pieces[this.indexPiece]);
         this.speed = 1000;
         this.score = 0;
         this.isFinished = false;
@@ -58,7 +52,7 @@ class BoardController {
         console.log('[ACTION] NEW PIECE GENERATED ');
         this.askPiece();
         this.indexPiece += 1;
-        this.currentPiece = PieceFactory_1.default.createPiece(this.pieces[this.indexPiece].name);
+        this.currentPiece = PieceFactory_1.default.createPiece(this.pieces[this.indexPiece]);
         if (this.check()) {
             console.log(' /!\\ END GAME /!\\');
             console.log(this.currentPiece);
@@ -131,10 +125,21 @@ class BoardController {
     askPiece() {
         this.eventEmitter.emit('need', this.indexPiece);
     }
+    freeBoard(socketId) {
+        clearInterval(this.timer);
+        this.socket.removeAllListeners();
+        delete this.socket;
+        delete this.timer;
+        delete this.currentPiece;
+        delete this.currentBoard;
+        delete this.currentPlayer;
+        delete this.pieces;
+        this.eventEmitter.emit('free', socketId);
+        delete this.eventEmitter;
+        console.log('to free:', socketId);
+        console.log('is freed ?:', this.eventEmitter);
+    }
     run() {
-        // const timer = setInterval(() => this.run(), 1 * 1000);
-        // this.currentPiece = PieceFactory.createRandomPiece();
-        // console.log(this.currentPiece);
         this.timer = setInterval(this.drop, this.speed);
     }
     init() {
@@ -143,11 +148,10 @@ class BoardController {
             this.draw();
             this.run();
         });
-        // this.socket.on('start', mdw);
-        // this.socket.on('start', () => {
-        //     this.draw();
-        //     this.run();
-        // });
+        this.socket.on('disconnect', () => {
+            console.log('disconnected: ', this.socket.id);
+            this.freeBoard(this.socket.id);
+        });
         this.socket.on('down', () => {
             console.log('down received');
             this.moveDown();

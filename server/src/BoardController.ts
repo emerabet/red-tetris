@@ -3,22 +3,15 @@ import Player from './Player';
 import Board from './Board';
 import Piece from './Piece';
 import PieceFactory from './PieceFactory';
-import { Direction, From, CellState } from './constants';
-import ICollisionStrategy from './Interfaces/ICollisionStrategy';
-import CollisionDownStrategy from './Strategies/CollisionDownStrategy';
-import CollisionTopStrategy from './Strategies/CollisionTopStrategy';
-import { Socket } from 'socket.io';
+import { Direction, CellState } from './constants';
 
-const strategies: any = {
-    [Direction.Down]: new CollisionDownStrategy(),
-    [Direction.Top]: new CollisionTopStrategy(),
-};
+import { Socket } from 'socket.io';
 
 class BoardController {
     private currentPlayer: Player;
     private currentBoard: Board;
     private currentPiece: Piece;
-    private pieces: Piece[];
+    private pieces: string[];
     private timer: any;
     private socket: Socket;
     private eventEmitter: EventEmitter;
@@ -27,14 +20,14 @@ class BoardController {
     private score: number;
     private isFinished: boolean;
 
-    constructor(player:Player, board:Board, socket:Socket, emitter: EventEmitter, pieces: Piece[]) {
+    constructor(player:Player, board:Board, socket:SocketIO.Socket, emitter: EventEmitter, pieces: string[]) {
         this.currentPlayer = player;
         this.currentBoard = board;
         this.socket = socket;
         this.eventEmitter = emitter;
         this.indexPiece = 0;
         this.pieces = pieces; // Pass by value the reference to the array of piece created from Game.
-        this.currentPiece = PieceFactory.createPiece(pieces[this.indexPiece].name);
+        this.currentPiece = PieceFactory.createPiece(pieces[this.indexPiece]);
         this.speed = 1000;
         this.score = 0;
         this.isFinished = false;
@@ -79,7 +72,7 @@ class BoardController {
         console.log('[ACTION] NEW PIECE GENERATED ');
         this.askPiece();
         this.indexPiece += 1;
-        this.currentPiece = PieceFactory.createPiece(this.pieces[this.indexPiece].name);
+        this.currentPiece = PieceFactory.createPiece(this.pieces[this.indexPiece]);
         if (this.check()) {
             console.log(' /!\\ END GAME /!\\');
             console.log(this.currentPiece);
@@ -159,10 +152,22 @@ class BoardController {
         this.eventEmitter.emit('need', this.indexPiece);
     }
 
+    private freeBoard(socketId: string) {
+        clearInterval(this.timer);
+        this.socket.removeAllListeners();
+        delete this.socket;
+        delete this.timer;
+        delete this.currentPiece;
+        delete this.currentBoard;
+        delete this.currentPlayer;
+        delete this.pieces;
+        this.eventEmitter.emit('free', socketId);
+        delete this.eventEmitter;
+        console.log('to free:', socketId);
+        console.log('is freed ?:', this.eventEmitter);
+    }
+
     public run() {
-        // const timer = setInterval(() => this.run(), 1 * 1000);
-        // this.currentPiece = PieceFactory.createRandomPiece();
-        // console.log(this.currentPiece);
         this.timer = setInterval(this.drop, this.speed);
     }
 
@@ -173,12 +178,10 @@ class BoardController {
             this.run();
         });
 
-       // this.socket.on('start', mdw);
-
-        // this.socket.on('start', () => {
-        //     this.draw();
-        //     this.run();
-        // });
+        this.socket.on('disconnect', () => {
+            console.log('disconnected: ', this.socket.id);
+            this.freeBoard(this.socket.id);
+        });
 
         this.socket.on('down', () => {
             console.log('down received');
