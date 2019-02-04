@@ -7,6 +7,14 @@ import UseSocket from './UseSocket';
 
 import './style.css';
 
+const styles:any = {
+    effectL0_1: {
+        // translate: "-1vw,-4vw",
+        backgroundColor: "yellow",
+        // width: "400px"
+    }
+}
+
 interface GamePageProps {
     nagivation: any,
     history: any,
@@ -30,6 +38,27 @@ const GamePage: React.SFC<GamePageProps> = props => {
     const [room, setRoom] = useState("");
     const [player, setPlayer] = useState("");
     const [socket, setSocket] = useState(Socket);
+    const initialRowDestruction:number[] = [];
+    const [row, setRow] = useState(initialRowDestruction);
+    useEffect(() => {
+        if (props.board && props.board !== undefined) {
+            // let row: number[] = [];
+            setRow([]);
+            console.log("changed")
+            for (let i = 0; i < props.board.length; i++) {
+                let nbEmpty = 0;
+                for (let j = 0; j < props.board[i].length; j++) {
+                    if (props.board[i][j] === 0) {
+                        nbEmpty++;
+                    }
+                }
+                if (nbEmpty === 0) {
+                    setRow([...row, i]);
+                }
+            }
+            console.log("ROW", row);
+        }
+    }, [props.board])
 
     useEffect(() => {
         if (props.started) {
@@ -112,6 +141,41 @@ const GamePage: React.SFC<GamePageProps> = props => {
         )
     }
 
+    const renderBoard2 = () => {
+        let i = 0;
+        let j = 0;
+        return (
+            <div className="board">
+                {props.board.map((d: any) => {
+                    let r = 0;
+                    return (
+                        <div key={i++} className={row.includes(i - 1) ? "boardRowDestructionOK" : "boardRowDestruction"}>
+                        {row.includes(i) && console.log("OOOOOOOPPPPPPPPPPPPPPPPPPPPPP")}
+                        {console.log("testttt", i -1, row)}
+                            {
+                                d.map((c: any) => {
+                                    return (
+                                        <div key={j++} className="destructionRow">
+                                            <div className="destructionCol">
+                                            {/* {console.log(i,j)} */}
+                                                <div className={`boardCellDestruction effectL${r}`}>{}</div>
+                                                <div className={`boardCellDestruction effectR${r}`}>{}</div>
+                                            </div>
+                                            <div className="destructionCol">
+                                                <div className={`boardCellDestruction effectT${r}`}>{}</div>
+                                                <div className={`boardCellDestruction effectB${r++}`}>{}</div>
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+                    )
+                })}
+            </div>
+        )
+    }
+
     return (
         <div>
             test Game page {props.started && "started"} ad {props.room} {props.player}
@@ -130,7 +194,10 @@ const GamePage: React.SFC<GamePageProps> = props => {
                 <div>
                     x:{props.position.x}/y:{props.position.y}
                 </div>
-                {renderBoard()}
+                <div className="boardSpace">
+                    {renderBoard()}
+                    {renderBoard2()}
+                </div>
                 <button onClick={rotate}>UP</button>
                 <button onClick={moveDown}>DOWN</button>
                 <button onClick={reset}>RESET</button>

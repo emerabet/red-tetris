@@ -1,3 +1,12 @@
+/* .random(@min, @max) {
+  @random: `Math.round(Math.random() * (@{max} - @{min}) + @{min})`;
+} */
+
+@keyframes example {
+  from {background-color: red;}
+  to {background-color: yellow;}
+}
+
 .mainDiv {
   background-color: #282c34;
   min-height: 100vh;
@@ -9,7 +18,19 @@
   color: white;
 }
 
+.boardSpace {
+  /* position: relative; */
+  background-color: rebeccapurple;
+  margin-left: auto;
+  margin-right: auto;
+  width: 220px;
+  height: 440px;
+}
+
 .board {
+  position: absolute;
+  /* top: 0; */
+  /* left: 0; */
     display: flex;
     flex-direction: column;
   }
@@ -25,6 +46,89 @@
     background-color: blue;
     border: solid black 1px;
  }
+
+.destructionRow {
+  display: flex;
+  flex-direction: row;
+  border-top: solid rgba(255, 0, 0, 0.0) 1px;
+  border-bottom: solid rgba(255, 0, 0, 0.0) 1px;
+}
+
+.boardRowDestruction {
+  display: flex;
+  flex-direction: row;
+}
+.boardRowDestruction:hover{
+  /* background-color: yellow; */
+  animation-name: example;
+  animation-duration: 4s;
+}
+
+/* .boardRowDestruction:hover .destructionRow{ */
+  /* transform: translate(-1vw,-4vw); */
+/* } */
+
+.destructionCol {
+  display: flex;
+  flex-direction: column;
+  border-left: solid rgba(255, 0, 0, 0.0) 1px;
+  /* border-right: solid black 1px; */
+}
+
+ .boardCellDestruction {
+  width: 10px;
+  height: 10px;
+  /* background-color: blue; */
+  /* border: solid black 1px; */
+ }
+
+ .boardCellDestruction:hover{
+   /* background-color: red; */
+   /* transform: translate(~'@{.random(-5, 5);}vw',-4vw); */
+  }
+
+  /* .boardRowDestruction:hover .effectL1{
+    background-color: cyan;
+    transform: translate(-5vw, -3vw);
+   }
+   .boardRowDestruction:hover .effectR1{
+    background-color: cyan;
+    transform: translate(-5vw, 3vw);
+   }
+   .boardRowDestruction:hover .effectT1{
+    background-color: cyan;
+    transform: translate(5vw, -3vw);
+   }
+   .boardRowDestruction:hover .effectB1{
+    background-color: cyan;
+    transform: translate(5vw, 3vw);
+   } */
+
+   .boardRowDestructionOK {
+    display: flex;
+    flex-direction: row;
+   }
+
+   .boardRowDestructionOK .effectL1{
+     /* position: absolute; */
+    background-color: cyan;
+    transform: translate(-1vw, -1vw);
+   }
+   .boardRowDestructionOK .effectR1{
+    /* position: absolute; */
+    background-color: cyan;
+    transform: translate(-1vw, 1vw);
+   }
+   .boardRowDestructionOK .effectT1{
+    /* position: absolute; */
+    background-color: cyan;
+    transform: translate(1vw, -1vw);
+   }
+   .boardRowDestructionOK .effectB1{
+    /* position: absolute; */
+    background-color: cyan;
+    transform: translate(1vw, 1vw);
+   }
 
  .c1 {
   background-color: #b3e5fc;
