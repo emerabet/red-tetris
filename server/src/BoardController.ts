@@ -7,24 +7,23 @@ import { Direction, CellState } from './constants';
 
 import { Socket } from 'socket.io';
 
-class BoardController {
+class BoardController extends EventEmitter {
     private currentPlayer: Player;
     private currentBoard: Board;
     private currentPiece: Piece;
     private pieces: string[];
     private timer: any;
     private socket: Socket;
-    private eventEmitter: EventEmitter;
     private indexPiece: number;
     private speed: number;
     private score: number;
     private isFinished: boolean;
 
-    constructor(player:Player, board:Board, socket:SocketIO.Socket, emitter: EventEmitter, pieces: string[]) {
+    constructor(player:Player, board:Board, socket:SocketIO.Socket, pieces: string[]) {
+        super();
         this.currentPlayer = player;
         this.currentBoard = board;
         this.socket = socket;
-        this.eventEmitter = emitter;
         this.indexPiece = 0;
         this.pieces = pieces; // Pass by value the reference to the array of piece created from Game.
         this.currentPiece = PieceFactory.createPiece(pieces[this.indexPiece]);
@@ -145,11 +144,11 @@ class BoardController {
     }
 
     private addMalus() {
-        this.eventEmitter.emit('malus', this.socket.id);
+        this.emit('malus', this.socket.id);
     }
 
     private askPiece() {
-        this.eventEmitter.emit('need', this.indexPiece);
+        this.emit('need', this.indexPiece);
     }
 
     private freeBoard(socketId: string) {
@@ -161,10 +160,8 @@ class BoardController {
         delete this.currentBoard;
         delete this.currentPlayer;
         delete this.pieces;
-        this.eventEmitter.emit('free', socketId);
-        delete this.eventEmitter;
-        console.log('to free:', socketId);
-        console.log('is freed ?:', this.eventEmitter);
+        this.emit('free', socketId);
+        this.removeAllListeners();
     }
 
     public run() {

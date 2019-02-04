@@ -9,7 +9,6 @@ const http_1 = __importDefault(require("http"));
 const socket_io_1 = __importDefault(require("socket.io"));
 const path_1 = __importDefault(require("path"));
 const Game_1 = __importDefault(require("./Game"));
-const events_1 = require("events");
 const app = express_1.default();
 const server = http_1.default.createServer(app);
 const io = socket_io_1.default(server, { pingTimeout: 60000 });
@@ -22,9 +21,9 @@ io.on('connection', (socket) => {
     const { room, pseudo } = socket.handshake.query;
     if (!games.has(room)) {
         console.log('Game created: ', room);
-        const eventGame = new events_1.EventEmitter();
-        games.set(room, new Game_1.default(room, eventGame));
-        init(eventGame);
+        const game = new Game_1.default(room);
+        games.set(room, game);
+        init(game);
     }
     const game = games.get(room);
     if (game) {
@@ -32,10 +31,9 @@ io.on('connection', (socket) => {
         game.createBoard(20, 10, socket);
     }
 });
-function init(eventGame) {
-    eventGame.on('freeGame', (room) => {
+function init(game) {
+    game.on('freeGame', (room) => {
         games.delete(room);
-        eventGame.removeAllListeners();
         console.log('in free game:: ', room);
         console.log(games.get(room));
         console.log('games: ', games);

@@ -5,7 +5,6 @@ import socketIo from 'socket.io';
 import path from 'path';
 
 import Game from './Game';
-import { EventEmitter } from 'events';
 
 const app = express();
 const server = http.createServer(app);
@@ -22,9 +21,9 @@ io.on('connection', (socket:SocketIO.Socket) => {
     const { room, pseudo } = socket.handshake.query;
     if (!games.has(room)) {
         console.log('Game created: ', room);
-        const eventGame = new EventEmitter();
-        games.set(room, new Game(room, eventGame));
-        init(eventGame);
+        const game = new Game(room);
+        games.set(room, game);
+        init(game);
     }
     const game = games.get(room);
     if (game) {
@@ -33,10 +32,9 @@ io.on('connection', (socket:SocketIO.Socket) => {
     }
 });
 
-function init(eventGame: EventEmitter) {
-    eventGame.on('freeGame', (room) => {
+function init(game: Game) {
+    game.on('freeGame', (room) => {
         games.delete(room);
-        eventGame.removeAllListeners();
         console.log('in free game:: ', room);
         console.log(games.get(room));
         console.log('games: ', games);

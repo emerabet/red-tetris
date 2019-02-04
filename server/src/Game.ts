@@ -4,25 +4,21 @@ import Board from './Board';
 import BoardController from './BoardController';
 import PieceFactory from './PieceFactory';
 
-class Game {
+class Game extends EventEmitter {
     private room: string;
-    private eventGame: EventEmitter;
     private isStarted: boolean;
     private boards: Map<string, BoardController>; // SocketId, boardController
-    private eventBoard: EventEmitter;
     private players: Map<string, Player>; // SocketId, Player
     private pieces: string[];
 
-    constructor(room:string, eventGame:EventEmitter) {
+    constructor(room:string) {
+        super();
         this.room = room;
-        this.eventGame = eventGame;
         this.isStarted = false;
         this.boards = new Map<string, BoardController>();
-        this.eventBoard = new EventEmitter();
         this.players = new Map<string, Player>();
         this.pieces = [];
 
-        this.init();
         this.createSetOfPieces();
     }
 
@@ -34,13 +30,13 @@ class Game {
         console.log('list of pieces: ', this.pieces);
     }
 
-    private init() {
-        this.eventBoard.on('testevent', (id:number) => {
+    private init(board: BoardController) {
+        board.on('testevent', (id:number) => {
             console.log(`Malus added by socketId: ${id}`);
             console.log('List pieces:: ', this.pieces);
         });
 
-        this.eventBoard.on('need', (index) => {
+        board.on('need', (index) => {
             console.log('index need:: ', index);
             if ((this.pieces.length - 1) - index <= 1) {
                 this.pieces.push(PieceFactory.createRandomPiece());
@@ -48,16 +44,14 @@ class Game {
             }
         });
 
-        this.eventBoard.on('free', (socketId: string) => {
+        board.on('free', (socketId: string) => {
             this.players.delete(socketId);
             this.boards.delete(socketId);
             if (this.boards.size === 0) {
                 this.pieces.length = 0;
                 delete this.pieces;
-                this.eventBoard.removeAllListeners();
-                delete this.eventBoard;
-                this.eventGame.emit('freeGame', this.room);
-                delete this.eventGame;
+                this.emit('freeGame', this.room);
+                this.removeAllListeners();
             }
             console.log('je suis dans onFree');
         });
@@ -76,8 +70,8 @@ class Game {
                 player,
                 board,
                 socket,
-                this.eventBoard,
                 this.pieces);
+            this.init(boardController);
             this.boards.set(socket.id, boardController);
         }
     }
