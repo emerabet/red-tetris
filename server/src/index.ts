@@ -13,9 +13,6 @@ const io = socketIo(server, { pingTimeout: 60000 });
 app.use(cors());
 
 const games = new Map<string, Game>();
-// const game:Game = new Game();
-// const p1 = new Player('Eric');
-// const p2 = new Player('Lol');
 
 io.on('connection', (socket:SocketIO.Socket) => {
     const { room, pseudo } = socket.handshake.query;
@@ -23,7 +20,7 @@ io.on('connection', (socket:SocketIO.Socket) => {
         console.log('Game created: ', room);
         const game = new Game(room);
         games.set(room, game);
-        init(game);
+        initListeners(game);
     }
     const game = games.get(room);
     if (game) {
@@ -32,7 +29,7 @@ io.on('connection', (socket:SocketIO.Socket) => {
     }
 });
 
-function init(game: Game) {
+function initListeners(game: Game) {
     game.on('freeGame', (room) => {
         games.delete(room);
         console.log('in free game:: ', room);

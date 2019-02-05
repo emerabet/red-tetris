@@ -112,7 +112,7 @@ class BoardController extends EventEmitter {
             if (this.currentBoard.isFull(i) === true) {
                 this.currentBoard.removeRowAt(i);
                 this.currentBoard.addEmptyRow();
-                this.addMalus();
+                this.addMalusToOther();
                 console.log('Full row, row removed');
                 i += 1;
             } else {
@@ -143,7 +143,13 @@ class BoardController extends EventEmitter {
         }
     }
 
-    private addMalus() {
+    public addMalus() {
+        this.currentBoard.clear(this.currentPiece);
+        this.currentBoard.addLockedRow();
+        this.draw();
+    }
+
+    private addMalusToOther() {
         this.emit('malus', this.socket.id);
     }
 

@@ -30,10 +30,15 @@ class Game extends EventEmitter {
         console.log('list of pieces: ', this.pieces);
     }
 
-    private init(board: BoardController) {
-        board.on('testevent', (id:number) => {
-            console.log(`Malus added by socketId: ${id}`);
-            console.log('List pieces:: ', this.pieces);
+    private initListeners(board: BoardController) {
+        board.on('malus', (socketId:string) => {
+            console.log(`Malus added by socketId: ${socketId}`);
+            this.boards.forEach((value, key) => {
+                if (key !== socketId) {
+                    console.log('try to add malus to :', key);
+                    value.addMalus();
+                }
+            });
         });
 
         board.on('need', (index) => {
@@ -71,7 +76,7 @@ class Game extends EventEmitter {
                 board,
                 socket,
                 this.pieces);
-            this.init(boardController);
+            this.initListeners(boardController);
             this.boards.set(socket.id, boardController);
         }
     }
