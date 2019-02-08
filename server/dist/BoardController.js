@@ -93,7 +93,7 @@ class BoardController extends events_1.EventEmitter {
             if (this.currentBoard.isFull(i) === true) {
                 this.currentBoard.removeRowAt(i);
                 this.currentBoard.addEmptyRow();
-                this.addMalus();
+                this.addMalusToOther();
                 console.log('Full row, row removed');
                 i += 1;
             }
@@ -121,6 +121,11 @@ class BoardController extends events_1.EventEmitter {
         }
     }
     addMalus() {
+        this.currentBoard.clear(this.currentPiece);
+        this.currentBoard.addLockedRow();
+        this.draw();
+    }
+    addMalusToOther() {
         this.emit('malus', this.socket.id);
     }
     askPiece() {
@@ -139,13 +144,13 @@ class BoardController extends events_1.EventEmitter {
         this.removeAllListeners();
     }
     run() {
+        this.draw();
         this.timer = setInterval(this.drop, this.speed);
     }
     init() {
         this.socket.on('init', () => {
-            console.log('First print');
-            this.draw();
-            this.run();
+            console.log('Init game');
+            this.emit('start');
         });
         this.socket.on('disconnect', () => {
             console.log('disconnected: ', this.socket.id);

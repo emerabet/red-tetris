@@ -24,10 +24,21 @@ class Game extends events_1.EventEmitter {
         }
         console.log('list of pieces: ', this.pieces);
     }
-    init(board) {
-        board.on('testevent', (id) => {
-            console.log(`Malus added by socketId: ${id}`);
-            console.log('List pieces:: ', this.pieces);
+    initListeners(board) {
+        board.on('start', () => {
+            this.boards.forEach((value, key) => {
+                console.log('try to start game :', key);
+                value.run();
+            });
+        });
+        board.on('malus', (socketId) => {
+            console.log(`Malus added by socketId: ${socketId}`);
+            this.boards.forEach((value, key) => {
+                if (key !== socketId) {
+                    console.log('try to add malus to :', key);
+                    value.addMalus();
+                }
+            });
         });
         board.on('need', (index) => {
             console.log('index need:: ', index);
@@ -57,7 +68,7 @@ class Game extends events_1.EventEmitter {
             this.players.set(socket.id, player);
             const board = new Board_1.default(height, width);
             const boardController = new BoardController_1.default(player, board, socket, this.pieces);
-            this.init(boardController);
+            this.initListeners(boardController);
             this.boards.set(socket.id, boardController);
         }
     }

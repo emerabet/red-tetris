@@ -31,6 +31,13 @@ class Game extends EventEmitter {
     }
 
     private initListeners(board: BoardController) {
+        board.on('start', () => {
+            this.boards.forEach((value, key) => {
+                console.log('try to start game :', key);
+                value.run();
+            });
+        });
+
         board.on('malus', (socketId:string) => {
             console.log(`Malus added by socketId: ${socketId}`);
             this.boards.forEach((value, key) => {

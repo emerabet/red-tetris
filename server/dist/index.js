@@ -14,16 +14,13 @@ const server = http_1.default.createServer(app);
 const io = socket_io_1.default(server, { pingTimeout: 60000 });
 app.use(cors_1.default());
 const games = new Map();
-// const game:Game = new Game();
-// const p1 = new Player('Eric');
-// const p2 = new Player('Lol');
 io.on('connection', (socket) => {
     const { room, pseudo } = socket.handshake.query;
     if (!games.has(room)) {
         console.log('Game created: ', room);
         const game = new Game_1.default(room);
         games.set(room, game);
-        init(game);
+        initListeners(game);
     }
     const game = games.get(room);
     if (game) {
@@ -31,7 +28,7 @@ io.on('connection', (socket) => {
         game.createBoard(20, 10, socket);
     }
 });
-function init(game) {
+function initListeners(game) {
     game.on('freeGame', (room) => {
         games.delete(room);
         console.log('in free game:: ', room);
