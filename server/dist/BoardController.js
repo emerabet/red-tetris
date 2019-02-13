@@ -20,11 +20,6 @@ class BoardController extends events_1.EventEmitter {
         this.isFinished = false;
         this.drop = this.drop.bind(this);
         this.init();
-        // this.currentBoard.clear(this.currentPiece);
-        // this.currentBoard.addLockedRow();
-        // this.currentBoard.addLockedRow();
-        // this.currentBoard.addLockedRow();
-        // this.place();
     }
     get board() {
         return this.currentBoard;
@@ -61,6 +56,7 @@ class BoardController extends events_1.EventEmitter {
             console.log(this.currentBoard.grid);
             clearInterval(this.timer);
             this.isFinished = true;
+            // TODO: Une fois la partie perdue l'etat de la board ne doit plus changer tant qu'une partie n'a pas été relancée.
         }
         else {
             // this.draw();
@@ -150,6 +146,7 @@ class BoardController extends events_1.EventEmitter {
     init() {
         this.socket.on('init', () => {
             console.log('Init game');
+            // TODO: Vérifier si c'est bien l'admin de la partie.
             this.emit('start');
         });
         this.socket.on('disconnect', () => {
