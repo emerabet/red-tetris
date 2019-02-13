@@ -3,39 +3,36 @@ import Player from './Player';
 import Board from './Board';
 import Piece from './Piece';
 import PieceFactory from './PieceFactory';
-import { Direction, From, CellState } from './constants';
-import ICollisionStrategy from './Interfaces/ICollisionStrategy';
-import CollisionDownStrategy from './Strategies/CollisionDownStrategy';
-import CollisionTopStrategy from './Strategies/CollisionTopStrategy';
+import { Direction, CellState } from './constants';
+
 import { Socket } from 'socket.io';
 
-const strategies: any = {
-    [Direction.Down]: new CollisionDownStrategy(),
-    [Direction.Top]: new CollisionTopStrategy(),
-};
-
-class BoardController {
+class BoardController extends EventEmitter {
     private currentPlayer: Player;
     private currentBoard: Board;
     private currentPiece: Piece;
+    private pieces: string[];
     private timer: any;
     private socket: Socket;
-    private eventEmitter: EventEmitter;
+    private indexPiece: number;
+    private speed: number;
+    private score: number;
+    private isFinished: boolean;
 
-    constructor(player:Player, board:Board, socket:Socket, emitter: EventEmitter) {
+    constructor(player:Player, board:Board, socket:SocketIO.Socket, pieces: string[]) {
+        super();
         this.currentPlayer = player;
         this.currentBoard = board;
         this.socket = socket;
-        this.eventEmitter = emitter;
-        this.currentPiece = PieceFactory.createRandomPiece();
+        this.indexPiece = 0;
+        this.pieces = pieces; // Pass by value the reference to the array of piece created from Game.
+        this.currentPiece = PieceFactory.createPiece(pieces[this.indexPiece]);
+        this.speed = 1000;
+        this.score = 0;
+        this.isFinished = false;
 
         this.drop = this.drop.bind(this);
         this.init();
-        // this.currentBoard.clear(this.currentPiece);
-        // this.currentBoard.addLockedRow();
-        // this.currentBoard.addLockedRow();
-        // this.currentBoard.addLockedRow();
-        // this.place();
     }
 
     get board(): Board {
@@ -48,17 +45,6 @@ class BoardController {
 
     public log() {
         console.log('Name:', this.currentPlayer.username);
-    }
-
-    private checkCollision(direction: Direction): boolean {
-        const collision:ICollisionStrategy = strategies[direction];
-        if (collision.check(this.currentBoard, this.currentPiece)) {
-            console.log('Collision detected');
-            //clearInterval(this.timer);
-            return true;
-        }
-
-        return false;
     }
 
     private check() {
@@ -78,13 +64,17 @@ class BoardController {
 
     private newPiece() {
         console.log('[ACTION] NEW PIECE GENERATED ');
-        this.currentPiece = PieceFactory.createRandomPiece();
+        this.askPiece();
+        this.indexPiece += 1;
+        this.currentPiece = PieceFactory.createPiece(this.pieces[this.indexPiece]);
         if (this.check()) {
             console.log(' /!\\ END GAME /!\\');
             console.log(this.currentPiece);
             this.place();
             console.log(this.currentBoard.grid);
             clearInterval(this.timer);
+            this.isFinished = true;
+            // TODO: Une fois la partie perdue l'etat de la board ne doit plus changer tant qu'une partie n'a pas été relancée.
         } else {
             // this.draw();
         }
@@ -118,7 +108,7 @@ class BoardController {
             if (this.currentBoard.isFull(i) === true) {
                 this.currentBoard.removeRowAt(i);
                 this.currentBoard.addEmptyRow();
-                this.addMalus();
+                this.addMalusToOther();
                 console.log('Full row, row removed');
                 i += 1;
             } else {
@@ -149,22 +139,48 @@ class BoardController {
         }
     }
 
-    private addMalus() {
-        this.eventEmitter.emit('malus', this.socket.id);
+    public addMalus() {
+        this.currentBoard.clear(this.currentPiece);
+        this.currentBoard.addLockedRow();
+        this.draw();
+    }
+
+    private addMalusToOther() {
+        this.emit('malus', this.socket.id);
+    }
+
+    private askPiece() {
+        this.emit('need', this.indexPiece);
+    }
+
+    private freeBoard(socketId: string) {
+        clearInterval(this.timer);
+        this.socket.removeAllListeners();
+        delete this.socket;
+        delete this.timer;
+        delete this.currentPiece;
+        delete this.currentBoard;
+        delete this.currentPlayer;
+        delete this.pieces;
+        this.emit('free', socketId);
+        this.removeAllListeners();
     }
 
     public run() {
-        // const timer = setInterval(() => this.run(), 1 * 1000);
-        // this.currentPiece = PieceFactory.createRandomPiece();
-        // console.log(this.currentPiece);
-        this.timer = setInterval(this.drop, 1000);
+        this.draw();
+        this.timer = setInterval(this.drop, this.speed);
     }
 
     private init() {
         this.socket.on('init', () => {
-            console.log('First print');
-            this.draw();
-            this.run();
+            console.log('Init game');
+            // TODO: Vérifier si c'est bien l'admin de la partie.
+            this.emit('start');
+        });
+
+        this.socket.on('disconnect', () => {
+            console.log('disconnected: ', this.socket.id);
+            this.freeBoard(this.socket.id);
         });
 
         this.socket.on('down', () => {

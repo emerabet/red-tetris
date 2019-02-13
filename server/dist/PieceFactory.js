@@ -24,12 +24,8 @@ class PieceFactory {
         const max = Object.keys(this.allPieces).length - 1;
         const index = this.random(min, max);
         const letter = Object.keys(this.allPieces)[index];
-        return this.createPiece(letter);
-    }
-    static print() {
-        const p = this.createRandomPiece();
-        p.rotate();
-        console.log(p.shape);
+        console.log('la lettre:: ', letter);
+        return letter;
     }
 }
 PieceFactory.allPieces = {

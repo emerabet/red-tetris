@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "test": "echo \"Error: no tests specified\" && exit 1",
-    "dev": "concurrently -k -n \"Typescript,Node\" -p \"[{name}]\" -c \"blue, green\" \"tsc --watch\" \"nodemon dist/index.js\"",
+    "dev": "concurrently -k -n \"Typescript,Node\" -p \"[{name}]\" -c \"blue, green\" \"tsc --watch\" \"nodemon --inspect dist/index.js\"",
     "lint": "tslint --project tslint.json 'src/**/*.{ts,tsx}'"
   },
   "devDependencies": {

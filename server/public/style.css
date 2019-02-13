@@ -14,7 +14,7 @@ main:last-child {
 
  .row_cell {
     flex: 1;
-    height: calc(100vh / 20);
+    height: calc(90vh / 20);
     border-top: solid black 1px;
     border-right: solid black 1px;
  }

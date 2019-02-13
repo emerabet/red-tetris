@@ -1,40 +1,90 @@
+import { EventEmitter } from 'events';
 import Player from './Player';
 import Board from './Board';
 import BoardController from './BoardController';
-import { EventEmitter } from 'events';
-import { Socket } from 'socket.io';
-import { stringify } from 'querystring';
+import PieceFactory from './PieceFactory';
 
-class Game {
+class Game extends EventEmitter {
+    private room: string;
     private isStarted: boolean;
-    private boards: BoardController[];
-    private eventEmitter: EventEmitter;
-    private players: Map<string, Player>;
+    private boards: Map<string, BoardController>; // SocketId, boardController
+    private players: Map<string, Player>; // SocketId, Player
+    private pieces: string[];
 
-    constructor() {
+    constructor(room:string) {
+        super();
+        this.room = room;
         this.isStarted = false;
-        this.boards = [];
-        this.eventEmitter = new EventEmitter();
+        this.boards = new Map<string, BoardController>();
         this.players = new Map<string, Player>();
+        this.pieces = [];
 
-        this.init();
+        this.createSetOfPieces();
     }
 
-    private init() {
-        this.eventEmitter.on('testevent', (id:number) => {
-            console.log(`Malus added by socketId: ${id}`);
+    private createSetOfPieces() {
+        for (let i = 0; i < 3; i += 1) {
+            this.pieces.push(PieceFactory.createRandomPiece());
+        }
+
+        console.log('list of pieces: ', this.pieces);
+    }
+
+    private initListeners(board: BoardController) {
+        board.on('start', () => {
+            this.boards.forEach((value, key) => {
+                console.log('try to start game :', key);
+                value.run();
+            });
+        });
+
+        board.on('malus', (socketId:string) => {
+            console.log(`Malus added by socketId: ${socketId}`);
+            this.boards.forEach((value, key) => {
+                if (key !== socketId) {
+                    console.log('try to add malus to :', key);
+                    value.addMalus();
+                }
+            });
+        });
+
+        board.on('need', (index) => {
+            console.log('index need:: ', index);
+            if ((this.pieces.length - 1) - index <= 1) {
+                this.pieces.push(PieceFactory.createRandomPiece());
+                console.log('piece added to the list');
+            }
+        });
+
+        board.on('free', (socketId: string) => {
+            this.players.delete(socketId);
+            this.boards.delete(socketId);
+            if (this.boards.size === 0) {
+                this.pieces.length = 0;
+                delete this.pieces;
+                this.emit('freeGame', this.room);
+                this.removeAllListeners();
+            }
+            console.log('je suis dans onFree');
         });
     }
 
-    public getBoards(): BoardController[] {
+    public getBoards(): Map<string, BoardController> {
         return this.boards;
     }
 
-    public createBoard(player:Player, height:number, width:number, socket:Socket): void {
+    public createBoard(height:number, width:number, socket:SocketIO.Socket): void {
         if (!this.isStarted) {
+            const player = new Player(socket.id);
+            this.players.set(socket.id, player);
             const board:Board = new Board(height, width);
-            const boardController = new BoardController(player, board, socket, this.eventEmitter);
-            this.boards.push(boardController);
+            const boardController = new BoardController(
+                player,
+                board,
+                socket,
+                this.pieces);
+            this.initListeners(boardController);
+            this.boards.set(socket.id, boardController);
         }
     }
 }

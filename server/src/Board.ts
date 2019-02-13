@@ -2,13 +2,11 @@ import Piece from './Piece';
 import { CellState, From } from './constants';
 
 class Board {
-    private score:number;
     private readonly height: number;
     private readonly width: number;
     private playfield: number[][];
 
     constructor(height:number, width:number) {
-        this.score = 0;
         this.playfield = [];
         this.height = height;
         this.width = width;
