@@ -7,7 +7,7 @@ import UseSocket from './UseSocket';
 
 import './style.css';
 
-const styles:any = {
+const styles: any = {
     effectL0_1: {
         // translate: "-1vw,-4vw",
         backgroundColor: "yellow",
@@ -38,7 +38,7 @@ const GamePage: React.SFC<GamePageProps> = props => {
     const [room, setRoom] = useState("");
     const [player, setPlayer] = useState("");
     const [socket, setSocket] = useState(Socket);
-    const initialRowDestruction:number[] = [];
+    const initialRowDestruction: number[] = [];
     const [row, setRow] = useState(initialRowDestruction);
     useEffect(() => {
         if (props.board && props.board !== undefined) {
@@ -130,7 +130,7 @@ const GamePage: React.SFC<GamePageProps> = props => {
                             {
                                 d.map((c: any) => {
                                     return (
-                                        <div key={j++} className={`boardCell c${c}`}>{c}</div>
+                                        <div key={j++} className={`boardCell c${c}`}>{/*c*/}</div>
                                     )
                                 })
                             }
@@ -150,14 +150,14 @@ const GamePage: React.SFC<GamePageProps> = props => {
                     let r = 0;
                     return (
                         <div key={i++} className={row.includes(i - 1) ? "boardRowDestructionOK" : "boardRowDestruction"}>
-                        {row.includes(i) && console.log("OOOOOOOPPPPPPPPPPPPPPPPPPPPPP")}
-                        {console.log("testttt", i -1, row)}
+                            {row.includes(i) && console.log("OOOOOOOPPPPPPPPPPPPPPPPPPPPPP")}
+                            {console.log("testttt", i - 1, row)}
                             {
                                 d.map((c: any) => {
                                     return (
                                         <div key={j++} className="destructionRow">
                                             <div className="destructionCol">
-                                            {/* {console.log(i,j)} */}
+                                                {/* {console.log(i,j)} */}
                                                 <div className={`boardCellDestruction effectL${r}`}>{}</div>
                                                 <div className={`boardCellDestruction effectR${r}`}>{}</div>
                                             </div>
@@ -176,10 +176,50 @@ const GamePage: React.SFC<GamePageProps> = props => {
         )
     }
 
+    function renderTitle() {
+        return (
+            <div className="redTetris">
+                <div className="box boxR">
+                    <div className="boxCube boxR1"></div>
+                    <div className="boxCube boxR2"></div>
+                    <div className="boxCube boxR3"></div>
+                    <div className="boxCube boxR4"></div>
+                    <div className="boxCube boxR5"></div>
+                    <div className="boxCube boxR6"></div>
+                    <div className="boxCube boxR7"></div>
+                    <div className="boxCube boxR8"></div>
+                    <div className="boxCube boxR9"></div>
+                    <div className="boxCube boxR10"></div>
+                    <div className="boxCube boxR11"></div>
+                    <div className="boxCube boxR12"></div>
+                    <div className="boxCube boxR13"></div>
+                    <div className="boxCube boxR14"></div>
+                </div>
+                <div className="box boxE">
+                    <div className="boxCube boxE1"></div>
+                    <div className="boxCube boxE2"></div>
+                    <div className="boxCube boxE3"></div>
+                    <div className="boxCube boxE4"></div>
+                    <div className="boxCube boxE5"></div>
+                    <div className="boxCube boxE6"></div>
+                    <div className="boxCube boxE7"></div>
+                    <div className="boxCube boxE8"></div>
+                    <div className="boxCube boxE9"></div>
+                    <div className="boxCube boxE10"></div>
+                    <div className="boxCube boxE11"></div>
+                    <div className="boxCube boxE12"></div>
+                    <div className="boxCube boxE13"></div>
+                </div>
+
+            </div>
+        )
+    }
+
     return (
         <div>
             test Game page {props.started && "started"} ad {props.room} {props.player}
             <div className="mainDiv">
+                {renderTitle()}
                 <form onSubmit={play}>
                     <input name="room" type="text" placeholder="room" onChange={handleChange}></input>
                     <input name="player" type="text" placeholder="player" onChange={handleChange}></input>
@@ -194,9 +234,15 @@ const GamePage: React.SFC<GamePageProps> = props => {
                 <div>
                     x:{props.position.x}/y:{props.position.y}
                 </div>
-                <div className="boardSpace">
-                    {renderBoard()}
-                    {renderBoard2()}
+                <div className="outerBoard">
+                    <div className="boardSpace">
+                        <div className="bar top "></div>
+                        <div className="bar right delay"></div>
+                        <div className="bar bottom delay"></div>
+                        <div className="bar left "></div>
+                        {renderBoard()}
+                        {renderBoard2()}
+                    </div>
                 </div>
                 <button onClick={rotate}>UP</button>
                 <button onClick={moveDown}>DOWN</button>
