@@ -36,7 +36,9 @@ interface GamePageProps {
 
 const GamePage: React.SFC<GamePageProps> = props => {
     const [room, setRoom] = useState("");
+    const [roomClassName, setRoomClassName] = useState('');
     const [player, setPlayer] = useState("");
+    const [playerClassName, setPlayerClassName] = useState('');
     const [socket, setSocket] = useState(Socket);
     const initialRowDestruction: number[] = [];
     const [row, setRow] = useState(initialRowDestruction);
@@ -96,7 +98,7 @@ const GamePage: React.SFC<GamePageProps> = props => {
         });
         setSocket(s);
         s.emit('init');
-        props.history.push(`/#${props.room}[${props.player}]`);
+        props.history.push(`/#${room}[${player}]`);
     }
 
     const reset = () => {
@@ -146,6 +148,7 @@ const GamePage: React.SFC<GamePageProps> = props => {
         let j = 0;
         return (
             <div className="board">
+
                 {props.board.map((d: any) => {
                     let r = 0;
                     return (
@@ -275,6 +278,34 @@ const GamePage: React.SFC<GamePageProps> = props => {
                     <div className="boxCube boxR13"></div>
                     <div className="boxCube boxR14"></div>
                 </div>
+                <div className="box boxI">
+                    <div className="boxCube boxI1"></div>
+                    <div className="boxCube boxI2"></div>
+                    <div className="boxCube boxI3"></div>
+                    <div className="boxCube boxI4"></div>
+                    <div className="boxCube boxI5"></div>
+                    <div className="boxCube boxI6"></div>
+                    <div className="boxCube boxI7"></div>
+                    <div className="boxCube boxI8"></div>
+                    <div className="boxCube boxI9"></div>
+                </div>
+
+                <div className="box boxS">
+                    <div className="boxCube boxS1"></div>
+                    <div className="boxCube boxS2"></div>
+                    <div className="boxCube boxS3"></div>
+                    <div className="boxCube boxS4"></div>
+                    <div className="boxCube boxS5"></div>
+                    <div className="boxCube boxS6"></div>
+                    <div className="boxCube boxS7"></div>
+                    <div className="boxCube boxS8"></div>
+                    <div className="boxCube boxS9"></div>
+                    <div className="boxCube boxS10"></div>
+                    <div className="boxCube boxS11"></div>
+                    <div className="boxCube boxS12"></div>
+                    <div className="boxCube boxS13"></div>
+                    <div className="boxCube boxS14"></div>
+                </div>
 
 
 
@@ -282,38 +313,252 @@ const GamePage: React.SFC<GamePageProps> = props => {
         )
     }
 
+    function roomShake() {
+        setRoomClassName("shake");
+        setTimeout(() => {
+            setRoomClassName("");
+        }, 1000)
+    }
+
+    function playerShake() {
+        setPlayerClassName("shake");
+        setTimeout(() => {
+            setPlayerClassName("");
+        }, 1000)
+    }
+
+    function renderRoomLabel() {
+        return (
+            <div className="labelTitle">
+                <div className="labelLetter">
+                    <div className="labelCube r1"></div>
+                    <div className="labelCube r2"></div>
+                    <div className="labelCube r3"></div>
+                    <div className="labelCube r4"></div>
+                    <div className="labelCube r5"></div>
+                    <div className="labelCube r6"></div>
+                    <div className="labelCube r7"></div>
+                    <div className="labelCube r8"></div>
+                    <div className="labelCube r9"></div>
+                    <div className="labelCube r10"></div>
+                    <div className="labelCube r11"></div>
+                    <div className="labelCube r12"></div>
+                    <div className="labelCube r13"></div>
+                    <div className="labelCube r14"></div>
+                    <div className="labelCube r15"></div>
+                    <div className="labelCube r16"></div>
+                </div>
+                <div className="labelLetter">
+                    <div className="labelCube o1"></div>
+                    <div className="labelCube o2"></div>
+                    <div className="labelCube o3"></div>
+                    <div className="labelCube o4"></div>
+                    <div className="labelCube o5"></div>
+                    <div className="labelCube o6"></div>
+                    <div className="labelCube o7"></div>
+                    <div className="labelCube o8"></div>
+                    <div className="labelCube o9"></div>
+                    <div className="labelCube o10"></div>
+                    <div className="labelCube o11"></div>
+                    <div className="labelCube o12"></div>
+                    <div className="labelCube o13"></div>
+                    <div className="labelCube o14"></div>
+                    <div className="labelCube o15"></div>
+                    <div className="labelCube o16"></div>
+                </div>
+                <div className="labelLetter">
+                    <div className="labelCube o1"></div>
+                    <div className="labelCube o2"></div>
+                    <div className="labelCube o3"></div>
+                    <div className="labelCube o4"></div>
+                    <div className="labelCube o5"></div>
+                    <div className="labelCube o6"></div>
+                    <div className="labelCube o7"></div>
+                    <div className="labelCube o8"></div>
+                    <div className="labelCube o9"></div>
+                    <div className="labelCube o10"></div>
+                    <div className="labelCube o11"></div>
+                    <div className="labelCube o12"></div>
+                    <div className="labelCube o13"></div>
+                    <div className="labelCube o14"></div>
+                    <div className="labelCube o15"></div>
+                    <div className="labelCube o16"></div>
+                </div>
+                <div className="labelLetter">
+                    <div className="labelCube m1"></div>
+                    <div className="labelCube m2"></div>
+                    <div className="labelCube m3"></div>
+                    <div className="labelCube m4"></div>
+                    <div className="labelCube m5"></div>
+                    <div className="labelCube m6"></div>
+                    <div className="labelCube m7"></div>
+                    <div className="labelCube m8"></div>
+                    <div className="labelCube m9"></div>
+                    <div className="labelCube m10"></div>
+                    <div className="labelCube m11"></div>
+                    <div className="labelCube m12"></div>
+                    <div className="labelCube m13"></div>
+                </div>
+            </div>
+        )
+    }
+
+    function renderPlayerLabel() {
+        return (
+            <div className="labelTitle">
+                <div className="labelLetter">
+                    <div className="labelCube p1"></div>
+                    <div className="labelCube p2"></div>
+                    <div className="labelCube p3"></div>
+                    <div className="labelCube p4"></div>
+                    <div className="labelCube p5"></div>
+                    <div className="labelCube p6"></div>
+                    <div className="labelCube p7"></div>
+                    <div className="labelCube p8"></div>
+                    <div className="labelCube p9"></div>
+                    <div className="labelCube p10"></div>
+                    <div className="labelCube p11"></div>
+                    <div className="labelCube p12"></div>
+                    <div className="labelCube p13"></div>
+                    <div className="labelCube p14"></div>
+                </div>
+                <div className="labelLetter">
+                    <div className="labelCube l1"></div>
+                    <div className="labelCube l2"></div>
+                    <div className="labelCube l3"></div>
+                    <div className="labelCube l4"></div>
+                    <div className="labelCube l5"></div>
+                    <div className="labelCube l6"></div>
+                    <div className="labelCube l7"></div>
+                    <div className="labelCube l8"></div>
+                    <div className="labelCube l9"></div>
+                </div>
+                <div className="labelLetter">
+                    <div className="labelCube a1"></div>
+                    <div className="labelCube a2"></div>
+                    <div className="labelCube a3"></div>
+                    <div className="labelCube a4"></div>
+                    <div className="labelCube a5"></div>
+                    <div className="labelCube a6"></div>
+                    <div className="labelCube a7"></div>
+                    <div className="labelCube a8"></div>
+                    <div className="labelCube a9"></div>
+                    <div className="labelCube a10"></div>
+                    <div className="labelCube a11"></div>
+                    <div className="labelCube a12"></div>
+                    <div className="labelCube a13"></div>
+                    <div className="labelCube a14"></div>
+                    <div className="labelCube a15"></div>
+                    <div className="labelCube a16"></div>
+                    <div className="labelCube a17"></div>
+                    <div className="labelCube a18"></div>
+                </div>
+                <div className="labelLetter">
+                    <div className="labelCube y1"></div>
+                    <div className="labelCube y2"></div>
+                    <div className="labelCube y3"></div>
+                    <div className="labelCube y4"></div>
+                    <div className="labelCube y5"></div>
+                    <div className="labelCube y6"></div>
+                    <div className="labelCube y7"></div>
+                </div>
+
+                <div className="labelLetter">
+                    <div className="labelCube e1"></div>
+                    <div className="labelCube e2"></div>
+                    <div className="labelCube e3"></div>
+                    <div className="labelCube e4"></div>
+                    <div className="labelCube e5"></div>
+                    <div className="labelCube e6"></div>
+                    <div className="labelCube e7"></div>
+                    <div className="labelCube e8"></div>
+                    <div className="labelCube e9"></div>
+                    <div className="labelCube e10"></div>
+                    <div className="labelCube e11"></div>
+                    <div className="labelCube e12"></div>
+                    <div className="labelCube e13"></div>
+                    <div className="labelCube e14"></div>
+                    <div className="labelCube e15"></div>
+                    <div className="labelCube e16"></div>
+                </div>
+                <div className="labelLetter">
+                    <div className="labelCube r1"></div>
+                    <div className="labelCube r2"></div>
+                    <div className="labelCube r3"></div>
+                    <div className="labelCube r4"></div>
+                    <div className="labelCube r5"></div>
+                    <div className="labelCube r6"></div>
+                    <div className="labelCube r7"></div>
+                    <div className="labelCube r8"></div>
+                    <div className="labelCube r9"></div>
+                    <div className="labelCube r10"></div>
+                    <div className="labelCube r11"></div>
+                    <div className="labelCube r12"></div>
+                    <div className="labelCube r13"></div>
+                    <div className="labelCube r14"></div>
+                    <div className="labelCube r15"></div>
+                    <div className="labelCube r16"></div>
+                </div>
+            </div>
+        )
+    }
+
+
     return (
         <div>
-            test Game page {props.started && "started"} ad {props.room} {props.player}
             <div className="mainDiv">
-                {renderTitle()}
-                <form onSubmit={play}>
-                    <input name="room" type="text" placeholder="room" onChange={handleChange}></input>
-                    <input name="player" type="text" placeholder="player" onChange={handleChange}></input>
-                    <button type="submit" disabled={room === "" || player === ""}> Play </button>
-                </form>
-                <div>
-                    {props.piece}
-                </div>
-                <div>
-                    {props.piece[props.pieceIndex]}
-                </div>
-                <div>
-                    x:{props.position.x}/y:{props.position.y}
-                </div>
-                <div className="outerBoard">
-                    <div className="boardSpace">
-                        <div className="bar top "></div>
-                        <div className="bar right delay"></div>
-                        <div className="bar bottom delay"></div>
-                        <div className="bar left "></div>
-                        {renderBoard()}
-                        {renderBoard2()}
+                <div className="sectionLeft">
+
+                    <form className="formFlex" onSubmit={play}>
+                        {room !== '' && renderRoomLabel()}
+                        <div className="namer">
+                            <div className="namer-input">
+                                <input
+                                    onBlur={roomShake}
+                                    className={roomClassName} name="room" type="text" placeholder="ROOM" onChange={handleChange}></input>
+                            </div>
+                        </div>
+                        {player !== '' && renderPlayerLabel()}
+                        <div className="namer">
+                            <div className="namer-input">
+                                <input
+                                    onBlur={playerShake}
+                                    className={playerClassName}
+                                    name="player" type="text" placeholder="PLAYER" onChange={handleChange}></input>
+                            </div>
+                        </div>
+                        <button type="submit" className="plus" disabled={room === "" || player === ""}></button>
+                    </form>
+                    <div>
+                        {props.piece}
+                    </div>
+                    <div>
+                        {props.piece[props.pieceIndex]}
+                    </div>
+                    <div>
                     </div>
                 </div>
-                <button onClick={rotate}>UP</button>
+                <div className="outerBoard">
+                    {renderTitle()}
+                    <div className="boardSpace">
+                        <svg className="pulse" viewBox="0 0 1024 1024" version="1.1">
+                            <circle id="Oval" cx="512" cy="512" r="512"></circle>
+                            <circle id="Oval" cx="512" cy="512" r="512"></circle>
+                            <circle id="Oval" cx="512" cy="512" r="512"></circle>
+                        </svg>
+                        <div className="boardInner">
+                            <div className="bar top "></div>
+                            <div className="bar right delay"></div>
+                            <div className="bar bottom delay"></div>
+                            <div className="bar left "></div>
+                            {renderBoard()}
+                            {renderBoard2()}
+                        </div>
+                    </div>
+                </div>
+                {/* <button onClick={rotate}>UP</button>
                 <button onClick={moveDown}>DOWN</button>
-                <button onClick={reset}>RESET</button>
+                <button onClick={reset}>RESET</button> */}
                 <UseSocket socket={socket} />
             </div>
         </div>
