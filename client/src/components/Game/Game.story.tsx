@@ -26,5 +26,7 @@ storiesOf('Game', module)
          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]}
          row={[]}
+         room="SUPERROOM"
+         player="BIG BOSS"
       />
    ));

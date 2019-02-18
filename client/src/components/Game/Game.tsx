@@ -1,31 +1,30 @@
 import React, { Component, useState, useEffect } from 'react';
 import SquareLabel from '../Labels';
 import RedTetris from '../RedTetris';
-import UseSocket from '../../containers/GamePage/UseSocket';
 
 import './style.css';
 
 interface GameProps {
   board: number[][];
   row: number[];
+  room: string;
+  player: string;
 }
 
 const Game: React.SFC<GameProps> = (props) => {
-  const initialRowDestruction: number[] = [];
-  const [row, setRow] = useState(initialRowDestruction);
+  /*const initialRowDestruction: number[] = [];
+  const [row, setRow] = useState(initialRowDestruction);*/
 
   function renderBoard() {
-    let i = 0;
-    let j = 0;
     return (
       <div className="board">
-        {props.board.map((d: any) => {
+        {props.board.map((d: any, i:number) => {
           return (
-            <div key={i++} className="boardRow">
+            <div key={i} className="boardRow">
               {
-                d.map((c: any) => {
+                d.map((c: any, j:number) => {
                   return (
-                    <div key={j++} className={`boardCell c${c}`}>{/*c*/}</div>
+                    <div key={j} className={`boardCell c${c}`}>{/*c*/}</div>
                   );
                 })
               }
@@ -41,17 +40,16 @@ const Game: React.SFC<GameProps> = (props) => {
     let j = 0;
     return (
       <div className="board">
-        {props.board.map((d: any) => {
+        {props.board.map((d: any, i:number) => {
           let r = 0;
           return (
-            <div key={i++} className={row.includes(i - 1)
+            <div key={i} className={props.row.includes(i - 1)
               ? 'boardRowDestructionOK' : 'boardRowDestruction'}>
               {
-                d.map((c: any) => {
+                d.map((c: any, j:number) => {
                   return (
-                    <div key={j++} className="destructionRow">
+                    <div key={j} className="destructionRow">
                       <div className="destructionCol">
-                        {/* {console.log(i,j)} */}
                         <div className={`boardCellDestruction effectL${r}`}>{}</div>
                         <div className={`boardCellDestruction effectR${r}`}>{}</div>
                       </div>
@@ -75,7 +73,14 @@ const Game: React.SFC<GameProps> = (props) => {
 
       <div className="sectionLeft">
         <RedTetris additionalClassName="small" />
-
+        <div className="outerLabel">
+          <SquareLabel label="room:" />
+          <SquareLabel label={props.room} red />
+        </div>
+        <div className="outerLabel">
+          <SquareLabel label="player:" />
+          <SquareLabel label={props.player} red />
+        </div>
       </div>
       <div className="outerBoard">
 
@@ -97,6 +102,7 @@ const Game: React.SFC<GameProps> = (props) => {
       </div>
       <div className="sectionRight">
         Opponents
+
       </div>
     </div>
 

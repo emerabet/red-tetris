@@ -4,5 +4,5 @@ import SquareLabel from './SquareLabel';
 
 storiesOf('SquareLabel', module)
   .add('player', () => (
-    <SquareLabel label="test123456789" />
+    <SquareLabel label="RTETest12345678 9:" />
   ));

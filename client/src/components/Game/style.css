@@ -1,5 +1,5 @@
 .sectionLeft {
-    background: #96e899;
+   /* background: #96e899;*/
     width: 25%;
     max-width: 25%;
     min-width: 250px;
@@ -31,4 +31,11 @@
     justify-content: center;
     align-items: center;
     background: yellow;
+}
+
+.outerLabel {
+    border: dotted #f8b500 2px;
+    padding: 10px;
+    margin: 10px;
+    width: 80%;
 }

@@ -9,7 +9,7 @@ interface GamePageProps {
   nagivation: any;
   history: any;
   socket: SocketIOClient.Socket;
-  started: boolean;
+  /*started: boolean;*/
   board: number[][];
   startGame: Function;
   endGame: Function;
@@ -18,6 +18,7 @@ interface GamePageProps {
 const GamePage: React.SFC<GamePageProps> = (props) => {
   const [room, setRoom] = useState('');
   const [player, setPlayer] = useState('');
+  const [started, setStarted] = useState(false);
   const [socket, setSocket] = useState(socketIOClient);
   const initialRowDestruction: number[] = [];
   const [row, setRow] = useState(initialRowDestruction);
@@ -43,7 +44,7 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
 
   useEffect(
     () => {
-      if (props.started) {
+      if (started) {
         document.addEventListener('keyup', async (e) => {
           switch (e.key) {
             case 'ArrowLeft':
@@ -77,6 +78,7 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
         pseudo: player,
       },
     });
+    setStarted(true);
     setSocket(s);
     s.emit('init');
     props.history.push(`/#${room}[${player}]`);
@@ -92,7 +94,7 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
 
   return (
     <div>
-      {!props.started
+      {!started
         ?
         <Home
           room={room}
@@ -105,6 +107,8 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
           <Game
             board={props.board}
             row={row}
+            room={room}
+            player={player}
           />
           <UseSocket socket={socket} />
         </div>
