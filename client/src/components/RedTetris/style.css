@@ -2,12 +2,12 @@
     display: flex;
     flex-direction: row;
     /* margin: 50px; */
+    flex-wrap: nowrap;
     margin-top: 30px;
     margin-bottom: 80px;
-     background: #ed1c5b;
+    background: #ed1c5b;
    -webkit-box-shadow: 0 0 30px 20px #ed1c5b;
    box-shadow: 0 0 30px 20px #ed1c5b;
-   /* border: 5px solid rgb(202, 182, 182); */
   }
 
   .small {
@@ -16,8 +16,8 @@
  
   .box {
     position: relative;
-    /* background-color: #ed1c5b; */
     width: 44px;
+    min-width: 44px;
     height: 55px;
     margin-left: 2px;
   }
@@ -26,6 +26,7 @@
    position: relative;
    /* background-color: red; */
    width: 33px;
+   min-width: 33px;
    height: 55px;
    margin-left: 2px;
  }
@@ -230,6 +231,7 @@
  
   .titleSpace {
     width: 44px;
+    min-width: 22px;
   }
  
   .boxT1 {

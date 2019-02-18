@@ -43,11 +43,10 @@
   ],
   "devDependencies": {
     "@babel/core": "^7.2.2",
-    "@storybook/react": "^4.1.11",
-    "babel-loader": "^8.0.5",
-    "tslint-config-airbnb": "^5.11.1",
     "@storybook/addon-actions": "^4.1.11",
     "@storybook/addon-links": "^4.1.11",
-    "@storybook/addons": "^4.1.11"
+    "@storybook/addons": "^4.1.11",
+    "@storybook/react": "^4.1.11",
+    "tslint-config-airbnb": "^5.11.1"
   }
 }

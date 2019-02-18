@@ -122,3 +122,24 @@ label {
   margin-top: 10px;
   margin-bottom: 2px;
 }
+
+.mainDiv {
+    /* background-color: #282c34; */
+    background-image: linear-gradient( rgba(10,67,128,1), rgba(1,21,54,1));
+    min-height: 100vh;
+    display: flex;
+    font-size: calc(2px + 2vmin);
+    color: white;
+  }
+  
+  .flexRow {
+    flex-direction: row;
+    /* align-items: center; */
+    justify-content: center;
+  }
+  
+  .flexColumn {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }

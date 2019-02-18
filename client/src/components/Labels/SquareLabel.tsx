@@ -2,8 +2,47 @@ import React, { Component, useState, useEffect } from 'react';
 
 import './style.css';
 
-const alphabet = {
-    a: () => <div className="labelLetterM">
+interface AlphabetInterface {
+    a:JSX.Element;
+    b:JSX.Element;
+    c:JSX.Element;
+    d:JSX.Element;
+    e:JSX.Element;
+    f:JSX.Element;
+    g:JSX.Element;
+    h:JSX.Element;
+    i:JSX.Element;
+    j:JSX.Element;
+    k:JSX.Element;
+    l:JSX.Element;
+    m:JSX.Element;
+    n:JSX.Element;
+    o:JSX.Element;
+    p:JSX.Element;
+    q:JSX.Element;
+    r:JSX.Element;
+    s:JSX.Element;
+    t:JSX.Element;
+    u:JSX.Element;
+    v:JSX.Element;
+    w:JSX.Element;
+    x:JSX.Element;
+    y:JSX.Element;
+    z:JSX.Element;
+    1:JSX.Element;
+    2:JSX.Element;
+    3:JSX.Element;
+    4:JSX.Element;
+    5:JSX.Element;
+    6:JSX.Element;
+    7:JSX.Element;
+    8:JSX.Element;
+    9:JSX.Element;
+    [key: string]: JSX.Element;
+}
+
+const alphabet: AlphabetInterface = {
+    a: <div className="labelLetterM">
         <div className="labelCube a1"></div>
         <div className="labelCube a2"></div>
         <div className="labelCube a3"></div>
@@ -18,7 +57,7 @@ const alphabet = {
         <div className="labelCube a12"></div>
         <div className="labelCube a13"></div>
     </div>,
-    b: () => <div className="labelLetterM">
+    b: <div className="labelLetterM">
         <div className="labelCube b1"></div>
         <div className="labelCube b2"></div>
         <div className="labelCube b3"></div>
@@ -33,7 +72,7 @@ const alphabet = {
         <div className="labelCube b12"></div>
         <div className="labelCube b13"></div>
     </div>,
-    c: () => <div className="labelLetterM">
+    c: <div className="labelLetterM">
         <div className="labelCube c1"></div>
         <div className="labelCube c2"></div>
         <div className="labelCube c3"></div>
@@ -44,7 +83,7 @@ const alphabet = {
         <div className="labelCube c8"></div>
         <div className="labelCube c9"></div>
     </div>,
-    d: () => <div className="labelLetterM">
+    d: <div className="labelLetterM">
         <div className="labelCube d1"></div>
         <div className="labelCube d2"></div>
         <div className="labelCube d3"></div>
@@ -58,7 +97,7 @@ const alphabet = {
         <div className="labelCube d11"></div>
         <div className="labelCube d12"></div>
     </div>,
-    e: () => <div className="labelLetterM">
+    e: <div className="labelLetterM">
         <div className="labelCube e1"></div>
         <div className="labelCube e2"></div>
         <div className="labelCube e3"></div>
@@ -73,7 +112,7 @@ const alphabet = {
         <div className="labelCube e12"></div>
         <div className="labelCube e13"></div>
     </div>,
-    f: () => <div className="labelLetterM">
+    f: <div className="labelLetterM">
         <div className="labelCube f1"></div>
         <div className="labelCube f2"></div>
         <div className="labelCube f3"></div>
@@ -85,7 +124,7 @@ const alphabet = {
         <div className="labelCube f9"></div>
         <div className="labelCube f10"></div>
     </div>,
-    g: () => <div className="labelLetterM">
+    g: <div className="labelLetterM">
         <div className="labelCube g1"></div>
         <div className="labelCube g2"></div>
         <div className="labelCube g3"></div>
@@ -99,7 +138,7 @@ const alphabet = {
         <div className="labelCube g11"></div>
         <div className="labelCube g12"></div>
     </div>,
-    h: () => <div className="labelLetterM">
+    h: <div className="labelLetterM">
         <div className="labelCube h1"></div>
         <div className="labelCube h2"></div>
         <div className="labelCube h3"></div>
@@ -113,7 +152,7 @@ const alphabet = {
         <div className="labelCube h11"></div>
         <div className="labelCube h12"></div>
     </div>,
-    i: () => <div className="labelLetterS">
+    i: <div className="labelLetterS">
         <div className="labelCube i1"></div>
         <div className="labelCube i2"></div>
         <div className="labelCube i3"></div>
@@ -124,7 +163,7 @@ const alphabet = {
         <div className="labelCube i8"></div>
         <div className="labelCube i9"></div>
     </div>,
-    j: () => <div className="labelLetter">
+    j: <div className="labelLetter">
         <div className="labelCube j1"></div>
         <div className="labelCube j2"></div>
         <div className="labelCube j3"></div>
@@ -137,7 +176,7 @@ const alphabet = {
         <div className="labelCube j10"></div>
         <div className="labelCube j11"></div>
     </div>,
-    k: () => <div className="labelLetterM">
+    k: <div className="labelLetterM">
         <div className="labelCube k1"></div>
         <div className="labelCube k2"></div>
         <div className="labelCube k3"></div>
@@ -149,7 +188,7 @@ const alphabet = {
         <div className="labelCube k9"></div>
         <div className="labelCube k10"></div>
     </div>,
-    l: () => <div className="labelLetterM">
+    l: <div className="labelLetterM">
         <div className="labelCube l1"></div>
         <div className="labelCube l2"></div>
         <div className="labelCube l3"></div>
@@ -159,7 +198,7 @@ const alphabet = {
         <div className="labelCube l7"></div>
         <div className="labelCube l8"></div>
     </div>,
-    m: () => <div className="labelLetter">
+    m: <div className="labelLetter">
         <div className="labelCube m1"></div>
         <div className="labelCube m2"></div>
         <div className="labelCube m3"></div>
@@ -174,7 +213,7 @@ const alphabet = {
         <div className="labelCube m12"></div>
         <div className="labelCube m13"></div>
     </div>,
-    n: () => <div className="labelLetterM">
+    n: <div className="labelLetterM">
         <div className="labelCube n1"></div>
         <div className="labelCube n2"></div>
         <div className="labelCube n3"></div>
@@ -188,7 +227,7 @@ const alphabet = {
         <div className="labelCube n11"></div>
         <div className="labelCube n12"></div>
     </div>,
-    o: () => <div className="labelLetterM">
+    o: <div className="labelLetterM">
         <div className="labelCube o1"></div>
         <div className="labelCube o2"></div>
         <div className="labelCube o3"></div>
@@ -201,7 +240,7 @@ const alphabet = {
         <div className="labelCube o10"></div>
         <div className="labelCube o11"></div>
     </div>,
-    p: () => <div className="labelLetterM">
+    p: <div className="labelLetterM">
         <div className="labelCube p1"></div>
         <div className="labelCube p2"></div>
         <div className="labelCube p3"></div>
@@ -214,7 +253,7 @@ const alphabet = {
         <div className="labelCube p10"></div>
         <div className="labelCube p11"></div>
     </div>,
-    q: () => <div className="labelLetter">
+    q: <div className="labelLetter">
         <div className="labelCube q1"></div>
         <div className="labelCube q2"></div>
         <div className="labelCube q3"></div>
@@ -228,7 +267,7 @@ const alphabet = {
         <div className="labelCube q11"></div>
         <div className="labelCube q12"></div>
     </div>,
-    r: () => <div className="labelLetterM">
+    r: <div className="labelLetterM">
         <div className="labelCube r1"></div>
         <div className="labelCube r2"></div>
         <div className="labelCube r3"></div>
@@ -242,7 +281,7 @@ const alphabet = {
         <div className="labelCube r11"></div>
         <div className="labelCube r12"></div>
     </div>,
-    s: () => <div className="labelLetterM">
+    s: <div className="labelLetterM">
         <div className="labelCube s1"></div>
         <div className="labelCube s2"></div>
         <div className="labelCube s3"></div>
@@ -254,7 +293,7 @@ const alphabet = {
         <div className="labelCube s9"></div>
         <div className="labelCube s10"></div>
     </div>,
-    t: () => <div className="labelLetter">
+    t: <div className="labelLetter">
         <div className="labelCube t1"></div>
         <div className="labelCube t2"></div>
         <div className="labelCube t3"></div>
@@ -265,7 +304,7 @@ const alphabet = {
         <div className="labelCube t8"></div>
         <div className="labelCube t9"></div>
     </div>,
-    u: () => <div className="labelLetterM">
+    u: <div className="labelLetterM">
         <div className="labelCube u1"></div>
         <div className="labelCube u2"></div>
         <div className="labelCube u3"></div>
@@ -277,7 +316,7 @@ const alphabet = {
         <div className="labelCube u9"></div>
         <div className="labelCube u10"></div>
     </div>,
-    v: () => <div className="labelLetterM">
+    v: <div className="labelLetterM">
         <div className="labelCube v1"></div>
         <div className="labelCube v2"></div>
         <div className="labelCube v3"></div>
@@ -288,7 +327,7 @@ const alphabet = {
         <div className="labelCube v8"></div>
         <div className="labelCube v9"></div>
     </div>,
-    w: () => <div className="labelLetter">
+    w: <div className="labelLetter">
         <div className="labelCube w1"></div>
         <div className="labelCube w2"></div>
         <div className="labelCube w3"></div>
@@ -304,7 +343,7 @@ const alphabet = {
         <div className="labelCube w13"></div>
         <div className="labelCube w14"></div>
     </div>,
-    x: () => <div className="labelLetterM">
+    x: <div className="labelLetterM">
         <div className="labelCube x1"></div>
         <div className="labelCube x2"></div>
         <div className="labelCube x3"></div>
@@ -317,7 +356,7 @@ const alphabet = {
         <div className="labelCube x10"></div>
         <div className="labelCube x11"></div>
     </div>,
-    y: () => <div className="labelLetterM">
+    y: <div className="labelLetterM">
         <div className="labelCube y1"></div>
         <div className="labelCube y2"></div>
         <div className="labelCube y3"></div>
@@ -329,7 +368,7 @@ const alphabet = {
         <div className="labelCube y9"></div>
         <div className="labelCube y10"></div>
     </div>,
-    z: () => <div className="labelLetterM">
+    z: <div className="labelLetterM">
         <div className="labelCube z1"></div>
         <div className="labelCube z2"></div>
         <div className="labelCube z3"></div>
@@ -343,19 +382,132 @@ const alphabet = {
         <div className="labelCube z11"></div>
         <div className="labelCube z12"></div>
     </div>,
+    1: <div className="labelLetterS">
+        <div className="labelCube num1-1"></div>
+        <div className="labelCube num1-2"></div>
+        <div className="labelCube num1-3"></div>
+        <div className="labelCube num1-4"></div>
+        <div className="labelCube num1-5"></div>
+        <div className="labelCube num1-6"></div>
+        <div className="labelCube num1-7"></div>
+    </div>,
+    2: <div className="labelLetterM">
+        <div className="labelCube num2-1"></div>
+        <div className="labelCube num2-2"></div>
+        <div className="labelCube num2-3"></div>
+        <div className="labelCube num2-4"></div>
+        <div className="labelCube num2-5"></div>
+        <div className="labelCube num2-6"></div>
+        <div className="labelCube num2-7"></div>
+        <div className="labelCube num2-8"></div>
+        <div className="labelCube num2-9"></div>
+        <div className="labelCube num2-10"></div>
+        <div className="labelCube num2-11"></div>
+    </div>,
+    3: <div className="labelLetterM">
+    <div className="labelCube num3-1"></div>
+    <div className="labelCube num3-2"></div>
+    <div className="labelCube num3-3"></div>
+    <div className="labelCube num3-4"></div>
+    <div className="labelCube num3-5"></div>
+    <div className="labelCube num3-6"></div>
+    <div className="labelCube num3-7"></div>
+    <div className="labelCube num3-8"></div>
+    <div className="labelCube num3-9"></div>
+    <div className="labelCube num3-10"></div>
+</div>,
+    4: <div className="labelLetterM">
+    <div className="labelCube num4-1"></div>
+    <div className="labelCube num4-2"></div>
+    <div className="labelCube num4-3"></div>
+    <div className="labelCube num4-4"></div>
+    <div className="labelCube num4-5"></div>
+    <div className="labelCube num4-6"></div>
+    <div className="labelCube num4-7"></div>
+    <div className="labelCube num4-8"></div>
+    <div className="labelCube num4-9"></div>
+</div>,
+    5: <div className="labelLetterM">
+    <div className="labelCube num5-1"></div>
+    <div className="labelCube num5-2"></div>
+    <div className="labelCube num5-3"></div>
+    <div className="labelCube num5-4"></div>
+    <div className="labelCube num5-5"></div>
+    <div className="labelCube num5-6"></div>
+    <div className="labelCube num5-7"></div>
+    <div className="labelCube num5-8"></div>
+    <div className="labelCube num5-9"></div>
+    <div className="labelCube num5-10"></div>
+    <div className="labelCube num5-11"></div>
+    <div className="labelCube num5-12"></div>
+    <div className="labelCube num5-13"></div>
+</div>,
+    6: <div className="labelLetterM">
+    <div className="labelCube num6-1"></div>
+    <div className="labelCube num6-2"></div>
+    <div className="labelCube num6-3"></div>
+    <div className="labelCube num6-4"></div>
+    <div className="labelCube num6-5"></div>
+    <div className="labelCube num6-6"></div>
+    <div className="labelCube num6-7"></div>
+    <div className="labelCube num6-8"></div>
+    <div className="labelCube num6-9"></div>
+    <div className="labelCube num6-10"></div>
+    <div className="labelCube num6-11"></div>
+    <div className="labelCube num6-12"></div>
+</div>,
+    7: <div className="labelLetterM">
+    <div className="labelCube num7-1"></div>
+    <div className="labelCube num7-2"></div>
+    <div className="labelCube num7-3"></div>
+    <div className="labelCube num7-4"></div>
+    <div className="labelCube num7-5"></div>
+    <div className="labelCube num7-6"></div>
+    <div className="labelCube num7-7"></div>
+    <div className="labelCube num7-8"></div>
+</div>,
+    8: <div className="labelLetterM">
+    <div className="labelCube num8-1"></div>
+    <div className="labelCube num8-2"></div>
+    <div className="labelCube num8-3"></div>
+    <div className="labelCube num8-4"></div>
+    <div className="labelCube num8-5"></div>
+    <div className="labelCube num8-6"></div>
+    <div className="labelCube num8-7"></div>
+    <div className="labelCube num8-8"></div>
+    <div className="labelCube num8-9"></div>
+    <div className="labelCube num8-10"></div>
+</div>,
+    9: <div className="labelLetterM">
+    <div className="labelCube num9-1"></div>
+    <div className="labelCube num9-2"></div>
+    <div className="labelCube num9-3"></div>
+    <div className="labelCube num9-4"></div>
+    <div className="labelCube num9-5"></div>
+    <div className="labelCube num9-6"></div>
+    <div className="labelCube num9-7"></div>
+    <div className="labelCube num9-8"></div>
+    <div className="labelCube num9-9"></div>
+    <div className="labelCube num9-10"></div>
+    <div className="labelCube num9-11"></div>
+    <div className="labelCube num9-12"></div>
+    <div className="labelCube num9-13"></div>
+</div>,
 }
 
 interface SquareLabelInterface {
     label: any;
+    additionalClassName?: string;
 }
 
 const PlayerLabel: React.SFC<SquareLabelInterface> = (props) => {
 
     return (
-        <div className="labelTitle">
+        <div className={`labelTitle ${props.additionalClassName !== undefined
+            ? props.additionalClassName : ''}`}>
             {
                 [...props.label].map((c) => {
-                    return alphabet[c]();
+                    return alphabet[c];
                 })
             }
         </div>

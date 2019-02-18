@@ -5,6 +5,12 @@
     margin-top: 20px;
   }
   
+.big {
+    transform: scale(2);
+    margin-top: 50px;
+    margin-bottom: 10px;
+}
+
   .labelLetter {
     width: 15px;
     height: 15px;
@@ -1228,6 +1234,383 @@
     top: 12px;
   }
 
+  .num1-1 {
+      left:6px;
+      top: 0;
+  }
+  .num1-2 {
+    left:3px;
+    top: 3px;
+}
+.num1-3 {
+    left:6px;
+    top: 3px;
+}
+.num1-4 {
+    left:0;
+    top: 6px;
+}
+.num1-5 {
+    left:6px;
+    top: 6px;
+}
+.num1-6 {
+    left:6px;
+    top: 9px;
+}
+.num1-7 {
+    left:6px;
+    top: 12px;
+}
+
+.num2-1 {
+    left:0;
+    top: 0;
+}
+.num2-2 {
+  left:3px;
+  top: 0;
+}
+.num2-3 {
+  left:6px;
+  top: 0;
+}
+.num2-4 {
+  left:9px;
+  top: 3px;
+}
+.num2-5 {
+  left:3px;
+  top: 6px;
+}
+.num2-6 {
+  left:6px;
+  top: 6px;
+}
+.num2-7 {
+  left: 0;
+  top: 9px;
+}
+.num2-8 {
+    left: 0;
+    top: 12px;
+  }
+  .num2-9 {
+    left: 3px;
+    top: 12px;
+  }
+  .num2-10 {
+    left: 6px;
+    top: 12px;
+  }
+  .num2-11 {
+    left: 9px;
+    top: 12px;
+  }
+
+.num3-1 {
+left:0;
+top: 0;
+}
+.num3-2 {
+  left:3px;
+  top: 0;
+}
+.num3-3 {
+  left:6px;
+  top: 0;
+}
+.num3-4 {
+  left:9px;
+  top: 3px;
+}
+.num3-5 {
+  left:3px;
+  top: 6px;
+}
+.num3-6 {
+  left:6px;
+  top: 6px;
+}
+.num3-7 {
+  left: 9px;
+  top: 9px;
+}
+.num3-8 {
+    left: 0;
+    top: 12px;
+  }
+  .num3-9 {
+    left: 3px;
+    top: 12px;
+  }
+  .num3-10 {
+    left: 6px;
+    top: 12px;
+  }
   
-  
-  
+  .num4-1 {
+    left:6px;
+    top: 0;
+    }
+    .num4-2 {
+      left:3px;
+      top: 3px;
+    }
+    .num4-3 {
+      left: 0;
+      top: 6px;
+    }
+    .num4-4 {
+      left:9px;
+      top: 6px;
+    }
+    .num4-5 {
+      left:0;
+      top: 9px;
+    }
+    .num4-6 {
+      left:3px;
+      top: 9px;
+    }
+    .num4-7 {
+      left: 6px;
+      top: 9px;
+    }
+    .num4-8 {
+        left: 9px;
+        top: 9px;
+      }
+      .num4-9 {
+        left: 9px;
+        top: 12px;
+      }
+
+      .num5-1 {
+        left:0;
+        top: 0;
+        }
+        .num5-2 {
+          left:3px;
+          top: 0;
+        }
+        .num5-3 {
+          left: 6px;
+          top: 0;
+        }
+        .num5-4 {
+          left:9px;
+          top: 0;
+        }
+        .num5-5 {
+          left:0;
+          top: 3px;
+        }
+        .num5-6 {
+          left:0;
+          top: 6px;
+        }
+        .num5-7 {
+          left: 3px;
+          top: 6px;
+        }
+        .num5-8 {
+            left: 6px;
+            top: 6px;
+          }
+          .num5-9 {
+            left: 9px;
+            top: 6px;
+          }
+          .num5-10 {
+            left: 9px;
+            top: 9px;
+          }
+          .num5-11 {
+            left: 0;
+            top: 12px;
+          }
+          .num5-12 {
+            left: 3px;
+            top: 12px;
+          }
+          .num5-13 {
+            left: 6px;
+            top: 12px;
+          }
+
+          .num6-1 {
+            left:3px;
+            top: 0;
+            }
+            .num6-2 {
+              left:6px;
+              top: 0;
+            }
+            .num6-3 {
+              left: 9px;
+              top: 0;
+            }
+            .num6-4 {
+              left:0;
+              top: 3px;
+            }
+            .num6-5 {
+              left:0;
+              top: 6px;
+            }
+            .num6-6 {
+              left:3px;
+              top: 6px;
+            }
+            .num6-7 {
+              left: 6px;
+              top: 6px;
+            }
+            .num6-8 {
+                left: 9px;
+                top: 6px;
+              }
+              .num6-9 {
+                left: 0;
+                top: 9px;
+              }
+              .num6-10 {
+                left: 9px;
+                top: 9px;
+              }
+              .num6-11 {
+                left: 3px;
+                top: 12px;
+              }
+              .num6-12 {
+                left: 6px;
+                top: 12px;
+              }
+
+              .num7-1 {
+                left: 0;
+                top: 0;
+                }
+                .num7-2 {
+                  left: 3px;
+                  top: 0;
+                }
+                .num7-3 {
+                  left: 6px;
+                  top: 0;
+                }
+                .num7-4 {
+                    left: 9px;
+                    top: 0;
+                }
+                .num7-5 {
+                  left: 9px;
+                  top: 3px;
+                }
+                .num7-6 {
+                  left: 6px;
+                  top: 6px;
+                }
+                .num7-7 {
+                  left:3px;
+                  top: 9px;
+                }
+                .num7-8 {
+                  left: 3px;
+                  top: 12px;
+                }
+
+                .num8-1 {
+                    left:3px;
+                    top: 0;
+                    }
+                    .num8-2 {
+                      left:6px;
+                      top: 0;
+                    }
+                    .num8-3 {
+                      left: 0;
+                      top: 3px;
+                    }
+                    .num8-4 {
+                      left:9px;
+                      top: 3px;
+                    }
+                    .num8-5 {
+                      left:3px;
+                      top: 6px;
+                    }
+                    .num8-6 {
+                      left:6px;
+                      top: 6px;
+                    }
+                    .num8-7 {
+                      left: 0;
+                      top: 9px;
+                    }
+                    .num8-8 {
+                        left: 9px;
+                        top: 9px;
+                      }
+                      .num8-9 {
+                        left: 3px;
+                        top: 12px;
+                      }
+                      .num8-10 {
+                        left: 6px;
+                        top: 12px;
+                      }
+
+                      .num9-1 {
+                        left:0;
+                        top: 0;
+                        }
+                        .num9-2 {
+                          left:3px;
+                          top: 0;
+                        }
+                        .num9-3 {
+                          left: 6px;
+                          top: 0;
+                        }
+                        .num9-4 {
+                          left:9px;
+                          top: 0;
+                        }
+                        .num9-5 {
+                          left:0;
+                          top: 3px;
+                        }
+                        .num9-6 {
+                          left:9px;
+                          top: 3px;
+                        }
+                        .num9-7 {
+                          left: 3px;
+                          top: 6px;
+                        }
+                        .num9-8 {
+                            left: 6px;
+                            top: 6px;
+                          }
+                          .num9-9 {
+                            left: 9px;
+                            top: 6px;
+                          }
+                          .num9-10 {
+                            left: 9px;
+                            top: 9px;
+                          }
+                          .num9-11 {
+                            left: 0;
+                            top: 12px;
+                          }
+                          .num9-12 {
+                            left: 3px;
+                            top: 12px;
+                          }
+                          .num9-13 {
+                            left: 6px;
+                            top: 12px;
+                          }
