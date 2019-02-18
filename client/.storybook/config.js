@@ -8,6 +8,7 @@ function loadStories() {
   require('../src/containers/GamePage/GamePage.story');
   require('../src/components/Game/Game.story');
   require('../src/components/LabeledBox/LabeledBox.story');
+  require('../src/components/Star/Star.story');
 }
 
 configure(loadStories, module);

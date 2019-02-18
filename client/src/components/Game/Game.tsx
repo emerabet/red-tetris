@@ -105,6 +105,9 @@ const Game: React.SFC<GameProps> = (props) => {
         <SquareLabel
           label="opponents:"
         />
+        <LabeledBox
+          content="oponent1"
+        />
 
       </div>
     </div>

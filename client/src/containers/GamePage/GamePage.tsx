@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import socketIOClient from 'socket.io-client';
 import UseSocket from './UseSocket';
-import Home from '../../components/Home/Home';
+import Home from '../../components/Home';
 import Game from '../../components/Game';
 import './style.css';
 
