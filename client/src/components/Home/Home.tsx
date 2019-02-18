@@ -18,16 +18,20 @@ const Home: React.SFC<HomeProps> = (props) => {
 
   function roomShake() {
     setRoomClassName('shake');
-    setTimeout(() => {
-      setRoomClassName('');
-    }, 1000)
+    setTimeout(
+      () => {
+        setRoomClassName('');
+      },
+      1000);
   }
 
   function playerShake() {
     setPlayerClassName('shake');
-    setTimeout(() => {
-      setPlayerClassName('');
-    }, 1000)
+    setTimeout(
+      () => {
+        setPlayerClassName('');
+      },
+      1000);
   }
 
   return (
@@ -66,7 +70,7 @@ const Home: React.SFC<HomeProps> = (props) => {
           disabled={props.room === '' || props.player === ''}></button>
       </form>
     </div>
-  )
-}
+  );
+};
 
 export default Home;

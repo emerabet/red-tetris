@@ -14,7 +14,7 @@ const Game: React.SFC<GameProps> = (props) => {
   const initialRowDestruction: number[] = [];
   const [row, setRow] = useState(initialRowDestruction);
 
-  const renderBoard = () => {
+  function renderBoard() {
     let i = 0;
     let j = 0;
     return (
@@ -34,9 +34,9 @@ const Game: React.SFC<GameProps> = (props) => {
         })}
       </div>
     );
-  };
+  }
 
-  const renderBoard2 = () => {
+  function renderBoard2() {
     let i = 0;
     let j = 0;
     return (
@@ -68,13 +68,14 @@ const Game: React.SFC<GameProps> = (props) => {
         })}
       </div>
     );
-  };
+  }
 
   return (
     <div className="mainDiv flexRow">
 
       <div className="sectionLeft">
         <RedTetris additionalClassName="small" />
+
       </div>
       <div className="outerBoard">
 
@@ -96,7 +97,7 @@ const Game: React.SFC<GameProps> = (props) => {
       </div>
       <div className="sectionRight">
         Opponents
-                    </div>
+      </div>
     </div>
 
   );
