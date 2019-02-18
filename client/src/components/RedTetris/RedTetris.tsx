@@ -118,7 +118,6 @@ const RedTetris: React.SFC<RedTetrisProps> = (props) => {
         <div className="boxCube boxI8"></div>
         <div className="boxCube boxI9"></div>
       </div>
-
       <div className="box boxS">
         <div className="boxCube boxS1"></div>
         <div className="boxCube boxS2"></div>

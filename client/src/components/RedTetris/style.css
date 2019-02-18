@@ -1,13 +1,12 @@
 .redTetris {
     display: flex;
     flex-direction: row;
-    /* margin: 50px; */
-    flex-wrap: nowrap;
-    margin-top: 30px;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 80px;
     background: #ed1c5b;
-   -webkit-box-shadow: 0 0 30px 20px #ed1c5b;
-   box-shadow: 0 0 30px 20px #ed1c5b;
+    -webkit-box-shadow: 0 0 30px 20px #ed1c5b;
+    box-shadow: 0 0 30px 20px #ed1c5b;
   }
 
   .small {

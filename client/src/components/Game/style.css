@@ -1,11 +1,11 @@
 .sectionLeft {
-   /* background: #96e899;*/
+   background: #96e899;
     width: 25%;
     max-width: 25%;
     min-width: 250px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
   }
   
@@ -17,25 +17,13 @@
     align-items: center;
     background: red;
     flex-grow: 2;
-    /* overflow: hidden;
-      margin: 50px auto;
-      width: 220px;
-    height: 440px; */
-    /* transform: scale(1.3) translateY(20%) */
   }
 
   .sectionRight {
+    padding-top: 30px;
     display: flex;
     flex-grow: 1;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    background: yellow;
-}
-
-.outerLabel {
-    border: dotted #f8b500 2px;
-    padding: 10px;
-    margin: 10px;
-    width: 80%;
 }

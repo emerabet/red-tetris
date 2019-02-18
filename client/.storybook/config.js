@@ -7,6 +7,7 @@ function loadStories() {
   require('../src/components/RedTetris/RedTetris.story');
   require('../src/containers/GamePage/GamePage.story');
   require('../src/components/Game/Game.story');
+  require('../src/components/LabeledBox/LabeledBox.story');
 }
 
 configure(loadStories, module);

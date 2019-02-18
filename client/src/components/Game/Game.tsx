@@ -1,6 +1,7 @@
 import React, { Component, useState, useEffect } from 'react';
 import SquareLabel from '../Labels';
 import RedTetris from '../RedTetris';
+import LabeledBox from '../LabeledBox';
 
 import './style.css';
 
@@ -18,11 +19,11 @@ const Game: React.SFC<GameProps> = (props) => {
   function renderBoard() {
     return (
       <div className="board">
-        {props.board.map((d: any, i:number) => {
+        {props.board.map((d: any, i: number) => {
           return (
             <div key={i} className="boardRow">
               {
-                d.map((c: any, j:number) => {
+                d.map((c: any, j: number) => {
                   return (
                     <div key={j} className={`boardCell c${c}`}>{/*c*/}</div>
                   );
@@ -40,13 +41,13 @@ const Game: React.SFC<GameProps> = (props) => {
     let j = 0;
     return (
       <div className="board">
-        {props.board.map((d: any, i:number) => {
+        {props.board.map((d: any, i: number) => {
           let r = 0;
           return (
             <div key={i} className={props.row.includes(i - 1)
               ? 'boardRowDestructionOK' : 'boardRowDestruction'}>
               {
-                d.map((c: any, j:number) => {
+                d.map((c: any, j: number) => {
                   return (
                     <div key={j} className="destructionRow">
                       <div className="destructionCol">
@@ -73,14 +74,14 @@ const Game: React.SFC<GameProps> = (props) => {
 
       <div className="sectionLeft">
         <RedTetris additionalClassName="small" />
-        <div className="outerLabel">
-          <SquareLabel label="room:" />
-          <SquareLabel label={props.room} red />
-        </div>
-        <div className="outerLabel">
-          <SquareLabel label="player:" />
-          <SquareLabel label={props.player} red />
-        </div>
+        <LabeledBox
+          label="room:"
+          content={props.room}
+        />
+        <LabeledBox
+          label="player:"
+          content={props.player}
+        />
       </div>
       <div className="outerBoard">
 
@@ -101,7 +102,9 @@ const Game: React.SFC<GameProps> = (props) => {
         </div>
       </div>
       <div className="sectionRight">
-        Opponents
+        <SquareLabel
+          label="opponents:"
+        />
 
       </div>
     </div>
