@@ -32,7 +32,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "tslint --project tslint.json 'src/**/*.{ts,tsx}'",
-    "storybook": "start-storybook -p 9001 -c storybook"
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "browserslist": [
     ">0.2%",
@@ -42,8 +43,11 @@
   ],
   "devDependencies": {
     "@babel/core": "^7.2.2",
-    "@storybook/react": "^4.1.7",
+    "@storybook/react": "^4.1.11",
     "babel-loader": "^8.0.5",
-    "tslint-config-airbnb": "^5.11.1"
+    "tslint-config-airbnb": "^5.11.1",
+    "@storybook/addon-actions": "^4.1.11",
+    "@storybook/addon-links": "^4.1.11",
+    "@storybook/addons": "^4.1.11"
   }
 }

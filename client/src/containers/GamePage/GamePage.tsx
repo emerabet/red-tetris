@@ -4,8 +4,6 @@ import Socket from 'socket.io-client';
 import socketIOClient from 'socket.io-client';
 import { position } from '../../types/gameTypes';
 import UseSocket from './UseSocket';
-import RoomLabel from '../../components/Labels/RoomLabel';
-import PlayerLabel from '../../components/Labels/PlayerLabel';
 import Home from '../../components/Home/Home';
 import RedTetris from '../../components/RedTetris/RedTetris';
 
@@ -204,7 +202,7 @@ const GamePage: React.SFC<GamePageProps> = props => {
                 <div className="mainDiv flexRow">
 
                     <div className="sectionLeft">
-                        <RedTetris />
+                        <RedTetris additionalClassName="small" />
                         <Home
                             room={room}
                             player={player}
@@ -237,6 +235,9 @@ const GamePage: React.SFC<GamePageProps> = props => {
                                 {renderBoard2()}
                             </div>
                         </div>
+                    </div>
+                    <div className="sectionRight">
+                        Opponents
                     </div>
                     {/* <button onClick={rotate}>UP</button>
 <button onClick={moveDown}>DOWN</button>

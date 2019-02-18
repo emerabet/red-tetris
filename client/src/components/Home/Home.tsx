@@ -1,12 +1,13 @@
 import React, { Component, useState, useEffect } from 'react';
 import RoomLabel from '../Labels/RoomLabel';
 import PlayerLabel from '../Labels/PlayerLabel';
+import SquareLabel from '../Labels';
 
 import './style.css';
 
 interface HomeProps {
-    room: String;
-    player: String;
+    room: string;
+    player: string;
     play: (event: any) => {};
     handleChange: (event: any) => void;
 
@@ -32,7 +33,7 @@ const Home: React.SFC<HomeProps> = (props) => {
 
     return (
         <form className="formFlex" onSubmit={props.play}>
-            {props.room !== '' && <RoomLabel />}
+            {props.room !== '' && <SquareLabel label="room" />}
             <div className="namer">
                 <div className="namer-input">
                     <input
@@ -41,10 +42,11 @@ const Home: React.SFC<HomeProps> = (props) => {
                         name="room"
                         type="text"
                         placeholder="ROOM"
+                        value={props.room}
                         onChange={props.handleChange}></input>
                 </div>
             </div>
-            {props.player !== '' && <PlayerLabel />}
+            {props.player !== '' && <SquareLabel label="player" />}
             <div className="namer">
                 <div className="namer-input">
                     <input
@@ -53,6 +55,7 @@ const Home: React.SFC<HomeProps> = (props) => {
                         name="player"
                         type="text"
                         placeholder="PLAYER"
+                        value={props.player}
                         onChange={props.handleChange}></input>
                 </div>
             </div>

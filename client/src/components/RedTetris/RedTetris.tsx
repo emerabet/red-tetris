@@ -2,9 +2,15 @@ import React, { Component, useState, useEffect } from 'react';
 
 import './style.css';
 
-const RedTetris: React.SFC = () => {
-  return (
-        <div className="redTetris">
+interface RedTetrisProps {
+    additionalClassName?: String;
+}
+
+const RedTetris: React.SFC<RedTetrisProps> = (props) => {
+    return (
+        <div
+            className={`redTetris ${props.additionalClassName !== undefined
+                ? props.additionalClassName : ''}`}>
             <div className="box boxR">
                 <div className="boxCube boxR1"></div>
                 <div className="boxCube boxR2"></div>
@@ -130,7 +136,7 @@ const RedTetris: React.SFC = () => {
                 <div className="boxCube boxS14"></div>
             </div>
         </div>
-  );
+    );
 };
 
 export default RedTetris;

@@ -9,6 +9,10 @@
    box-shadow: 0 0 30px 20px #ed1c5b;
    /* border: 5px solid rgb(202, 182, 182); */
   }
+
+  .small {
+      transform: scale(0.5);
+  }
  
   .box {
     position: relative;
