@@ -12,6 +12,7 @@ function loadStories() {
   require('../src/components/Board/Board.story');
   require('../src/components/Cell/Cell.story');
   require('../src/components/Row/Row.story');
+  require('../src/components/SectionLeft/SectionLeft.story');
 }
 
 configure(loadStories, module);

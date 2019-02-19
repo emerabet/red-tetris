@@ -1,7 +1,7 @@
 import React, { Component, useState, useEffect } from 'react';
 import SquareLabel from '../Labels';
-import RedTetris from '../RedTetris';
 import LabeledBox from '../LabeledBox';
+import SectionLeft from '../SectionLeft';
 import Board from '../Board';
 
 import './style.css';
@@ -20,17 +20,10 @@ const Game: React.SFC<GameProps> = (props) => {
   return (
     <div className="mainDiv flexRow">
 
-      <div className="sectionLeft">
-        <RedTetris additionalClassName="small" />
-        <LabeledBox
-          label="room:"
-          content={props.room}
-        />
-        <LabeledBox
-          label="player:"
-          content={props.player}
-        />
-      </div>
+      <SectionLeft
+        room={props.room}
+        player={props.player}
+      />
       <Board
         board={props.board}
         rowDestruction={props.row}
