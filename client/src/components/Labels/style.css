@@ -15,7 +15,6 @@
     width: 15px;
     height: 15px;
     margin: 2px;
-    /* background: orange; */
     position: relative;
   }
 
@@ -23,7 +22,6 @@
     width: 9px;
     height: 15px;
     margin: 2px;
-    /* background: orange; */
     position: relative;
   }
 
@@ -31,7 +29,6 @@
     width: 12px;
     height: 15px;
     margin: 2px;
-    /* background: orange; */
     position: relative;
   }
    
@@ -48,7 +45,8 @@
   }
 
   .redCube {
-      background: red;
+      margin-left: 10px;
+      background: #ed1c5b;
   }
   
 
