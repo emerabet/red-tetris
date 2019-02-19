@@ -54,3 +54,10 @@
   box-shadow: inset 0 0 4px 2px #cfd8dc;
   border: solid black 0px;
  }
+
+ .c-1 {
+    background: red;
+    -webkit-box-shadow: inset 0 0 4px 2px #cfd8dc;
+    box-shadow: inset 0 0 4px 2px #cfd8dc;
+    border: solid black 0px;
+   }

@@ -1,8 +1,9 @@
 .sectionLeft {
-    width: 25%;
     max-width: 25%;
     min-width: 250px;
+   
     display: flex;
+    flex-grow: 1;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
