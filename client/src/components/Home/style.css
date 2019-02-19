@@ -1,7 +1,17 @@
+.mainDivHome {
+    min-height: 100vh;
+    font-size: calc(2px + 2vmin);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .formFlex {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
   }
 
 .namer {
@@ -122,10 +132,3 @@ label {
   margin-top: 10px;
   margin-bottom: 2px;
 }
-  
-
-  .flexColumn {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }

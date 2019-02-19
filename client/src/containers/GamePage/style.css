@@ -12,8 +12,7 @@
   to {background-color: yellow; opacity: 0;}
 }
 
-.mainDiv {
-  background-color: #282c34;
+.mainDivGame {
   min-height: 100vh;
   min-width: 750px;
   font-size: calc(2px + 2vmin);
@@ -28,11 +27,6 @@
   justify-content: center;
 }
 
-.flexColumn {
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
 
 
 

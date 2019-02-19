@@ -18,7 +18,7 @@ const Game: React.SFC<GameProps> = (props) => {
   const [row, setRow] = useState(initialRowDestruction);*/
 
   return (
-    <div className="mainDiv flexRow">
+    <div className="mainDivGame flexRow">
 
       <SectionLeft
         room={props.room}

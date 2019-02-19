@@ -35,7 +35,7 @@ const Home: React.SFC<HomeProps> = (props) => {
   }
 
   return (
-    <div className="mainDiv flexColumn">
+    <div className="mainDivHome">
       <RedTetris />
       <form className="formFlex" onSubmit={props.play}>
         {props.room !== '' && <SquareLabel label="room" additionalClassName="big" />}
