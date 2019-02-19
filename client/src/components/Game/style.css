@@ -1,5 +1,6 @@
     .sectionRight {
     padding-top: 30px;
+    padding-bottom: 30px;
     display: flex;
     flex-grow: 1;
     flex-direction: column;
@@ -9,3 +10,34 @@
     max-width: 25%;
 }
 
+.opponents {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.opponentFlex {
+    max-width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.opponent {
+    width: 74px;
+    height: 144px;
+    border: solid black 2px;
+    margin-top: 10px;
+}
+
+.opponentRow {
+    width: 70px;
+    height: 7px;
+}
+
+.opponentFull {
+    background: black;
+  -webkit-box-shadow: inset 0 0 1px 1px #cfd8dc;
+  box-shadow: inset 0 0 1px 1px #cfd8dc;
+}

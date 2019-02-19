@@ -32,10 +32,124 @@ const Game: React.SFC<GameProps> = (props) => {
         <SquareLabel
           label="opponents:"
         />
-        <LabeledBox
-          content="oponent1"
-        />
-
+        <div className="opponents">
+          <div className="opponentFlex">
+            <div className="opponent">
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow opponentFull"></div>
+              <div className="opponentRow opponentFull"></div>
+              <div className="opponentRow opponentFull"></div>
+            </div>
+            <SquareLabel
+              label="opponent1"
+              red
+              additionalClassName="small"
+            />
+          </div>
+          <div className="opponentFlex">
+            <div className="opponent">
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow opponentFull"></div>
+              <div className="opponentRow opponentFull"></div>
+              <div className="opponentRow opponentFull"></div>
+            </div>
+            <SquareLabel
+              label="opponent1"
+              red
+              additionalClassName="small"
+            />
+          </div>
+          <div className="opponentFlex">
+            <div className="opponent">
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow opponentFull"></div>
+              <div className="opponentRow opponentFull"></div>
+              <div className="opponentRow opponentFull"></div>
+            </div>
+            <SquareLabel
+              label="opponent1"
+              red
+              additionalClassName="small"
+            />
+          </div>
+          <div className="opponentFlex">
+            <div className="opponent">
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow"></div>
+              <div className="opponentRow opponentFull"></div>
+              <div className="opponentRow opponentFull"></div>
+              <div className="opponentRow opponentFull"></div>
+            </div>
+            <SquareLabel
+              label="opponent1"
+              red
+              additionalClassName="small"
+            />
+          </div>
+        </div>
       </div>
     </div>
 

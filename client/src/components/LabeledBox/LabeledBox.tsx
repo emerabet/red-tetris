@@ -13,7 +13,7 @@ const LabeledBox: React.SFC<GameProps> = (props) => {
   return (
     <div className="outerLabel">
       {props.label !== undefined && <SquareLabel label={props.label} />}
-      <SquareLabel label={props.content} red />
+      <SquareLabel label={props.content} red additionalClassName="paddingLabel"/>
     </div>
   );
 };
