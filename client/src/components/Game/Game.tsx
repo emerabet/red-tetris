@@ -37,8 +37,6 @@ const Game: React.SFC<GameProps> = (props) => {
   }
 
   function renderBoard2() {
-    let i = 0;
-    let j = 0;
     return (
       <div className="board">
         {props.board.map((d: any, i: number) => {
