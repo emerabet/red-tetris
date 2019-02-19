@@ -33,7 +33,8 @@
     "eject": "react-scripts eject",
     "lint": "tslint --project tslint.json 'src/**/*.{ts,tsx}'",
     "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "build:svg": "svgr -d svg/ componentsTMP/"
   },
   "browserslist": [
     ">0.2%",
