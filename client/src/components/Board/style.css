@@ -1,0 +1,109 @@
+.outerBoard {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 2;
+    min-width: 250px;
+  }
+
+  .boardSpace {
+    -webkit-box-shadow: 0 0 3vw 2vw rgb(2, 2, 2);
+    box-shadow: 0 0 3vw 2vw #ed1c5b;
+    overflow: hidden;
+  }
+  
+  .boardInner {
+    width: 20vw;
+    min-width: 200px;
+    height: 40vw;
+    min-height: 400px;
+    border: 5px solid rgb(202, 182, 182);
+    position: relative;
+  }
+
+.board {
+    position: absolute;
+    /* top: 0; */
+    /* left: 0; */
+      display: flex;
+      flex-direction: column;
+    }
+
+   /* border effect outer */
+ .bar {
+	position: absolute;
+	width: 50px;
+	height: 5px;
+	background: #fff;
+	transition: all 1s linear;
+	-webkit-animation-duration: 2s;
+	animation-duration: 2s;
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both;
+	-webkit-animation-iteration-count: infinite;
+	animation-iteration-count: infinite;
+}
+.bar.delay {
+	animation-delay: 0.5s;
+	-webkit-animation-delay: 0.5s;
+}
+.top {
+	top: -5px;
+	left: -5px;
+}
+.right {
+	top: 18px;
+	right: -28px;
+	transform: rotate(90deg);
+}
+.bottom {
+	bottom: -5px;
+	left: -5px;
+}
+.left {
+	top: 18px;
+	left: -28px;
+	transform: rotate(90deg);
+}
+ @-webkit-keyframes h-move {
+ 0% {
+left: -5px;
+}
+100% {
+left: 21vw;
+}
+}
+ @keyframes h-move {
+ 0% {
+left: -5px;
+}
+100% {
+left:21vw;
+}
+}
+.top, .bottom {
+	-webkit-animation-name: h-move;
+	animation-name: h-move;
+}
+ @-webkit-keyframes v-move {
+0% {
+top: -5px;
+}
+100% {
+top:41vw;
+}
+}
+ @keyframes v-move {
+ 0% {
+top: -5px;
+}
+100% {
+top:41vw;
+}
+}
+.right, .left {
+	-webkit-animation-name: v-move;
+	animation-name: v-move;
+}
