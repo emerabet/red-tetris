@@ -17,14 +17,14 @@ class BoardController extends events_1.EventEmitter {
         this.currentPiece = PieceFactory_1.default.createPiece(pieces[this.indexPiece]);
         this.speed = 1000;
         this.score = 0;
+        this.lines = 0;
+        this.level = 0;
         this.isFinished = false;
         this.drop = this.drop.bind(this);
+        this.moveDown = this.moveDown.bind(this);
+        this.rotate = this.rotate.bind(this);
+        this.moveSide = this.moveSide.bind(this);
         this.init();
-        // this.currentBoard.clear(this.currentPiece);
-        // this.currentBoard.addLockedRow();
-        // this.currentBoard.addLockedRow();
-        // this.currentBoard.addLockedRow();
-        // this.place();
     }
     get board() {
         return this.currentBoard;
@@ -34,6 +34,10 @@ class BoardController extends events_1.EventEmitter {
     }
     log() {
         console.log('Name:', this.currentPlayer.username);
+    }
+    updateScore() {
+        this.level = Math.ceil(this.lines / 4);
+        this.score = (this.level + this.lines) * this.lines;
     }
     check() {
         for (let i = 0; i < this.currentPiece.shape.length; i += 1) {
@@ -61,14 +65,13 @@ class BoardController extends events_1.EventEmitter {
             console.log(this.currentBoard.grid);
             clearInterval(this.timer);
             this.isFinished = true;
-        }
-        else {
-            // this.draw();
+            // TODO: Une fois la partie perdue l'etat de la board ne doit plus changer tant qu'une partie n'a pas été relancée.
         }
     }
     draw() {
         this.place();
         console.log(this.currentBoard.grid);
+        // TODO: Creer une copie de la grid à envoyer
         this.socket.emit('state', this.currentBoard.grid);
         console.log('emitted');
         this.currentBoard.clear(this.currentPiece);
@@ -81,10 +84,6 @@ class BoardController extends events_1.EventEmitter {
             this.place();
             this.checkLine();
             this.newPiece();
-            this.draw();
-        }
-        else {
-            this.draw();
         }
     }
     checkLine() {
@@ -95,12 +94,11 @@ class BoardController extends events_1.EventEmitter {
                 this.currentBoard.addEmptyRow();
                 this.addMalusToOther();
                 console.log('Full row, row removed');
+                this.lines += 1;
                 i += 1;
             }
-            else {
-                console.log('not full:: ', i);
-            }
         }
+        this.updateScore();
     }
     place() {
         this.currentBoard.fill(this.currentPiece);
@@ -113,6 +111,8 @@ class BoardController extends events_1.EventEmitter {
     }
     drop() {
         this.moveDown();
+        this.draw();
+        console.log('timer: ', this.timer);
     }
     rotate() {
         this.currentPiece.rotate();
@@ -147,9 +147,17 @@ class BoardController extends events_1.EventEmitter {
         this.draw();
         this.timer = setInterval(this.drop, this.speed);
     }
+    execute(action, arg = null) {
+        if (this.isFinished === true) {
+            return;
+        }
+        action(arg);
+        this.draw();
+    }
     init() {
         this.socket.on('init', () => {
             console.log('Init game');
+            // TODO: Vérifier si c'est bien l'admin de la partie.
             this.emit('start');
         });
         this.socket.on('disconnect', () => {
@@ -158,22 +166,19 @@ class BoardController extends events_1.EventEmitter {
         });
         this.socket.on('down', () => {
             console.log('down received');
-            this.moveDown();
+            this.execute(this.moveDown);
         });
         this.socket.on('up', () => {
             console.log('up received, try rotate');
-            this.rotate();
-            this.draw();
+            this.execute(this.rotate);
         });
         this.socket.on('left', () => {
             console.log('left received');
-            this.moveSide(constants_1.Direction.Left);
-            this.draw();
+            this.execute(this.moveSide, constants_1.Direction.Left);
         });
         this.socket.on('right', () => {
             console.log('right received');
-            this.moveSide(constants_1.Direction.Right);
-            this.draw();
+            this.execute(this.moveSide, constants_1.Direction.Right);
         });
     }
 }

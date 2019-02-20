@@ -43,7 +43,7 @@ class Game extends EventEmitter {
             this.boards.forEach((value, key) => {
                 if (key !== socketId) {
                     console.log('try to add malus to :', key);
-                    value.addMalus();
+                    value.takeMalus();
                 }
             });
         });
