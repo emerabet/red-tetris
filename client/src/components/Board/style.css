@@ -9,8 +9,8 @@
   }
 
   .boardSpace {
-    -webkit-box-shadow: 0 0 3vw 2vw rgb(2, 2, 2);
-    box-shadow: 0 0 3vw 2vw #ed1c5b;
+    -webkit-box-shadow: 0 0 1vw 1vw rgb(2, 2, 2);
+    box-shadow: 0 0 1vw 1vw #ed1c5b;
     overflow: hidden;
   }
   

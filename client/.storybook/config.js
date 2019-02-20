@@ -13,6 +13,8 @@ function loadStories() {
   require('../src/components/Cell/Cell.story');
   require('../src/components/Row/Row.story');
   require('../src/components/SectionLeft/SectionLeft.story');
+  require('../src/components/Piece/Piece.story');
+  require('../src/components/NextPieces/NextPieces.story');
 }
 
 configure(loadStories, module);

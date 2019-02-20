@@ -1,0 +1,4 @@
+.pieceRow {
+    display: flex;
+    flex-direction: row;
+}
