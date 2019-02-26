@@ -48,6 +48,9 @@ class Piece {
             case constants_1.Direction.Down:
                 this.positionRow += 1;
                 break;
+            case constants_1.Direction.Up:
+                this.positionRow -= 1;
+                break;
             case constants_1.Direction.Left:
                 this.positionCol -= 1;
                 break;

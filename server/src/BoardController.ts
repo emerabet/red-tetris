@@ -148,7 +148,7 @@ class BoardController extends EventEmitter {
     }
 
     public takeMalus() {
-        // TODO: Fix bug quand la currentPiece est en position de la future ligne locked.
+        this.moveSide(Direction.Up);
         this.currentBoard.clear(this.currentPiece);
         this.currentBoard.addLockedRow();
         this.draw();

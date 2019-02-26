@@ -2,7 +2,7 @@ export enum Direction {
     Down,
     Left,
     Right,
-    Top,
+    Up,
 }
 
 export enum From {

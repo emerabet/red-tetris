@@ -87,7 +87,6 @@ class BoardController extends events_1.EventEmitter {
         }
     }
     checkLine() {
-        // Vérifier si des lignes sont pleines
         for (let i = this.currentBoard.grid.length - 1; i >= 0; i -= 1) {
             if (this.currentBoard.isFull(i) === true) {
                 this.currentBoard.removeRowAt(i);
@@ -112,7 +111,6 @@ class BoardController extends events_1.EventEmitter {
     drop() {
         this.moveDown();
         this.draw();
-        console.log('timer: ', this.timer);
     }
     rotate() {
         this.currentPiece.rotate();
@@ -120,7 +118,8 @@ class BoardController extends events_1.EventEmitter {
             this.currentPiece.rollback();
         }
     }
-    addMalus() {
+    takeMalus() {
+        this.moveSide(constants_1.Direction.Up);
         this.currentBoard.clear(this.currentPiece);
         this.currentBoard.addLockedRow();
         this.draw();
