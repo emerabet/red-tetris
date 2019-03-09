@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const events_1 = require("events");
 const PieceFactory_1 = __importDefault(require("./PieceFactory"));
 const constants_1 = require("./constants");
+const utils_1 = require("./utils");
 class BoardController extends events_1.EventEmitter {
     constructor(player, board, socket, pieces) {
         super();
@@ -13,7 +14,7 @@ class BoardController extends events_1.EventEmitter {
         this.currentBoard = board;
         this.socket = socket;
         this.indexPiece = 0;
-        this.pieces = pieces; // Pass by value the reference to the array of piece created from Game.
+        this.pieces = pieces;
         this.currentPiece = PieceFactory_1.default.createPiece(pieces[this.indexPiece]);
         this.speed = 1000;
         this.score = 0;
@@ -32,9 +33,6 @@ class BoardController extends events_1.EventEmitter {
     get player() {
         return this.currentPlayer;
     }
-    log() {
-        console.log('Name:', this.currentPlayer.username);
-    }
     updateScore() {
         this.level = Math.ceil(this.lines / 4);
         this.score = (this.level + this.lines) * this.lines;
@@ -43,8 +41,10 @@ class BoardController extends events_1.EventEmitter {
         for (let i = 0; i < this.currentPiece.shape.length; i += 1) {
             for (let j = 0; j < this.currentPiece.shape[i].length; j += 1) {
                 if (this.currentPiece.shape[i][j] !== constants_1.CellState.Empty) {
-                    if (!this.currentBoard.grid[this.currentPiece.row + i]
-                        || this.currentBoard.grid[this.currentPiece.row + i][this.currentPiece.col + j] !== constants_1.CellState.Empty) {
+                    const grid = this.currentBoard.grid;
+                    if (!grid[this.currentPiece.row + i] ||
+                        grid[this.currentPiece.row + i][this.currentPiece.col + j]
+                            !== constants_1.CellState.Empty) {
                         console.log('COLLISION DETECTED!!');
                         return true;
                     }
@@ -54,28 +54,36 @@ class BoardController extends events_1.EventEmitter {
         return false;
     }
     newPiece() {
-        console.log('[ACTION] NEW PIECE GENERATED ');
         this.askPiece();
         this.indexPiece += 1;
         this.currentPiece = PieceFactory_1.default.createPiece(this.pieces[this.indexPiece]);
         if (this.check()) {
-            console.log(' /!\\ END GAME /!\\');
-            console.log(this.currentPiece);
             this.place();
-            console.log(this.currentBoard.grid);
             clearInterval(this.timer);
             this.isFinished = true;
-            // TODO: Une fois la partie perdue l'etat de la board ne doit plus changer tant qu'une partie n'a pas été relancée.
         }
     }
+    getNextPieces() {
+        let str = '';
+        console.log('oooo::: ', this.pieces);
+        for (let i = this.indexPiece; i < this.indexPiece + 3; i += 1) {
+            console.log('i ::: ', i);
+            str += this.pieces[i];
+        }
+        return str;
+    }
     draw() {
+        const spectre = this.currentBoard.getSpectre();
         this.place();
-        console.log(this.currentBoard.grid);
-        // TODO: Creer une copie de la grid à envoyer
-        this.socket.emit('state', this.currentBoard.grid);
-        console.log('emitted');
+        const state = {
+            spectre,
+            grid: utils_1.deepCopy(this.currentBoard.grid),
+            score: this.score,
+            level: this.level,
+            pieces: this.getNextPieces(),
+        };
+        this.socket.emit('state', state);
         this.currentBoard.clear(this.currentPiece);
-        console.log('------------');
     }
     moveDown() {
         this.currentPiece.move(constants_1.Direction.Down);
@@ -92,7 +100,6 @@ class BoardController extends events_1.EventEmitter {
                 this.currentBoard.removeRowAt(i);
                 this.currentBoard.addEmptyRow();
                 this.addMalusToOther();
-                console.log('Full row, row removed');
                 this.lines += 1;
                 i += 1;
             }
@@ -119,6 +126,9 @@ class BoardController extends events_1.EventEmitter {
         }
     }
     takeMalus() {
+        if (this.isFinished === true) {
+            return;
+        }
         this.moveSide(constants_1.Direction.Up);
         this.currentBoard.clear(this.currentPiece);
         this.currentBoard.addLockedRow();
@@ -164,19 +174,15 @@ class BoardController extends events_1.EventEmitter {
             this.freeBoard(this.socket.id);
         });
         this.socket.on('down', () => {
-            console.log('down received');
             this.execute(this.moveDown);
         });
         this.socket.on('up', () => {
-            console.log('up received, try rotate');
             this.execute(this.rotate);
         });
         this.socket.on('left', () => {
-            console.log('left received');
             this.execute(this.moveSide, constants_1.Direction.Left);
         });
         this.socket.on('right', () => {
-            console.log('right received');
             this.execute(this.moveSide, constants_1.Direction.Right);
         });
     }

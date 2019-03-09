@@ -42,8 +42,9 @@ class Game extends events_1.EventEmitter {
         });
         board.on('need', (index) => {
             console.log('index need:: ', index);
-            if ((this.pieces.length - 1) - index <= 1) {
-                this.pieces.push(PieceFactory_1.default.createRandomPiece());
+            if ((this.pieces.length - 1) - index <= 3) {
+                this.createSetOfPieces();
+                // this.pieces.push(PieceFactory.createRandomPiece());
                 console.log('piece added to the list');
             }
         });
