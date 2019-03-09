@@ -14,7 +14,7 @@ const Row: React.SFC<RowProps> = (props) => {
       {
         props.row.map((c: number, j: number) => {
           return (
-            <Cell index={j} color={c} />
+            <Cell key={`cell_${j}`} index={j} color={c} />
           );
         })
       }

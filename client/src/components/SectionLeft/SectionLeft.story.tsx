@@ -7,5 +7,7 @@ storiesOf('SectionLeft', module)
       <SectionLeft
          room="SUPERROOM"
          player="BIG BOSS"
+         status="start"
+         score={999}
       />
    ));

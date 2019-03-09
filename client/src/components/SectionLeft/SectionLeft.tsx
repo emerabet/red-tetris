@@ -2,6 +2,8 @@ import React from 'react';
 import RedTetris from '../RedTetris';
 import LabeledBox from '../LabeledBox';
 import NextPieces from '../NextPieces';
+import AdminButton from '../AdminButton';
+import Score from '../Score';
 import * as utils from '../../Utils/constants';
 
 import './style.css';
@@ -9,6 +11,8 @@ import './style.css';
 interface SectionLeftProps {
   room: string;
   player: string;
+  status: string;
+  score: number;
 }
 
 const SectionLeft: React.SFC<SectionLeftProps> = (props) => {
@@ -16,13 +20,9 @@ const SectionLeft: React.SFC<SectionLeftProps> = (props) => {
   return (
     <div className="sectionLeft">
       <RedTetris additionalClassName="small" />
-      <NextPieces
-        pieces={[
-          utils.SAHPES_T[0],
-          utils.SHAPES_I[0],
-          utils.SHAPES_Z[0]]}
+      <Score
+        score={props.score}
       />
-
       <LabeledBox
         label="room:"
         content={props.room}
@@ -30,6 +30,9 @@ const SectionLeft: React.SFC<SectionLeftProps> = (props) => {
       <LabeledBox
         label="player:"
         content={props.player}
+      />
+      <AdminButton
+        text={props.status}
       />
     </div>
   );

@@ -973,8 +973,9 @@ const PlayerLabel: React.SFC<SquareLabelInterface> = (props) => {
     <div className={`labelTitle ${props.additionalClassName !== undefined
       ? props.additionalClassName : ''}`}>
       {
-        [...props.label.toLowerCase()].map((c) => {
-          return props.red ? redAlphabet[c] : alphabet[c];
+        [...props.label.toLowerCase()].map((c, i) => {
+          return props.red ? <div key={`redA_${i}`}> {redAlphabet[c]} </div> :
+            <div key={`alph_${i}`}> {alphabet[c]} </div>;
         })
       }
     </div>

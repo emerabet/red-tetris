@@ -19,6 +19,7 @@ const Piece: React.SFC<PieceProps> = (props) => {
         props.piece.map((row, index) => {
           return (
             <Row
+              key={`row_${index}`}
               row={row}
               index={index}
             />

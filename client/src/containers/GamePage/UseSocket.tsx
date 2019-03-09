@@ -1,29 +1,35 @@
 import React from 'react';
-import { connect } from "react-redux";
-import { Dispatch } from "redux";
-import { StateType } from "typesafe-actions";
-import rootReducer from "../../reducers/index";
-import { updateBoard } from "../../actions/gameActions";
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { StateType } from 'typesafe-actions';
+import rootReducer from '../../reducers/index';
+import { updateBoard } from '../../actions/gameActions';
 
 interface Props {
-    socket: any,
-    updateBoard: Function,
+  socket: any;
+  updateBoard: Function;
 }
 
-const UseSocket: React.SFC<Props> = props => {
-    props.socket.on('state', (board: number[][]) => {
-        props.updateBoard(board);
-    });
+// interface TestI {
+//   board: number[][];
+// }
 
-    return (<div></div>)
-}
+const UseSocket: React.SFC<Props> = (props) => {
+  props.socket.on('state', (board: number[][]) => {
+    // console.log()
+    console.log("IIIII", board);
+    props.updateBoard(board);
+  });
 
-const mapStateToProps = (_state: StateType<typeof rootReducer>) => ({
+  return (<div></div>);
+};
+
+const mapStateToProps = (state: StateType<typeof rootReducer>) => ({
 
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-    updateBoard: (board: number[][]) => dispatch(updateBoard(board)),
+  updateBoard: (board: number[][]) => dispatch(updateBoard(board)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UseSocket);

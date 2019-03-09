@@ -1,0 +1,19 @@
+.sectionRight {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    /* justify-content: flex-start; */
+    /* align-items: center; */
+    min-width: 250px;
+    max-width: 25%;
+}
+
+.opponents {
+    display: flex;
+    /* flex-direction: row;
+    flex-wrap: wrap; */
+    align-items: center;
+    justify-content: space-around;
+}

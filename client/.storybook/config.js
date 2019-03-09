@@ -15,6 +15,10 @@ function loadStories() {
   require('../src/components/SectionLeft/SectionLeft.story');
   require('../src/components/Piece/Piece.story');
   require('../src/components/NextPieces/NextPieces.story');
+  require('../src/components/SectionRight/SectionRight.story');
+  require('../src/components/Oponent/Oponent.story');
+  require('../src/components/AdminButton/AdminButton.story');
+  require('../src/components/Score/Score.story');
 }
 
 configure(loadStories, module);

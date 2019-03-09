@@ -11,18 +11,27 @@ interface BoardProps {
 const Board: React.SFC<BoardProps> = (props) => {
 
   function renderBoard() {
-    return (
-      <div className="board">
-        {props.board.map((d: number[], i: number) => {
+    if (props.board.length > 0) {
+      return (
+        <div className="board">
+          {console.log("TEST", props.board)}
+          {console.log("TEST", props.board[0])}
+          {props.board.map((d: number[], i: number) => {
+            return (
+              <Row
+                row={d}
+                index={i}
+              />
+            );
+          })}
+        </div>
+      );
+        } else {
           return (
-            <Row
-              row={d}
-              index={i}
-            />
-          );
-        })}
-      </div>
-    );
+            <div>
+            </div>
+          )
+        }
   }
 
   function renderBoard2() {
@@ -58,7 +67,7 @@ const Board: React.SFC<BoardProps> = (props) => {
 
   return (
     <div className="outerBoard">
-
+      {console.log("IN BAORD", props.board)}
       <div className="boardSpace">
         <svg className="pulse" viewBox="0 0 1024 1024" version="1.1">
           <circle id="Oval" cx="512" cy="512" r="512"></circle>

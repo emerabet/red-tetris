@@ -1,0 +1,134 @@
+.opponentFlex {
+    width: 50%;
+    display: flex;
+    /* flex-direction: column; */
+    /* align-items: center; */
+    /* justify-content: center; */
+}
+
+.opponent {
+    width: 74px;
+    height: 144px;
+    border: solid black 2px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    /* align-items: flex-end; */
+}
+
+.opponentColumn {
+    background: #cfd8dc;
+    -webkit-box-shadow: inset 0 0 1px 0 #000;
+  box-shadow: inset 0 0 1px 0 #000;
+}
+
+.opponentColumn_0 {
+    width: 7px;
+    height: 0px;
+}
+
+.opponentColumn_1 {
+    width: 7px;
+    height: 7px;
+}
+
+.opponentColumn_2 {
+    width: 7px;
+    height: 14px;
+}
+
+.opponentColumn_3 {
+    width: 7px;
+    height: 21px;
+}
+
+.opponentColumn_4 {
+    width: 7px;
+    height: 28px;
+}
+
+.opponentColumn_5 {
+    width: 7px;
+    height: 35px;
+}
+
+.opponentColumn_6 {
+    width: 7px;
+    height: 42px;
+}
+
+.opponentColumn_7 {
+    width: 7px;
+    height: 49px;
+}
+
+.opponentColumn_8 {
+    width: 7px;
+    height: 56px;
+}
+
+.opponentColumn_9 {
+    width: 7px;
+    height: 63px;
+}
+
+.opponentColumn_A {
+    width: 7px;
+    height: 70px;
+}
+
+.opponentColumn_B {
+    width: 7px;
+    height: 77px;
+}
+
+.opponentColumn_C {
+    width: 7px;
+    height: 84px;
+}
+
+.opponentColumn_D {
+    width: 7px;
+    height: 91px;
+}
+
+.opponentColumn_E {
+    width: 7px;
+    height: 98px;
+}
+
+.opponentColumn_F {
+    width: 7px;
+    height: 105px;
+}
+
+.opponentColumn_G {
+    width: 7px;
+    height: 112px;
+}
+
+.opponentColumn_H {
+    width: 7px;
+    height: 119px;
+}
+
+.opponentColumn_I {
+    width: 7px;
+    height: 126px;
+}
+
+.opponentColumn_J {
+    width: 7px;
+    height: 133px;
+}
+
+.opponentColumn_K {
+    width: 7px;
+    height: 140px;
+}
+
+.opponentFull {
+    background: black;
+  -webkit-box-shadow: inset 0 0 1px 1px #cfd8dc;
+  box-shadow: inset 0 0 1px 1px #cfd8dc;
+}

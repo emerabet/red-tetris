@@ -1,0 +1,136 @@
+.shimmer_start {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.1);
+    background: -webkit-gradient(linear, left top, right top, from(#ed1c5b), to(#ed1c5b), color-stop(0.5, #fff));
+    background: -moz-gradient(linear, left top, right top, from(#ed1c5b), to(#ed1c5b), color-stop(0.5, #fff));
+    background: gradient(linear, left top, right top, from(#ed1c5b), to(#ed1c5b), color-stop(0.5, #fff));
+    -webkit-background-size: 25px 100%;
+    -moz-background-size: 25px 100%;
+    background-size: 25px 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    -webkit-animation-name: shimmer;
+    -moz-animation-name: shimmer;
+    animation-name: shimmer;
+    -webkit-animation-duration: 2s;
+    -moz-animation-duration: 2s;
+    animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-color: #ed1c5b;
+  }
+  .shimmer_restart {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.1);
+    background: -webkit-gradient(linear, left top, right top, from(#f8b500), to(#f8b500), color-stop(0.5, #fff));
+    background: -moz-gradient(linear, left top, right top, from(#f8b500), to(#f8b500), color-stop(0.5, #fff));
+    background: gradient(linear, left top, right top, from(#f8b500), to(#f8b500), color-stop(0.5, #fff));
+    -webkit-background-size: 25px 100%;
+    -moz-background-size: 25px 100%;
+    background-size: 25px 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    -webkit-animation-name: shimmer;
+    -moz-animation-name: shimmer;
+    animation-name: shimmer;
+    -webkit-animation-duration: 2s;
+    -moz-animation-duration: 2s;
+    animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-color: #f8b500;
+  }
+  @-moz-keyframes shimmer {
+    0% {
+      background-position: top left;
+    }
+    100% {
+      background-position: top right;
+    }
+  }
+  @-webkit-keyframes shimmer {
+    0% {
+      background-position: top left;
+    }
+    100% {
+      background-position: top right;
+    }
+  }
+  @-o-keyframes shimmer {
+    0% {
+      background-position: top left;
+    }
+    100% {
+      background-position: top right;
+    }
+  }
+  @keyframes shimmer {
+    0% {
+      background-position: top left;
+    }
+    100% {
+      background-position: top right;
+    }
+  }
+  
+  .button-container{
+    color: #eee;
+    cursor: pointer;
+    overflow: hidden;
+    height: 40px;
+    width: 125px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 32px;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 5px;
+    -webkit-transition: 100ms;
+    -moz-transition: 100ms;
+    -o-transition: 100ms;
+    transition: 100ms;
+    margin: 10px;
+  }
+  
+  .button_start {
+    border-color: #ed1c5b;
+  }
+
+  .button_restart {
+      border-color: #f8b500;
+  }
+
+  .button_restart:hover {
+    background-color: #ed1c5b;
+}
+
+.button_start:hover {
+    background-color: #f8b500;
+  }
+
+  .button-container:hover {
+    -webkit-transition: 100ms;
+    -moz-transition: 100ms;
+    -o-transition: 100ms;
+    transition: 100ms;
+  }
+  
+  .button-text{
+    width: 125px;
+    font-family: helvetica;
+    font-size: 28px;
+    font-weight: 100; 
+    z-index: 1;
+    position: absolute;
+  }
+  
+  
+  

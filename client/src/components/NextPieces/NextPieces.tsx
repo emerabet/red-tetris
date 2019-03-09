@@ -16,9 +16,9 @@ const NextPieces: React.SFC<NextPiecesProps> = (props) => {
     <div className="nextPieces">
       <div className="pieceRow">
         {
-          props.pieces.map((piece) => {
+          props.pieces.map((piece, i) => {
             return (
-              <Piece piece={piece} />
+              <Piece key={`piece_${i}`} piece={piece} />
             );
           })
         }

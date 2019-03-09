@@ -10,7 +10,7 @@ interface BoardProps {
 const Board: React.SFC<BoardProps> = (props) => {
 
   return (
-    <div key={props.index} className={`boardCell c${props.color}`}>{}</div>
+    <div key={props.index} className={`boardCell cell${props.color}`}>{}</div>
   );
 };
 

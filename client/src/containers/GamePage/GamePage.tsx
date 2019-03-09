@@ -3,6 +3,7 @@ import socketIOClient from 'socket.io-client';
 import UseSocket from './UseSocket';
 import Home from '../../components/Home';
 import Game from '../../components/Game';
+import { OponentInterface } from '../../types/gameTypes';
 import './style.css';
 
 interface GamePageProps {
@@ -13,6 +14,9 @@ interface GamePageProps {
   board: number[][];
   startGame: Function;
   endGame: Function;
+  resetGame: Function;
+  oponents: OponentInterface[];
+  status: string;
 }
 
 const GamePage: React.SFC<GamePageProps> = (props) => {
@@ -70,6 +74,7 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
 
   const play = async (event: any) => {
     event.preventDefault();
+    await props.resetGame();
     await props.startGame(room, player);
     const s = socketIOClient('http://localhost:4000', {
       transports: ['websocket'],
@@ -104,11 +109,14 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
         />
         :
         <div>
+          {console.log('BOARD', props.board)}
           <Game
             board={props.board}
             row={row}
             room={room}
             player={player}
+            oponents={props.oponents}
+            status={props.status}
           />
           <UseSocket socket={socket} />
         </div>
