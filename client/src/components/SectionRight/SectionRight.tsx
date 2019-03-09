@@ -18,24 +18,26 @@ const SectionRight: React.SFC<SectionRightProps> = (props) => {
 
   return (
     <div className="sectionRight">
-      <SquareLabel
-        label="next pieces:"
-      />
-      <NextPieces
-        pieces={[
-          utils.SAHPES_T[0],
-          utils.SHAPES_I[0],
-          utils.SHAPES_Z[0]]}
-      />
-      <SquareLabel
-        label="opponents:"
-      />
-      <div className="opponents">
-        {
-          props.oponents.map((oponent, i) => {
-            return <Oponent key={`op_${i}`} oponent={oponent} />;
-          })
-        }
+      <div className="sectionRightInside">
+        <SquareLabel
+          label="next pieces:"
+        />
+        <NextPieces
+          pieces={[
+            utils.SAHPES_T[0],
+            utils.SHAPES_I[0],
+            utils.SHAPES_Z[0]]}
+        />
+        <SquareLabel
+          label="opponents:"
+        />
+        <div className="opponents">
+          {
+            props.oponents.map((oponent, i) => {
+              return <Oponent key={`op_${i}`} oponent={oponent} />;
+            })
+          }
+        </div>
       </div>
     </div>
   );

@@ -17,6 +17,7 @@ interface GamePageProps {
   resetGame: Function;
   oponents: OponentInterface[];
   status: string;
+  score: number;
 }
 
 const GamePage: React.SFC<GamePageProps> = (props) => {
@@ -109,8 +110,8 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
         />
         :
         <div>
-          {console.log('BOARD', props.board)}
           <Game
+            score={props.score}
             board={props.board}
             row={row}
             room={room}

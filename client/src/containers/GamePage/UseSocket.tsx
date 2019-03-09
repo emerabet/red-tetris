@@ -16,8 +16,6 @@ interface Props {
 
 const UseSocket: React.SFC<Props> = (props) => {
   props.socket.on('state', (board: number[][]) => {
-    // console.log()
-    console.log("IIIII", board);
     props.updateBoard(board);
   });
 

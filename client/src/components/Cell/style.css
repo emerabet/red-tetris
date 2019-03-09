@@ -1,7 +1,7 @@
 .boardCell {
-    width: 2vw;
+    width: 2.2vw;
     min-width: 20px;
-    height: 2vw;
+    height: 2.2vw;
     min-height: 20px;
     border: solid rgba(0,0,0,0) 0px;
  }

@@ -18,8 +18,18 @@ const mapStateToProps = (state: StateType<typeof rootReducer>) => ({
   oponents: [{
     name: 'oponent 1',
     game: '0123456789',
+  }, {
+    name: 'oponent 1',
+    game: '0123456789',
+  }, {
+    name: 'oponent 1',
+    game: '0123456789',
+  }, {
+    name: 'oponent 1',
+    game: '0123456789',
   }],
   status: 'start',
+  score: 89,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
@@ -38,16 +48,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     })),
   //   onNavigateBtnPress: () => dispatch(NavigationActions.navigate({ routeName: "Home" })),
 });
-// nagivation: any;
-//   history: any;
-//   socket: SocketIOClient.Socket;
-//   /*started: boolean;*/
-//   board: number[][];
-//   startGame: Function;
-//   endGame: Function;
-//   resetGame: Function;
-//   oponents: OponentInterface[];
-//   status: string;
 
 export default connect(
   mapStateToProps,

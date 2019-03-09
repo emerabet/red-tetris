@@ -98,6 +98,7 @@
     -o-transition: 100ms;
     transition: 100ms;
     margin: 10px;
+    margin-top: 60px;
   }
   
   .button_start {

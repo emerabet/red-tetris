@@ -68,37 +68,34 @@ export function* moveDown(action: any) {
   let stop: boolean = false;
   let ypiece = piece.length - 1;
 
-  for (let y = action.position.y; y >= 0 && ypiece >= 0; y--) {
-    console.log("Y", y, ypiece, piece[ypiece], board[y])
-    for (let x = action.position.x; x < piece[0].length; x++) {
+  for (let y = action.position.y; y >= 0 && ypiece >= 0; y -= 1) {
+    for (let x = action.position.x; x < piece[0].length; x += 1) {
       if (board[y][x] !== 0 && piece[ypiece][x] !== 0) {
         stop = true;
       }
     }
-    ypiece--;
+    ypiece -= 1;
   }
   if (position.y >= 19) {
     stop = true;
   }
 
   if (stop === false) {
-    position.y++;
+    position.y += 1;
     ypiece = piece.length - 1;
-    for (let y = action.position.y; y >= 0 && ypiece >= -1; y--) {
+    for (let y = action.position.y; y >= 0 && ypiece >= -1; y -= 1) {
       let xpiece = 0;
-      for (let x = action.position.x; x < board[0].length && xpiece < piece[0].length; x++) {
+      for (let x = action.position.x; x < board[0].length && xpiece < piece[0].length; x += 1) {
         if (ypiece === -1) {
           board[y][x] = 0;
         } else {
           board[y][x] = piece[ypiece][xpiece];
         }
-        xpiece++;
+        xpiece += 1;
       }
-      ypiece--;
+      ypiece -= 1;
     }
   } else {
-    // freeze piece
-    console.log("FREEZE")
   }
 
   yield put(gameActions.moveDown(position, board));

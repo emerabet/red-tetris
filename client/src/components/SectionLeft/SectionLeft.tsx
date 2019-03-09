@@ -19,21 +19,23 @@ const SectionLeft: React.SFC<SectionLeftProps> = (props) => {
 
   return (
     <div className="sectionLeft">
-      <RedTetris additionalClassName="small" />
-      <Score
-        score={props.score}
-      />
-      <LabeledBox
-        label="room:"
-        content={props.room}
-      />
-      <LabeledBox
-        label="player:"
-        content={props.player}
-      />
-      <AdminButton
-        text={props.status}
-      />
+      <div className="sectionLeftInside">
+        <RedTetris additionalClassName="small" />
+        <Score
+          score={props.score}
+        />
+        <LabeledBox
+          label="room:"
+          content={props.room}
+        />
+        <LabeledBox
+          label="player:"
+          content={props.player}
+        />
+        <AdminButton
+          text={props.status}
+        />
+      </div>
     </div>
   );
 };

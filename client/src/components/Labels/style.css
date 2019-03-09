@@ -49,6 +49,10 @@
       background: #ed1c5b;
   }
 
+  .whiteCube {
+    background: #fff;
+  }
+
   .paddingLabel {
       padding-left: 10px;
   }

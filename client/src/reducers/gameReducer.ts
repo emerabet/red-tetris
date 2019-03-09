@@ -1,18 +1,18 @@
-import { getType } from "typesafe-actions";
-import * as gameActions from "../actions/gameActions";
-import { GameAction, GameState } from "../types/gameTypes";
+import { getType } from 'typesafe-actions';
+import * as gameActions from '../actions/gameActions';
+import { GameAction, GameState } from '../types/gameTypes';
 
 const initialState: GameState = {
   started: false,
-  room: "",
-  player: "",
+  room: '',
+  player: '',
   board: [],
   piece: [],
   pieceIndex: 0,
   position: {
     x: 4,
     y: 0,
-  }
+  },
 };
 
 export default function (state: GameState = initialState, action: any /*GameAction*/) {
@@ -46,8 +46,6 @@ export default function (state: GameState = initialState, action: any /*GameActi
     //         ...action.payload
     //     };
     case getType(gameActions.UPDATE_BOARD):
-      console.log("REDUCER UPDATE BOARD")
-      console.log(action.payload)
       return {
         ...state,
         ...action.payload,

@@ -24,7 +24,7 @@ const Oponent: React.SFC<OponentProps> = (props) => {
       </div>
       <SquareLabel
         label={props.oponent.name}
-        red
+        white
         additionalClassName="small"
       />
     </div>

@@ -6,6 +6,7 @@ import socketIOClient from 'socket.io-client';
 storiesOf('GamePage', module)
   .add('start', () => (
     <GamePage
+      score={897}
       nagivation={null}
       history={null}
       socket={socketIOClient('http://localhost:4000')}

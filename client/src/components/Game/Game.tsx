@@ -16,20 +16,17 @@ interface GameProps {
   player: string;
   oponents: OponentInterface[];
   status: string;
+  score: number;
 }
 
 const Game: React.SFC<GameProps> = (props) => {
-  /*const initialRowDestruction: number[] = [];
-  const [row, setRow] = useState(initialRowDestruction);*/
-
   return (
     <div className="mainDivGame flexRow">
-      {console.log("IN GAME", props.board)}
       <SectionLeft
         room={props.room}
         player={props.player}
         status={props.status}
-        score={999}
+        score={props.score}
       />
       <Board
         board={props.board}

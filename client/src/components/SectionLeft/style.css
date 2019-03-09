@@ -1,12 +1,20 @@
 .sectionLeft {
-    max-width: 25%;
+    max-width: 35%;
     min-width: 250px;
-   
     display: flex;
     flex-grow: 1;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-end;
     padding-top: 30px;
     padding-bottom: 30px;
+}
+
+.sectionLeftInside {
+    max-width: 25%;
+    min-width: 250px;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    align-items: center;
 }
