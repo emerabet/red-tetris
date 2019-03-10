@@ -61,6 +61,7 @@ class Piece {
         this.snapshotPosition();
         switch (direction) {
         case Direction.Down: this.positionRow += 1; break;
+        case Direction.Up: this.positionRow -= 1; break;
         case Direction.Left: this.positionCol -= 1; break;
         case Direction.Right: this.positionCol += 1; break;
         }

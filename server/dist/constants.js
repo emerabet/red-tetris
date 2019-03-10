@@ -5,7 +5,7 @@ var Direction;
     Direction[Direction["Down"] = 0] = "Down";
     Direction[Direction["Left"] = 1] = "Left";
     Direction[Direction["Right"] = 2] = "Right";
-    Direction[Direction["Top"] = 3] = "Top";
+    Direction[Direction["Up"] = 3] = "Up";
 })(Direction = exports.Direction || (exports.Direction = {}));
 var From;
 (function (From) {
