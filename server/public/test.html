@@ -301,9 +301,9 @@
                 board.innerHTML = el;
             }
            
-            socket.on('state', (grid) => {
-                console.log(grid);
-                drawGrid(grid);
+            socket.on('state', (state) => {
+                console.log(state);
+                drawGrid(state.grid);
             });
             
             window.onkeydown = function(e) {

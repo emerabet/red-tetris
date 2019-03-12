@@ -1,5 +1,6 @@
 import Piece from './Piece';
 import { CellState, From } from './constants';
+import { deepCopy } from './utils';
 
 class Board {
     private readonly height: number;
@@ -106,6 +107,19 @@ class Board {
 
     public removeRowAt(rowIndex: number) {
         this.playfield.splice(rowIndex, 1);
+    }
+
+    public getSpectre() {
+        let spectre = '';
+        for (let col = 0; col < this.gridWidth; col += 1) {
+            for (let row = 0; row < this.gridHeight; row += 1) {
+                if (this.playfield[row][col] !== CellState.Empty || row === this.gridHeight - 1) {
+                    spectre += row.toString(this.gridHeight);
+                    break;
+                }
+            }
+        }
+        return spectre;
     }
 }
 

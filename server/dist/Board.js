@@ -89,5 +89,17 @@ class Board {
     removeRowAt(rowIndex) {
         this.playfield.splice(rowIndex, 1);
     }
+    getSpectre() {
+        let spectre = '';
+        for (let col = 0; col < this.gridWidth; col += 1) {
+            for (let row = 0; row < this.gridHeight; row += 1) {
+                if (this.playfield[row][col] !== constants_1.CellState.Empty || row === this.gridHeight - 1) {
+                    spectre += row.toString(this.gridHeight);
+                    break;
+                }
+            }
+        }
+        return spectre;
+    }
 }
 exports.default = Board;
