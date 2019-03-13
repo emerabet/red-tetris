@@ -6,7 +6,13 @@ import socketIOClient from 'socket.io-client';
 storiesOf('GamePage', module)
   .add('start', () => (
     <GamePage
-      score={897}
+      state={{
+        grid: [[]],
+        level: 0,
+        pieces: '',
+        score: 0,
+        spectre: '0000000000',
+      }}
       nagivation={null}
       history={null}
       socket={socketIOClient('http://localhost:4000')}

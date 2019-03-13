@@ -16,9 +16,18 @@ export interface GameState {
   piece: number[][][];
   pieceIndex: number;
   position: Position;
+  state: StateBoardI;
 }
 
 export interface OponentInterface {
   name: string;
   game: string;
+}
+
+export interface StateBoardI {
+  grid: number[][];
+  score:number;
+  level:number;
+  spectre:string;
+  pieces:string;
 }

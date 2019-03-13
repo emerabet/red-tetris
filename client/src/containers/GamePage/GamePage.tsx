@@ -3,7 +3,7 @@ import socketIOClient from 'socket.io-client';
 import UseSocket from './UseSocket';
 import Home from '../../components/Home';
 import Game from '../../components/Game';
-import { OponentInterface } from '../../types/gameTypes';
+import { OponentInterface, StateBoardI } from '../../types/gameTypes';
 import './style.css';
 
 interface GamePageProps {
@@ -11,13 +11,13 @@ interface GamePageProps {
   history: any;
   socket: SocketIOClient.Socket;
   /*started: boolean;*/
+  state: StateBoardI;
   board: number[][];
   startGame: Function;
   endGame: Function;
   resetGame: Function;
   oponents: OponentInterface[];
   status: string;
-  score: number;
 }
 
 const GamePage: React.SFC<GamePageProps> = (props) => {
@@ -30,12 +30,12 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
 
   useEffect(
     () => {
-      if (props.board && props.board !== undefined) {
+      if (props.state.grid && props.state.grid !== undefined) {
         setRow([]);
-        for (let i = 0; i < props.board.length; i += 1) {
+        for (let i = 0; i < props.state.grid.length; i += 1) {
           let nbEmpty = 0;
-          for (let j = 0; j < props.board[i].length; j += 1) {
-            if (props.board[i][j] === 0) {
+          for (let j = 0; j < props.state.grid[i].length; j += 1) {
+            if (props.state.grid[i][j] === 0) {
               nbEmpty += 1;
             }
           }
@@ -45,7 +45,7 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
         }
       }
     },
-    [props.board]);
+    [props.state.grid]);
 
   useEffect(
     () => {
@@ -100,6 +100,7 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
 
   return (
     <div>
+      {console.log('sdfsdg', props.state)}
       {!started
         ?
         <Home
@@ -111,13 +112,15 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
         :
         <div>
           <Game
-            score={props.score}
-            board={props.board}
+            level={props.state.level}
+            score={props.state.score}
+            board={props.state.grid}
             row={row}
             room={room}
             player={player}
             oponents={props.oponents}
             status={props.status}
+            pieces={props.state.pieces}
           />
           <UseSocket socket={socket} />
         </div>

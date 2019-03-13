@@ -45,7 +45,6 @@ class BoardController extends events_1.EventEmitter {
                     if (!grid[this.currentPiece.row + i] ||
                         grid[this.currentPiece.row + i][this.currentPiece.col + j]
                             !== constants_1.CellState.Empty) {
-                        console.log('COLLISION DETECTED!!');
                         return true;
                     }
                 }
@@ -65,9 +64,7 @@ class BoardController extends events_1.EventEmitter {
     }
     getNextPieces() {
         let str = '';
-        console.log('oooo::: ', this.pieces);
         for (let i = this.indexPiece; i < this.indexPiece + 3; i += 1) {
-            console.log('i ::: ', i);
             str += this.pieces[i];
         }
         return str;

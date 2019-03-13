@@ -5,6 +5,7 @@ import Game from './Game';
 storiesOf('Game', module)
   .add('empty', () => (
     <Game
+      level={1}
       score={999}
       board={[[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -45,9 +46,11 @@ storiesOf('Game', module)
         game: '0040565600',
       }]}
       status="start"
+      pieces="ZOL"
     />
   )).add('game', () => (
     <Game
+      level={2}
       score={88}
       board={[[0, 0, 0, 3, 0, 6, 0, 0, 0, 0],
       [0, 0, 0, 3, 3, 3, 0, 0, 0, 0],
@@ -88,9 +91,11 @@ storiesOf('Game', module)
         game: '0040565600',
       }]}
       status="restart"
+      pieces="ZOL"
     />
   )).add('malus', () => (
     <Game
+      level={3}
       score={97}
       board={[[0, 0, 0, 3, 0, 6, 0, 0, 0, 0],
       [0, 0, 0, 3, 3, 3, 0, 0, 0, 0],
@@ -131,5 +136,6 @@ storiesOf('Game', module)
         game: '0040565600',
       }]}
       status="start"
+      pieces="ZOL"
     />
   ));

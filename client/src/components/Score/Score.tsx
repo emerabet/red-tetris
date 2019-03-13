@@ -3,6 +3,7 @@ import React, { Component, useState, useEffect } from 'react';
 import './style.css';
 
 interface ScoreProps {
+  level:number;
   score: number;
 }
 
@@ -10,7 +11,8 @@ const Score: React.SFC<ScoreProps> = (props) => {
 
   return (
     <div className="scoreContainer">
-      SCORE: 999
+    <div>LEVEL: {props.level}</div>
+      <div>SCORE: {props.score}</div>
     </div>
 
   );

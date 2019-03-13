@@ -3,20 +3,20 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { StateType } from 'typesafe-actions';
 import rootReducer from '../../reducers/index';
-import { updateBoard } from '../../actions/gameActions';
+import { updateBoard, updateState } from '../../actions/gameActions';
+import { StateBoardI } from '../../types/gameTypes';
 
 interface Props {
   socket: any;
   updateBoard: Function;
+  updateState: Function;
 }
 
-// interface TestI {
-//   board: number[][];
-// }
-
 const UseSocket: React.SFC<Props> = (props) => {
-  props.socket.on('state', (board: number[][]) => {
-    props.updateBoard(board);
+  props.socket.on('state', (state: StateBoardI) => {
+    console.log('STATE', state);
+    // props.updateBoard(board.grid);
+    props.updateState(state);
   });
 
   return (<div></div>);
@@ -28,6 +28,7 @@ const mapStateToProps = (state: StateType<typeof rootReducer>) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   updateBoard: (board: number[][]) => dispatch(updateBoard(board)),
+  updateState: (state:StateBoardI) => dispatch(updateState(state)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UseSocket);

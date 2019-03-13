@@ -20,5 +20,6 @@ storiesOf('SectionRight', module)
         name: 'bobo',
         game: '0040565600',
       }]}
+      pieces={'ZOL'}
     />
   ));

@@ -12,6 +12,7 @@ interface SectionLeftProps {
   room: string;
   player: string;
   status: string;
+  level: number;
   score: number;
 }
 
@@ -22,6 +23,7 @@ const SectionLeft: React.SFC<SectionLeftProps> = (props) => {
       <div className="sectionLeftInside">
         <RedTetris additionalClassName="small" />
         <Score
+          level={props.level}
           score={props.score}
         />
         <LabeledBox

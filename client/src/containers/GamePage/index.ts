@@ -6,8 +6,10 @@ import { StateType } from 'typesafe-actions';
 import rootReducer from '../../reducers/index';
 import { startGameAsync, endGameAsync, rotateAsync, moveDownAsync, reset }
   from '../../actions/gameActions';
+import { STATUS_CODES } from 'http';
 
 const mapStateToProps = (state: StateType<typeof rootReducer>) => ({
+  state: state.game.state,
   started: state.game.started,
   room: state.game.room,
   player: state.game.player,
@@ -29,7 +31,6 @@ const mapStateToProps = (state: StateType<typeof rootReducer>) => ({
     game: '0123456789',
   }],
   status: 'start',
-  score: 89,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

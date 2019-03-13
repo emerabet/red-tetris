@@ -8,6 +8,7 @@ storiesOf('SectionLeft', module)
          room="SUPERROOM"
          player="BIG BOSS"
          status="start"
-         score={999}
+         level={2}
+         score={8}
       />
    ));

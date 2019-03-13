@@ -12,6 +12,7 @@ import './style.css';
 
 interface SectionRightProps {
   oponents: OponentInterface[];
+  pieces: string;
 }
 
 const SectionRight: React.SFC<SectionRightProps> = (props) => {
@@ -23,10 +24,7 @@ const SectionRight: React.SFC<SectionRightProps> = (props) => {
           label="next pieces:"
         />
         <NextPieces
-          pieces={[
-            utils.SAHPES_T[0],
-            utils.SHAPES_I[0],
-            utils.SHAPES_Z[0]]}
+          pieces={props.pieces}
         />
         <SquareLabel
           label="opponents:"

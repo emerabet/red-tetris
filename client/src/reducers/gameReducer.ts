@@ -1,6 +1,6 @@
 import { getType } from 'typesafe-actions';
 import * as gameActions from '../actions/gameActions';
-import { GameAction, GameState } from '../types/gameTypes';
+import { GameAction, GameState, StateBoardI } from '../types/gameTypes';
 
 const initialState: GameState = {
   started: false,
@@ -12,6 +12,13 @@ const initialState: GameState = {
   position: {
     x: 4,
     y: 0,
+  },
+  state: {
+    grid: [],
+    level: 0,
+    pieces: '',
+    score: 0,
+    spectre: '0000000000',
   },
 };
 
@@ -46,6 +53,11 @@ export default function (state: GameState = initialState, action: any /*GameActi
     //         ...action.payload
     //     };
     case getType(gameActions.UPDATE_BOARD):
+      return {
+        ...state,
+        ...action.payload,
+      };
+    case getType(gameActions.UPDATE_STATE):
       return {
         ...state,
         ...action.payload,

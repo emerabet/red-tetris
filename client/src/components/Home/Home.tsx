@@ -1,7 +1,7 @@
 import React, { Component, useState, useEffect } from 'react';
 import SquareLabel from '../Labels';
 import RedTetris from '../RedTetris';
-
+import { useWindowSize } from '../../effects/useWindowSize';
 import './style.css';
 
 interface HomeProps {
@@ -15,6 +15,7 @@ interface HomeProps {
 const Home: React.SFC<HomeProps> = (props) => {
   const [roomClassName, setRoomClassName] = useState('');
   const [playerClassName, setPlayerClassName] = useState('');
+  const dim = useWindowSize();
 
   function roomShake() {
     setRoomClassName('shake');
@@ -36,7 +37,8 @@ const Home: React.SFC<HomeProps> = (props) => {
 
   return (
     <div className="mainDivHome">
-      <RedTetris />
+    <RedTetris additionalClassName={dim.outerWidth > 480 ? '' :
+    dim.outerWidth > 340 ? 'medium' : 'small' }/>
       <form className="formFlex" onSubmit={props.play}>
         {props.room !== '' && <SquareLabel label="room" additionalClassName="big" />}
         <div className="namer">

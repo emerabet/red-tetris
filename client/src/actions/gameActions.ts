@@ -1,5 +1,5 @@
 import { createStandardAction, getType, createAsyncAction } from 'typesafe-actions';
-import { Position } from '../types/gameTypes';
+import { Position, StateBoardI } from '../types/gameTypes';
 
 export const RESET = createStandardAction('RESET')<void>();
 export const START = createStandardAction('START')<void>();
@@ -7,6 +7,7 @@ export const END = createStandardAction('END')<void>();
 export const ROTATE = createStandardAction('ROTATE')<void>();
 export const MOVE_DOWN = createStandardAction('MOVE_DOWN')<void>();
 export const UPDATE_BOARD = createStandardAction('UPDATE_BOARD')<void>();
+export const UPDATE_STATE = createStandardAction('UPDATE_STATE')<void>();
 
 export const START_SAGA = createStandardAction('START_SAGA')<void>();
 export const END_SAGA = createStandardAction('END_SAGA')<void>();
@@ -37,6 +38,15 @@ export const updateBoard = (board: number[][]) => {
     type: getType(UPDATE_BOARD),
     payload: {
       board,
+    },
+  };
+};
+
+export const updateState = (state: StateBoardI) => {
+  return {
+    type: getType(UPDATE_STATE),
+    payload: {
+      state,
     },
   };
 };
