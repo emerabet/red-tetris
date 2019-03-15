@@ -12,6 +12,7 @@ class BoardController extends EventEmitter {
     private currentPlayer: Player;
     private currentBoard: Board;
     private currentPiece: Piece;
+    private room: string;
     private pieces: string[];
     private timer: any;
     private socket: Socket;
@@ -22,10 +23,11 @@ class BoardController extends EventEmitter {
     private lines: number;
     private isFinished: boolean;
 
-    constructor(player:Player, board:Board, socket:SocketIO.Socket, pieces: string[]) {
+    constructor(room:string, player:Player, board:Board, socket:SocketIO.Socket, pieces: string[]) {
         super();
         this.currentPlayer = player;
         this.currentBoard = board;
+        this.room = room;
         this.socket = socket;
         this.indexPiece = 0;
         this.pieces = pieces;
@@ -96,12 +98,16 @@ class BoardController extends EventEmitter {
         this.place();
         const state = {
             spectre,
+            id: this.socket.id,
             grid: deepCopy(this.currentBoard.grid),
             score: this.score,
             level: this.level,
             pieces: this.getNextPieces(),
         };
         this.socket.emit('state', state);
+        this.socket
+            .to(this.room)
+            .emit('spectre', { spectre, id: this.socket.id });
         this.currentBoard.clear(this.currentPiece);
     }
 

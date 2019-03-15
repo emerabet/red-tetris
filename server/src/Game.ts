@@ -80,6 +80,7 @@ class Game extends EventEmitter {
             this.players.set(socket.id, player);
             const board:Board = new Board(height, width);
             const boardController = new BoardController(
+                this.room,
                 player,
                 board,
                 socket,
