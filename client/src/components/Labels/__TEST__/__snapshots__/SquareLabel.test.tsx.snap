@@ -1,0 +1,137 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly with defaults 1`] = `
+<div
+  className="labelTitle "
+>
+  <div>
+     
+    <div
+      className="labelLetterM"
+    >
+      <div
+        className="labelCube a1"
+      />
+      <div
+        className="labelCube a2"
+      />
+      <div
+        className="labelCube a3"
+      />
+      <div
+        className="labelCube a4"
+      />
+      <div
+        className="labelCube a5"
+      />
+      <div
+        className="labelCube a6"
+      />
+      <div
+        className="labelCube a7"
+      />
+      <div
+        className="labelCube a8"
+      />
+      <div
+        className="labelCube a9"
+      />
+      <div
+        className="labelCube a10"
+      />
+      <div
+        className="labelCube a11"
+      />
+      <div
+        className="labelCube a12"
+      />
+      <div
+        className="labelCube a13"
+      />
+    </div>
+     
+  </div>
+  <div>
+     
+    <div
+      className="labelLetterM"
+    >
+      <div
+        className="labelCube b1"
+      />
+      <div
+        className="labelCube b2"
+      />
+      <div
+        className="labelCube b3"
+      />
+      <div
+        className="labelCube b4"
+      />
+      <div
+        className="labelCube b5"
+      />
+      <div
+        className="labelCube b6"
+      />
+      <div
+        className="labelCube b7"
+      />
+      <div
+        className="labelCube b8"
+      />
+      <div
+        className="labelCube b9"
+      />
+      <div
+        className="labelCube b10"
+      />
+      <div
+        className="labelCube b11"
+      />
+      <div
+        className="labelCube b12"
+      />
+      <div
+        className="labelCube b13"
+      />
+    </div>
+     
+  </div>
+  <div>
+     
+    <div
+      className="labelLetterM"
+    >
+      <div
+        className="labelCube c1"
+      />
+      <div
+        className="labelCube c2"
+      />
+      <div
+        className="labelCube c3"
+      />
+      <div
+        className="labelCube c4"
+      />
+      <div
+        className="labelCube c5"
+      />
+      <div
+        className="labelCube c6"
+      />
+      <div
+        className="labelCube c7"
+      />
+      <div
+        className="labelCube c8"
+      />
+      <div
+        className="labelCube c9"
+      />
+    </div>
+     
+  </div>
+</div>
+`;

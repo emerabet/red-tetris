@@ -1,0 +1,597 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly with defaults 1`] = `
+<div
+  className="opponentFlex"
+>
+  <div
+    className="opponent"
+  >
+    <div
+      className="opponentColumn opponentColumn_0"
+    />
+    <div
+      className="opponentColumn opponentColumn_1"
+    />
+    <div
+      className="opponentColumn opponentColumn_2"
+    />
+    <div
+      className="opponentColumn opponentColumn_3"
+    />
+    <div
+      className="opponentColumn opponentColumn_4"
+    />
+    <div
+      className="opponentColumn opponentColumn_5"
+    />
+    <div
+      className="opponentColumn opponentColumn_6"
+    />
+    <div
+      className="opponentColumn opponentColumn_7"
+    />
+    <div
+      className="opponentColumn opponentColumn_8"
+    />
+    <div
+      className="opponentColumn opponentColumn_9"
+    />
+  </div>
+  <div
+    className="labelTitle small"
+  >
+    <div>
+       
+      <div
+        className="labelLetterM"
+      >
+        <div
+          className="labelCube whiteCube o1"
+        />
+        <div
+          className="labelCube whiteCube o2"
+        />
+        <div
+          className="labelCube whiteCube o3"
+        />
+        <div
+          className="labelCube whiteCube o4"
+        />
+        <div
+          className="labelCube whiteCube o5"
+        />
+        <div
+          className="labelCube whiteCube o6"
+        />
+        <div
+          className="labelCube whiteCube o7"
+        />
+        <div
+          className="labelCube whiteCube o8"
+        />
+        <div
+          className="labelCube whiteCube o9"
+        />
+        <div
+          className="labelCube whiteCube o10"
+        />
+        <div
+          className="labelCube whiteCube o11"
+        />
+      </div>
+       
+    </div>
+    <div>
+       
+      <div
+        className="labelLetterM"
+      >
+        <div
+          className="labelCube whiteCube p1"
+        />
+        <div
+          className="labelCube whiteCube p2"
+        />
+        <div
+          className="labelCube whiteCube p3"
+        />
+        <div
+          className="labelCube whiteCube p4"
+        />
+        <div
+          className="labelCube whiteCube p5"
+        />
+        <div
+          className="labelCube whiteCube p6"
+        />
+        <div
+          className="labelCube whiteCube p7"
+        />
+        <div
+          className="labelCube whiteCube p8"
+        />
+        <div
+          className="labelCube whiteCube p9"
+        />
+        <div
+          className="labelCube whiteCube p10"
+        />
+        <div
+          className="labelCube whiteCube p11"
+        />
+      </div>
+       
+    </div>
+    <div>
+       
+      <div
+        className="labelLetterM"
+      >
+        <div
+          className="labelCube whiteCube o1"
+        />
+        <div
+          className="labelCube whiteCube o2"
+        />
+        <div
+          className="labelCube whiteCube o3"
+        />
+        <div
+          className="labelCube whiteCube o4"
+        />
+        <div
+          className="labelCube whiteCube o5"
+        />
+        <div
+          className="labelCube whiteCube o6"
+        />
+        <div
+          className="labelCube whiteCube o7"
+        />
+        <div
+          className="labelCube whiteCube o8"
+        />
+        <div
+          className="labelCube whiteCube o9"
+        />
+        <div
+          className="labelCube whiteCube o10"
+        />
+        <div
+          className="labelCube whiteCube o11"
+        />
+      </div>
+       
+    </div>
+    <div>
+       
+      <div
+        className="labelLetterM"
+      >
+        <div
+          className="labelCube whiteCube n1"
+        />
+        <div
+          className="labelCube whiteCube n2"
+        />
+        <div
+          className="labelCube whiteCube n3"
+        />
+        <div
+          className="labelCube whiteCube n4"
+        />
+        <div
+          className="labelCube whiteCube n5"
+        />
+        <div
+          className="labelCube whiteCube n6"
+        />
+        <div
+          className="labelCube whiteCube n7"
+        />
+        <div
+          className="labelCube whiteCube n8"
+        />
+        <div
+          className="labelCube whiteCube n9"
+        />
+        <div
+          className="labelCube whiteCube n10"
+        />
+        <div
+          className="labelCube whiteCube n11"
+        />
+        <div
+          className="labelCube whiteCube n12"
+        />
+      </div>
+       
+    </div>
+    <div>
+       
+      <div
+        className="labelLetterM"
+      >
+        <div
+          className="labelCube whiteCube e1"
+        />
+        <div
+          className="labelCube whiteCube e2"
+        />
+        <div
+          className="labelCube whiteCube e3"
+        />
+        <div
+          className="labelCube whiteCube e4"
+        />
+        <div
+          className="labelCube whiteCube e5"
+        />
+        <div
+          className="labelCube whiteCube e6"
+        />
+        <div
+          className="labelCube whiteCube e7"
+        />
+        <div
+          className="labelCube whiteCube e8"
+        />
+        <div
+          className="labelCube whiteCube e9"
+        />
+        <div
+          className="labelCube whiteCube e10"
+        />
+        <div
+          className="labelCube whiteCube e11"
+        />
+        <div
+          className="labelCube whiteCube e12"
+        />
+        <div
+          className="labelCube whiteCube e13"
+        />
+      </div>
+       
+    </div>
+    <div>
+       
+      <div
+        className="labelLetterM"
+      >
+        <div
+          className="labelCube whiteCube n1"
+        />
+        <div
+          className="labelCube whiteCube n2"
+        />
+        <div
+          className="labelCube whiteCube n3"
+        />
+        <div
+          className="labelCube whiteCube n4"
+        />
+        <div
+          className="labelCube whiteCube n5"
+        />
+        <div
+          className="labelCube whiteCube n6"
+        />
+        <div
+          className="labelCube whiteCube n7"
+        />
+        <div
+          className="labelCube whiteCube n8"
+        />
+        <div
+          className="labelCube whiteCube n9"
+        />
+        <div
+          className="labelCube whiteCube n10"
+        />
+        <div
+          className="labelCube whiteCube n11"
+        />
+        <div
+          className="labelCube whiteCube n12"
+        />
+      </div>
+       
+    </div>
+    <div>
+       
+      <div
+        className="labelLetterM"
+      >
+        <div
+          className="labelCube whiteCube e1"
+        />
+        <div
+          className="labelCube whiteCube e2"
+        />
+        <div
+          className="labelCube whiteCube e3"
+        />
+        <div
+          className="labelCube whiteCube e4"
+        />
+        <div
+          className="labelCube whiteCube e5"
+        />
+        <div
+          className="labelCube whiteCube e6"
+        />
+        <div
+          className="labelCube whiteCube e7"
+        />
+        <div
+          className="labelCube whiteCube e8"
+        />
+        <div
+          className="labelCube whiteCube e9"
+        />
+        <div
+          className="labelCube whiteCube e10"
+        />
+        <div
+          className="labelCube whiteCube e11"
+        />
+        <div
+          className="labelCube whiteCube e12"
+        />
+        <div
+          className="labelCube whiteCube e13"
+        />
+      </div>
+       
+    </div>
+    <div>
+       
+      <div
+        className="labelLetter"
+      >
+        <div
+          className="labelCube whiteCube t1"
+        />
+        <div
+          className="labelCube whiteCube t2"
+        />
+        <div
+          className="labelCube whiteCube t3"
+        />
+        <div
+          className="labelCube whiteCube t4"
+        />
+        <div
+          className="labelCube whiteCube t5"
+        />
+        <div
+          className="labelCube whiteCube t6"
+        />
+        <div
+          className="labelCube whiteCube t7"
+        />
+        <div
+          className="labelCube whiteCube t8"
+        />
+        <div
+          className="labelCube whiteCube t9"
+        />
+      </div>
+       
+    </div>
+    <div>
+       
+      <div
+        className="labelLetterM"
+      >
+        <div
+          className="labelCube whiteCube e1"
+        />
+        <div
+          className="labelCube whiteCube e2"
+        />
+        <div
+          className="labelCube whiteCube e3"
+        />
+        <div
+          className="labelCube whiteCube e4"
+        />
+        <div
+          className="labelCube whiteCube e5"
+        />
+        <div
+          className="labelCube whiteCube e6"
+        />
+        <div
+          className="labelCube whiteCube e7"
+        />
+        <div
+          className="labelCube whiteCube e8"
+        />
+        <div
+          className="labelCube whiteCube e9"
+        />
+        <div
+          className="labelCube whiteCube e10"
+        />
+        <div
+          className="labelCube whiteCube e11"
+        />
+        <div
+          className="labelCube whiteCube e12"
+        />
+        <div
+          className="labelCube whiteCube e13"
+        />
+      </div>
+       
+    </div>
+    <div>
+       
+      <div
+        className="labelLetter"
+      >
+        <div
+          className="labelCube whiteCube t1"
+        />
+        <div
+          className="labelCube whiteCube t2"
+        />
+        <div
+          className="labelCube whiteCube t3"
+        />
+        <div
+          className="labelCube whiteCube t4"
+        />
+        <div
+          className="labelCube whiteCube t5"
+        />
+        <div
+          className="labelCube whiteCube t6"
+        />
+        <div
+          className="labelCube whiteCube t7"
+        />
+        <div
+          className="labelCube whiteCube t8"
+        />
+        <div
+          className="labelCube whiteCube t9"
+        />
+      </div>
+       
+    </div>
+    <div>
+       
+      <div
+        className="labelLetterM"
+      >
+        <div
+          className="labelCube whiteCube e1"
+        />
+        <div
+          className="labelCube whiteCube e2"
+        />
+        <div
+          className="labelCube whiteCube e3"
+        />
+        <div
+          className="labelCube whiteCube e4"
+        />
+        <div
+          className="labelCube whiteCube e5"
+        />
+        <div
+          className="labelCube whiteCube e6"
+        />
+        <div
+          className="labelCube whiteCube e7"
+        />
+        <div
+          className="labelCube whiteCube e8"
+        />
+        <div
+          className="labelCube whiteCube e9"
+        />
+        <div
+          className="labelCube whiteCube e10"
+        />
+        <div
+          className="labelCube whiteCube e11"
+        />
+        <div
+          className="labelCube whiteCube e12"
+        />
+        <div
+          className="labelCube whiteCube e13"
+        />
+      </div>
+       
+    </div>
+    <div>
+       
+      <div
+        className="labelLetter"
+      >
+        <div
+          className="labelCube whiteCube t1"
+        />
+        <div
+          className="labelCube whiteCube t2"
+        />
+        <div
+          className="labelCube whiteCube t3"
+        />
+        <div
+          className="labelCube whiteCube t4"
+        />
+        <div
+          className="labelCube whiteCube t5"
+        />
+        <div
+          className="labelCube whiteCube t6"
+        />
+        <div
+          className="labelCube whiteCube t7"
+        />
+        <div
+          className="labelCube whiteCube t8"
+        />
+        <div
+          className="labelCube whiteCube t9"
+        />
+      </div>
+       
+    </div>
+    <div>
+       
+      <div
+        className="labelLetterM"
+      >
+        <div
+          className="labelCube whiteCube e1"
+        />
+        <div
+          className="labelCube whiteCube e2"
+        />
+        <div
+          className="labelCube whiteCube e3"
+        />
+        <div
+          className="labelCube whiteCube e4"
+        />
+        <div
+          className="labelCube whiteCube e5"
+        />
+        <div
+          className="labelCube whiteCube e6"
+        />
+        <div
+          className="labelCube whiteCube e7"
+        />
+        <div
+          className="labelCube whiteCube e8"
+        />
+        <div
+          className="labelCube whiteCube e9"
+        />
+        <div
+          className="labelCube whiteCube e10"
+        />
+        <div
+          className="labelCube whiteCube e11"
+        />
+        <div
+          className="labelCube whiteCube e12"
+        />
+        <div
+          className="labelCube whiteCube e13"
+        />
+      </div>
+       
+    </div>
+  </div>
+</div>
+`;
