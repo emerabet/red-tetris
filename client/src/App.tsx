@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import './App.css';
-
 import { Route, Switch, Redirect, BrowserRouter } from 'react-router-dom';
-// import HomePage from './containers/HomePage';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import configureStore from './configureStore';
+const { persistor, store } = configureStore();
 import GamePage from './containers/GamePage/';
+import './App.css';
 
 interface AppProps {
   // socket: SocketIOClient.Socket
@@ -22,9 +24,13 @@ class App extends Component<AppProps> {
 
     return (
       <div className="App">
+      <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter>
           {routes}
         </BrowserRouter>
+        </PersistGate>
+        </Provider>
       </div>
     );
   }

@@ -9,6 +9,7 @@
     "@types/react-dom": "16.0.11",
     "@types/react-redux": "^7.0.0",
     "@types/react-router-dom": "^4.3.1",
+    "@types/react-test-renderer": "^16.8.1",
     "@types/redux-persist": "^4.3.1",
     "@types/socket.io-client": "^1.4.32",
     "@types/storybook__react": "^4.0.0",

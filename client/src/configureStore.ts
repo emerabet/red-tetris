@@ -8,20 +8,17 @@ import rootReducer from './reducers';
 import rootSaga from './middlewares/sagas';
 
 const persistConfig = {
-    key: 'root',
-    storage: storage,
-    stateReconciler: autoMergeLevel2
-}
+  storage,
+  key: 'root',
+  stateReconciler: autoMergeLevel2,
+};
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 const sagaMiddleware = createSagaMiddleWare();
 
 export default () => {
-    let store = createStore(persistedReducer,
-        compose(applyMiddleware(sagaMiddleware))
-    );
-    sagaMiddleware.run(rootSaga);
-    let persistor = persistStore(store);
-    return { store, persistor };
-}
-
+  const store = createStore(persistedReducer, compose(applyMiddleware(sagaMiddleware)));
+  sagaMiddleware.run(rootSaga);
+  const persistor = persistStore(store);
+  return { store, persistor };
+};
