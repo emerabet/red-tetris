@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly with defaults 1`] = `
+<div
+  className="button-container button_start"
+>
+  <div
+    className="button-text shimmer_start"
+  >
+    start
+  </div>
+</div>
+`;
