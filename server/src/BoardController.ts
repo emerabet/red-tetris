@@ -45,14 +45,6 @@ class BoardController extends EventEmitter {
         this.init();
     }
 
-    get board(): Board {
-        return this.currentBoard;
-    }
-
-    get player(): Player {
-        return this.currentPlayer;
-    }
-
     private updateScore() {
         this.level = Math.ceil(this.lines / 4);
         this.score = (this.level + this.lines) * this.lines;
@@ -203,13 +195,11 @@ class BoardController extends EventEmitter {
 
     private init() {
         this.socket.on('init', () => {
-            console.log('Init game');
             // TODO: Vérifier si c'est bien l'admin de la partie.
             this.emit('start');
         });
 
         this.socket.on('disconnect', () => {
-            console.log('disconnected: ', this.socket.id);
             this.freeBoard(this.socket.id);
         });
 

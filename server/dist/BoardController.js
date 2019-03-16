@@ -8,10 +8,11 @@ const PieceFactory_1 = __importDefault(require("./PieceFactory"));
 const constants_1 = require("./constants");
 const utils_1 = require("./utils");
 class BoardController extends events_1.EventEmitter {
-    constructor(player, board, socket, pieces) {
+    constructor(room, player, board, socket, pieces) {
         super();
         this.currentPlayer = player;
         this.currentBoard = board;
+        this.room = room;
         this.socket = socket;
         this.indexPiece = 0;
         this.pieces = pieces;
@@ -27,12 +28,6 @@ class BoardController extends events_1.EventEmitter {
         this.moveSide = this.moveSide.bind(this);
         this.init();
     }
-    get board() {
-        return this.currentBoard;
-    }
-    get player() {
-        return this.currentPlayer;
-    }
     updateScore() {
         this.level = Math.ceil(this.lines / 4);
         this.score = (this.level + this.lines) * this.lines;
@@ -45,7 +40,6 @@ class BoardController extends events_1.EventEmitter {
                     if (!grid[this.currentPiece.row + i] ||
                         grid[this.currentPiece.row + i][this.currentPiece.col + j]
                             !== constants_1.CellState.Empty) {
-                        console.log('COLLISION DETECTED!!');
                         return true;
                     }
                 }
@@ -65,9 +59,7 @@ class BoardController extends events_1.EventEmitter {
     }
     getNextPieces() {
         let str = '';
-        console.log('oooo::: ', this.pieces);
         for (let i = this.indexPiece; i < this.indexPiece + 3; i += 1) {
-            console.log('i ::: ', i);
             str += this.pieces[i];
         }
         return str;
@@ -77,12 +69,16 @@ class BoardController extends events_1.EventEmitter {
         this.place();
         const state = {
             spectre,
+            id: this.socket.id,
             grid: utils_1.deepCopy(this.currentBoard.grid),
             score: this.score,
             level: this.level,
             pieces: this.getNextPieces(),
         };
         this.socket.emit('state', state);
+        this.socket
+            .to(this.room)
+            .emit('spectre', { spectre, id: this.socket.id });
         this.currentBoard.clear(this.currentPiece);
     }
     moveDown() {
@@ -165,12 +161,10 @@ class BoardController extends events_1.EventEmitter {
     }
     init() {
         this.socket.on('init', () => {
-            console.log('Init game');
             // TODO: Vérifier si c'est bien l'admin de la partie.
             this.emit('start');
         });
         this.socket.on('disconnect', () => {
-            console.log('disconnected: ', this.socket.id);
             this.freeBoard(this.socket.id);
         });
         this.socket.on('down', () => {

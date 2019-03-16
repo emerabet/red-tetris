@@ -26,23 +26,18 @@ class Game extends EventEmitter {
         for (let i = 0; i < 3; i += 1) {
             this.pieces.push(PieceFactory.createRandomPiece());
         }
-
-        console.log('list of pieces: ', this.pieces);
     }
 
     private initListeners(board: BoardController) {
         board.on('start', () => {
             this.boards.forEach((value, key) => {
-                console.log('try to start game :', key);
                 value.run();
             });
         });
 
         board.on('malus', (socketId:string) => {
-            console.log(`Malus added by socketId: ${socketId}`);
             this.boards.forEach((value, key) => {
                 if (key !== socketId) {
-                    console.log('try to add malus to :', key);
                     value.takeMalus();
                 }
             });
@@ -52,8 +47,6 @@ class Game extends EventEmitter {
             console.log('index need:: ', index);
             if ((this.pieces.length - 1) - index <= 3) {
                 this.createSetOfPieces();
-                // this.pieces.push(PieceFactory.createRandomPiece());
-                console.log('piece added to the list');
             }
         });
 
@@ -66,12 +59,7 @@ class Game extends EventEmitter {
                 this.emit('freeGame', this.room);
                 this.removeAllListeners();
             }
-            console.log('je suis dans onFree');
         });
-    }
-
-    public getBoards(): Map<string, BoardController> {
-        return this.boards;
     }
 
     public createBoard(height:number, width:number, socket:SocketIO.Socket): void {
