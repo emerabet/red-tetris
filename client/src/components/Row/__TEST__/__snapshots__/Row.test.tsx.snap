@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly with defaults 1`] = `
+<div
+  className="boardRow"
+>
+  <div
+    className="boardCell cell0"
+  />
+  <div
+    className="boardCell cell0"
+  />
+  <div
+    className="boardCell cell0"
+  />
+  <div
+    className="boardCell cell0"
+  />
+  <div
+    className="boardCell cell0"
+  />
+  <div
+    className="boardCell cell0"
+  />
+  <div
+    className="boardCell cell0"
+  />
+  <div
+    className="boardCell cell0"
+  />
+  <div
+    className="boardCell cell0"
+  />
+  <div
+    className="boardCell cell0"
+  />
+</div>
+`;
