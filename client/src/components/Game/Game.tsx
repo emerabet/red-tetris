@@ -49,7 +49,7 @@ const Game: React.SFC<GameProps> = (props) => {
         <div>
         <RedTetris additionalClassName="small" />
         <div className="flexRowGame">
-          <div className="flexColumnL">
+        {dim.outerWidth >= 535 && <div className="flexColumnL">
             <LabeledBox
               label="room:"
               content={props.room}
@@ -61,17 +61,14 @@ const Game: React.SFC<GameProps> = (props) => {
             <AdminButton
           text={props.status}
         />
-          </div>
+          </div>}
         <div className="flexColumnGame">
-            {/* <RedTetris additionalClassName="small" /> */}
-          {/* <NextPieces
-            pieces={props.pieces}
-          /> */}
           <Board
           board={props.board}
           rowDestruction={props.row}
         />
         </div>
+        {dim.outerWidth >= 535 ?
         <div className="flexColumnR">
         <Score
           level={props.level}
@@ -81,7 +78,16 @@ const Game: React.SFC<GameProps> = (props) => {
           vertical
           pieces={props.pieces}
         />
-        </div>
+        </div> : <div className="flexColumnR">
+        <Score
+          small
+          level={props.level}
+          score={props.score}
+        />
+        <NextPieces
+          vertical
+          pieces={props.pieces}
+        /></div>}
         </div>
         <div className="opponentsNoWrap">
           {
@@ -90,6 +96,13 @@ const Game: React.SFC<GameProps> = (props) => {
             })
           }
         </div>
+        {dim.outerWidth < 535 &&
+        <div className="admBtnSmall">
+      <AdminButton
+      text={props.status}
+    />
+    </div>
+      }
           </div>
       }
       {dim.outerWidth > 750 &&
