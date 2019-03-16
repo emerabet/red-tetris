@@ -56,6 +56,10 @@ class Board {
         const startRow = piece.row;
         const startCol = piece.col;
 
+        if (!piece || !piece.shape) {
+            return ;
+        }
+
         for (let i = 0; i < piece.shape.length; i += 1) {
             for (let j = 0; j < piece.shape[i].length; j += 1) {
                 if (piece.shape[i][j] !== CellState.Empty) {
@@ -68,6 +72,10 @@ class Board {
     public fill(piece: Piece): void {
         const startRow = piece.row;
         const startCol = piece.col;
+
+        if (!piece || !piece.shape) {
+            return ;
+        }
 
         for (let i = 0; i < piece.shape.length; i += 1) {
             for (let j = 0; j < piece.shape[i].length; j += 1) {

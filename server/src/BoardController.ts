@@ -25,6 +25,7 @@ class BoardController extends EventEmitter {
 
     constructor(room:string, player:Player, board:Board, socket:SocketIO.Socket, pieces: string[]) {
         super();
+        this.timer = null;
         this.currentPlayer = player;
         this.currentBoard = board;
         this.room = room;
@@ -181,6 +182,7 @@ class BoardController extends EventEmitter {
     }
 
     public run() {
+        clearInterval(this.timer);
         this.draw();
         this.timer = setInterval(this.drop, this.speed);
     }

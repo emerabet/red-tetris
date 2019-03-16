@@ -28,6 +28,11 @@ class Game extends EventEmitter {
         }
     }
 
+    private resetSetOfPieces() {
+        this.pieces.length = 0;
+        this.createSetOfPieces();
+    }
+
     private initListeners(board: BoardController) {
         board.on('start', () => {
             this.boards.forEach((value, key) => {
