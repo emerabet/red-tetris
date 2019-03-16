@@ -1,1 +1,29 @@
 
+.flexRowGame {
+    display: flex;
+    flex-direction: row;
+    /* align-items: center; */
+    flex-wrap: nowrap;
+    justify-content: center;
+  }
+
+.flexColumnGame {
+    align-items: center;
+    justify-content: center;
+    /* width: calc(22vw + 1vw); */
+    min-width: 250px;
+}
+
+.flexColumnL {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.flexColumnR {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}  

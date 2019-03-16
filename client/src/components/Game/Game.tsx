@@ -5,7 +5,9 @@ import SectionLeft from '../SectionLeft';
 import Board from '../Board';
 import SectionRight from '../SectionRight';
 import RedTetris from '../RedTetris';
+import AdminButton from '../AdminButton';
 import NextPieces from '../NextPieces';
+import Oponent from '../Oponent';
 import Score from '../Score';
 import { useWindowSize } from '../../effects/useWindowSize';
 import { OponentInterface } from '../../types/gameTypes';
@@ -44,8 +46,10 @@ const Game: React.SFC<GameProps> = (props) => {
         rowDestruction={props.row}
       />
         :
-        <div className="flexRow">
-          <div className="flexColumn">
+        <div>
+        <RedTetris additionalClassName="small" />
+        <div className="flexRowGame">
+          <div className="flexColumnL">
             <LabeledBox
               label="room:"
               content={props.room}
@@ -54,9 +58,12 @@ const Game: React.SFC<GameProps> = (props) => {
               label="player:"
               content={props.player}
             />
+            <AdminButton
+          text={props.status}
+        />
           </div>
-        <div className="flexColumn">
-            <RedTetris additionalClassName="small" />
+        <div className="flexColumnGame">
+            {/* <RedTetris additionalClassName="small" /> */}
           {/* <NextPieces
             pieces={props.pieces}
           /> */}
@@ -65,10 +72,24 @@ const Game: React.SFC<GameProps> = (props) => {
           rowDestruction={props.row}
         />
         </div>
+        <div className="flexColumnR">
         <Score
           level={props.level}
           score={props.score}
         />
+        <NextPieces
+          vertical
+          pieces={props.pieces}
+        />
+        </div>
+        </div>
+        <div className="opponentsNoWrap">
+          {
+            props.oponents.map((oponent, i) => {
+              return <Oponent key={`op_${i}`} oponent={oponent} />;
+            })
+          }
+        </div>
           </div>
       }
       {dim.outerWidth > 750 &&

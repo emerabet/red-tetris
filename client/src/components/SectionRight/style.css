@@ -26,3 +26,10 @@
     align-items: center;
     justify-content: space-around;
 }
+
+.opponentsNoWrap {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    transform: scale(0.7);
+}

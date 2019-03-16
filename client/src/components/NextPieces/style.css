@@ -16,3 +16,12 @@
     flex-direction: row;
     transform: scaleX(0.7) scaleY(0.7);
 }
+
+.pieceColumn {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

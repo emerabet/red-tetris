@@ -19,13 +19,14 @@ const piecesType:{[name: string]:number[][]} = {
 
 interface NextPiecesProps {
   pieces: string;
+  vertical?: boolean;
 }
 
 const NextPieces: React.SFC<NextPiecesProps> = (props) => {
   const pcs = props.pieces.split('');
   return (
     <div className="nextPieces">
-      <div className="pieceRow">
+      <div className={props.vertical ? 'pieceColumn' : 'pieceRow'}>
         {
           pcs.map((piece:string, i:number) => {
             return (

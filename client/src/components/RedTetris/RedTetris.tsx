@@ -10,7 +10,7 @@ const RedTetris: React.SFC<RedTetrisProps> = (props) => {
   return (
     <div
       className={`redTetris ${props.additionalClassName !== undefined
-        ? props.additionalClassName : ''}`}>
+        ? `${props.additionalClassName}` : ''}`}>
       <div className="box boxR">
         <div className="boxCube boxR1"></div>
         <div className="boxCube boxR2"></div>

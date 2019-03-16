@@ -38,7 +38,6 @@ const Board: React.SFC<BoardProps> = (props) => {
                   return (
                     <div key={j} className="destructionRow">
                       <div className="destructionCol">
-                      {console.log("DESTRI")}
                         <div className={`boardCellDestruction effectL${r}`}>{}</div>
                         <div className={`boardCellDestruction effectR${r}`}>{}</div>
                       </div>
