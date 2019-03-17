@@ -15,6 +15,12 @@ export enum CellState {
     Locked = -1,
 }
 
+export enum PlayerType {
+    Admin = 0,
+    Player = 1,
+    Spectator = 2,
+}
+
 export const Z:string = 'Z';
 export const S:string = 'S';
 export const J:string = 'J';

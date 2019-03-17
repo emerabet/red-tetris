@@ -3,6 +3,7 @@ import Player from './Player';
 import Board from './Board';
 import BoardController from './BoardController';
 import PieceFactory from './PieceFactory';
+import { PlayerType } from './constants';
 
 class Game extends EventEmitter {
     private room: string;
@@ -69,11 +70,11 @@ class Game extends EventEmitter {
 
     public createBoard(height:number, width:number, socket:SocketIO.Socket): void {
         if (!this.isStarted) {
-            const player = new Player(socket.id);
+            const role: number = this.players.size === 0 ? PlayerType.Admin : PlayerType.Player;
+            const player = new Player(socket.id, this.room, role);
             this.players.set(socket.id, player);
             const board:Board = new Board(height, width);
             const boardController = new BoardController(
-                this.room,
                 player,
                 board,
                 socket,
