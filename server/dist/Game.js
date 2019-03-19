@@ -8,6 +8,7 @@ const Player_1 = __importDefault(require("./Player"));
 const Board_1 = __importDefault(require("./Board"));
 const BoardController_1 = __importDefault(require("./BoardController"));
 const PieceFactory_1 = __importDefault(require("./PieceFactory"));
+const constants_1 = require("./constants");
 class Game extends events_1.EventEmitter {
     constructor(room) {
         super();
@@ -22,6 +23,10 @@ class Game extends events_1.EventEmitter {
         for (let i = 0; i < 3; i += 1) {
             this.pieces.push(PieceFactory_1.default.createRandomPiece());
         }
+    }
+    resetSetOfPieces() {
+        this.pieces.length = 0;
+        this.createSetOfPieces();
     }
     initListeners(board) {
         board.on('start', () => {
@@ -55,10 +60,11 @@ class Game extends events_1.EventEmitter {
     }
     createBoard(height, width, socket) {
         if (!this.isStarted) {
-            const player = new Player_1.default(socket.id);
+            const role = this.players.size === 0 ? constants_1.PlayerType.Admin : constants_1.PlayerType.Player;
+            const player = new Player_1.default(socket.id, this.room, role);
             this.players.set(socket.id, player);
             const board = new Board_1.default(height, width);
-            const boardController = new BoardController_1.default(this.room, player, board, socket, this.pieces);
+            const boardController = new BoardController_1.default(player, board, socket, this.pieces);
             this.initListeners(boardController);
             this.boards.set(socket.id, boardController);
         }

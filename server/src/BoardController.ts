@@ -28,20 +28,23 @@ class BoardController extends EventEmitter {
         this.currentPlayer = player;
         this.currentBoard = board;
         this.socket = socket;
-        this.indexPiece = 0;
         this.pieces = pieces;
-        this.currentPiece = PieceFactory.createPiece(pieces[this.indexPiece]);
-        this.speed = 1000;
-        this.score = 0;
-        this.lines = 0;
-        this.level = 0;
-        this.isFinished = false;
-
         this.drop = this.drop.bind(this);
         this.moveDown = this.moveDown.bind(this);
         this.rotate = this.rotate.bind(this);
         this.moveSide = this.moveSide.bind(this);
         this.init();
+    }
+
+    private prepare() {
+        this.currentBoard.clearAll();
+        this.indexPiece = 0;
+        this.currentPiece = PieceFactory.createPiece(this.pieces[this.indexPiece]);
+        this.speed = 1000;
+        this.score = 0;
+        this.lines = 0;
+        this.level = 0;
+        this.isFinished = false;
     }
 
     private updateScore() {
@@ -181,6 +184,7 @@ class BoardController extends EventEmitter {
 
     public run() {
         clearInterval(this.timer);
+        this.prepare();
         this.draw();
         this.timer = setInterval(this.drop, this.speed);
     }
@@ -193,6 +197,16 @@ class BoardController extends EventEmitter {
         this.draw();
     }
 
+    private stop() {
+        this.isFinished = true;
+        clearInterval(this.timer);
+        this.currentBoard.clearAll();
+    }
+
+    private restart() {
+
+    }
+
     private init() {
         this.socket.on('init', () => {
             // TODO: Vérifier si c'est bien l'admin de la partie.
@@ -201,6 +215,14 @@ class BoardController extends EventEmitter {
 
         this.socket.on('disconnect', () => {
             this.freeBoard(this.socket.id);
+        });
+
+        this.socket.on('restart', () => {
+
+        });
+
+        this.socket.on('stop', () => {
+
         });
 
         this.socket.on('down', () => {

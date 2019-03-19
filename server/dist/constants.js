@@ -17,6 +17,12 @@ var CellState;
     CellState[CellState["Empty"] = 0] = "Empty";
     CellState[CellState["Locked"] = -1] = "Locked";
 })(CellState = exports.CellState || (exports.CellState = {}));
+var PlayerType;
+(function (PlayerType) {
+    PlayerType[PlayerType["Admin"] = 0] = "Admin";
+    PlayerType[PlayerType["Player"] = 1] = "Player";
+    PlayerType[PlayerType["Spectator"] = 2] = "Spectator";
+})(PlayerType = exports.PlayerType || (exports.PlayerType = {}));
 exports.Z = 'Z';
 exports.S = 'S';
 exports.J = 'J';

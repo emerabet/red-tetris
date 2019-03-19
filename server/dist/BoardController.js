@@ -8,25 +8,28 @@ const PieceFactory_1 = __importDefault(require("./PieceFactory"));
 const constants_1 = require("./constants");
 const utils_1 = require("./utils");
 class BoardController extends events_1.EventEmitter {
-    constructor(room, player, board, socket, pieces) {
+    constructor(player, board, socket, pieces) {
         super();
+        this.timer = null;
         this.currentPlayer = player;
         this.currentBoard = board;
-        this.room = room;
         this.socket = socket;
-        this.indexPiece = 0;
         this.pieces = pieces;
-        this.currentPiece = PieceFactory_1.default.createPiece(pieces[this.indexPiece]);
+        this.drop = this.drop.bind(this);
+        this.moveDown = this.moveDown.bind(this);
+        this.rotate = this.rotate.bind(this);
+        this.moveSide = this.moveSide.bind(this);
+        this.prepare();
+        this.init();
+    }
+    prepare() {
+        this.indexPiece = 0;
+        this.currentPiece = PieceFactory_1.default.createPiece(this.pieces[this.indexPiece]);
         this.speed = 1000;
         this.score = 0;
         this.lines = 0;
         this.level = 0;
         this.isFinished = false;
-        this.drop = this.drop.bind(this);
-        this.moveDown = this.moveDown.bind(this);
-        this.rotate = this.rotate.bind(this);
-        this.moveSide = this.moveSide.bind(this);
-        this.init();
     }
     updateScore() {
         this.level = Math.ceil(this.lines / 4);
@@ -77,7 +80,7 @@ class BoardController extends events_1.EventEmitter {
         };
         this.socket.emit('state', state);
         this.socket
-            .to(this.room)
+            .to(this.currentPlayer.room)
             .emit('spectre', { spectre, id: this.socket.id });
         this.currentBoard.clear(this.currentPiece);
     }
@@ -149,6 +152,7 @@ class BoardController extends events_1.EventEmitter {
         this.removeAllListeners();
     }
     run() {
+        clearInterval(this.timer);
         this.draw();
         this.timer = setInterval(this.drop, this.speed);
     }
@@ -159,6 +163,13 @@ class BoardController extends events_1.EventEmitter {
         action(arg);
         this.draw();
     }
+    stop() {
+        this.isFinished = true;
+        clearInterval(this.timer);
+        this.currentBoard.clearAll();
+    }
+    restart() {
+    }
     init() {
         this.socket.on('init', () => {
             // TODO: Vérifier si c'est bien l'admin de la partie.
@@ -166,6 +177,10 @@ class BoardController extends events_1.EventEmitter {
         });
         this.socket.on('disconnect', () => {
             this.freeBoard(this.socket.id);
+        });
+        this.socket.on('restart', () => {
+        });
+        this.socket.on('stop', () => {
         });
         this.socket.on('down', () => {
             this.execute(this.moveDown);
