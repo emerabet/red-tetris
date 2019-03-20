@@ -35,10 +35,22 @@ class Game extends EventEmitter {
     }
 
     private initListeners(board: BoardController) {
-        board.on('start', () => {
-            this.boards.forEach((value, key) => {
-                value.run();
-            });
+        board.on('start', (socketId:string) => {
+            const player:Player|undefined = this.players.get(socketId);
+            if (player !== undefined && player.isAdmin) {
+                this.boards.forEach((value, key) => {
+                    value.run();
+                });
+            }
+        });
+
+        board.on('stop', (socketId:string) => {
+            const player:Player|undefined = this.players.get(socketId);
+            if (player !== undefined && player.isAdmin && this.isStarted === true) {
+                this.boards.forEach((value, key) => {
+                    value.stop();
+                });
+            }
         });
 
         board.on('malus', (socketId:string) => {

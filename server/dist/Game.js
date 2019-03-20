@@ -29,10 +29,21 @@ class Game extends events_1.EventEmitter {
         this.createSetOfPieces();
     }
     initListeners(board) {
-        board.on('start', () => {
-            this.boards.forEach((value, key) => {
-                value.run();
-            });
+        board.on('start', (socketId) => {
+            const player = this.players.get(socketId);
+            if (player !== undefined && player.isAdmin) {
+                this.boards.forEach((value, key) => {
+                    value.run();
+                });
+            }
+        });
+        board.on('stop', (socketId) => {
+            const player = this.players.get(socketId);
+            if (player !== undefined && player.isAdmin && this.isStarted === true) {
+                this.boards.forEach((value, key) => {
+                    value.stop();
+                });
+            }
         });
         board.on('malus', (socketId) => {
             this.boards.forEach((value, key) => {
@@ -60,6 +71,9 @@ class Game extends events_1.EventEmitter {
     }
     createBoard(height, width, socket) {
         if (!this.isStarted) {
+            socket.on('tttt', () => {
+                console.log('okokokok');
+            });
             const role = this.players.size === 0 ? constants_1.PlayerType.Admin : constants_1.PlayerType.Player;
             const player = new Player_1.default(socket.id, this.room, role);
             this.players.set(socket.id, player);

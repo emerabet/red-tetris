@@ -19,10 +19,10 @@ class BoardController extends events_1.EventEmitter {
         this.moveDown = this.moveDown.bind(this);
         this.rotate = this.rotate.bind(this);
         this.moveSide = this.moveSide.bind(this);
-        this.prepare();
         this.init();
     }
     prepare() {
+        this.currentBoard.clearAll();
         this.indexPiece = 0;
         this.currentPiece = PieceFactory_1.default.createPiece(this.pieces[this.indexPiece]);
         this.speed = 1000;
@@ -141,7 +141,9 @@ class BoardController extends events_1.EventEmitter {
     }
     freeBoard(socketId) {
         clearInterval(this.timer);
+        console.log('listeners:: ', this.socket.eventNames());
         this.socket.removeAllListeners();
+        console.log('listeners:: ', this.socket.eventNames());
         delete this.socket;
         delete this.timer;
         delete this.currentPiece;
@@ -152,7 +154,9 @@ class BoardController extends events_1.EventEmitter {
         this.removeAllListeners();
     }
     run() {
+        this.currentBoard.clearAll();
         clearInterval(this.timer);
+        this.prepare();
         this.draw();
         this.timer = setInterval(this.drop, this.speed);
     }
@@ -168,19 +172,15 @@ class BoardController extends events_1.EventEmitter {
         clearInterval(this.timer);
         this.currentBoard.clearAll();
     }
-    restart() {
-    }
     init() {
-        this.socket.on('init', () => {
-            // TODO: Vérifier si c'est bien l'admin de la partie.
-            this.emit('start');
-        });
+        // this.socket.on('init', () => {
+        //     this.emit('start', this.socket.id);
+        // });
         this.socket.on('disconnect', () => {
             this.freeBoard(this.socket.id);
         });
-        this.socket.on('restart', () => {
-        });
         this.socket.on('stop', () => {
+            this.emit('stop', this.socket.id);
         });
         this.socket.on('down', () => {
             this.execute(this.moveDown);
