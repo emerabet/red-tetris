@@ -93,6 +93,7 @@ class BoardController extends EventEmitter {
         const state = {
             spectre,
             id: this.socket.id,
+            username: this.currentPlayer.username,
             grid: deepCopy(this.currentBoard.grid),
             score: this.score,
             level: this.level,
@@ -101,7 +102,11 @@ class BoardController extends EventEmitter {
         this.socket.emit('state', state);
         this.socket
             .to(this.currentPlayer.room)
-            .emit('spectre', { spectre, id: this.socket.id });
+            .emit('spectre', {
+                spectre,
+                id: this.socket.id,
+                username: this.currentPlayer.username,
+            });
         this.currentBoard.clear(this.currentPiece);
     }
 

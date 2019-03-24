@@ -75,10 +75,10 @@ class Game extends EventEmitter {
         });
     }
 
-    public createBoard(height:number, width:number, socket:SocketIO.Socket): void {
+    public createBoard(height:number, width:number, socket:SocketIO.Socket, username: string): void {
         if (this.status === GameState.Opened) {
             const role: number = this.players.size === 0 ? PlayerType.Admin : PlayerType.Player;
-            const player = new Player(socket.id, this.room, role);
+            const player = new Player(socket.id, username, this.room, role);
             this.players.set(socket.id, player);
             const board:Board = new Board(height, width);
             const boardController = new BoardController(

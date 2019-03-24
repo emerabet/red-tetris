@@ -15,7 +15,7 @@ app.use(cors());
 const games = new Map<string, Game>();
 
 io.on('connection', (socket:SocketIO.Socket) => {
-    const { room, pseudo } = socket.handshake.query;
+    const { room, username } = socket.handshake.query;
     if (!games.has(room)) {
         console.log('Game created: ', room);
         const game = new Game(room);
@@ -25,7 +25,7 @@ io.on('connection', (socket:SocketIO.Socket) => {
     const game = games.get(room);
     if (game) {
         console.log('Player added: ', socket.id);
-        game.createBoard(20, 10, socket);
+        game.createBoard(20, 10, socket, username);
     }
 });
 

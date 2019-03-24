@@ -1,14 +1,20 @@
 import { PlayerType } from './constants';
 
 class Player {
-    private name: string;
+    private uniqueId: string;
     private inRoom: string;
     private role: PlayerType;
+    private name: string;
 
-    constructor(name:string, room: string, role: PlayerType) {
-        this.name = name;
+    constructor(id:string, username: string, room: string, role: PlayerType) {
+        this.uniqueId = id;
+        this.name = username;
         this.inRoom = room;
         this.role = role;
+    }
+
+    get id(): string {
+        return this.uniqueId;
     }
 
     get username(): string {
