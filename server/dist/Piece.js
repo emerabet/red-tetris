@@ -10,7 +10,6 @@ class Piece {
         this.positionRow = 0;
         this.positionCol = 3;
         this.previous = null;
-        this.snapshotPosition();
     }
     get name() {
         return this.shapeName;

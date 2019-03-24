@@ -1,16 +1,17 @@
-import Game from './../Game';
-import socketIo from 'socket.io';
-
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const Game_1 = __importDefault(require("./../Game"));
 it('create game instance with the rigth name', () => {
-    const game: Game = new Game('RoomName');
+    const game = new Game_1.default('RoomName');
     expect(game.name).toBe('RoomName');
 });
-
 it('create game instance', () => {
-    const game: Game = new Game('RoomName');
+    const game = new Game_1.default('RoomName');
     expect(game.name).toBeDefined();
 });
-
 // it('game instance extends eventemitter', () => {
 //     const game: Game = new Game('RoomName');
 //     const socket:SocketIO.Socket = {

@@ -18,6 +18,9 @@ class Game extends events_1.EventEmitter {
         this.players = new Map();
         this.pieces = [];
     }
+    get name() {
+        return this.room;
+    }
     createSetOfPieces() {
         for (let i = 0; i < 3; i += 1) {
             this.pieces.push(PieceFactory_1.default.createRandomPiece());

@@ -1,6 +1,5 @@
 import Piece from './Piece';
 import { CellState, From } from './constants';
-import { deepCopy } from './utils';
 
 class Board {
     private readonly height: number;

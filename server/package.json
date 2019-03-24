@@ -9,9 +9,13 @@
       "js"
     ],
     "transform": {
-      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+      "\\.(ts|tsx)$": "ts-jest"
     },
-    "testRegex": "/__tests__/.*\\.(ts|tsx|js)$"
+    "testRegex": "src/__tests__/.*\\.(ts|tsx|js)$",
+    "coverageReporters": [
+      "text",
+      "html"
+    ]
   },
   "scripts": {
     "test": "jest",

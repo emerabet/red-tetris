@@ -100,7 +100,7 @@ class BoardController extends events_1.EventEmitter {
     }
     checkLine() {
         for (let i = this.currentBoard.grid.length - 1; i >= 0; i -= 1) {
-            if (this.currentBoard.isFull(i) === true) {
+            if (this.currentBoard.isFull(i)) {
                 this.currentBoard.removeRowAt(i);
                 this.currentBoard.addEmptyRow();
                 this.addMalusToOther();
@@ -130,7 +130,7 @@ class BoardController extends events_1.EventEmitter {
         }
     }
     takeMalus() {
-        if (this.isFinished === true) {
+        if (this.isFinished) {
             return;
         }
         this.moveSide(constants_1.Direction.Up);
@@ -164,7 +164,7 @@ class BoardController extends events_1.EventEmitter {
         this.timer = setInterval(this.drop, this.speed);
     }
     execute(action, arg = null) {
-        if (this.isFinished === true) {
+        if (this.isFinished) {
             return;
         }
         action(arg);
