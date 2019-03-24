@@ -13,25 +13,22 @@ class Game extends events_1.EventEmitter {
     constructor(room) {
         super();
         this.room = room;
-        this.isStarted = false;
+        this.status = constants_1.GameState.Opened;
         this.boards = new Map();
         this.players = new Map();
         this.pieces = [];
-        this.createSetOfPieces();
     }
     createSetOfPieces() {
         for (let i = 0; i < 3; i += 1) {
             this.pieces.push(PieceFactory_1.default.createRandomPiece());
         }
     }
-    resetSetOfPieces() {
-        this.pieces.length = 0;
-        this.createSetOfPieces();
-    }
     initListeners(board) {
         board.on('start', (socketId) => {
             const player = this.players.get(socketId);
             if (player !== undefined && player.isAdmin) {
+                this.createSetOfPieces();
+                this.status = constants_1.GameState.OnGoing;
                 this.boards.forEach((value, key) => {
                     value.run();
                 });
@@ -39,7 +36,8 @@ class Game extends events_1.EventEmitter {
         });
         board.on('stop', (socketId) => {
             const player = this.players.get(socketId);
-            if (player !== undefined && player.isAdmin && this.isStarted === true) {
+            if (player !== undefined && player.isAdmin && this.status === constants_1.GameState.OnGoing) {
+                this.pieces.length = 0;
                 this.boards.forEach((value, key) => {
                     value.stop();
                 });
@@ -53,7 +51,6 @@ class Game extends events_1.EventEmitter {
             });
         });
         board.on('need', (index) => {
-            console.log('index need:: ', index);
             if ((this.pieces.length - 1) - index <= 3) {
                 this.createSetOfPieces();
             }
@@ -70,10 +67,7 @@ class Game extends events_1.EventEmitter {
         });
     }
     createBoard(height, width, socket) {
-        if (!this.isStarted) {
-            socket.on('tttt', () => {
-                console.log('okokokok');
-            });
+        if (this.status === constants_1.GameState.Opened) {
             const role = this.players.size === 0 ? constants_1.PlayerType.Admin : constants_1.PlayerType.Player;
             const player = new Player_1.default(socket.id, this.room, role);
             this.players.set(socket.id, player);

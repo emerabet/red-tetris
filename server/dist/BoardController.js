@@ -141,9 +141,7 @@ class BoardController extends events_1.EventEmitter {
     }
     freeBoard(socketId) {
         clearInterval(this.timer);
-        console.log('listeners:: ', this.socket.eventNames());
         this.socket.removeAllListeners();
-        console.log('listeners:: ', this.socket.eventNames());
         delete this.socket;
         delete this.timer;
         delete this.currentPiece;
@@ -171,13 +169,19 @@ class BoardController extends events_1.EventEmitter {
         this.isFinished = true;
         clearInterval(this.timer);
         this.currentBoard.clearAll();
+        this.draw();
     }
     init() {
-        // this.socket.on('init', () => {
-        //     this.emit('start', this.socket.id);
-        // });
+        this.socket.on('init', () => {
+            this.emit('start', this.socket.id);
+        });
         this.socket.on('disconnect', () => {
             this.freeBoard(this.socket.id);
+        });
+        this.socket.on('restart', () => {
+            console.log('restart');
+            this.emit('stop', this.socket.id);
+            this.emit('start', this.socket.id);
         });
         this.socket.on('stop', () => {
             this.emit('stop', this.socket.id);

@@ -14,10 +14,7 @@ class Player {
         return this.inRoom;
     }
     get isAdmin() {
-        if (this.role === constants_1.PlayerType.Admin) {
-            return true;
-        }
-        return false;
+        return (this.role === constants_1.PlayerType.Admin);
     }
 }
 exports.default = Player;

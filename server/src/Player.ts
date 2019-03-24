@@ -20,10 +20,7 @@ class Player {
     }
 
     get isAdmin(): boolean {
-        if (this.role === PlayerType.Admin) {
-            return true;
-        }
-        return false;
+        return (this.role === PlayerType.Admin);
     }
 }
 

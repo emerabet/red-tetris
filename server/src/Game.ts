@@ -3,24 +3,22 @@ import Player from './Player';
 import Board from './Board';
 import BoardController from './BoardController';
 import PieceFactory from './PieceFactory';
-import { PlayerType } from './constants';
+import { PlayerType, GameState } from './constants';
 
 class Game extends EventEmitter {
     private room: string;
-    private isStarted: boolean;
     private boards: Map<string, BoardController>; // SocketId, boardController
     private players: Map<string, Player>; // SocketId, Player
     private pieces: string[];
+    private status: GameState;
 
     constructor(room:string) {
         super();
         this.room = room;
-        this.isStarted = false;
+        this.status = GameState.Opened;
         this.boards = new Map<string, BoardController>();
         this.players = new Map<string, Player>();
         this.pieces = [];
-
-        this.createSetOfPieces();
     }
 
     private createSetOfPieces() {
@@ -29,15 +27,12 @@ class Game extends EventEmitter {
         }
     }
 
-    private resetSetOfPieces() {
-        this.pieces.length = 0;
-        this.createSetOfPieces();
-    }
-
     private initListeners(board: BoardController) {
         board.on('start', (socketId:string) => {
             const player:Player|undefined = this.players.get(socketId);
             if (player !== undefined && player.isAdmin) {
+                this.createSetOfPieces();
+                this.status = GameState.OnGoing;
                 this.boards.forEach((value, key) => {
                     value.run();
                 });
@@ -46,7 +41,8 @@ class Game extends EventEmitter {
 
         board.on('stop', (socketId:string) => {
             const player:Player|undefined = this.players.get(socketId);
-            if (player !== undefined && player.isAdmin && this.isStarted === true) {
+            if (player !== undefined && player.isAdmin && this.status === GameState.OnGoing) {
+                this.pieces.length = 0;
                 this.boards.forEach((value, key) => {
                     value.stop();
                 });
@@ -62,7 +58,6 @@ class Game extends EventEmitter {
         });
 
         board.on('need', (index) => {
-            console.log('index need:: ', index);
             if ((this.pieces.length - 1) - index <= 3) {
                 this.createSetOfPieces();
             }
@@ -81,7 +76,7 @@ class Game extends EventEmitter {
     }
 
     public createBoard(height:number, width:number, socket:SocketIO.Socket): void {
-        if (!this.isStarted) {
+        if (this.status === GameState.Opened) {
             const role: number = this.players.size === 0 ? PlayerType.Admin : PlayerType.Player;
             const player = new Player(socket.id, this.room, role);
             this.players.set(socket.id, player);

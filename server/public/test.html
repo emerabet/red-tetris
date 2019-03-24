@@ -238,8 +238,10 @@
                 <div class="row_cell locked"></div>
                 <div class="row_cell locked"></div>
             </div>
-            <button id='btnState' name='btnState'>Get State</button>
         </main>
+        <button id='btnState' name='btnState'>Start</button>
+        <button id='btnStop' name='btnStop'>Stop</button>
+        <button id='btnRestart' name='btnRestart'>Restart</button>
         <script src="/socket.io/socket.io.js"></script>
         <script>
             const lookuptable = {
@@ -272,10 +274,23 @@
 
             const board = document.querySelector('#board');
             const btnState = document.querySelector('#btnState');
+            const btnStop = document.querySelector('#btnStop');
+            const btnRestart = document.querySelector('#btnRestart');
 
             btnState.addEventListener('click', () => {
-                console.log(socket.id);
                 socket.emit('init');
+            });
+
+            btnState.addEventListener('click', () => {
+                socket.emit('init');
+            });
+
+            btnStop.addEventListener('click', () => {
+                socket.emit('stop');
+            });
+
+            btnRestart.addEventListener('click', () => {
+                socket.emit('restart');
             });
 
             function createCell(cell) {
@@ -302,7 +317,6 @@
             }
            
             socket.on('state', (state) => {
-                console.log(state);
                 drawGrid(state.grid);
             });
             
