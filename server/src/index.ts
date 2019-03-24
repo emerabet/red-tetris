@@ -17,14 +17,12 @@ const games = new Map<string, Game>();
 io.on('connection', (socket:SocketIO.Socket) => {
     const { room, username } = socket.handshake.query;
     if (!games.has(room)) {
-        console.log('Game created: ', room);
         const game = new Game(room);
         games.set(room, game);
         initListeners(game);
     }
     const game = games.get(room);
     if (game) {
-        console.log('Player added: ', socket.id);
         game.createBoard(20, 10, socket, username);
     }
 });
@@ -32,9 +30,6 @@ io.on('connection', (socket:SocketIO.Socket) => {
 function initListeners(game: Game) {
     game.on('freeGame', (room) => {
         games.delete(room);
-        console.log('in free game:: ', room);
-        console.log(games.get(room));
-        console.log('games: ', games);
     });
 }
 
@@ -47,5 +42,3 @@ app.use(express.static('public'));
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/test.html'));
 });
-
-console.log('-------- Début --------');

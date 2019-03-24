@@ -66,10 +66,10 @@ class Game extends events_1.EventEmitter {
             }
         });
     }
-    createBoard(height, width, socket) {
+    createBoard(height, width, socket, username) {
         if (this.status === constants_1.GameState.Opened) {
             const role = this.players.size === 0 ? constants_1.PlayerType.Admin : constants_1.PlayerType.Player;
-            const player = new Player_1.default(socket.id, this.room, role);
+            const player = new Player_1.default(socket.id, username, this.room, role);
             this.players.set(socket.id, player);
             const board = new Board_1.default(height, width);
             const boardController = new BoardController_1.default(player, board, socket, this.pieces);

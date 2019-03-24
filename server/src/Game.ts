@@ -21,6 +21,10 @@ class Game extends EventEmitter {
         this.pieces = [];
     }
 
+    get name(): string {
+        return this.room;
+    }
+
     private createSetOfPieces() {
         for (let i = 0; i < 3; i += 1) {
             this.pieces.push(PieceFactory.createRandomPiece());
@@ -75,7 +79,10 @@ class Game extends EventEmitter {
         });
     }
 
-    public createBoard(height:number, width:number, socket:SocketIO.Socket, username: string): void {
+    public createBoard(height:number,
+                       width:number,
+                       socket:SocketIO.Socket,
+                       username: string): void {
         if (this.status === GameState.Opened) {
             const role: number = this.players.size === 0 ? PlayerType.Admin : PlayerType.Player;
             const player = new Player(socket.id, username, this.room, role);

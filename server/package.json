@@ -3,8 +3,19 @@
   "version": "1.0.0",
   "main": "server.js",
   "license": "MIT",
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "transform": {
+      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "/__tests__/.*\\.(ts|tsx|js)$"
+  },
   "scripts": {
-    "test": "echo \"Error: no tests specified\" && exit 1",
+    "test": "jest",
+    "coverage": "jest --coverage",
     "dev": "concurrently -k -n \"Typescript,Node\" -p \"[{name}]\" -c \"blue, green\" \"tsc --watch\" \"nodemon --inspect dist/index.js\"",
     "lint": "tslint --project tslint.json 'src/**/*.{ts,tsx}'"
   },
@@ -12,11 +23,12 @@
     "@types/jest": "^23.3.11",
     "@types/node": "^10.12.18",
     "concurrently": "^4.1.0",
-    "jest": "^23.6.0",
     "nodemon": "^1.18.9",
+    "jest": "^23.6.0",
     "ts-jest": "^23.10.5",
     "tslint-config-airbnb": "^5.11.1",
-    "typescript": "^3.2.2"
+    "typescript": "^3.2.2",
+    "tslint": "^5.12.0"
   },
   "dependencies": {
     "@types/cors": "^2.8.4",
@@ -24,7 +36,6 @@
     "@types/socket.io": "^2.1.2",
     "cors": "^2.8.5",
     "express": "^4.16.4",
-    "socket.io": "^2.2.0",
-    "tslint": "^5.12.0"
+    "socket.io": "^2.2.0"
   }
 }

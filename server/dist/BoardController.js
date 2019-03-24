@@ -73,6 +73,7 @@ class BoardController extends events_1.EventEmitter {
         const state = {
             spectre,
             id: this.socket.id,
+            username: this.currentPlayer.username,
             grid: utils_1.deepCopy(this.currentBoard.grid),
             score: this.score,
             level: this.level,
@@ -81,7 +82,11 @@ class BoardController extends events_1.EventEmitter {
         this.socket.emit('state', state);
         this.socket
             .to(this.currentPlayer.room)
-            .emit('spectre', { spectre, id: this.socket.id });
+            .emit('spectre', {
+            spectre,
+            id: this.socket.id,
+            username: this.currentPlayer.username,
+        });
         this.currentBoard.clear(this.currentPiece);
     }
     moveDown() {
@@ -179,7 +184,6 @@ class BoardController extends events_1.EventEmitter {
             this.freeBoard(this.socket.id);
         });
         this.socket.on('restart', () => {
-            console.log('restart');
             this.emit('stop', this.socket.id);
             this.emit('start', this.socket.id);
         });

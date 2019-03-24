@@ -2,10 +2,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const constants_1 = require("./constants");
 class Player {
-    constructor(name, room, role) {
-        this.name = name;
+    constructor(id, username, room, role) {
+        this.uniqueId = id;
+        this.name = username;
         this.inRoom = room;
         this.role = role;
+    }
+    get id() {
+        return this.uniqueId;
     }
     get username() {
         return this.name;
