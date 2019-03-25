@@ -15,25 +15,20 @@ const io = socket_io_1.default(server, { pingTimeout: 60000 });
 app.use(cors_1.default());
 const games = new Map();
 io.on('connection', (socket) => {
-    const { room, pseudo } = socket.handshake.query;
+    const { room, username } = socket.handshake.query;
     if (!games.has(room)) {
-        console.log('Game created: ', room);
         const game = new Game_1.default(room);
         games.set(room, game);
         initListeners(game);
     }
     const game = games.get(room);
     if (game) {
-        console.log('Player added: ', socket.id);
-        game.createBoard(20, 10, socket);
+        game.createBoard(20, 10, socket, username);
     }
 });
 function initListeners(game) {
     game.on('freeGame', (room) => {
         games.delete(room);
-        console.log('in free game:: ', room);
-        console.log(games.get(room));
-        console.log('games: ', games);
     });
 }
 server.listen(4000, () => {
@@ -43,4 +38,3 @@ app.use(express_1.default.static('public'));
 app.get('/', (req, res) => {
     res.sendFile(path_1.default.join(__dirname, '../public/test.html'));
 });
-console.log('-------- Début --------');

@@ -8,44 +8,54 @@ const Player_1 = __importDefault(require("./Player"));
 const Board_1 = __importDefault(require("./Board"));
 const BoardController_1 = __importDefault(require("./BoardController"));
 const PieceFactory_1 = __importDefault(require("./PieceFactory"));
+const constants_1 = require("./constants");
 class Game extends events_1.EventEmitter {
     constructor(room) {
         super();
         this.room = room;
-        this.isStarted = false;
+        this.status = constants_1.GameState.Opened;
         this.boards = new Map();
         this.players = new Map();
         this.pieces = [];
-        this.createSetOfPieces();
+    }
+    get name() {
+        return this.room;
     }
     createSetOfPieces() {
         for (let i = 0; i < 3; i += 1) {
             this.pieces.push(PieceFactory_1.default.createRandomPiece());
         }
-        console.log('list of pieces: ', this.pieces);
     }
     initListeners(board) {
-        board.on('start', () => {
-            this.boards.forEach((value, key) => {
-                console.log('try to start game :', key);
-                value.run();
-            });
+        board.on('start', (socketId) => {
+            const player = this.players.get(socketId);
+            if (player !== undefined && player.isAdmin) {
+                this.createSetOfPieces();
+                this.status = constants_1.GameState.OnGoing;
+                this.boards.forEach((value, key) => {
+                    value.run();
+                });
+            }
+        });
+        board.on('stop', (socketId) => {
+            const player = this.players.get(socketId);
+            if (player !== undefined && player.isAdmin && this.status === constants_1.GameState.OnGoing) {
+                this.pieces.length = 0;
+                this.boards.forEach((value, key) => {
+                    value.stop();
+                });
+            }
         });
         board.on('malus', (socketId) => {
-            console.log(`Malus added by socketId: ${socketId}`);
             this.boards.forEach((value, key) => {
                 if (key !== socketId) {
-                    console.log('try to add malus to :', key);
                     value.takeMalus();
                 }
             });
         });
         board.on('need', (index) => {
-            console.log('index need:: ', index);
             if ((this.pieces.length - 1) - index <= 3) {
                 this.createSetOfPieces();
-                // this.pieces.push(PieceFactory.createRandomPiece());
-                console.log('piece added to the list');
             }
         });
         board.on('free', (socketId) => {
@@ -57,15 +67,12 @@ class Game extends events_1.EventEmitter {
                 this.emit('freeGame', this.room);
                 this.removeAllListeners();
             }
-            console.log('je suis dans onFree');
         });
     }
-    getBoards() {
-        return this.boards;
-    }
-    createBoard(height, width, socket) {
-        if (!this.isStarted) {
-            const player = new Player_1.default(socket.id);
+    createBoard(height, width, socket, username) {
+        if (this.status === constants_1.GameState.Opened) {
+            const role = this.players.size === 0 ? constants_1.PlayerType.Admin : constants_1.PlayerType.Player;
+            const player = new Player_1.default(socket.id, username, this.room, role);
             this.players.set(socket.id, player);
             const board = new Board_1.default(height, width);
             const boardController = new BoardController_1.default(player, board, socket, this.pieces);

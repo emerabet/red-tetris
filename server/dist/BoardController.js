@@ -10,28 +10,26 @@ const utils_1 = require("./utils");
 class BoardController extends events_1.EventEmitter {
     constructor(player, board, socket, pieces) {
         super();
+        this.timer = null;
         this.currentPlayer = player;
         this.currentBoard = board;
         this.socket = socket;
-        this.indexPiece = 0;
         this.pieces = pieces;
-        this.currentPiece = PieceFactory_1.default.createPiece(pieces[this.indexPiece]);
-        this.speed = 1000;
-        this.score = 0;
-        this.lines = 0;
-        this.level = 0;
-        this.isFinished = false;
         this.drop = this.drop.bind(this);
         this.moveDown = this.moveDown.bind(this);
         this.rotate = this.rotate.bind(this);
         this.moveSide = this.moveSide.bind(this);
         this.init();
     }
-    get board() {
-        return this.currentBoard;
-    }
-    get player() {
-        return this.currentPlayer;
+    prepare() {
+        this.currentBoard.clearAll();
+        this.indexPiece = 0;
+        this.currentPiece = PieceFactory_1.default.createPiece(this.pieces[this.indexPiece]);
+        this.speed = 1000;
+        this.score = 0;
+        this.lines = 0;
+        this.level = 0;
+        this.isFinished = false;
     }
     updateScore() {
         this.level = Math.ceil(this.lines / 4);
@@ -74,12 +72,21 @@ class BoardController extends events_1.EventEmitter {
         this.place();
         const state = {
             spectre,
+            id: this.socket.id,
+            username: this.currentPlayer.username,
             grid: utils_1.deepCopy(this.currentBoard.grid),
             score: this.score,
             level: this.level,
             pieces: this.getNextPieces(),
         };
         this.socket.emit('state', state);
+        this.socket
+            .to(this.currentPlayer.room)
+            .emit('spectre', {
+            spectre,
+            id: this.socket.id,
+            username: this.currentPlayer.username,
+        });
         this.currentBoard.clear(this.currentPiece);
     }
     moveDown() {
@@ -93,7 +100,7 @@ class BoardController extends events_1.EventEmitter {
     }
     checkLine() {
         for (let i = this.currentBoard.grid.length - 1; i >= 0; i -= 1) {
-            if (this.currentBoard.isFull(i) === true) {
+            if (this.currentBoard.isFull(i)) {
                 this.currentBoard.removeRowAt(i);
                 this.currentBoard.addEmptyRow();
                 this.addMalusToOther();
@@ -123,7 +130,7 @@ class BoardController extends events_1.EventEmitter {
         }
     }
     takeMalus() {
-        if (this.isFinished === true) {
+        if (this.isFinished) {
             return;
         }
         this.moveSide(constants_1.Direction.Up);
@@ -150,25 +157,38 @@ class BoardController extends events_1.EventEmitter {
         this.removeAllListeners();
     }
     run() {
+        this.currentBoard.clearAll();
+        clearInterval(this.timer);
+        this.prepare();
         this.draw();
         this.timer = setInterval(this.drop, this.speed);
     }
     execute(action, arg = null) {
-        if (this.isFinished === true) {
+        if (this.isFinished) {
             return;
         }
         action(arg);
         this.draw();
     }
+    stop() {
+        this.isFinished = true;
+        clearInterval(this.timer);
+        this.currentBoard.clearAll();
+        this.draw();
+    }
     init() {
         this.socket.on('init', () => {
-            console.log('Init game');
-            // TODO: Vérifier si c'est bien l'admin de la partie.
-            this.emit('start');
+            this.emit('start', this.socket.id);
         });
         this.socket.on('disconnect', () => {
-            console.log('disconnected: ', this.socket.id);
             this.freeBoard(this.socket.id);
+        });
+        this.socket.on('restart', () => {
+            this.emit('stop', this.socket.id);
+            this.emit('start', this.socket.id);
+        });
+        this.socket.on('stop', () => {
+            this.emit('stop', this.socket.id);
         });
         this.socket.on('down', () => {
             this.execute(this.moveDown);

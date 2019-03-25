@@ -48,7 +48,6 @@ class PieceFactory {
         const max: number = Object.keys(this.allPieces).length - 1;
         const index: number = this.random(min, max);
         const letter: string = Object.keys(this.allPieces)[index];
-        console.log('la lettre:: ', letter);
         return letter;
     }
 }

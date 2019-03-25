@@ -24,18 +24,11 @@ class BoardController extends EventEmitter {
 
     constructor(player:Player, board:Board, socket:SocketIO.Socket, pieces: string[]) {
         super();
+        this.timer = null;
         this.currentPlayer = player;
         this.currentBoard = board;
         this.socket = socket;
-        this.indexPiece = 0;
         this.pieces = pieces;
-        this.currentPiece = PieceFactory.createPiece(pieces[this.indexPiece]);
-        this.speed = 1000;
-        this.score = 0;
-        this.lines = 0;
-        this.level = 0;
-        this.isFinished = false;
-
         this.drop = this.drop.bind(this);
         this.moveDown = this.moveDown.bind(this);
         this.rotate = this.rotate.bind(this);
@@ -43,12 +36,15 @@ class BoardController extends EventEmitter {
         this.init();
     }
 
-    get board(): Board {
-        return this.currentBoard;
-    }
-
-    get player(): Player {
-        return this.currentPlayer;
+    private prepare() {
+        this.currentBoard.clearAll();
+        this.indexPiece = 0;
+        this.currentPiece = PieceFactory.createPiece(this.pieces[this.indexPiece]);
+        this.speed = 1000;
+        this.score = 0;
+        this.lines = 0;
+        this.level = 0;
+        this.isFinished = false;
     }
 
     private updateScore() {
@@ -96,12 +92,21 @@ class BoardController extends EventEmitter {
         this.place();
         const state = {
             spectre,
+            id: this.socket.id,
+            username: this.currentPlayer.username,
             grid: deepCopy(this.currentBoard.grid),
             score: this.score,
             level: this.level,
             pieces: this.getNextPieces(),
         };
         this.socket.emit('state', state);
+        this.socket
+            .to(this.currentPlayer.room)
+            .emit('spectre', {
+                spectre,
+                id: this.socket.id,
+                username: this.currentPlayer.username,
+            });
         this.currentBoard.clear(this.currentPiece);
     }
 
@@ -117,7 +122,7 @@ class BoardController extends EventEmitter {
 
     private checkLine() {
         for (let i = this.currentBoard.grid.length - 1; i >= 0; i -= 1) {
-            if (this.currentBoard.isFull(i) === true) {
+            if (this.currentBoard.isFull(i)) {
                 this.currentBoard.removeRowAt(i);
                 this.currentBoard.addEmptyRow();
                 this.addMalusToOther();
@@ -152,7 +157,7 @@ class BoardController extends EventEmitter {
     }
 
     public takeMalus() {
-        if (this.isFinished === true) {
+        if (this.isFinished) {
             return ;
         }
         this.moveSide(Direction.Up);
@@ -183,28 +188,44 @@ class BoardController extends EventEmitter {
     }
 
     public run() {
+        this.currentBoard.clearAll();
+        clearInterval(this.timer);
+        this.prepare();
         this.draw();
         this.timer = setInterval(this.drop, this.speed);
     }
 
     private execute(action:any, arg:any = null) {
-        if (this.isFinished === true) {
+        if (this.isFinished) {
             return ;
         }
         action(arg);
         this.draw();
     }
 
+    public stop() {
+        this.isFinished = true;
+        clearInterval(this.timer);
+        this.currentBoard.clearAll();
+        this.draw();
+    }
+
     private init() {
         this.socket.on('init', () => {
-            console.log('Init game');
-            // TODO: Vérifier si c'est bien l'admin de la partie.
-            this.emit('start');
+            this.emit('start', this.socket.id);
         });
 
         this.socket.on('disconnect', () => {
-            console.log('disconnected: ', this.socket.id);
             this.freeBoard(this.socket.id);
+        });
+
+        this.socket.on('restart', () => {
+            this.emit('stop', this.socket.id);
+            this.emit('start', this.socket.id);
+        });
+
+        this.socket.on('stop', () => {
+            this.emit('stop', this.socket.id);
         });
 
         this.socket.on('down', () => {
