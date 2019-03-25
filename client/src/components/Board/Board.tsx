@@ -18,6 +18,7 @@ const Board: React.SFC<BoardProps> = (props) => {
             <Row
               row={d}
               index={i}
+              key={i}
             />
           );
         })}

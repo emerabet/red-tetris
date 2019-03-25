@@ -14,6 +14,7 @@ interface SectionLeftProps {
   status: string;
   level: number;
   score: number;
+  play: () => void;
 }
 
 const SectionLeft: React.SFC<SectionLeftProps> = (props) => {
@@ -36,6 +37,7 @@ const SectionLeft: React.SFC<SectionLeftProps> = (props) => {
         />
         <AdminButton
           text={props.status}
+          play={props.play}
         />
       </div>
     </div>

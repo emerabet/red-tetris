@@ -7,7 +7,7 @@ storiesOf('Home', module)
         <Home
             room=""
             player=""
-            play={(_) => { return 'void'; }}
+            enterRoom={(_) => { return 'void'; }}
             handleChange={(_) => { return 'void'; }}
         />
     ))
@@ -15,7 +15,7 @@ storiesOf('Home', module)
         <Home
             room="my room"
             player="my name"
-            play={(_) => { return 'void'; }}
+            enterRoom={(_) => { return 'void'; }}
             handleChange={(_) => { return 'void'; }}
         />
     ));

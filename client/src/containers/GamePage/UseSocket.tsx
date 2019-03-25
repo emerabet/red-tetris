@@ -19,6 +19,14 @@ const UseSocket: React.SFC<Props> = (props) => {
     props.updateState(state);
   });
 
+  console.log("START TEST")
+  props.socket.on('spectre', (state:any) => {
+    console.log('SPECTRE', state);
+    // props.updateBoard(board.grid);
+    // props.updateState(state);
+  });
+  console.log("END TEST")
+
   return (<div></div>);
 };
 

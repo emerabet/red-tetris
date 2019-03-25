@@ -10,5 +10,6 @@ storiesOf('SectionLeft', module)
          status="start"
          level={2}
          score={8}
+         play={() => 'void' }
       />
    ));

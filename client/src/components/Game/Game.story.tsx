@@ -47,6 +47,7 @@ storiesOf('Game', module)
       }]}
       status="start"
       pieces="ZOL"
+      play={() => 'void'}
     />
   )).add('game', () => (
     <Game
@@ -92,6 +93,7 @@ storiesOf('Game', module)
       }]}
       status="restart"
       pieces="ZOL"
+      play={() => 'void'}
     />
   )).add('malus', () => (
     <Game
@@ -137,5 +139,6 @@ storiesOf('Game', module)
       }]}
       status="start"
       pieces="ZOL"
+      play={() => 'void' }
     />
   ));

@@ -6,5 +6,6 @@ storiesOf('AdminButton', module)
    .add('normal', () => (
       <AdminButton
         text="start"
+        play={() => 'void' }
       />
    ));

@@ -24,6 +24,7 @@ interface GameProps {
   level: number;
   score: number;
   pieces: string;
+  play: () => void;
 }
 
 const Game: React.SFC<GameProps> = (props) => {
@@ -38,6 +39,7 @@ const Game: React.SFC<GameProps> = (props) => {
         status={props.status}
         level={props.level}
         score={props.score}
+        play={props.play}
       />}
       {
         dim.outerWidth >= 750 ?
@@ -60,6 +62,7 @@ const Game: React.SFC<GameProps> = (props) => {
             />
             <AdminButton
           text={props.status}
+          play={props.play}
         />
           </div>}
         <div className="flexColumnGame">
@@ -100,6 +103,7 @@ const Game: React.SFC<GameProps> = (props) => {
         <div className="admBtnSmall">
       <AdminButton
       text={props.status}
+      play={props.play}
     />
     </div>
       }

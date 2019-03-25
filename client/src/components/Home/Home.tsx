@@ -7,7 +7,7 @@ import './style.css';
 interface HomeProps {
   room: string;
   player: string;
-  play: (event: any) => {};
+  enterRoom: (event: any) => {};
   handleChange: (event: any) => void;
 
 }
@@ -39,7 +39,7 @@ const Home: React.SFC<HomeProps> = (props) => {
     <div className="mainDivHome">
     <RedTetris additionalClassName={dim.outerWidth > 480 ? '' :
     dim.outerWidth > 340 ? 'medium' : 'small' }/>
-      <form className="formFlex" onSubmit={props.play}>
+      <form className="formFlex" onSubmit={props.enterRoom}>
         {props.room !== '' && <SquareLabel label="room" additionalClassName="big" />}
         <div className="namer">
           <div className="namer-input">

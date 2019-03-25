@@ -73,7 +73,7 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
     },
     [socket]);
 
-  const play = async (event: any) => {
+  const enterRoom = async (event: any) => {
     event.preventDefault();
     await props.resetGame();
     await props.startGame(room, player);
@@ -86,7 +86,7 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
     });
     setStarted(true);
     setSocket(s);
-    s.emit('init');
+    // s.emit('init');
     props.history.push(`/#${room}[${player}]`);
   };
 
@@ -98,15 +98,19 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
     }
   }
 
+  const play = () => {
+    socket.emit('init');
+  };
+
   return (
     <div>
-      {console.log('sdfsdg', props.state)}
+      {/* {console.log('sdfsdg', props.state)} */}
       {!started
         ?
         <Home
           room={room}
           player={player}
-          play={play}
+          enterRoom={enterRoom}
           handleChange={handleChange}
         />
         :
@@ -121,6 +125,7 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
             oponents={props.oponents}
             status={props.status}
             pieces={props.state.pieces}
+            play={play}
           />
           <UseSocket socket={socket} />
         </div>
