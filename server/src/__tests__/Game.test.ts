@@ -1,7 +1,6 @@
 import Game from './../Game';
 import BoardController from './../BoardController';
-import socketIo from 'socket.io';
-import { GameState } from '../constants';
+import { GameState } from './../constants';
 
 it('create game instance with the rigth name', () => {
     const game: Game = new Game('RoomName');

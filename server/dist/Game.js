@@ -71,6 +71,7 @@ class Game extends events_1.EventEmitter {
     }
     createBoard(height, width, socket, username) {
         if (this.status === constants_1.GameState.Opened) {
+            socket.join(this.room);
             const role = this.players.size === 0 ? constants_1.PlayerType.Admin : constants_1.PlayerType.Player;
             const player = new Player_1.default(socket.id, username, this.room, role);
             this.players.set(socket.id, player);

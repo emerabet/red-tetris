@@ -146,6 +146,7 @@ class BoardController extends events_1.EventEmitter {
     }
     freeBoard(socketId) {
         clearInterval(this.timer);
+        this.socket.leave(this.currentPlayer.room);
         this.socket.removeAllListeners();
         delete this.socket;
         delete this.timer;
