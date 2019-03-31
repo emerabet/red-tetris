@@ -11,8 +11,10 @@ class GameServer {
     private server:http.Server;
     private io:SocketIO.Server;
     private games:Map<string, Game>;
+    private port: number;
 
-    constructor() {
+    constructor(port: number) {
+        this.port = port;
         this.app = express();
         this.server = http.createServer(this.app);
         this.io = socketIo(this.server, { pingTimeout: 60000 });
@@ -38,13 +40,11 @@ class GameServer {
                     this.games.delete(room);
                 });
             }
-            const game = this.games.get(room);
-            if (game) {
-                game.createBoard(20, 10, socket, username);
-            }
+            const game = this.games.get(room) as Game;
+            game.createBoard(20, 10, socket, username);
         });
 
-        await this.server.listen(4000);
+        await this.server.listen(this.port);
         console.log('listening on *:4000');
     }
 
