@@ -84,6 +84,7 @@ class Game extends EventEmitter {
                        socket:SocketIO.Socket,
                        username: string): void {
         if (this.status === GameState.Opened) {
+            socket.join(this.room);
             const role: number = this.players.size === 0 ? PlayerType.Admin : PlayerType.Player;
             const player = new Player(socket.id, username, this.room, role);
             this.players.set(socket.id, player);
