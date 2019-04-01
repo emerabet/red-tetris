@@ -17,20 +17,7 @@ const mapStateToProps = (state: StateType<typeof rootReducer>) => ({
   piece: state.game.piece,
   pieceIndex: state.game.pieceIndex,
   position: state.game.position,
-  oponents: [{
-    name: 'oponent 1',
-    game: '0123456789',
-  }, {
-    name: 'oponent 1',
-    game: '0123456789',
-  }, {
-    name: 'oponent 1',
-    game: '0123456789',
-  }, {
-    name: 'oponent 1',
-    game: '0123456789',
-  }],
-  status: 'start',
+  spectres: state.game.spectres,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

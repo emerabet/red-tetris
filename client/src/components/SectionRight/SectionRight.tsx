@@ -6,12 +6,12 @@ import * as utils from '../../Utils/constants';
 import SquareLabel from '../Labels';
 import Oponent from '../Oponent';
 
-import { OponentInterface } from '../../types/gameTypes';
+import { SpectreI } from '../../types/gameTypes';
 
 import './style.css';
 
 interface SectionRightProps {
-  oponents: OponentInterface[];
+  spectres: SpectreI[];
   pieces: string;
 }
 
@@ -31,8 +31,8 @@ const SectionRight: React.SFC<SectionRightProps> = (props) => {
         />
         <div className="opponents">
           {
-            props.oponents.map((oponent, i) => {
-              return <Oponent key={`op_${i}`} oponent={oponent} />;
+            props.spectres.map((spectre, i) => {
+              return <Oponent key={`op_${i}`} spectre={spectre} />;
             })
           }
         </div>

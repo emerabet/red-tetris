@@ -5,21 +5,17 @@ import SectionRight from './SectionRight';
 storiesOf('SectionRight', module)
   .add('4 other players', () => (
     <SectionRight
-      oponents={[{
-        name: 'oponenetetete',
-        game: '0123456789',
-      },
-      {
-        name: 'booottt',
-        game: '4444333345',
-      },
-      {
-        name: 'pop',
-        game: '88AAJJIIIJ',
+    spectres={
+      [{
+        id: 'oponent 1',
+        spectre: '0123456789',
+        username: 'aaaaa',
       }, {
-        name: 'bobo',
-        game: '0040565600',
-      }]}
+        id: 'oponent 2',
+        spectre: '0123456789',
+        username: 'bbb',
+      }]
+    }
       pieces={'ZOL'}
     />
   ));

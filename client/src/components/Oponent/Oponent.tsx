@@ -1,16 +1,16 @@
 import React from 'react';
 import SquareLabel from '../Labels';
 
-import { OponentInterface } from '../../types/gameTypes';
+import { SpectreI } from '../../types/gameTypes';
 
 import './style.css';
 
 interface OponentProps {
-  oponent: OponentInterface;
+  spectre: SpectreI;
 }
 
 const Oponent: React.SFC<OponentProps> = (props) => {
-  const game: string[] = props.oponent.game.split('');
+  const game: string[] = props.spectre.spectre.split('');
   return (
     <div className="opponentFlex">
       <div className="opponent">
@@ -23,7 +23,7 @@ const Oponent: React.SFC<OponentProps> = (props) => {
         }
       </div>
       <SquareLabel
-        label={props.oponent.name}
+        label={props.spectre.id}
         white
         additionalClassName="small"
       />

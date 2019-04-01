@@ -5,7 +5,8 @@ import Game from '../Game';
 
 it('renders correctly with defaults', () => {
   const game = renderer.create(<Game
-    level={1}
+      started={true}
+      level={1}
       score={999}
       board={[[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -30,22 +31,18 @@ it('renders correctly with defaults', () => {
       row={[]}
       room="SUPERROOM"
       player="BIG BOSS"
-      oponents={[{
-        name: 'oponent 1',
-        game: '0123456789',
-      },
-      {
-        name: 'booo',
-        game: '4444333345',
-      },
-      {
-        name: 'pop',
-        game: '88AAJJIIIJ',
-      }, {
-        name: 'bobo',
-        game: '0040565600',
-      }]}
-      status="start"
+      spectres={
+        [{
+          id: 'oponent 1',
+          spectre: '0123456789',
+          username: 'aaaaa',
+        }, {
+          id: 'oponent 2',
+          spectre: '0123456789',
+          username: 'bbb',
+        }]
+      }
+      play={() => {}}
       pieces="ZOL" />).toJSON();
   expect(game).toMatchSnapshot();
 });

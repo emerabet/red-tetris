@@ -10,7 +10,7 @@ import NextPieces from '../NextPieces';
 import Oponent from '../Oponent';
 import Score from '../Score';
 import { useWindowSize } from '../../effects/useWindowSize';
-import { OponentInterface } from '../../types/gameTypes';
+import { SpectreI } from '../../types/gameTypes';
 
 import './style.css';
 
@@ -19,12 +19,12 @@ interface GameProps {
   row: number[];
   room: string;
   player: string;
-  oponents: OponentInterface[];
-  status: string;
+  spectres: SpectreI[];
   level: number;
   score: number;
   pieces: string;
   play: () => void;
+  started: boolean;
 }
 
 const Game: React.SFC<GameProps> = (props) => {
@@ -36,7 +36,7 @@ const Game: React.SFC<GameProps> = (props) => {
       <SectionLeft
         room={props.room}
         player={props.player}
-        status={props.status}
+        status={props.started ? 'restart' : 'start'}
         level={props.level}
         score={props.score}
         play={props.play}
@@ -61,7 +61,7 @@ const Game: React.SFC<GameProps> = (props) => {
               content={props.player}
             />
             <AdminButton
-          text={props.status}
+          text={props.started ? 'restart' : 'start'}
           play={props.play}
         />
           </div>}
@@ -90,28 +90,27 @@ const Game: React.SFC<GameProps> = (props) => {
         <NextPieces
           vertical
           pieces={props.pieces}
-        /></div>}
-        </div>
-        <div className="opponentsNoWrap">
-          {
-            props.oponents.map((oponent, i) => {
-              return <Oponent key={`op_${i}`} oponent={oponent} />;
-            })
-          }
-        </div>
-        {dim.outerWidth < 535 &&
+        />
         <div className="admBtnSmall">
       <AdminButton
-      text={props.status}
+      text={props.started ? 'restart' : 'start'}
       play={props.play}
     />
     </div>
-      }
+        </div>}
+        </div>
+        <div className="opponentsNoWrap">
+          {
+            props.spectres.map((spectre, i) => {
+              return <Oponent key={`op_${i}`} spectre={spectre} />;
+            })
+          }
+        </div>
           </div>
       }
       {dim.outerWidth > 750 &&
       <SectionRight
-        oponents={props.oponents}
+        spectres={props.spectres}
         pieces={props.pieces}
       />
       }

@@ -20,11 +20,12 @@ storiesOf('GamePage', module)
       startGame={() => { }}
       endGame={() => { }}
       resetGame={() => { }}
-      status="start"
-      oponents={
+      started = {true}
+      spectres={
         [{
-          name: 'oponent 1',
-          game: '0123456789',
+          id: 'oponent 1',
+          spectre: '0123456789',
+          username: 'aaaaa',
         }]
       }
     />

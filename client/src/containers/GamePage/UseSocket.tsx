@@ -3,13 +3,14 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { StateType } from 'typesafe-actions';
 import rootReducer from '../../reducers/index';
-import { updateBoard, updateState } from '../../actions/gameActions';
-import { StateBoardI } from '../../types/gameTypes';
+import { updateBoard, updateState, updateSpectre } from '../../actions/gameActions';
+import { StateBoardI, SpectreI } from '../../types/gameTypes';
 
 interface Props {
   socket: any;
   updateBoard: Function;
   updateState: Function;
+  updateSpectre: Function;
 }
 
 const UseSocket: React.SFC<Props> = (props) => {
@@ -20,10 +21,11 @@ const UseSocket: React.SFC<Props> = (props) => {
   });
 
   console.log("START TEST")
-  props.socket.on('spectre', (spectre:any) => {
+  props.socket.on('spectre', (spectre:SpectreI) => {
     console.log('SPECTRE', spectre);
     // props.updateBoard(board.grid);
     // props.updateState(state);
+    props.updateSpectre(spectre);
   });
   console.log("END TEST")
 
@@ -37,6 +39,7 @@ const mapStateToProps = (state: StateType<typeof rootReducer>) => ({
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   updateBoard: (board: number[][]) => dispatch(updateBoard(board)),
   updateState: (state:StateBoardI) => dispatch(updateState(state)),
+  updateSpectre: (spectre:SpectreI) => dispatch(updateSpectre(spectre)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UseSocket);

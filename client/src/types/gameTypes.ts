@@ -17,6 +17,7 @@ export interface GameState {
   pieceIndex: number;
   position: Position;
   state: StateBoardI;
+  spectres: SpectreI[];
 }
 
 export interface OponentInterface {
@@ -30,4 +31,10 @@ export interface StateBoardI {
   level:number;
   spectre:string;
   pieces:string;
+}
+
+export interface SpectreI {
+  id: string;
+  spectre: string;
+  username?: string;
 }

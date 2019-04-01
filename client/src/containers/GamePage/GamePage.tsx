@@ -3,21 +3,20 @@ import socketIOClient from 'socket.io-client';
 import UseSocket from './UseSocket';
 import Home from '../../components/Home';
 import Game from '../../components/Game';
-import { OponentInterface, StateBoardI } from '../../types/gameTypes';
+import { SpectreI, StateBoardI } from '../../types/gameTypes';
 import './style.css';
 
 interface GamePageProps {
   nagivation: any;
   history: any;
   socket: SocketIOClient.Socket;
-  /*started: boolean;*/
+  started: boolean;
   state: StateBoardI;
   board: number[][];
   startGame: Function;
   endGame: Function;
   resetGame: Function;
-  oponents: OponentInterface[];
-  status: string;
+  spectres: SpectreI[];
 }
 
 const GamePage: React.SFC<GamePageProps> = (props) => {
@@ -122,10 +121,10 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
             row={row}
             room={room}
             player={player}
-            oponents={props.oponents}
-            status={props.status}
+            spectres={props.spectres}
             pieces={props.state.pieces}
             play={play}
+            started={props.started}
           />
           <UseSocket socket={socket} />
         </div>
