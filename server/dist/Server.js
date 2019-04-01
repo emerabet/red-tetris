@@ -45,7 +45,7 @@ class GameServer {
                 game.createBoard(20, 10, socket, username);
             });
             yield this.server.listen(this.port);
-            console.log('listening on *:4000');
+            console.log(`listening on *:${this.port}`);
         });
     }
     gamesCount() {
