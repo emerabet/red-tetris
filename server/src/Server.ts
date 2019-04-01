@@ -45,7 +45,7 @@ class GameServer {
         });
 
         await this.server.listen(this.port);
-        console.log('listening on *:4000');
+        console.log(`listening on *:${this.port}`);
     }
 
     public gamesCount(): number {

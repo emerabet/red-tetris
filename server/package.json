@@ -18,9 +18,9 @@
     ]
   },
   "scripts": {
-    "test": "NODE_ENV=test jest",
-    "coverage": "NODE_ENV=test jest --coverage",
-    "dev": "concurrently -k -n \"Typescript,Node\" -p \"[{name}]\" -c \"blue, green\" \"tsc --watch\" \"nodemon --inspect dist/index.js\"",
+    "test": "PORT=4000 jest",
+    "coverage": "PORT=4000 jest --coverage",
+    "dev": "concurrently -k -n \"Typescript,Node\" -p \"[{name}]\" -c \"blue, green\" \"tsc --watch\" \"PORT=4000 nodemon --inspect dist/index.js\"",
     "lint": "tslint --project tslint.json 'src/**/*.{ts,tsx}'"
   },
   "devDependencies": {
