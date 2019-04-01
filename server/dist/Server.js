@@ -45,6 +45,7 @@ class GameServer {
                 game.createBoard(20, 10, socket, username);
             });
             yield this.server.listen(this.port);
+            console.log(process.env.NODE_ENV);
             console.log('listening on *:4000');
         });
     }

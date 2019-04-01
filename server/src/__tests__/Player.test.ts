@@ -6,6 +6,7 @@ it('create Player instance', () => {
     expect(player.id).toBeDefined();
     expect(player.username).toBeDefined();
     expect(player.room).toBeDefined();
+    expect(player.username).toEqual('pseudo');
 });
 
 it('should return true to isAdmin', () => {

@@ -171,7 +171,6 @@ describe('socket init', () => {
     }));
     beforeEach((done) => {
         if (ser.gamesCount() === 0) {
-            console.log('before: ', ser.gamesCount());
             sender = socket_io_client_1.default('http://localhost:4000/', {
                 transports: ['websocket'],
                 query: {
@@ -474,13 +473,11 @@ describe('socket left', () => {
     let sender;
     const ser = new Server_1.default(4000);
     beforeAll((done) => __awaiter(this, void 0, void 0, function* () {
-        // start the io server
         yield ser.start();
         done();
     }));
     beforeEach((done) => {
         if (ser.gamesCount() === 0) {
-            // connect two io clients
             sender = socket_io_client_1.default('http://localhost:4000/', {
                 transports: ['websocket'],
                 query: {
@@ -496,7 +493,6 @@ describe('socket left', () => {
         }
     });
     afterEach((done) => {
-        // disconnect io clients after each test
         sender.disconnect();
         done();
     });
@@ -531,13 +527,11 @@ describe('socket right', () => {
     let sender;
     const ser = new Server_1.default(4000);
     beforeAll((done) => __awaiter(this, void 0, void 0, function* () {
-        // start the io server
         yield ser.start();
         done();
     }));
     beforeEach((done) => {
         if (ser.gamesCount() === 0) {
-            // connect two io clients
             sender = socket_io_client_1.default('http://localhost:4000/', {
                 transports: ['websocket'],
                 query: {
@@ -553,7 +547,6 @@ describe('socket right', () => {
         }
     });
     afterEach((done) => {
-        // disconnect io clients after each test
         sender.disconnect();
         done();
     });
@@ -588,13 +581,11 @@ describe('socket disconnect', () => {
     let sender;
     const ser = new Server_1.default(4000);
     beforeAll((done) => __awaiter(this, void 0, void 0, function* () {
-        // start the io server
         yield ser.start();
         done();
     }));
     beforeEach((done) => {
         if (ser.gamesCount() === 0) {
-            // connect two io clients
             sender = socket_io_client_1.default('http://localhost:4000/', {
                 transports: ['websocket'],
                 query: {
@@ -637,7 +628,6 @@ describe('check line', () => {
     let sender;
     const ser = new Server_1.default(4000);
     beforeAll((done) => __awaiter(this, void 0, void 0, function* () {
-        // start the io server
         yield ser.start();
         done();
     }));
@@ -698,13 +688,11 @@ describe('isFinished', () => {
     let sender;
     const ser = new Server_1.default(4000);
     beforeAll((done) => __awaiter(this, void 0, void 0, function* () {
-        // start the io server
         yield ser.start();
         done();
     }));
     beforeEach((done) => {
         if (ser.gamesCount() === 0) {
-            // connect two io clients
             sender = socket_io_client_1.default('http://localhost:4000/', {
                 transports: ['websocket'],
                 query: {

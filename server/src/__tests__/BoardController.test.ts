@@ -573,14 +573,12 @@ describe('socket left', () => {
     const ser =  new GameServer(4000);
 
     beforeAll(async (done) => {
-        // start the io server
         await ser.start();
         done();
     });
 
     beforeEach((done) => {
         if (ser.gamesCount() === 0) {
-            // connect two io clients
             sender = io('http://localhost:4000/', {
                 transports: ['websocket'],
                 query: {
@@ -597,7 +595,6 @@ describe('socket left', () => {
     });
 
     afterEach((done) => {
-        // disconnect io clients after each test
         sender.disconnect();
         done();
     });
@@ -638,14 +635,12 @@ describe('socket right', () => {
     const ser =  new GameServer(4000);
 
     beforeAll(async (done) => {
-        // start the io server
         await ser.start();
         done();
     });
 
     beforeEach((done) => {
         if (ser.gamesCount() === 0) {
-            // connect two io clients
             sender = io('http://localhost:4000/', {
                 transports: ['websocket'],
                 query: {
@@ -662,7 +657,6 @@ describe('socket right', () => {
     });
 
     afterEach((done) => {
-        // disconnect io clients after each test
         sender.disconnect();
         done();
     });
@@ -703,14 +697,12 @@ describe('socket disconnect', () => {
     const ser =  new GameServer(4000);
 
     beforeAll(async (done) => {
-        // start the io server
         await ser.start();
         done();
     });
 
     beforeEach((done) => {
         if (ser.gamesCount() === 0) {
-            // connect two io clients
             sender = io('http://localhost:4000/', {
                 transports: ['websocket'],
                 query: {
@@ -759,7 +751,6 @@ describe('check line', () => {
     const ser =  new GameServer(4000);
 
     beforeAll(async (done) => {
-        // start the io server
         await ser.start();
         done();
     });
@@ -834,14 +825,12 @@ describe('isFinished', () => {
     const ser = new GameServer(4000);
 
     beforeAll(async (done) => {
-        // start the io server
         await ser.start();
         done();
     });
 
     beforeEach((done) => {
         if (ser.gamesCount() === 0) {
-            // connect two io clients
             sender = io('http://localhost:4000/', {
                 transports: ['websocket'],
                 query: {

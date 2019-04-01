@@ -55,10 +55,19 @@ class BoardController extends events_1.EventEmitter {
         this.indexPiece += 1;
         this.currentPiece = PieceFactory_1.default.createPiece(this.pieces[this.indexPiece]);
         if (this.check()) {
-            this.place();
-            clearInterval(this.timer);
-            this.isFinished = true;
+            this.endOfGame();
         }
+    }
+    endOfGame() {
+        this.place();
+        clearInterval(this.timer);
+        this.isFinished = true;
+        const data = {
+            id: this.currentPlayer.id,
+            username: this.currentPlayer.username,
+        };
+        this.socket.emit('gameOver', data);
+        this.socket.to(this.currentPlayer.room).emit('gameOver', data);
     }
     getNextPieces() {
         let str = '';
@@ -182,6 +191,10 @@ class BoardController extends events_1.EventEmitter {
             this.emit('start', this.socket.id);
         });
         this.socket.on('disconnect', () => {
+            this.socket.to(this.currentPlayer.room).emit('gameOver', {
+                id: this.currentPlayer.id,
+                username: this.currentPlayer.username,
+            });
             this.freeBoard(this.socket.id);
         });
         this.socket.on('restart', () => {

@@ -18,8 +18,8 @@
     ]
   },
   "scripts": {
-    "test": "jest",
-    "coverage": "jest --coverage",
+    "test": "NODE_ENV=test jest",
+    "coverage": "NODE_ENV=test jest --coverage",
     "dev": "concurrently -k -n \"Typescript,Node\" -p \"[{name}]\" -c \"blue, green\" \"tsc --watch\" \"nodemon --inspect dist/index.js\"",
     "lint": "tslint --project tslint.json 'src/**/*.{ts,tsx}'"
   },
