@@ -171,7 +171,6 @@ describe('socket init', () => {
     }));
     beforeEach((done) => {
         if (ser.gamesCount() === 0) {
-            console.log('before: ', ser.gamesCount());
             sender = socket_io_client_1.default('http://localhost:4000/', {
                 transports: ['websocket'],
                 query: {

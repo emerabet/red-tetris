@@ -28,7 +28,6 @@ describe('Server', () => {
         done();
     }));
     beforeEach((done) => {
-        // connect two io clients
         player1 = socket_io_client_1.default('http://localhost:5000/', {
             transports: ['websocket'],
             query: {
@@ -38,19 +37,16 @@ describe('Server', () => {
         });
         if (!player1.connected) {
             player1.on('connect', () => {
-                console.log('PLAYER 1 CONNECTED');
                 done();
             });
         }
     });
     afterEach((done) => {
-        // disconnect io clients after each test
         player1.disconnect();
         done();
     });
     describe('ttttt', () => {
         beforeEach((done) => {
-            // connect two io clients
             player2 = socket_io_client_1.default('http://localhost:5000/', {
                 transports: ['websocket'],
                 query: {
@@ -60,13 +56,11 @@ describe('Server', () => {
             });
             if (!player2.connected) {
                 player2.on('connect', () => {
-                    console.log('PLAYER 2 CONNECTED');
                     done();
                 });
             }
         });
         afterEach((done) => {
-            // disconnect io clients after each test
             player2.disconnect();
             done();
         });
