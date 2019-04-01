@@ -15,19 +15,12 @@ interface Props {
 
 const UseSocket: React.SFC<Props> = (props) => {
   props.socket.on('state', (state: StateBoardI) => {
-    console.log('STATE', state);
-    // props.updateBoard(board.grid);
     props.updateState(state);
   });
 
-  console.log("START TEST")
   props.socket.on('spectre', (spectre:SpectreI) => {
-    console.log('SPECTRE', spectre);
-    // props.updateBoard(board.grid);
-    // props.updateState(state);
     props.updateSpectre(spectre);
   });
-  console.log("END TEST")
 
   return (<div></div>);
 };

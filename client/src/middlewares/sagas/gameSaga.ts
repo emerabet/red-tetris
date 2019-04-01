@@ -102,14 +102,10 @@ export function* moveDown(action: any) {
 }
 
 function* gameSaga() {
-  //  while (true) {
   yield takeLatest(getType(gameActions.START_SAGA), startGame);
   yield takeLatest(getType(gameActions.END_SAGA), endGame);
   yield takeEvery(getType(gameActions.ROTATE_SAGA), rotate);
   yield takeEvery(getType(gameActions.MOVE_DOWN_SAGA), moveDown);
-  // yield take(actions.END_SAGA);
-  // console.log("TOOK")
-  //  }
 }
 
 export default gameSaga;

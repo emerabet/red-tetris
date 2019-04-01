@@ -103,7 +103,6 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
 
   return (
     <div>
-      {/* {console.log('sdfsdg', props.state)} */}
       {!started
         ?
         <Home

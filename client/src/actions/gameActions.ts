@@ -21,15 +21,12 @@ export const reset = () => {
   };
 };
 
-export const startGame = (room: String, player: String,
-  /*, board: number[][], piece: number[][][]*/) => {
+export const startGame = (room: String, player: String) => {
   return {
     type: getType(START),
     payload: {
       room,
       player,
-      // board: board,
-      // piece: piece,
     },
   };
 };

@@ -44,7 +44,7 @@ class HomePage extends Component<HomePageProps> {
     return (
       <div>
         test home page
-                <header className="App-header">
+          <header className="App-header">
           <Button handleClick={this.init}>init</Button>
           <Button handleClick={this.down}>down</Button>
           <Button handleClick={this.up}>up</Button>

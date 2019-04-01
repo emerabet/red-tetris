@@ -23,36 +23,20 @@ const initialState: GameState = {
   spectres: [],
 };
 
-export default function (state: GameState = initialState, action: any /*GameAction*/) {
+export default function (state: GameState = initialState, action: any) {
   switch (action.type) {
     case getType(gameActions.RESET):
-      console.log("REDUCER RESET")
       return initialState;
     case getType(gameActions.START):
-      console.log("REDUCER START")
       return {
         ...state,
-        // started: true,
         ...action.payload,
       };
     case getType(gameActions.END):
-      console.log("REDUCER END")
       return {
         ...state,
         started: false,
       };
-    // case getType(gameActions.ROTATE):
-    //     console.log("REDUCER ROTATE")
-    //     return {
-    //         ...state,
-    //         ...action.payload
-    //     };
-    // case getType(gameActions.MOVE_DOWN):
-    //     console.log("REDUCER MOVE DOWN")
-    //     return {
-    //         ...state,
-    //         ...action.payload
-    //     };
     case getType(gameActions.UPDATE_BOARD):
       return {
         ...state,
