@@ -43,7 +43,7 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
       if (rRoom !== null && rUsername !== null) {
         setRoom(rRoom[1]);
         setPlayer(rUsername[1]);
-        enterRoom();
+        enterRoomUrl(rRoom[1], rUsername[1]);
       }
     }
   }, []);
@@ -106,25 +106,22 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
     });
     setStarted(true);
     setSocket(s);
-    // s.emit('init');
     props.history.push(`/#${room}[${player}]`);
   };
 
   const enterRoomUrl = async (r: string, p: string) => {
-    event.preventDefault();
     await props.resetGame();
     await props.startGame(room, player);
     const s = socketIOClient('http://localhost:4000', {
       transports: ['websocket'],
       query: {
-        room,
-        username: player,
+        r,
+        username: p,
       },
     });
     setStarted(true);
     setSocket(s);
-    // s.emit('init');
-    props.history.push(`/#${room}[${player}]`);
+    props.history.push(`/#${r}[${p}]`);
   };
 
   function handleChange(event: any) {
