@@ -203,6 +203,7 @@ it('should clear player/board but keep listener reference', () => {
     const boards = Reflect.get(game, 'boards') as Map<string, BoardController>;
     const bc:BoardController = boards.get('socketId') as BoardController;
 
+    game.on('test', () => { });
     bc.emit('free', 'socketId');
 
     expect(boards.has('socketId')).toEqual(false);
