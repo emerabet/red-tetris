@@ -36,8 +36,11 @@ class GameServer {
             if (!this.games.has(room)) {
                 const game = new Game(room);
                 this.games.set(room, game);
-                game.on('freeGame', (room) => {
+                game.on('free_game', (room) => {
                     this.games.delete(room);
+                });
+                game.on('update_player_count', (count) => {
+                    this.io.in(room).emit('update_player_count', count);
                 });
             }
             const game = this.games.get(room) as Game;
