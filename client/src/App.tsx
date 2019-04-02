@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch, Redirect, BrowserRouter } from 'react-router-dom';
+import { Route, Switch, Redirect, BrowserRouter, HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import configureStore from './configureStore';
@@ -17,7 +17,8 @@ class App extends Component<AppProps> {
     const routes = (
       <Switch>
         {/* <Route path="/" exact component={HomePage} /> */}
-        <Route path="/" exact component={GamePage} />
+        {/* <Route path="/" exact component={GamePage} /> */}
+        <Route path="/:id" exact component={GamePage} />
         <Redirect from="/" to="/" />
       </Switch>
     );
@@ -26,9 +27,9 @@ class App extends Component<AppProps> {
       <div className="App">
       <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
-        <BrowserRouter>
+        <HashRouter basename="/" hashType="noslash">
           {routes}
-        </BrowserRouter>
+        </HashRouter>
         </PersistGate>
         </Provider>
       </div>
