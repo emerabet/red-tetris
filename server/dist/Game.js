@@ -44,6 +44,7 @@ class Game extends events_1.EventEmitter {
                 this.boards.forEach((value, key) => {
                     value.stop();
                 });
+                this.status = constants_1.GameState.Opened;
             }
         });
         board.on('malus', (socketId) => {
@@ -65,6 +66,7 @@ class Game extends events_1.EventEmitter {
                 this.pieces.length = 0;
                 delete this.pieces;
                 this.emit('freeGame', this.room);
+                this.emit('update_player_count', 'couuuuunnttt 0');
                 this.removeAllListeners();
             }
         });

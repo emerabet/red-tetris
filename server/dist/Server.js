@@ -40,6 +40,9 @@ class GameServer {
                     game.on('freeGame', (room) => {
                         this.games.delete(room);
                     });
+                    game.on('update_player_count', (count) => {
+                        // Emit to all member of room the count of players
+                    });
                 }
                 const game = this.games.get(room);
                 game.createBoard(20, 10, socket, username);

@@ -50,6 +50,7 @@ class Game extends EventEmitter {
                 this.boards.forEach((value, key) => {
                     value.stop();
                 });
+                this.status = GameState.Opened;
             }
         });
 
@@ -73,7 +74,8 @@ class Game extends EventEmitter {
             if (this.boards.size === 0) {
                 this.pieces.length = 0;
                 delete this.pieces;
-                this.emit('freeGame', this.room);
+                this.emit('free_game', this.room);
+                this.emit('update_player_count', this.players.size);
                 this.removeAllListeners();
             }
         });
@@ -94,6 +96,7 @@ class Game extends EventEmitter {
                 board,
                 socket,
                 this.pieces);
+            this.emit('update_player_count', this.players.size);
             this.initListeners(boardController);
             this.boards.set(socket.id, boardController);
         }

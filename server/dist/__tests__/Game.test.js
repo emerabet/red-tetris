@@ -93,11 +93,12 @@ it('should stop the game for every players', () => {
     const boards = Reflect.get(game, 'boards');
     const bc = boards.get('socketId');
     bc.stop = jest.fn().mockImplementation();
-    Object.defineProperty(game, 'status', { value: constants_1.GameState.OnGoing });
+    Object.defineProperty(game, 'status', { value: constants_1.GameState.OnGoing, writable: true });
     bc.emit('stop', 'wrongId');
     expect(bc.stop).toHaveBeenCalledTimes(0);
     bc.emit('stop', 'socketId');
     expect(bc.stop).toHaveBeenCalledTimes(1);
+    expect(Reflect.get(game, 'status')).toEqual(constants_1.GameState.Opened);
 });
 it('should execute takeMalus function on malus event', () => {
     const game = new Game_1.default('RoomName');

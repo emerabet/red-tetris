@@ -104,11 +104,12 @@ it('should stop the game for every players', () => {
     const bc:BoardController = boards.get('socketId') as BoardController;
     bc.stop = jest.fn().mockImplementation();
 
-    Object.defineProperty(game, 'status', { value: GameState.OnGoing });
+    Object.defineProperty(game, 'status', { value: GameState.OnGoing, writable: true });
     bc.emit('stop', 'wrongId');
     expect(bc.stop).toHaveBeenCalledTimes(0);
     bc.emit('stop', 'socketId');
     expect(bc.stop).toHaveBeenCalledTimes(1);
+    expect(Reflect.get(game, 'status')).toEqual(GameState.Opened);
 });
 
 it('should execute takeMalus function on malus event', () => {
@@ -175,11 +176,9 @@ it('should clear player/board/listeners reference', () => {
     game.createBoard(8, 10, socket, 'playerName');
     const boards = Reflect.get(game, 'boards') as Map<string, BoardController>;
     const bc:BoardController = boards.get('socketId') as BoardController;
-    game.on('test', () => { });
     bc.emit('free', 'socketId');
     expect(boards.has('socketId')).toEqual(false);
     expect(Reflect.has(game, 'pieces')).toEqual(false);
-    expect(game.emit).toHaveBeenCalledTimes(1);
     expect(game.eventNames().length).toEqual(0);
 });
 
@@ -204,11 +203,9 @@ it('should clear player/board but keep listener reference', () => {
     const boards = Reflect.get(game, 'boards') as Map<string, BoardController>;
     const bc:BoardController = boards.get('socketId') as BoardController;
 
-    game.on('test', () => { });
     bc.emit('free', 'socketId');
 
     expect(boards.has('socketId')).toEqual(false);
     expect(Reflect.has(game, 'pieces')).toEqual(true);
-    expect(game.emit).toHaveBeenCalledTimes(0);
     expect(game.eventNames().length).toEqual(1);
 });
