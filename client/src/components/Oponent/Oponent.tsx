@@ -23,7 +23,7 @@ const Oponent: React.SFC<OponentProps> = (props) => {
         }
       </div>
       <SquareLabel
-        label={props.spectre.id}
+        label={props.spectre.username}
         white
         additionalClassName="small"
       />

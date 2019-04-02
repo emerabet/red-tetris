@@ -18,6 +18,7 @@ class App extends Component<AppProps> {
       <Switch>
         {/* <Route path="/" exact component={HomePage} /> */}
         {/* <Route path="/" exact component={GamePage} /> */}
+        <Route path="/" exact component={GamePage} />
         <Route path="/:id" exact component={GamePage} />
         <Redirect from="/" to="/" />
       </Switch>

@@ -27,6 +27,22 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
   const initialRowDestruction: number[] = [];
   const [row, setRow] = useState(initialRowDestruction);
 
+  useEffect(() => {
+    console.log("HASH", window.location.hash);
+    if (window.location.hash === '') {
+      console.log('test')
+      
+
+    } else {
+      // var reRoom = /#([a-z A-Z 0-9]*\[)/g;
+        var reRoom = /#(.*)\[/g;
+      var reUsername = /\[(.*)\]/g;
+      var rRoom = reRoom.exec(window.location.hash);
+      var rUsername = reUsername.exec(window.location.hash);
+      console.log("R", rRoom, rUsername);
+    }
+  }, []);
+
   useEffect(
     () => {
       if (props.state.grid && props.state.grid !== undefined) {
@@ -80,7 +96,7 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
       transports: ['websocket'],
       query: {
         room,
-        pseudo: player,
+        username: player,
       },
     });
     setStarted(true);
