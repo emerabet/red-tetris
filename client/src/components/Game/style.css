@@ -2,7 +2,6 @@
 .flexRowGame {
     display: flex;
     flex-direction: row;
-    /* align-items: center; */
     flex-wrap: nowrap;
     justify-content: center;
   }
@@ -10,7 +9,6 @@
 .flexColumnGame {
     align-items: center;
     justify-content: center;
-    /* width: calc(22vw + 1vw); */
     min-width: 250px;
 }
 

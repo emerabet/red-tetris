@@ -12,7 +12,6 @@ interface GamePageProps {
   socket: SocketIOClient.Socket;
   started: boolean;
   state: StateBoardI;
-  board: number[][];
   startGame: Function;
   endGame: Function;
   resetGame: Function;

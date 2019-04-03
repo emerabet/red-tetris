@@ -3,12 +3,11 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { StateType } from 'typesafe-actions';
 import rootReducer from '../../reducers/index';
-import { updateBoard, updateState, updateSpectre } from '../../actions/gameActions';
+import { updateState, updateSpectre } from '../../actions/gameActions';
 import { StateBoardI, SpectreI } from '../../types/gameTypes';
 
 interface Props {
   socket: any;
-  updateBoard: Function;
   updateState: Function;
   updateSpectre: Function;
 }
@@ -30,7 +29,6 @@ const mapStateToProps = (state: StateType<typeof rootReducer>) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  updateBoard: (board: number[][]) => dispatch(updateBoard(board)),
   updateState: (state:StateBoardI) => dispatch(updateState(state)),
   updateSpectre: (spectre:SpectreI) => dispatch(updateSpectre(spectre)),
 });

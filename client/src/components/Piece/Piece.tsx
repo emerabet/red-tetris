@@ -8,10 +8,6 @@ interface PieceProps {
   piece: number[][];
 }
 
-const pieces = {
-
-};
-
 const Piece: React.SFC<PieceProps> = (props) => {
   return (
     <div className="nextPiece">

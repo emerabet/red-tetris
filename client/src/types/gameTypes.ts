@@ -12,10 +12,6 @@ export interface GameState {
   started: boolean;
   room: string;
   player: string;
-  board: number[][];
-  piece: number[][][];
-  pieceIndex: number;
-  position: Position;
   state: StateBoardI;
   spectres: SpectreI[];
 }
