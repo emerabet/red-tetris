@@ -185,6 +185,8 @@ class BoardController extends EventEmitter {
     }
 
     private freeBoard(socketId: string) {
+        const isAdmin = this.currentPlayer.isAdmin;
+        const username = this.currentPlayer.username;
         clearInterval(this.timer);
         this.socket.leave(this.currentPlayer.room);
         this.socket.removeAllListeners();
@@ -194,7 +196,7 @@ class BoardController extends EventEmitter {
         delete this.currentBoard;
         delete this.currentPlayer;
         delete this.pieces;
-        this.emit('free', socketId);
+        this.emit('free', socketId, isAdmin, username);
         this.removeAllListeners();
     }
 
