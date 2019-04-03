@@ -68,16 +68,37 @@ class Game extends EventEmitter {
             }
         });
 
-        board.on('free', (socketId: string) => {
+        board.on('free', (socketId: string, isAdmin: boolean, username: string) => {
             this.players.delete(socketId);
             this.boards.delete(socketId);
+
+            if (isAdmin && this.players.size > 0) {
+                this.assignNewAdministrator();
+            }
+
             if (this.boards.size === 0) {
                 this.pieces.length = 0;
                 delete this.pieces;
                 this.emit('free_game', this.room);
-                this.emit('update_player_count', this.players.size);
                 this.removeAllListeners();
             }
+
+            this.emit('update_player_count', {
+                username,
+                count: this.players.size,
+                action: 'left',
+            });
+        });
+    }
+
+    private assignNewAdministrator(): void {
+        const newAdmin = this.players.values().next().value;
+        newAdmin.setRole(PlayerType.Admin);
+
+        this.emit('update_player_count', {
+            username: newAdmin.username,
+            count: this.players.size,
+            action: 'owner',
         });
     }
 
@@ -96,7 +117,13 @@ class Game extends EventEmitter {
                 board,
                 socket,
                 this.pieces);
-            this.emit('update_player_count', this.players.size);
+
+            this.emit('update_player_count', {
+                username,
+                count: this.players.size,
+                action: 'joined',
+            });
+
             this.initListeners(boardController);
             this.boards.set(socket.id, boardController);
         }

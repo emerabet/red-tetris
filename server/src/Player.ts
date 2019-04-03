@@ -28,6 +28,10 @@ class Player {
     get isAdmin(): boolean {
         return (this.role === PlayerType.Admin);
     }
+
+    public setRole(role: PlayerType) {
+        this.role = role;
+    }
 }
 
 export default Player;
