@@ -20,5 +20,8 @@ class Player {
     get isAdmin() {
         return (this.role === constants_1.PlayerType.Admin);
     }
+    setRole(role) {
+        this.role = role;
+    }
 }
 exports.default = Player;

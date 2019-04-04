@@ -3,7 +3,7 @@ import Player from './Player';
 import Board from './Board';
 import BoardController from './BoardController';
 import PieceFactory from './PieceFactory';
-import { PlayerType, GameState } from './constants';
+import { PlayerType, GameState, GameMode, SynteticPlayerInfo } from './constants';
 
 class Game extends EventEmitter {
     private room: string;
@@ -11,6 +11,7 @@ class Game extends EventEmitter {
     private players: Map<string, Player>; // SocketId, Player
     private pieces: string[];
     private status: GameState;
+    private mode: GameMode;
 
     constructor(room:string) {
         super();
@@ -37,6 +38,7 @@ class Game extends EventEmitter {
             if (player !== undefined && player.isAdmin) {
                 this.createSetOfPieces();
                 this.status = GameState.OnGoing;
+                this.mode = this.players.size > 1 ? GameMode.Multiplyaer : GameMode.Solo;
                 this.boards.forEach((value, key) => {
                     value.run();
                 });
@@ -83,22 +85,42 @@ class Game extends EventEmitter {
                 this.removeAllListeners();
             }
 
-            this.emit('update_player_count', {
-                username,
-                count: this.players.size,
-                action: 'left',
-            });
+            this.updateStatusGame(username, 'left');
         });
+
+        board.on('game_over', ({ username }) => {
+            this.updateStatusGame(username, 'lost');
+            const hasWinner = this.hasWinner();
+            if (hasWinner) {
+                this.updateStatusGame(hasWinner.username, 'win');
+            }
+        });
+    }
+
+    private hasWinner(): SynteticPlayerInfo | null {
+        let countNotFinishedGame = 0;
+        let currentPlayerInfo = null;
+        this.boards.forEach((v) => {
+            if (!v.getIsFinished) {
+                countNotFinishedGame += 1;
+                currentPlayerInfo = v.getPlayerInfo();
+            }
+        });
+        return countNotFinishedGame === 1 ? currentPlayerInfo : null;
     }
 
     private assignNewAdministrator(): void {
         const newAdmin = this.players.values().next().value;
         newAdmin.setRole(PlayerType.Admin);
 
+        this.updateStatusGame(newAdmin.username, 'owner');
+    }
+
+    private updateStatusGame(username: string, action:string) {
         this.emit('update_player_count', {
-            username: newAdmin.username,
+            username,
+            action,
             count: this.players.size,
-            action: 'owner',
         });
     }
 
@@ -118,11 +140,7 @@ class Game extends EventEmitter {
                 socket,
                 this.pieces);
 
-            this.emit('update_player_count', {
-                username,
-                count: this.players.size,
-                action: 'joined',
-            });
+            this.updateStatusGame(username, 'joined');
 
             this.initListeners(boardController);
             this.boards.set(socket.id, boardController);

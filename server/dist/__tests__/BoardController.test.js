@@ -674,12 +674,12 @@ describe('check line', () => {
                 [7, 7, 7, 7, 7, 7, 7, 7, 7, 7],
             ];
             const board = new Board_1.default(3, 10);
-            Object.defineProperty(board, 'playfield', { value: mock });
+            Object.defineProperty(board, 'playfield', { value: mock, writable: true });
             Object.defineProperty(bc, 'currentBoard', { value: board });
             const spy = jest.spyOn(bc, 'emit');
             sender.emit('down');
             s.on('down', () => {
-                expect(spy).toHaveBeenCalledTimes(2);
+                expect(spy).toHaveBeenCalledTimes(3);
                 done();
             });
         });

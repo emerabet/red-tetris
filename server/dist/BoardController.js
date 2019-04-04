@@ -35,6 +35,15 @@ class BoardController extends events_1.EventEmitter {
         this.level = Math.ceil(this.lines / 4);
         this.score = (this.level + this.lines) * this.lines;
     }
+    getIsFinished() {
+        return this.isFinished;
+    }
+    getPlayerInfo() {
+        return {
+            id: this.socket.id,
+            username: this.currentPlayer.username,
+        };
+    }
     check() {
         for (let i = 0; i < this.currentPiece.shape.length; i += 1) {
             for (let j = 0; j < this.currentPiece.shape[i].length; j += 1) {
@@ -66,8 +75,7 @@ class BoardController extends events_1.EventEmitter {
             id: this.currentPlayer.id,
             username: this.currentPlayer.username,
         };
-        this.socket.emit('gameOver', data);
-        this.socket.to(this.currentPlayer.room).emit('gameOver', data);
+        this.emit('game_over', data);
     }
     getNextPieces() {
         let str = '';
@@ -154,6 +162,8 @@ class BoardController extends events_1.EventEmitter {
         this.emit('need', this.indexPiece);
     }
     freeBoard(socketId) {
+        const isAdmin = this.currentPlayer.isAdmin;
+        const username = this.currentPlayer.username;
         clearInterval(this.timer);
         this.socket.leave(this.currentPlayer.room);
         this.socket.removeAllListeners();
@@ -163,7 +173,7 @@ class BoardController extends events_1.EventEmitter {
         delete this.currentBoard;
         delete this.currentPlayer;
         delete this.pieces;
-        this.emit('free', socketId);
+        this.emit('free', socketId, isAdmin, username);
         this.removeAllListeners();
     }
     run() {
@@ -191,10 +201,6 @@ class BoardController extends events_1.EventEmitter {
             this.emit('start', this.socket.id);
         });
         this.socket.on('disconnect', () => {
-            this.socket.to(this.currentPlayer.room).emit('gameOver', {
-                id: this.currentPlayer.id,
-                username: this.currentPlayer.username,
-            });
             this.freeBoard(this.socket.id);
         });
         this.socket.on('restart', () => {

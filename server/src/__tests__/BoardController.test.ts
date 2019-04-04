@@ -807,7 +807,7 @@ describe('check line', () => {
             ];
 
             const board = new Board(3, 10);
-            Object.defineProperty(board, 'playfield', { value: mock });
+            Object.defineProperty(board, 'playfield', { value: mock, writable: true });
 
             Object.defineProperty(bc, 'currentBoard', { value: board });
 
@@ -815,7 +815,7 @@ describe('check line', () => {
 
             sender.emit('down');
             s.on('down', () => {
-                expect(spy).toHaveBeenCalledTimes(2);
+                expect(spy).toHaveBeenCalledTimes(3);
                 done();
             });
         });

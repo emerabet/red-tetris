@@ -37,11 +37,11 @@ class GameServer {
                 if (!this.games.has(room)) {
                     const game = new Game_1.default(room);
                     this.games.set(room, game);
-                    game.on('freeGame', (room) => {
+                    game.on('free_game', (room) => {
                         this.games.delete(room);
                     });
-                    game.on('update_player_count', (count) => {
-                        // Emit to all member of room the count of players
+                    game.on('update_player_count', ({ count, username, action }) => {
+                        this.io.in(room).emit('update_player_count', count, username, action);
                     });
                 }
                 const game = this.games.get(room);

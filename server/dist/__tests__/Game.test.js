@@ -152,11 +152,9 @@ it('should clear player/board/listeners reference', () => {
     game.createBoard(8, 10, socket, 'playerName');
     const boards = Reflect.get(game, 'boards');
     const bc = boards.get('socketId');
-    game.on('test', () => { });
     bc.emit('free', 'socketId');
     expect(boards.has('socketId')).toEqual(false);
     expect(Reflect.has(game, 'pieces')).toEqual(false);
-    expect(game.emit).toHaveBeenCalledTimes(1);
     expect(game.eventNames().length).toEqual(0);
 });
 it('should clear player/board but keep listener reference', () => {
@@ -180,6 +178,5 @@ it('should clear player/board but keep listener reference', () => {
     bc.emit('free', 'socketId');
     expect(boards.has('socketId')).toEqual(false);
     expect(Reflect.has(game, 'pieces')).toEqual(true);
-    expect(game.emit).toHaveBeenCalledTimes(0);
     expect(game.eventNames().length).toEqual(1);
 });

@@ -3,7 +3,7 @@ import Player from './Player';
 import Board from './Board';
 import Piece from './Piece';
 import PieceFactory from './PieceFactory';
-import { Direction, CellState } from './constants';
+import { Direction, CellState, SynteticPlayerInfo } from './constants';
 import { deepCopy } from './utils';
 
 import { Socket } from 'socket.io';
@@ -52,6 +52,17 @@ class BoardController extends EventEmitter {
         this.score = (this.level + this.lines) * this.lines;
     }
 
+    public getIsFinished(): boolean {
+        return this.isFinished;
+    }
+
+    public getPlayerInfo(): SynteticPlayerInfo {
+        return {
+            id: this.socket.id,
+            username: this.currentPlayer.username,
+        };
+    }
+
     private check() {
         for (let i = 0; i < this.currentPiece.shape.length; i += 1) {
             for (let j = 0; j < this.currentPiece.shape[i].length; j += 1) {
@@ -85,8 +96,7 @@ class BoardController extends EventEmitter {
             id: this.currentPlayer.id,
             username: this.currentPlayer.username,
         };
-        this.socket.emit('gameOver', data);
-        this.socket.to(this.currentPlayer.room).emit('gameOver', data);
+        this.emit('game_over', data);
     }
 
     private getNextPieces(): string {
@@ -229,10 +239,6 @@ class BoardController extends EventEmitter {
         });
 
         this.socket.on('disconnect', () => {
-            this.socket.to(this.currentPlayer.room).emit('gameOver', {
-                id: this.currentPlayer.id,
-                username: this.currentPlayer.username,
-            });
             this.freeBoard(this.socket.id);
         });
 
