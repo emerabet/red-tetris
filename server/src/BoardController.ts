@@ -96,6 +96,7 @@ class BoardController extends EventEmitter {
             id: this.currentPlayer.id,
             username: this.currentPlayer.username,
         };
+        console.log('emit game over');
         this.emit('game_over', data);
     }
 
@@ -226,10 +227,12 @@ class BoardController extends EventEmitter {
         this.draw();
     }
 
-    public stop() {
+    public stop(win:boolean = false) {
         this.isFinished = true;
         clearInterval(this.timer);
-        this.currentBoard.clearAll();
+        if (!win) {
+            this.currentBoard.clearAll();
+        }
         this.draw();
     }
 

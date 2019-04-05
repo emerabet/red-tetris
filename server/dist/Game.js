@@ -78,17 +78,22 @@ class Game extends events_1.EventEmitter {
             this.updateStatusGame(username, 'lost');
             const hasWinner = this.hasWinner();
             if (hasWinner) {
+                console.log('Winner found:: ', hasWinner);
                 this.updateStatusGame(hasWinner.username, 'win');
+                const b = this.boards.get(hasWinner.id);
+                b.stop(true);
             }
         });
     }
     hasWinner() {
         let countNotFinishedGame = 0;
         let currentPlayerInfo = null;
+        console.log('in hasWinner');
         this.boards.forEach((v) => {
-            if (!v.getIsFinished) {
+            if (!v.getIsFinished()) {
                 countNotFinishedGame += 1;
                 currentPlayerInfo = v.getPlayerInfo();
+                console.log('tttt:: ', countNotFinishedGame, currentPlayerInfo);
             }
         });
         return countNotFinishedGame === 1 ? currentPlayerInfo : null;
@@ -96,6 +101,7 @@ class Game extends events_1.EventEmitter {
     assignNewAdministrator() {
         const newAdmin = this.players.values().next().value;
         newAdmin.setRole(constants_1.PlayerType.Admin);
+        console.log('new admin assigned');
         this.updateStatusGame(newAdmin.username, 'owner');
     }
     updateStatusGame(username, action) {

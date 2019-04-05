@@ -93,15 +93,21 @@ class Game extends EventEmitter {
             const hasWinner = this.hasWinner();
             if (hasWinner) {
                 this.updateStatusGame(hasWinner.username, 'win');
+                const b: BoardController = <BoardController>this.boards.get(hasWinner.id);
+                b.stop(true);
             }
         });
     }
 
     private hasWinner(): SynteticPlayerInfo | null {
+        if (this.mode === GameMode.Solo) {
+            return null;
+        }
         let countNotFinishedGame = 0;
         let currentPlayerInfo = null;
+
         this.boards.forEach((v) => {
-            if (!v.getIsFinished) {
+            if (!v.getIsFinished()) {
                 countNotFinishedGame += 1;
                 currentPlayerInfo = v.getPlayerInfo();
             }

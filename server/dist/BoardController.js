@@ -75,6 +75,7 @@ class BoardController extends events_1.EventEmitter {
             id: this.currentPlayer.id,
             username: this.currentPlayer.username,
         };
+        console.log('emit game over');
         this.emit('game_over', data);
     }
     getNextPieces() {
@@ -190,10 +191,12 @@ class BoardController extends events_1.EventEmitter {
         action(arg);
         this.draw();
     }
-    stop() {
+    stop(win = false) {
         this.isFinished = true;
         clearInterval(this.timer);
-        this.currentBoard.clearAll();
+        if (!win) {
+            this.currentBoard.clearAll();
+        }
         this.draw();
     }
     init() {
