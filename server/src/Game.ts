@@ -39,7 +39,7 @@ class Game extends EventEmitter {
                 this.createSetOfPieces();
                 this.status = GameState.OnGoing;
                 this.mode = this.players.size > 1 ? GameMode.Multiplyaer : GameMode.Solo;
-                this.boards.forEach((value, key) => {
+                this.boards.forEach((value) => {
                     value.run();
                 });
             }
@@ -49,7 +49,7 @@ class Game extends EventEmitter {
             const player:Player|undefined = this.players.get(socketId);
             if (player !== undefined && player.isAdmin && this.status === GameState.OnGoing) {
                 this.pieces.length = 0;
-                this.boards.forEach((value, key) => {
+                this.boards.forEach((value) => {
                     value.stop();
                 });
                 this.status = GameState.Opened;
@@ -123,7 +123,7 @@ class Game extends EventEmitter {
     }
 
     private updateStatusGame(username: string, action:string) {
-        this.emit('update_player_count', {
+        this.emit('update_game_state', {
             username,
             action,
             count: this.players.size,
