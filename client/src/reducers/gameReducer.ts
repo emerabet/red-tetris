@@ -14,6 +14,9 @@ const initialState: GameState = {
     spectre: '0000000000',
   },
   spectres: [],
+  count: 0,
+  username: '',
+  action: '',
 };
 
 export default function (state: GameState = initialState, action: any) {
@@ -47,6 +50,11 @@ export default function (state: GameState = initialState, action: any) {
       return {
         ...state,
         spectres,
+      };
+    case getType(gameActions.UPDATE_PLAYERS):
+      return {
+        ...state,
+        ...action.payload,
       };
 
     default:

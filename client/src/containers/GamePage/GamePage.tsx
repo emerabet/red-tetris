@@ -26,26 +26,21 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
   const initialRowDestruction: number[] = [];
   const [row, setRow] = useState(initialRowDestruction);
 
-  useEffect(() => {
-    console.log("HASH", window.location.hash);
-    if (window.location.hash === '') {
-      console.log('test')
-      
-
-    } else {
-      // var reRoom = /#([a-z A-Z 0-9]*\[)/g;
-        var reRoom = /#(.*)\[/g;
-      var reUsername = /\[(.*)\]/g;
-      var rRoom = reRoom.exec(window.location.hash);
-      var rUsername = reUsername.exec(window.location.hash);
-      console.log("R", rRoom, rUsername);
-      if (rRoom !== null && rUsername !== null) {
-        setRoom(rRoom[1]);
-        setPlayer(rUsername[1]);
-        enterRoomUrl(rRoom[1], rUsername[1]);
+  useEffect(
+    () => {
+      if (window.location.hash !== '') {
+        const reRoom = /#(.*)\[/g;
+        const reUsername = /\[(.*)\]/g;
+        const rRoom = reRoom.exec(window.location.hash);
+        const rUsername = reUsername.exec(window.location.hash);
+        if (rRoom !== null && rUsername !== null) {
+          setRoom(rRoom[1]);
+          setPlayer(rUsername[1]);
+          enterRoomUrl(rRoom[1], rUsername[1]);
+        }
       }
-    }
-  }, []);
+    },
+    []);
 
   useEffect(
     () => {

@@ -14,6 +14,9 @@ export interface GameState {
   player: string;
   state: StateBoardI;
   spectres: SpectreI[];
+  count: number;
+  username: string;
+  action: string;
 }
 
 export interface OponentInterface {

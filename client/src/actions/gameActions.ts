@@ -6,6 +6,7 @@ export const START = createStandardAction('START')<void>();
 export const END = createStandardAction('END')<void>();
 export const UPDATE_STATE = createStandardAction('UPDATE_STATE')<void>();
 export const UPDATE_SPECTRE = createStandardAction('UPDATE_SPECTRE')<void>();
+export const UPDATE_PLAYERS = createStandardAction('UPDATE_PLAYERS')<void>();
 
 export const START_SAGA = createStandardAction('START_SAGA')<void>();
 export const END_SAGA = createStandardAction('END_SAGA')<void>();
@@ -40,6 +41,17 @@ export const updateSpectre = (spectre: SpectreI) => {
     type: getType(UPDATE_SPECTRE),
     payload: {
       spectre,
+    },
+  };
+};
+
+export const updatePlayers = (count: number, username: string, action: string) => {
+  return {
+    type: getType(UPDATE_PLAYERS),
+    payload: {
+      count,
+      username,
+      action,
     },
   };
 };

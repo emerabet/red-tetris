@@ -12,10 +12,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const socket_io_client_1 = __importDefault(require("socket.io-client"));
+const supertest_1 = __importDefault(require("supertest"));
+const Server_1 = __importDefault(require("./../Server"));
 describe('Server', () => {
     let player1;
     let player2;
-    const ser = null; //new GameServer(5000);
+    const ser = new Server_1.default(5000);
     beforeAll((done) => __awaiter(this, void 0, void 0, function* () {
         yield ser.start();
         done();
@@ -26,17 +28,14 @@ describe('Server', () => {
     }));
     beforeEach((done) => {
         player1 = socket_io_client_1.default('http://localhost:5000/', {
-            transports: ['websocket'],
             query: {
                 room: 'theroom',
                 username: 'player1',
             },
         });
-        if (!player1.connected) {
-            player1.on('connect', () => {
-                done();
-            });
-        }
+        player1.on('connect', () => {
+            done();
+        });
     });
     afterEach((done) => {
         player1.disconnect();
@@ -45,27 +44,24 @@ describe('Server', () => {
     describe('ttttt', () => {
         beforeEach((done) => {
             player2 = socket_io_client_1.default('http://localhost:5000/', {
-                transports: ['websocket'],
                 query: {
                     room: 'theroom',
-                    username: 'player1',
+                    username: 'player2',
                 },
             });
-            if (!player2.connected) {
-                player2.on('connect', () => {
-                    done();
-                });
-            }
+            player2.on('connect', () => {
+                done();
+            });
         });
         afterEach((done) => {
             player2.disconnect();
             done();
         });
         it('Test server', () => __awaiter(this, void 0, void 0, function* () {
-            // const server = Reflect.get(ser, 'server') as http.Server;
-            // const result = await request(server).get('/');
-            // expect(result.ok).toEqual(true);
-            // expect(ser.gamesCount()).toEqual(1);
+            const server = Reflect.get(ser, 'server');
+            const result = yield supertest_1.default(server).get('/');
+            expect(result.ok).toEqual(true);
+            expect(ser.gamesCount()).toEqual(1);
         }));
     });
 });
