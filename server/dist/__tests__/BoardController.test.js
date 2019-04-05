@@ -18,6 +18,7 @@ const Player_1 = __importDefault(require("./../Player"));
 const constants_1 = require("./../constants");
 const Board_1 = __importDefault(require("./../Board"));
 const PieceFactory_1 = __importDefault(require("../PieceFactory"));
+const port = parseInt(process.env.PORT, 10) || 4000;
 it('should create a boardController instance', () => {
     const player = new Player_1.default('socketId', 'playerName', 'roomName', constants_1.PlayerType.Admin);
     const board = new Board_1.default(8, 10);
@@ -164,14 +165,14 @@ it('should not add locked row to the board', () => {
 });
 describe('socket init', () => {
     let sender;
-    const ser = new Server_1.default(4000);
+    const ser = new Server_1.default(port);
     beforeAll((done) => __awaiter(this, void 0, void 0, function* () {
         yield ser.start();
         done();
     }));
     beforeEach((done) => {
         if (ser.gamesCount() === 0) {
-            sender = socket_io_client_1.default('http://localhost:4000/', {
+            sender = socket_io_client_1.default(`http://localhost:${port}/`, {
                 transports: ['websocket'],
                 query: {
                     room: 'theroom',
@@ -211,14 +212,14 @@ describe('socket init', () => {
 });
 describe('socket stop', () => {
     let sender;
-    const ser = new Server_1.default(4000);
+    const ser = new Server_1.default(port);
     beforeAll((done) => __awaiter(this, void 0, void 0, function* () {
         yield ser.start();
         done();
     }));
     beforeEach((done) => {
         if (ser.gamesCount() === 0) {
-            sender = socket_io_client_1.default('http://localhost:4000/', {
+            sender = socket_io_client_1.default(`http://localhost:${port}/`, {
                 transports: ['websocket'],
                 query: {
                     room: 'theroom',
@@ -258,14 +259,14 @@ describe('socket stop', () => {
 });
 describe('socket restart', () => {
     let sender;
-    const ser = new Server_1.default(4000);
+    const ser = new Server_1.default(port);
     beforeAll((done) => __awaiter(this, void 0, void 0, function* () {
         yield ser.start();
         done();
     }));
     beforeEach((done) => {
         if (ser.gamesCount() === 0) {
-            sender = socket_io_client_1.default('http://localhost:4000/', {
+            sender = socket_io_client_1.default(`http://localhost:${port}/`, {
                 transports: ['websocket'],
                 query: {
                     room: 'theroom',
@@ -305,14 +306,14 @@ describe('socket restart', () => {
 });
 describe('socket down', () => {
     let sender;
-    const ser = new Server_1.default(4000);
+    const ser = new Server_1.default(port);
     beforeAll((done) => __awaiter(this, void 0, void 0, function* () {
         yield ser.start();
         done();
     }));
     beforeEach((done) => {
         if (ser.gamesCount() === 0) {
-            sender = socket_io_client_1.default('http://localhost:4000/', {
+            sender = socket_io_client_1.default(`http://localhost:${port}/`, {
                 transports: ['websocket'],
                 query: {
                     room: 'theroom',
@@ -359,14 +360,14 @@ describe('socket down', () => {
 });
 describe('socket rotate', () => {
     let sender;
-    const ser = new Server_1.default(4000);
+    const ser = new Server_1.default(port);
     beforeAll((done) => __awaiter(this, void 0, void 0, function* () {
         yield ser.start();
         done();
     }));
     beforeEach((done) => {
         if (ser.gamesCount() === 0) {
-            sender = socket_io_client_1.default('http://localhost:4000/', {
+            sender = socket_io_client_1.default(`http://localhost:${port}/`, {
                 transports: ['websocket'],
                 query: {
                     room: 'theroom',
@@ -413,14 +414,14 @@ describe('socket rotate', () => {
 });
 describe('check wrong rotate', () => {
     let sender;
-    const ser = new Server_1.default(4000);
+    const ser = new Server_1.default(port);
     beforeAll((done) => __awaiter(this, void 0, void 0, function* () {
         yield ser.start();
         done();
     }));
     beforeEach((done) => {
         if (ser.gamesCount() === 0) {
-            sender = socket_io_client_1.default('http://localhost:4000/', {
+            sender = socket_io_client_1.default(`http://localhost:${port}/`, {
                 transports: ['websocket'],
                 query: {
                     room: 'theroom',
@@ -471,16 +472,14 @@ describe('check wrong rotate', () => {
 });
 describe('socket left', () => {
     let sender;
-    const ser = new Server_1.default(4000);
+    const ser = new Server_1.default(port);
     beforeAll((done) => __awaiter(this, void 0, void 0, function* () {
-        // start the io server
         yield ser.start();
         done();
     }));
     beforeEach((done) => {
         if (ser.gamesCount() === 0) {
-            // connect two io clients
-            sender = socket_io_client_1.default('http://localhost:4000/', {
+            sender = socket_io_client_1.default(`http://localhost:${port}/`, {
                 transports: ['websocket'],
                 query: {
                     room: 'theroom',
@@ -495,7 +494,6 @@ describe('socket left', () => {
         }
     });
     afterEach((done) => {
-        // disconnect io clients after each test
         sender.disconnect();
         done();
     });
@@ -528,16 +526,14 @@ describe('socket left', () => {
 });
 describe('socket right', () => {
     let sender;
-    const ser = new Server_1.default(4000);
+    const ser = new Server_1.default(port);
     beforeAll((done) => __awaiter(this, void 0, void 0, function* () {
-        // start the io server
         yield ser.start();
         done();
     }));
     beforeEach((done) => {
         if (ser.gamesCount() === 0) {
-            // connect two io clients
-            sender = socket_io_client_1.default('http://localhost:4000/', {
+            sender = socket_io_client_1.default(`http://localhost:${port}/`, {
                 transports: ['websocket'],
                 query: {
                     room: 'theroom',
@@ -552,7 +548,6 @@ describe('socket right', () => {
         }
     });
     afterEach((done) => {
-        // disconnect io clients after each test
         sender.disconnect();
         done();
     });
@@ -585,16 +580,14 @@ describe('socket right', () => {
 });
 describe('socket disconnect', () => {
     let sender;
-    const ser = new Server_1.default(4000);
+    const ser = new Server_1.default(port);
     beforeAll((done) => __awaiter(this, void 0, void 0, function* () {
-        // start the io server
         yield ser.start();
         done();
     }));
     beforeEach((done) => {
         if (ser.gamesCount() === 0) {
-            // connect two io clients
-            sender = socket_io_client_1.default('http://localhost:4000/', {
+            sender = socket_io_client_1.default(`http://localhost:${port}/`, {
                 transports: ['websocket'],
                 query: {
                     room: 'theroom',
@@ -634,16 +627,15 @@ describe('socket disconnect', () => {
 });
 describe('check line', () => {
     let sender;
-    const ser = new Server_1.default(4000);
+    const ser = new Server_1.default(port);
     beforeAll((done) => __awaiter(this, void 0, void 0, function* () {
-        // start the io server
         yield ser.start();
         done();
     }));
     beforeEach((done) => {
         if (ser.gamesCount() === 0) {
             // connect two io clients
-            sender = socket_io_client_1.default('http://localhost:4000/', {
+            sender = socket_io_client_1.default(`http://localhost:${port}/`, {
                 transports: ['websocket'],
                 query: {
                     room: 'theroom',
@@ -682,12 +674,12 @@ describe('check line', () => {
                 [7, 7, 7, 7, 7, 7, 7, 7, 7, 7],
             ];
             const board = new Board_1.default(3, 10);
-            Object.defineProperty(board, 'playfield', { value: mock });
+            Object.defineProperty(board, 'playfield', { value: mock, writable: true });
             Object.defineProperty(bc, 'currentBoard', { value: board });
             const spy = jest.spyOn(bc, 'emit');
             sender.emit('down');
             s.on('down', () => {
-                expect(spy).toHaveBeenCalledTimes(2);
+                expect(spy).toHaveBeenCalledTimes(3);
                 done();
             });
         });
@@ -695,16 +687,14 @@ describe('check line', () => {
 });
 describe('isFinished', () => {
     let sender;
-    const ser = new Server_1.default(4000);
+    const ser = new Server_1.default(port);
     beforeAll((done) => __awaiter(this, void 0, void 0, function* () {
-        // start the io server
         yield ser.start();
         done();
     }));
     beforeEach((done) => {
         if (ser.gamesCount() === 0) {
-            // connect two io clients
-            sender = socket_io_client_1.default('http://localhost:4000/', {
+            sender = socket_io_client_1.default(`http://localhost:${port}/`, {
                 transports: ['websocket'],
                 query: {
                     room: 'theroom',

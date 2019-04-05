@@ -93,11 +93,12 @@ it('should stop the game for every players', () => {
     const boards = Reflect.get(game, 'boards');
     const bc = boards.get('socketId');
     bc.stop = jest.fn().mockImplementation();
-    Object.defineProperty(game, 'status', { value: constants_1.GameState.OnGoing });
+    Object.defineProperty(game, 'status', { value: constants_1.GameState.OnGoing, writable: true });
     bc.emit('stop', 'wrongId');
     expect(bc.stop).toHaveBeenCalledTimes(0);
     bc.emit('stop', 'socketId');
     expect(bc.stop).toHaveBeenCalledTimes(1);
+    expect(Reflect.get(game, 'status')).toEqual(constants_1.GameState.Opened);
 });
 it('should execute takeMalus function on malus event', () => {
     const game = new Game_1.default('RoomName');
@@ -151,11 +152,9 @@ it('should clear player/board/listeners reference', () => {
     game.createBoard(8, 10, socket, 'playerName');
     const boards = Reflect.get(game, 'boards');
     const bc = boards.get('socketId');
-    game.on('test', () => { });
     bc.emit('free', 'socketId');
     expect(boards.has('socketId')).toEqual(false);
     expect(Reflect.has(game, 'pieces')).toEqual(false);
-    expect(game.emit).toHaveBeenCalledTimes(1);
     expect(game.eventNames().length).toEqual(0);
 });
 it('should clear player/board but keep listener reference', () => {
@@ -179,6 +178,5 @@ it('should clear player/board but keep listener reference', () => {
     bc.emit('free', 'socketId');
     expect(boards.has('socketId')).toEqual(false);
     expect(Reflect.has(game, 'pieces')).toEqual(true);
-    expect(game.emit).toHaveBeenCalledTimes(0);
     expect(game.eventNames().length).toEqual(1);
 });

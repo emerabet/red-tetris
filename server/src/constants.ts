@@ -1,3 +1,8 @@
+export interface SynteticPlayerInfo {
+    id: string;
+    username: string;
+}
+
 export enum Direction {
     Down,
     Left,
@@ -19,6 +24,11 @@ export enum GameState {
     Opened = 0,
     OnGoing = 1,
     Finished = 2,
+}
+
+export enum GameMode {
+    Solo = 1,
+    Multiplyaer = 2,
 }
 
 export enum PlayerType {

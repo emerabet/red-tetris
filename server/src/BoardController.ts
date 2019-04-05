@@ -3,7 +3,7 @@ import Player from './Player';
 import Board from './Board';
 import Piece from './Piece';
 import PieceFactory from './PieceFactory';
-import { Direction, CellState } from './constants';
+import { Direction, CellState, SynteticPlayerInfo } from './constants';
 import { deepCopy } from './utils';
 
 import { Socket } from 'socket.io';
@@ -52,6 +52,17 @@ class BoardController extends EventEmitter {
         this.score = (this.level + this.lines) * this.lines;
     }
 
+    public getIsFinished(): boolean {
+        return this.isFinished;
+    }
+
+    public getPlayerInfo(): SynteticPlayerInfo {
+        return {
+            id: this.socket.id,
+            username: this.currentPlayer.username,
+        };
+    }
+
     private check() {
         for (let i = 0; i < this.currentPiece.shape.length; i += 1) {
             for (let j = 0; j < this.currentPiece.shape[i].length; j += 1) {
@@ -73,10 +84,19 @@ class BoardController extends EventEmitter {
         this.indexPiece += 1;
         this.currentPiece = PieceFactory.createPiece(this.pieces[this.indexPiece]);
         if (this.check()) {
-            this.place();
-            clearInterval(this.timer);
-            this.isFinished = true;
+            this.endOfGame();
         }
+    }
+
+    private endOfGame(): void {
+        this.place();
+        clearInterval(this.timer);
+        this.isFinished = true;
+        const data = {
+            id: this.currentPlayer.id,
+            username: this.currentPlayer.username,
+        };
+        this.emit('game_over', data);
     }
 
     private getNextPieces(): string {
@@ -175,6 +195,8 @@ class BoardController extends EventEmitter {
     }
 
     private freeBoard(socketId: string) {
+        const isAdmin = this.currentPlayer.isAdmin;
+        const username = this.currentPlayer.username;
         clearInterval(this.timer);
         this.socket.leave(this.currentPlayer.room);
         this.socket.removeAllListeners();
@@ -184,7 +206,7 @@ class BoardController extends EventEmitter {
         delete this.currentBoard;
         delete this.currentPlayer;
         delete this.pieces;
-        this.emit('free', socketId);
+        this.emit('free', socketId, isAdmin, username);
         this.removeAllListeners();
     }
 

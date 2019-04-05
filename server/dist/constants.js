@@ -23,6 +23,11 @@ var GameState;
     GameState[GameState["OnGoing"] = 1] = "OnGoing";
     GameState[GameState["Finished"] = 2] = "Finished";
 })(GameState = exports.GameState || (exports.GameState = {}));
+var GameMode;
+(function (GameMode) {
+    GameMode[GameMode["Solo"] = 1] = "Solo";
+    GameMode[GameMode["Multiplyaer"] = 2] = "Multiplyaer";
+})(GameMode = exports.GameMode || (exports.GameMode = {}));
 var PlayerType;
 (function (PlayerType) {
     PlayerType[PlayerType["Admin"] = 0] = "Admin";

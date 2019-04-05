@@ -3,7 +3,7 @@ import Player from './Player';
 import Board from './Board';
 import BoardController from './BoardController';
 import PieceFactory from './PieceFactory';
-import { PlayerType, GameState } from './constants';
+import { PlayerType, GameState, GameMode, SynteticPlayerInfo } from './constants';
 
 class Game extends EventEmitter {
     private room: string;
@@ -11,6 +11,7 @@ class Game extends EventEmitter {
     private players: Map<string, Player>; // SocketId, Player
     private pieces: string[];
     private status: GameState;
+    private mode: GameMode;
 
     constructor(room:string) {
         super();
@@ -37,6 +38,7 @@ class Game extends EventEmitter {
             if (player !== undefined && player.isAdmin) {
                 this.createSetOfPieces();
                 this.status = GameState.OnGoing;
+                this.mode = this.players.size > 1 ? GameMode.Multiplyaer : GameMode.Solo;
                 this.boards.forEach((value, key) => {
                     value.run();
                 });
@@ -50,6 +52,7 @@ class Game extends EventEmitter {
                 this.boards.forEach((value, key) => {
                     value.stop();
                 });
+                this.status = GameState.Opened;
             }
         });
 
@@ -67,15 +70,57 @@ class Game extends EventEmitter {
             }
         });
 
-        board.on('free', (socketId: string) => {
+        board.on('free', (socketId: string, isAdmin: boolean, username: string) => {
             this.players.delete(socketId);
             this.boards.delete(socketId);
+
+            if (isAdmin && this.players.size > 0) {
+                this.assignNewAdministrator();
+            }
+
             if (this.boards.size === 0) {
                 this.pieces.length = 0;
                 delete this.pieces;
-                this.emit('freeGame', this.room);
+                this.emit('free_game', this.room);
                 this.removeAllListeners();
             }
+
+            this.updateStatusGame(username, 'left');
+        });
+
+        board.on('game_over', ({ username }) => {
+            this.updateStatusGame(username, 'lost');
+            const hasWinner = this.hasWinner();
+            if (hasWinner) {
+                this.updateStatusGame(hasWinner.username, 'win');
+            }
+        });
+    }
+
+    private hasWinner(): SynteticPlayerInfo | null {
+        let countNotFinishedGame = 0;
+        let currentPlayerInfo = null;
+        this.boards.forEach((v) => {
+            if (!v.getIsFinished) {
+                countNotFinishedGame += 1;
+                currentPlayerInfo = v.getPlayerInfo();
+            }
+        });
+        return countNotFinishedGame === 1 ? currentPlayerInfo : null;
+    }
+
+    private assignNewAdministrator(): void {
+        const newAdmin = this.players.values().next().value;
+        newAdmin.setRole(PlayerType.Admin);
+
+        this.updateStatusGame(newAdmin.username, 'owner');
+    }
+
+    private updateStatusGame(username: string, action:string) {
+        this.emit('update_player_count', {
+            username,
+            action,
+            count: this.players.size,
         });
     }
 
@@ -94,6 +139,9 @@ class Game extends EventEmitter {
                 board,
                 socket,
                 this.pieces);
+
+            this.updateStatusGame(username, 'joined');
+
             this.initListeners(boardController);
             this.boards.set(socket.id, boardController);
         }

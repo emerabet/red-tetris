@@ -35,6 +35,15 @@ class BoardController extends events_1.EventEmitter {
         this.level = Math.ceil(this.lines / 4);
         this.score = (this.level + this.lines) * this.lines;
     }
+    getIsFinished() {
+        return this.isFinished;
+    }
+    getPlayerInfo() {
+        return {
+            id: this.socket.id,
+            username: this.currentPlayer.username,
+        };
+    }
     check() {
         for (let i = 0; i < this.currentPiece.shape.length; i += 1) {
             for (let j = 0; j < this.currentPiece.shape[i].length; j += 1) {
@@ -55,10 +64,18 @@ class BoardController extends events_1.EventEmitter {
         this.indexPiece += 1;
         this.currentPiece = PieceFactory_1.default.createPiece(this.pieces[this.indexPiece]);
         if (this.check()) {
-            this.place();
-            clearInterval(this.timer);
-            this.isFinished = true;
+            this.endOfGame();
         }
+    }
+    endOfGame() {
+        this.place();
+        clearInterval(this.timer);
+        this.isFinished = true;
+        const data = {
+            id: this.currentPlayer.id,
+            username: this.currentPlayer.username,
+        };
+        this.emit('game_over', data);
     }
     getNextPieces() {
         let str = '';
@@ -145,6 +162,8 @@ class BoardController extends events_1.EventEmitter {
         this.emit('need', this.indexPiece);
     }
     freeBoard(socketId) {
+        const isAdmin = this.currentPlayer.isAdmin;
+        const username = this.currentPlayer.username;
         clearInterval(this.timer);
         this.socket.leave(this.currentPlayer.room);
         this.socket.removeAllListeners();
@@ -154,7 +173,7 @@ class BoardController extends events_1.EventEmitter {
         delete this.currentBoard;
         delete this.currentPlayer;
         delete this.pieces;
-        this.emit('free', socketId);
+        this.emit('free', socketId, isAdmin, username);
         this.removeAllListeners();
     }
     run() {

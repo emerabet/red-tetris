@@ -7,6 +7,8 @@ import Board from './../Board';
 import PieceFactory from '../PieceFactory';
 import Game from '../Game';
 
+const port:number = parseInt(<string>process.env.PORT, 10) || 4000;
+
 it('should create a boardController instance', () => {
     const player = new Player('socketId',
                               'playerName',
@@ -205,7 +207,7 @@ it('should not add locked row to the board', () => {
 
 describe('socket init', () => {
     let sender:SocketIOClient.Socket;
-    const ser =  new GameServer(4000);
+    const ser =  new GameServer(port);
 
     beforeAll(async (done) => {
         await ser.start();
@@ -214,7 +216,7 @@ describe('socket init', () => {
 
     beforeEach((done) => {
         if (ser.gamesCount() === 0) {
-            sender = io('http://localhost:4000/', {
+            sender = io(`http://localhost:${port}/`, {
                 transports: ['websocket'],
                 query: {
                     room: 'theroom',
@@ -261,7 +263,7 @@ describe('socket init', () => {
 
 describe('socket stop', () => {
     let sender:SocketIOClient.Socket;
-    const ser =  new GameServer(4000);
+    const ser =  new GameServer(port);
 
     beforeAll(async (done) => {
         await ser.start();
@@ -270,7 +272,7 @@ describe('socket stop', () => {
 
     beforeEach((done) => {
         if (ser.gamesCount() === 0) {
-            sender = io('http://localhost:4000/', {
+            sender = io(`http://localhost:${port}/`, {
                 transports: ['websocket'],
                 query: {
                     room: 'theroom',
@@ -317,7 +319,7 @@ describe('socket stop', () => {
 
 describe('socket restart', () => {
     let sender:SocketIOClient.Socket;
-    const ser =  new GameServer(4000);
+    const ser =  new GameServer(port);
 
     beforeAll(async (done) => {
         await ser.start();
@@ -326,7 +328,7 @@ describe('socket restart', () => {
 
     beforeEach((done) => {
         if (ser.gamesCount() === 0) {
-            sender = io('http://localhost:4000/', {
+            sender = io(`http://localhost:${port}/`, {
                 transports: ['websocket'],
                 query: {
                     room: 'theroom',
@@ -373,7 +375,7 @@ describe('socket restart', () => {
 
 describe('socket down', () => {
     let sender:SocketIOClient.Socket;
-    const ser =  new GameServer(4000);
+    const ser =  new GameServer(port);
 
     beforeAll(async (done) => {
         await ser.start();
@@ -382,7 +384,7 @@ describe('socket down', () => {
 
     beforeEach((done) => {
         if (ser.gamesCount() === 0) {
-            sender = io('http://localhost:4000/', {
+            sender = io(`http://localhost:${port}/`, {
                 transports: ['websocket'],
                 query: {
                     room: 'theroom',
@@ -435,7 +437,7 @@ describe('socket down', () => {
 
 describe('socket rotate', () => {
     let sender:SocketIOClient.Socket;
-    const ser =  new GameServer(4000);
+    const ser =  new GameServer(port);
 
     beforeAll(async (done) => {
         await ser.start();
@@ -444,7 +446,7 @@ describe('socket rotate', () => {
 
     beforeEach((done) => {
         if (ser.gamesCount() === 0) {
-            sender = io('http://localhost:4000/', {
+            sender = io(`http://localhost:${port}/`, {
                 transports: ['websocket'],
                 query: {
                     room: 'theroom',
@@ -498,7 +500,7 @@ describe('socket rotate', () => {
 
 describe('check wrong rotate', () => {
     let sender:SocketIOClient.Socket;
-    const ser =  new GameServer(4000);
+    const ser =  new GameServer(port);
 
     beforeAll(async (done) => {
         await ser.start();
@@ -507,7 +509,7 @@ describe('check wrong rotate', () => {
 
     beforeEach((done) => {
         if (ser.gamesCount() === 0) {
-            sender = io('http://localhost:4000/', {
+            sender = io(`http://localhost:${port}/`, {
                 transports: ['websocket'],
                 query: {
                     room: 'theroom',
@@ -570,18 +572,16 @@ describe('check wrong rotate', () => {
 
 describe('socket left', () => {
     let sender:SocketIOClient.Socket;
-    const ser =  new GameServer(4000);
+    const ser =  new GameServer(port);
 
     beforeAll(async (done) => {
-        // start the io server
         await ser.start();
         done();
     });
 
     beforeEach((done) => {
         if (ser.gamesCount() === 0) {
-            // connect two io clients
-            sender = io('http://localhost:4000/', {
+            sender = io(`http://localhost:${port}/`, {
                 transports: ['websocket'],
                 query: {
                     room: 'theroom',
@@ -597,7 +597,6 @@ describe('socket left', () => {
     });
 
     afterEach((done) => {
-        // disconnect io clients after each test
         sender.disconnect();
         done();
     });
@@ -635,18 +634,16 @@ describe('socket left', () => {
 
 describe('socket right', () => {
     let sender:SocketIOClient.Socket;
-    const ser =  new GameServer(4000);
+    const ser =  new GameServer(port);
 
     beforeAll(async (done) => {
-        // start the io server
         await ser.start();
         done();
     });
 
     beforeEach((done) => {
         if (ser.gamesCount() === 0) {
-            // connect two io clients
-            sender = io('http://localhost:4000/', {
+            sender = io(`http://localhost:${port}/`, {
                 transports: ['websocket'],
                 query: {
                     room: 'theroom',
@@ -662,7 +659,6 @@ describe('socket right', () => {
     });
 
     afterEach((done) => {
-        // disconnect io clients after each test
         sender.disconnect();
         done();
     });
@@ -700,18 +696,16 @@ describe('socket right', () => {
 
 describe('socket disconnect', () => {
     let sender:SocketIOClient.Socket;
-    const ser =  new GameServer(4000);
+    const ser =  new GameServer(port);
 
     beforeAll(async (done) => {
-        // start the io server
         await ser.start();
         done();
     });
 
     beforeEach((done) => {
         if (ser.gamesCount() === 0) {
-            // connect two io clients
-            sender = io('http://localhost:4000/', {
+            sender = io(`http://localhost:${port}/`, {
                 transports: ['websocket'],
                 query: {
                     room: 'theroom',
@@ -756,10 +750,9 @@ describe('socket disconnect', () => {
 
 describe('check line', () => {
     let sender:SocketIOClient.Socket;
-    const ser =  new GameServer(4000);
+    const ser =  new GameServer(port);
 
     beforeAll(async (done) => {
-        // start the io server
         await ser.start();
         done();
     });
@@ -767,7 +760,7 @@ describe('check line', () => {
     beforeEach((done) => {
         if (ser.gamesCount() === 0) {
             // connect two io clients
-            sender = io('http://localhost:4000/', {
+            sender = io(`http://localhost:${port}/`, {
                 transports: ['websocket'],
                 query: {
                     room: 'theroom',
@@ -814,7 +807,7 @@ describe('check line', () => {
             ];
 
             const board = new Board(3, 10);
-            Object.defineProperty(board, 'playfield', { value: mock });
+            Object.defineProperty(board, 'playfield', { value: mock, writable: true });
 
             Object.defineProperty(bc, 'currentBoard', { value: board });
 
@@ -822,7 +815,7 @@ describe('check line', () => {
 
             sender.emit('down');
             s.on('down', () => {
-                expect(spy).toHaveBeenCalledTimes(2);
+                expect(spy).toHaveBeenCalledTimes(3);
                 done();
             });
         });
@@ -831,18 +824,16 @@ describe('check line', () => {
 
 describe('isFinished', () => {
     let sender:SocketIOClient.Socket;
-    const ser = new GameServer(4000);
+    const ser = new GameServer(port);
 
     beforeAll(async (done) => {
-        // start the io server
         await ser.start();
         done();
     });
 
     beforeEach((done) => {
         if (ser.gamesCount() === 0) {
-            // connect two io clients
-            sender = io('http://localhost:4000/', {
+            sender = io(`http://localhost:${port}/`, {
                 transports: ['websocket'],
                 query: {
                     room: 'theroom',

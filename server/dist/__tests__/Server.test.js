@@ -12,14 +12,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const socket_io_client_1 = __importDefault(require("socket.io-client"));
-const supertest_1 = __importDefault(require("supertest"));
-const Server_1 = __importDefault(require("./../Server"));
 describe('Server', () => {
     let player1;
     let player2;
-    const ser = new Server_1.default(5000);
+    const ser = null; //new GameServer(5000);
     beforeAll((done) => __awaiter(this, void 0, void 0, function* () {
-        // start the io server
         yield ser.start();
         done();
     }));
@@ -65,10 +62,10 @@ describe('Server', () => {
             done();
         });
         it('Test server', () => __awaiter(this, void 0, void 0, function* () {
-            const server = Reflect.get(ser, 'server');
-            const result = yield supertest_1.default(server).get('/');
-            expect(result.ok).toEqual(true);
-            expect(ser.gamesCount()).toEqual(1);
+            // const server = Reflect.get(ser, 'server') as http.Server;
+            // const result = await request(server).get('/');
+            // expect(result.ok).toEqual(true);
+            // expect(ser.gamesCount()).toEqual(1);
         }));
     });
 });
