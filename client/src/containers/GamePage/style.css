@@ -33,8 +33,8 @@
   flex-direction: row;
 }
 .boardRowDestruction:hover{
-  animation-name: example;
-  animation-duration: 4s;
+  /* animation-name: example;
+  animation-duration: 4s; */
 }
 
 .destructionCol {
