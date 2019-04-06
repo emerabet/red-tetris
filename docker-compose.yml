@@ -1,0 +1,23 @@
+version: '3'
+services:
+  proxy:
+    build: 
+      dockerfile: Dockerfile 
+      context: ./proxy
+    restart: always
+    ports:
+      - 8080:80
+  client:
+    build:
+      dockerfile: Dockerfile
+      context: ./client
+    volumes:
+      - /app/node_modules
+      - ./client:/app
+  back:
+    build:
+      dockerfile: Dockerfile
+      context: ./server
+    volumes:
+      - /app/node_modules
+      - ./server:/app

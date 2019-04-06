@@ -3,6 +3,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import GamePage from '../GamePage';
 import socketIOClient from 'socket.io-client';
+import socketUrl from '../../../config/default';
 
 it('renders correctly with defaults', () => {
   const gamePage = renderer.create(<GamePage
@@ -15,7 +16,7 @@ it('renders correctly with defaults', () => {
       }}
       nagivation={null}
       history={null}
-      socket={socketIOClient('http://localhost:4000')}
+      socket={socketIOClient(socketUrl)}
       board={[[]]}
       startGame={() => { }}
       endGame={() => { }}
