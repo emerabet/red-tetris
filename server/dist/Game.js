@@ -89,6 +89,7 @@ class Game extends events_1.EventEmitter {
             this.updateStatusGame(hasWinner.username, 'win');
             const b = this.boards.get(hasWinner.id);
             b.stop(true);
+            this.status = constants_1.GameState.Opened;
         }
     }
     hasWinner() {
