@@ -29,5 +29,6 @@ storiesOf('GamePage', module)
       count={2}
       username="test"
       action="joined"
+      updatePlayers={() => {}}
     />
   ));

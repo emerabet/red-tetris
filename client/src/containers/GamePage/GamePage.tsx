@@ -18,6 +18,7 @@ interface GamePageProps {
   count: number;
   username: string;
   action: string;
+  updatePlayers: Function;
 }
 
 const GamePage: React.SFC<GamePageProps> = (props) => {
@@ -27,6 +28,15 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
   const [socket, setSocket] = useState<null | SocketIOClient.Socket>(null);
   const initialRowDestruction: number[] = [];
   const [row, setRow] = useState(initialRowDestruction);
+
+  useEffect(
+    () => {
+      const t = setTimeout(() => props.updatePlayers(props.count, '', ''), 2000);
+      return function cleanUp() {
+        clearTimeout(t);
+      };
+    },
+    [props.username, props.action]);
 
   useEffect(
     () => {

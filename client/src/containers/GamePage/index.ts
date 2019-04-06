@@ -3,7 +3,7 @@ import { Dispatch } from 'redux';
 import GamePage from './GamePage';
 import { StateType } from 'typesafe-actions';
 import rootReducer from '../../reducers/index';
-import { startGameAsync, endGameAsync, reset }
+import { startGameAsync, endGameAsync, reset, updatePlayers }
   from '../../actions/gameActions';
 
 const mapStateToProps = (state: StateType<typeof rootReducer>) => ({
@@ -22,6 +22,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   startGame: (room: string, player: string) =>
     dispatch(startGameAsync({ room, player })),
   endGame: () => dispatch(endGameAsync()),
+  updatePlayers: (count:number, username: string, action: string) =>
+  dispatch(updatePlayers(count, username, action)),
 });
 
 export default connect(
