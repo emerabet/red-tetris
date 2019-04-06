@@ -25,15 +25,15 @@
     "lint": "tslint --project tslint.json 'src/**/*.{ts,tsx}'"
   },
   "devDependencies": {
-    "@types/jest": "^23.3.11",
+    "@types/jest": "^24.0.11",
     "@types/node": "^10.12.18",
     "@types/socket.io-client": "^1.4.32",
     "@types/supertest": "^2.0.7",
     "concurrently": "^4.1.0",
-    "jest": "^23.6.0",
+    "jest": "^24.7.1",
     "nodemon": "^1.18.9",
     "supertest": "^4.0.2",
-    "ts-jest": "^23.10.5",
+    "ts-jest": "^24.0.2",
     "tslint": "^5.12.0",
     "tslint-config-airbnb": "^5.11.1",
     "typescript": "^3.2.2"

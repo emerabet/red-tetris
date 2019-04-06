@@ -218,7 +218,7 @@ it('should remove row to the specified index', () => {
 });
 
 it('should return the expect spectre string', () => {
-    const spectre = '7777667777';
+    const spectre = '-7--66----';
     const mock = [
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -227,7 +227,7 @@ it('should return the expect spectre string', () => {
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 7, 7, 0, 0, 0, 0],
-        [0, 0, 0, 0, 7, 7, 0, 0, 0, 0],
+        [0, 7, 0, 0, 7, 7, 0, 0, 0, 0],
     ];
 
     const board: Board = new Board(8, 10);

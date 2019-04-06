@@ -99,8 +99,12 @@ class Board {
         let spectre = '';
         for (let col = 0; col < this.gridWidth; col += 1) {
             for (let row = 0; row < this.gridHeight; row += 1) {
-                if (this.playfield[row][col] !== constants_1.CellState.Empty || row === this.gridHeight - 1) {
+                if (this.playfield[row][col] !== constants_1.CellState.Empty) {
                     spectre += row.toString(this.gridHeight);
+                    break;
+                }
+                else if (row === this.gridHeight - 1) {
+                    spectre += '-';
                     break;
                 }
             }
