@@ -15,9 +15,9 @@
   }
   
   .boardInner {
-    width: calc(22vw + 10px);
+    width: calc(44vh + 10px);
     min-width: 210px;
-    height: calc(44vw + 10px);
+    height: calc(88vh + 10px);
     min-height: 410px;
     border: 5px solid rgb(202, 182, 182);
     position: relative;
