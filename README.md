@@ -1,11 +1,12 @@
 # Red Tetris
 
+Tetris multijoueur
+
 ## Stack
     * Typescript
     * React JS
     * Node JS
-    * Socker IO ??
-    * Redis ??
+    * Socket IO
 
 ## Install
-    * Docker
+    `docker-compose up`
