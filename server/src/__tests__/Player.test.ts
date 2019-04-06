@@ -18,3 +18,9 @@ it('should return false to isAdmin', () => {
     const player: Player = new Player('totoId', 'pseudo', 'la room', PlayerType.Player);
     expect(player.isAdmin).toEqual(false);
 });
+
+it('should set the new role correctly', () => {
+    const player: Player = new Player('totoId', 'pseudo', 'la room', PlayerType.Player);
+    player.setRole(PlayerType.Admin);
+    expect(player.isAdmin).toEqual(true);
+});

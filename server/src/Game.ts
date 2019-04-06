@@ -3,7 +3,7 @@ import Player from './Player';
 import Board from './Board';
 import BoardController from './BoardController';
 import PieceFactory from './PieceFactory';
-import { PlayerType, GameState, GameMode, SynteticPlayerInfo } from './constants';
+import { PlayerType, GameState, GameMode, IPlayerInfo } from './constants';
 
 class Game extends EventEmitter {
     private room: string;
@@ -20,6 +20,7 @@ class Game extends EventEmitter {
         this.boards = new Map<string, BoardController>();
         this.players = new Map<string, Player>();
         this.pieces = [];
+        this.mode = GameMode.Solo;
     }
 
     get name(): string {
@@ -83,6 +84,8 @@ class Game extends EventEmitter {
                 delete this.pieces;
                 this.emit('free_game', this.room);
                 this.removeAllListeners();
+            } else {
+                this.checkWinner();
             }
 
             this.updateStatusGame(username, 'left');
@@ -90,16 +93,20 @@ class Game extends EventEmitter {
 
         board.on('game_over', ({ username }) => {
             this.updateStatusGame(username, 'lost');
-            const hasWinner = this.hasWinner();
-            if (hasWinner) {
-                this.updateStatusGame(hasWinner.username, 'win');
-                const b: BoardController = <BoardController>this.boards.get(hasWinner.id);
-                b.stop(true);
-            }
+            this.checkWinner();
         });
     }
 
-    private hasWinner(): SynteticPlayerInfo | null {
+    private checkWinner() {
+        const hasWinner = this.hasWinner();
+        if (this.status === GameState.OnGoing && hasWinner) {
+            this.updateStatusGame(hasWinner.username, 'win');
+            const b: BoardController = <BoardController>this.boards.get(hasWinner.id);
+            b.stop(true);
+        }
+    }
+
+    private hasWinner(): IPlayerInfo | null {
         if (this.mode === GameMode.Solo) {
             return null;
         }
