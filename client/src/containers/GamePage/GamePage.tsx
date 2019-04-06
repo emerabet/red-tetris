@@ -16,6 +16,9 @@ interface GamePageProps {
   endGame: Function;
   resetGame: Function;
   spectres: SpectreI[];
+  count: number;
+  username: string;
+  action: string;
 }
 
 const GamePage: React.SFC<GamePageProps> = (props) => {
@@ -41,6 +44,12 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
       }
     },
     []);
+
+  useEffect(
+    () => {
+      console.log("USE EFFECT", props.count, props.username, props.action)
+    },
+    [props.count, props.username, props.action]);
 
   useEffect(
     () => {
@@ -109,7 +118,7 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
     const s = socketIOClient('http://localhost:4000', {
       transports: ['websocket'],
       query: {
-        r,
+        room: r,
         username: p,
       },
     });

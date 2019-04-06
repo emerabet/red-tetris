@@ -27,5 +27,8 @@ storiesOf('GamePage', module)
           username: 'aaaaa',
         }]
       }
+      count={2}
+      username="test"
+      action="joined"
     />
   ));

@@ -27,6 +27,10 @@ const UseSocket: React.SFC<Props> = (props) => {
     props.updatePlayers(count, username, action);
   });
 
+  props.socket.on('game_over', (a: any) => {
+    console.log("GAME OVER", a)
+  });
+
   return (<div></div>);
 };
 

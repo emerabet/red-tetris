@@ -12,6 +12,9 @@ const mapStateToProps = (state: StateType<typeof rootReducer>) => ({
   room: state.game.room,
   player: state.game.player,
   spectres: state.game.spectres,
+  count: state.game.count,
+  username: state.game.username,
+  action: state.game.action,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
