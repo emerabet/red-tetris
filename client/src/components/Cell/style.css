@@ -1,63 +1,63 @@
 .boardCell {
-    width: 4.4vh;
+    width: 2.2vw;
     min-width: 20px;
-    height: 4.4vh;
+    height: 2.2vw;
     min-height: 20px;
     border: solid rgba(0,0,0,0) 0px;
  }
 
  .cell1 {
-  background: #a1dffc;
-  -webkit-box-shadow: inset 0 0 4px 2px #d4ecf7;
-  box-shadow: inset 0 0 4px 2px #d4ecf7;
+  background: #2962ff;
+  -webkit-box-shadow: inset 0 0 2px 1px #768fff;
+  box-shadow: inset 0 0 2px 1px #768fff;
   border: solid black 0px;
  }
 
  .cell2 {
-  background: #a3abe2;
-  -webkit-box-shadow: inset 0 0 4px 2px #c5cae9;
-  box-shadow: inset 0 0 4px 2px #c5cae9;
+  background: #7c4dff;
+  -webkit-box-shadow: inset 0 0 2px 1px #b47cff;
+  box-shadow: inset 0 0 2px 1px #b47cff;
   border: solid black 0px;
  }
 
  .cell3 {
-  background: #f794b7;
-  -webkit-box-shadow: inset 0 0 4px 2px #f8bbd0;
-  box-shadow: inset 0 0 4px 2px #f8bbd0;
+  background: #c51162;
+  -webkit-box-shadow: inset 0 0 2px 1px #fd558f;
+  box-shadow: inset 0 0 2px 1px #fd558f;
   border: solid black 0px;
  }
 
  .cell4 {
-  background: #96e899;
-  -webkit-box-shadow: inset 0 0 4px 2px #c8e6c9;
-  box-shadow: inset 0 0 4px 2px #c8e6c9;
+  background: #00c853;
+  -webkit-box-shadow: inset 0 0 2px 1px #5efc82;
+  box-shadow: inset 0 0 2px 1px #5efc82;
   border: solid black 0px;
  }
 
  .cell5 {
-  background: #f7ed91;
-  -webkit-box-shadow: inset 0 0 4px 2px #fff9c4;
-  box-shadow: inset 0 0 4px 2px #fff9c4;
+  background: #ffd600;
+  -webkit-box-shadow: inset 0 0 2px 1px #ffff52;
+  box-shadow: inset 0 0 2px 1px #ffff52;
   border: solid black 0px;
  }
 
  .cell6 {
-  background: #f9c475;
-  -webkit-box-shadow: inset 0 0 4px 2px #ffe0b2;
-  box-shadow: inset 0 0 4px 2px #ffe0b2;
+  background: #ff6d00;
+  -webkit-box-shadow: inset 0 0 2px 1px #ff9e40;
+  box-shadow: inset 0 0 2px 1px #ff9e40;
   border: solid black 0px;
  }
 
  .cell7 {
-  background: #9cbfce;
-  -webkit-box-shadow: inset 0 0 4px 2px #cfd8dc;
-  box-shadow: inset 0 0 4px 2px #cfd8dc;
+  background: #00b8d4;
+  -webkit-box-shadow: inset 0 0 2px 1px #62ebff;
+  box-shadow: inset 0 0 2px 1px #62ebff;
   border: solid black 0px;
  }
 
  .cell-1 {
     background: red;
-    -webkit-box-shadow: inset 0 0 4px 2px #cfd8dc;
-    box-shadow: inset 0 0 4px 2px #cfd8dc;
+    -webkit-box-shadow: inset 0 0 2px 1px #cfd8dc;
+    box-shadow: inset 0 0 2px 1px #cfd8dc;
     border: solid black 0px;
    }
