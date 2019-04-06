@@ -23,6 +23,7 @@
   "include": [
     "src"
   ],
+  "exclude": ["node_modules", "**/__TESTS__/*"],
   "types": [
     "jest",
     "react"

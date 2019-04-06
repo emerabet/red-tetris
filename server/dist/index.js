@@ -7,4 +7,3 @@ const Server_1 = __importDefault(require("./Server"));
 const port = parseInt(process.env.PORT, 10) || 4000;
 const server = new Server_1.default(port);
 server.start();
-console.log('port: ', process.env.PORT);

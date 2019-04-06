@@ -5,6 +5,7 @@ import Home from '../../components/Home';
 import Game from '../../components/Game';
 import { SpectreI, StateBoardI } from '../../types/gameTypes';
 import './style.css';
+import socketUrl from '../../config/default';
 
 interface GamePageProps {
   nagivation: any;
@@ -103,8 +104,7 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
     event.preventDefault();
     await props.resetGame();
     await props.startGame(room, player);
-    const s = socketIOClient('http://localhost:4000', {
-      transports: ['websocket'],
+    const s = socketIOClient(socketUrl, {
       query: {
         room,
         username: player,
@@ -118,8 +118,7 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
   const enterRoomUrl = async (r: string, p: string) => {
     await props.resetGame();
     await props.startGame(room, player);
-    const s = socketIOClient('http://localhost:4000', {
-      transports: ['websocket'],
+    const s = socketIOClient(socketUrl, {
       query: {
         room: r,
         username: p,
