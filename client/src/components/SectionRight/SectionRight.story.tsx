@@ -17,5 +17,6 @@ storiesOf('SectionRight', module)
       }]
     }
       pieces={'ZOL'}
+      started={true}
     />
   ));

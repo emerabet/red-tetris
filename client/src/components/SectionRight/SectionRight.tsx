@@ -13,13 +13,14 @@ import './style.css';
 interface SectionRightProps {
   spectres: SpectreI[];
   pieces: string;
+  started: boolean;
 }
 
 const SectionRight: React.SFC<SectionRightProps> = (props) => {
 
   return (
     <div className="sectionRight">
-      <div className="sectionRightInside">
+      {props.started && <div className="sectionRightInside">
         <SquareLabel
           label="next pieces:"
         />
@@ -36,7 +37,7 @@ const SectionRight: React.SFC<SectionRightProps> = (props) => {
             })
           }
         </div>
-      </div>
+      </div>}
     </div>
   );
 };

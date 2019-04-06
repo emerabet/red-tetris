@@ -85,10 +85,10 @@ const Game: React.SFC<GameProps> = (props) => {
           username={props.username}
           action={props.action}
         />
-        <NextPieces
+        {props.started && <NextPieces
           vertical
           pieces={props.pieces}
-        />
+        />}
         </div> : <div className="flexColumnR">
         <Score
           small
@@ -98,10 +98,10 @@ const Game: React.SFC<GameProps> = (props) => {
           username={props.username}
           action={props.action}
         />
-        <NextPieces
+        {props.started && <NextPieces
           vertical
           pieces={props.pieces}
-        />
+        />}
         <div className="admBtnSmall">
       <AdminButton
       text={props.started ? 'restart' : 'start'}
@@ -110,19 +110,20 @@ const Game: React.SFC<GameProps> = (props) => {
     </div>
         </div>}
         </div>
-        <div className="opponentsNoWrap">
+        {props.started && <div className="opponentsNoWrap">
           {
             props.spectres.map((spectre, i) => {
               return <Oponent key={`op_${i}`} spectre={spectre} />;
             })
           }
-        </div>
+        </div>}
           </div>
       }
       {dim.outerWidth > 750 &&
       <SectionRight
         spectres={props.spectres}
         pieces={props.pieces}
+        started={props.started}
       />
       }
     </div>
