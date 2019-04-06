@@ -17,9 +17,14 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "typeRoots": [ "./typedef" ],
   },
   "include": [
     "src"
-  ]
+  ],
+  "types": [
+    "jest",
+    "react"
+  ],
 }

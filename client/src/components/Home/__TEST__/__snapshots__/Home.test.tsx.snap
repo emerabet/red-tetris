@@ -1,0 +1,834 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly with defaults 1`] = `
+<div
+  className="mainDivHome"
+>
+  <div
+    className="redTetris "
+  >
+    <div
+      className="box boxR"
+    >
+      <div
+        className="boxCube boxR1"
+      />
+      <div
+        className="boxCube boxR2"
+      />
+      <div
+        className="boxCube boxR3"
+      />
+      <div
+        className="boxCube boxR4"
+      />
+      <div
+        className="boxCube boxR5"
+      />
+      <div
+        className="boxCube boxR6"
+      />
+      <div
+        className="boxCube boxR7"
+      />
+      <div
+        className="boxCube boxR8"
+      />
+      <div
+        className="boxCube boxR9"
+      />
+      <div
+        className="boxCube boxR10"
+      />
+      <div
+        className="boxCube boxR11"
+      />
+      <div
+        className="boxCube boxR12"
+      />
+      <div
+        className="boxCube boxR13"
+      />
+      <div
+        className="boxCube boxR14"
+      />
+    </div>
+    <div
+      className="box boxE"
+    >
+      <div
+        className="boxCube boxE1"
+      />
+      <div
+        className="boxCube boxE2"
+      />
+      <div
+        className="boxCube boxE3"
+      />
+      <div
+        className="boxCube boxE4"
+      />
+      <div
+        className="boxCube boxE5"
+      />
+      <div
+        className="boxCube boxE6"
+      />
+      <div
+        className="boxCube boxE7"
+      />
+      <div
+        className="boxCube boxE8"
+      />
+      <div
+        className="boxCube boxE9"
+      />
+      <div
+        className="boxCube boxE10"
+      />
+      <div
+        className="boxCube boxE11"
+      />
+      <div
+        className="boxCube boxE12"
+      />
+      <div
+        className="boxCube boxE13"
+      />
+    </div>
+    <div
+      className="box boxD"
+    >
+      <div
+        className="boxCube boxD1"
+      />
+      <div
+        className="boxCube boxD2"
+      />
+      <div
+        className="boxCube boxD3"
+      />
+      <div
+        className="boxCube boxD4"
+      />
+      <div
+        className="boxCube boxD5"
+      />
+      <div
+        className="boxCube boxD6"
+      />
+      <div
+        className="boxCube boxD7"
+      />
+      <div
+        className="boxCube boxD8"
+      />
+      <div
+        className="boxCube boxD9"
+      />
+      <div
+        className="boxCube boxD10"
+      />
+      <div
+        className="boxCube boxD11"
+      />
+      <div
+        className="boxCube boxD12"
+      />
+    </div>
+    <div
+      className="titleSpace"
+    />
+    <div
+      className="boxs boxT"
+    >
+      <div
+        className="boxCube boxT1"
+      />
+      <div
+        className="boxCube boxT2"
+      />
+      <div
+        className="boxCube boxT3"
+      />
+      <div
+        className="boxCube boxT4"
+      />
+      <div
+        className="boxCube boxT5"
+      />
+      <div
+        className="boxCube boxT6"
+      />
+      <div
+        className="boxCube boxT7"
+      />
+    </div>
+    <div
+      className="box boxE"
+    >
+      <div
+        className="boxCube boxE1"
+      />
+      <div
+        className="boxCube boxE2"
+      />
+      <div
+        className="boxCube boxE3"
+      />
+      <div
+        className="boxCube boxE4"
+      />
+      <div
+        className="boxCube boxE5"
+      />
+      <div
+        className="boxCube boxE6"
+      />
+      <div
+        className="boxCube boxE7"
+      />
+      <div
+        className="boxCube boxE8"
+      />
+      <div
+        className="boxCube boxE9"
+      />
+      <div
+        className="boxCube boxE10"
+      />
+      <div
+        className="boxCube boxE11"
+      />
+      <div
+        className="boxCube boxE12"
+      />
+      <div
+        className="boxCube boxE13"
+      />
+    </div>
+    <div
+      className="boxs boxT"
+    >
+      <div
+        className="boxCube boxT1"
+      />
+      <div
+        className="boxCube boxT2"
+      />
+      <div
+        className="boxCube boxT3"
+      />
+      <div
+        className="boxCube boxT4"
+      />
+      <div
+        className="boxCube boxT5"
+      />
+      <div
+        className="boxCube boxT6"
+      />
+      <div
+        className="boxCube boxT7"
+      />
+    </div>
+    <div
+      className="box boxR"
+    >
+      <div
+        className="boxCube boxR1"
+      />
+      <div
+        className="boxCube boxR2"
+      />
+      <div
+        className="boxCube boxR3"
+      />
+      <div
+        className="boxCube boxR4"
+      />
+      <div
+        className="boxCube boxR5"
+      />
+      <div
+        className="boxCube boxR6"
+      />
+      <div
+        className="boxCube boxR7"
+      />
+      <div
+        className="boxCube boxR8"
+      />
+      <div
+        className="boxCube boxR9"
+      />
+      <div
+        className="boxCube boxR10"
+      />
+      <div
+        className="boxCube boxR11"
+      />
+      <div
+        className="boxCube boxR12"
+      />
+      <div
+        className="boxCube boxR13"
+      />
+      <div
+        className="boxCube boxR14"
+      />
+    </div>
+    <div
+      className="boxs boxI"
+    >
+      <div
+        className="boxCube boxI1"
+      />
+      <div
+        className="boxCube boxI2"
+      />
+      <div
+        className="boxCube boxI3"
+      />
+      <div
+        className="boxCube boxI4"
+      />
+      <div
+        className="boxCube boxI5"
+      />
+      <div
+        className="boxCube boxI6"
+      />
+      <div
+        className="boxCube boxI7"
+      />
+      <div
+        className="boxCube boxI8"
+      />
+      <div
+        className="boxCube boxI9"
+      />
+    </div>
+    <div
+      className="box boxS"
+    >
+      <div
+        className="boxCube boxS1"
+      />
+      <div
+        className="boxCube boxS2"
+      />
+      <div
+        className="boxCube boxS3"
+      />
+      <div
+        className="boxCube boxS4"
+      />
+      <div
+        className="boxCube boxS5"
+      />
+      <div
+        className="boxCube boxS6"
+      />
+      <div
+        className="boxCube boxS7"
+      />
+      <div
+        className="boxCube boxS8"
+      />
+      <div
+        className="boxCube boxS9"
+      />
+      <div
+        className="boxCube boxS10"
+      />
+      <div
+        className="boxCube boxS11"
+      />
+      <div
+        className="boxCube boxS12"
+      />
+      <div
+        className="boxCube boxS13"
+      />
+      <div
+        className="boxCube boxS14"
+      />
+    </div>
+  </div>
+  <form
+    className="formFlex"
+    onSubmit={[Function]}
+  >
+    <div
+      className="labelTitle big"
+    >
+      <div>
+         
+        <div
+          className="labelLetterM"
+        >
+          <div
+            className="labelCube r1"
+          />
+          <div
+            className="labelCube r2"
+          />
+          <div
+            className="labelCube r3"
+          />
+          <div
+            className="labelCube r4"
+          />
+          <div
+            className="labelCube r5"
+          />
+          <div
+            className="labelCube r6"
+          />
+          <div
+            className="labelCube r7"
+          />
+          <div
+            className="labelCube r8"
+          />
+          <div
+            className="labelCube r9"
+          />
+          <div
+            className="labelCube r10"
+          />
+          <div
+            className="labelCube r11"
+          />
+          <div
+            className="labelCube r12"
+          />
+        </div>
+         
+      </div>
+      <div>
+         
+        <div
+          className="labelLetterM"
+        >
+          <div
+            className="labelCube o1"
+          />
+          <div
+            className="labelCube o2"
+          />
+          <div
+            className="labelCube o3"
+          />
+          <div
+            className="labelCube o4"
+          />
+          <div
+            className="labelCube o5"
+          />
+          <div
+            className="labelCube o6"
+          />
+          <div
+            className="labelCube o7"
+          />
+          <div
+            className="labelCube o8"
+          />
+          <div
+            className="labelCube o9"
+          />
+          <div
+            className="labelCube o10"
+          />
+          <div
+            className="labelCube o11"
+          />
+        </div>
+         
+      </div>
+      <div>
+         
+        <div
+          className="labelLetterM"
+        >
+          <div
+            className="labelCube o1"
+          />
+          <div
+            className="labelCube o2"
+          />
+          <div
+            className="labelCube o3"
+          />
+          <div
+            className="labelCube o4"
+          />
+          <div
+            className="labelCube o5"
+          />
+          <div
+            className="labelCube o6"
+          />
+          <div
+            className="labelCube o7"
+          />
+          <div
+            className="labelCube o8"
+          />
+          <div
+            className="labelCube o9"
+          />
+          <div
+            className="labelCube o10"
+          />
+          <div
+            className="labelCube o11"
+          />
+        </div>
+         
+      </div>
+      <div>
+         
+        <div
+          className="labelLetter"
+        >
+          <div
+            className="labelCube m1"
+          />
+          <div
+            className="labelCube m2"
+          />
+          <div
+            className="labelCube m3"
+          />
+          <div
+            className="labelCube m4"
+          />
+          <div
+            className="labelCube m5"
+          />
+          <div
+            className="labelCube m6"
+          />
+          <div
+            className="labelCube m7"
+          />
+          <div
+            className="labelCube m8"
+          />
+          <div
+            className="labelCube m9"
+          />
+          <div
+            className="labelCube m10"
+          />
+          <div
+            className="labelCube m11"
+          />
+          <div
+            className="labelCube m12"
+          />
+          <div
+            className="labelCube m13"
+          />
+        </div>
+         
+      </div>
+    </div>
+    <div
+      className="namer"
+    >
+      <div
+        className="namer-input"
+      >
+        <input
+          className=""
+          name="room"
+          onBlur={[Function]}
+          onChange={[Function]}
+          placeholder="ROOM"
+          type="text"
+          value="my room"
+        />
+      </div>
+    </div>
+    <div
+      className="labelTitle big"
+    >
+      <div>
+         
+        <div
+          className="labelLetterM"
+        >
+          <div
+            className="labelCube p1"
+          />
+          <div
+            className="labelCube p2"
+          />
+          <div
+            className="labelCube p3"
+          />
+          <div
+            className="labelCube p4"
+          />
+          <div
+            className="labelCube p5"
+          />
+          <div
+            className="labelCube p6"
+          />
+          <div
+            className="labelCube p7"
+          />
+          <div
+            className="labelCube p8"
+          />
+          <div
+            className="labelCube p9"
+          />
+          <div
+            className="labelCube p10"
+          />
+          <div
+            className="labelCube p11"
+          />
+        </div>
+         
+      </div>
+      <div>
+         
+        <div
+          className="labelLetterM"
+        >
+          <div
+            className="labelCube l1"
+          />
+          <div
+            className="labelCube l2"
+          />
+          <div
+            className="labelCube l3"
+          />
+          <div
+            className="labelCube l4"
+          />
+          <div
+            className="labelCube l5"
+          />
+          <div
+            className="labelCube l6"
+          />
+          <div
+            className="labelCube l7"
+          />
+          <div
+            className="labelCube l8"
+          />
+        </div>
+         
+      </div>
+      <div>
+         
+        <div
+          className="labelLetterM"
+        >
+          <div
+            className="labelCube a1"
+          />
+          <div
+            className="labelCube a2"
+          />
+          <div
+            className="labelCube a3"
+          />
+          <div
+            className="labelCube a4"
+          />
+          <div
+            className="labelCube a5"
+          />
+          <div
+            className="labelCube a6"
+          />
+          <div
+            className="labelCube a7"
+          />
+          <div
+            className="labelCube a8"
+          />
+          <div
+            className="labelCube a9"
+          />
+          <div
+            className="labelCube a10"
+          />
+          <div
+            className="labelCube a11"
+          />
+          <div
+            className="labelCube a12"
+          />
+          <div
+            className="labelCube a13"
+          />
+        </div>
+         
+      </div>
+      <div>
+         
+        <div
+          className="labelLetterM"
+        >
+          <div
+            className="labelCube y1"
+          />
+          <div
+            className="labelCube y2"
+          />
+          <div
+            className="labelCube y3"
+          />
+          <div
+            className="labelCube y4"
+          />
+          <div
+            className="labelCube y5"
+          />
+          <div
+            className="labelCube y6"
+          />
+          <div
+            className="labelCube y7"
+          />
+          <div
+            className="labelCube y8"
+          />
+          <div
+            className="labelCube y9"
+          />
+          <div
+            className="labelCube y10"
+          />
+        </div>
+         
+      </div>
+      <div>
+         
+        <div
+          className="labelLetterM"
+        >
+          <div
+            className="labelCube e1"
+          />
+          <div
+            className="labelCube e2"
+          />
+          <div
+            className="labelCube e3"
+          />
+          <div
+            className="labelCube e4"
+          />
+          <div
+            className="labelCube e5"
+          />
+          <div
+            className="labelCube e6"
+          />
+          <div
+            className="labelCube e7"
+          />
+          <div
+            className="labelCube e8"
+          />
+          <div
+            className="labelCube e9"
+          />
+          <div
+            className="labelCube e10"
+          />
+          <div
+            className="labelCube e11"
+          />
+          <div
+            className="labelCube e12"
+          />
+          <div
+            className="labelCube e13"
+          />
+        </div>
+         
+      </div>
+      <div>
+         
+        <div
+          className="labelLetterM"
+        >
+          <div
+            className="labelCube r1"
+          />
+          <div
+            className="labelCube r2"
+          />
+          <div
+            className="labelCube r3"
+          />
+          <div
+            className="labelCube r4"
+          />
+          <div
+            className="labelCube r5"
+          />
+          <div
+            className="labelCube r6"
+          />
+          <div
+            className="labelCube r7"
+          />
+          <div
+            className="labelCube r8"
+          />
+          <div
+            className="labelCube r9"
+          />
+          <div
+            className="labelCube r10"
+          />
+          <div
+            className="labelCube r11"
+          />
+          <div
+            className="labelCube r12"
+          />
+        </div>
+         
+      </div>
+    </div>
+    <div
+      className="namer"
+    >
+      <div
+        className="namer-input"
+      >
+        <input
+          className=""
+          name="player"
+          onBlur={[Function]}
+          onChange={[Function]}
+          placeholder="PLAYER"
+          type="text"
+          value="my name"
+        />
+      </div>
+    </div>
+    <button
+      className="plus"
+      disabled={false}
+      type="submit"
+    />
+  </form>
+</div>
+`;

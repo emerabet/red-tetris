@@ -1,13 +1,16 @@
 import React from 'react';
+import './style.css';
 
 interface Props {
   handleClick: Function;
   children: any;
 }
 
-const Button = (props:Props) => {
+const Button = (props: Props) => {
   return (
-    <button onClick={() => props.handleClick()}>{props.children}</button>
+    <button className="button_format" onClick={() => props.handleClick()}>
+        {props.children}
+    </button>
   );
 };
 

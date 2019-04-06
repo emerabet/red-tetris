@@ -1,0 +1,128 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly with defaults 1`] = `
+<div
+  className="nextPieces"
+>
+  <div
+    className="pieceRow"
+  >
+    <div
+      className="nextPiece"
+    >
+      <div
+        className="boardRow"
+      >
+        <div
+          className="boardCell cell1"
+        />
+        <div
+          className="boardCell cell1"
+        />
+        <div
+          className="boardCell cell0"
+        />
+      </div>
+      <div
+        className="boardRow"
+      >
+        <div
+          className="boardCell cell0"
+        />
+        <div
+          className="boardCell cell1"
+        />
+        <div
+          className="boardCell cell1"
+        />
+      </div>
+      <div
+        className="boardRow"
+      >
+        <div
+          className="boardCell cell0"
+        />
+        <div
+          className="boardCell cell0"
+        />
+        <div
+          className="boardCell cell0"
+        />
+      </div>
+    </div>
+    <div
+      className="nextPiece"
+    >
+      <div
+        className="boardRow"
+      >
+        <div
+          className="boardCell cell0"
+        />
+        <div
+          className="boardCell cell7"
+        />
+        <div
+          className="boardCell cell7"
+        />
+      </div>
+      <div
+        className="boardRow"
+      >
+        <div
+          className="boardCell cell0"
+        />
+        <div
+          className="boardCell cell7"
+        />
+        <div
+          className="boardCell cell7"
+        />
+      </div>
+    </div>
+    <div
+      className="nextPiece"
+    >
+      <div
+        className="boardRow"
+      >
+        <div
+          className="boardCell cell0"
+        />
+        <div
+          className="boardCell cell0"
+        />
+        <div
+          className="boardCell cell4"
+        />
+      </div>
+      <div
+        className="boardRow"
+      >
+        <div
+          className="boardCell cell4"
+        />
+        <div
+          className="boardCell cell4"
+        />
+        <div
+          className="boardCell cell4"
+        />
+      </div>
+      <div
+        className="boardRow"
+      >
+        <div
+          className="boardCell cell0"
+        />
+        <div
+          className="boardCell cell0"
+        />
+        <div
+          className="boardCell cell0"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

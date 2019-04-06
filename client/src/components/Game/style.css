@@ -1,0 +1,33 @@
+
+.flexRowGame {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+  }
+
+.flexColumnGame {
+    align-items: center;
+    justify-content: center;
+    min-width: 250px;
+}
+
+.flexColumnL {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.flexColumnR {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}  
+
+.admBtnSmall {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}

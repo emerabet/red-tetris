@@ -7,12 +7,25 @@
     "@types/node": "10.12.18",
     "@types/react": "16.7.18",
     "@types/react-dom": "16.0.11",
+    "@types/react-redux": "^7.0.0",
+    "@types/react-router-dom": "^4.3.1",
+    "@types/react-test-renderer": "^16.8.1",
+    "@types/redux-persist": "^4.3.1",
     "@types/socket.io-client": "^1.4.32",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0",
+    "@types/storybook__react": "^4.0.0",
+    "events": "^3.0.0",
+    "react": "^16.8.0-alpha.1",
+    "react-dom": "^16.8.0-alpha.1",
+    "react-redux": "^6.0.0",
+    "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.2",
+    "react-test-renderer": "^16.8.4",
+    "redux": "^4.0.1",
+    "redux-persist": "^5.10.0",
+    "redux-saga": "^1.0.0",
     "socket.io-client": "^2.2.0",
     "tslint": "^5.12.0",
+    "typesafe-actions": "^3.0.0",
     "typescript": "3.2.2"
   },
   "scripts": {
@@ -20,7 +33,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "tslint --project tslint.json 'src/**/*.{ts,tsx}'"
+    "lint": "tslint --project tslint.json 'src/**/*.{ts,tsx}'",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public",
+    "build:svg": "svgr -d svg/ componentsTMP/"
   },
   "browserslist": [
     ">0.2%",
@@ -29,6 +45,12 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@storybook/addon-actions": "^4.1.11",
+    "@storybook/addon-links": "^4.1.11",
+    "@storybook/addons": "^4.1.11",
+    "@storybook/react": "^4.1.11",
+    "jest": "^23.6.0",
     "tslint-config-airbnb": "^5.11.1"
   }
 }
