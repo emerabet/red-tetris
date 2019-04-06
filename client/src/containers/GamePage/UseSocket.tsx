@@ -22,13 +22,8 @@ const UseSocket: React.SFC<Props> = (props) => {
     props.updateSpectre(spectre);
   });
 
-  props.socket.on('update_player_count', (count: number, username: string, action: string) => {
-    console.log('update_player_count', count, username, action);
+  props.socket.on('update_game_state', (count: number, username: string, action: string) => {
     props.updatePlayers(count, username, action);
-  });
-
-  props.socket.on('game_over', (a: any) => {
-    console.log("GAME OVER", a)
   });
 
   return (<div></div>);

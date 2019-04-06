@@ -7,5 +7,8 @@ storiesOf('Score', module)
       <Score
         level={4}
         score={999}
+        count={2}
+        username="test"
+        action="joined"
       />
    ));

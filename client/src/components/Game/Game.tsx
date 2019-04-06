@@ -1,5 +1,4 @@
-import React, { Component, useState, useEffect } from 'react';
-import SquareLabel from '../Labels';
+import React from 'react';
 import LabeledBox from '../LabeledBox';
 import SectionLeft from '../SectionLeft';
 import Board from '../Board';
@@ -25,6 +24,9 @@ interface GameProps {
   pieces: string;
   play: () => void;
   started: boolean;
+  count: number;
+  username: string;
+  action: string;
 }
 
 const Game: React.SFC<GameProps> = (props) => {
@@ -40,6 +42,9 @@ const Game: React.SFC<GameProps> = (props) => {
         level={props.level}
         score={props.score}
         play={props.play}
+        count={props.count}
+        username={props.username}
+        action={props.action}
       />}
       {
         dim.outerWidth >= 750 ?
@@ -76,6 +81,9 @@ const Game: React.SFC<GameProps> = (props) => {
         <Score
           level={props.level}
           score={props.score}
+          count={props.count}
+          username={props.username}
+          action={props.action}
         />
         <NextPieces
           vertical
@@ -86,6 +94,9 @@ const Game: React.SFC<GameProps> = (props) => {
           small
           level={props.level}
           score={props.score}
+          count={props.count}
+          username={props.username}
+          action={props.action}
         />
         <NextPieces
           vertical

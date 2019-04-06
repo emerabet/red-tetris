@@ -11,5 +11,8 @@ storiesOf('SectionLeft', module)
          level={2}
          score={8}
          play={() => 'void' }
+         count={2}
+        username="test"
+        action="joined"
       />
    ));

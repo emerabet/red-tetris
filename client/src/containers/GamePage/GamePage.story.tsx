@@ -15,7 +15,6 @@ storiesOf('GamePage', module)
       }}
       nagivation={null}
       history={null}
-      socket={socketIOClient('http://localhost:4000')}
       startGame={() => { }}
       endGame={() => { }}
       resetGame={() => { }}

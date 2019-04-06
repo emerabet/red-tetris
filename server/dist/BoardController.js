@@ -190,10 +190,12 @@ class BoardController extends events_1.EventEmitter {
         action(arg);
         this.draw();
     }
-    stop() {
+    stop(win = false) {
         this.isFinished = true;
         clearInterval(this.timer);
-        this.currentBoard.clearAll();
+        if (!win) {
+            this.currentBoard.clearAll();
+        }
         this.draw();
     }
     init() {

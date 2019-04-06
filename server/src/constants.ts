@@ -1,4 +1,4 @@
-export interface SynteticPlayerInfo {
+export interface IPlayerInfo {
     id: string;
     username: string;
 }

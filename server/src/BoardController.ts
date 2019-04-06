@@ -3,7 +3,7 @@ import Player from './Player';
 import Board from './Board';
 import Piece from './Piece';
 import PieceFactory from './PieceFactory';
-import { Direction, CellState, SynteticPlayerInfo } from './constants';
+import { Direction, CellState, IPlayerInfo } from './constants';
 import { deepCopy } from './utils';
 
 import { Socket } from 'socket.io';
@@ -56,7 +56,7 @@ class BoardController extends EventEmitter {
         return this.isFinished;
     }
 
-    public getPlayerInfo(): SynteticPlayerInfo {
+    public getPlayerInfo(): IPlayerInfo {
         return {
             id: this.socket.id,
             username: this.currentPlayer.username,
@@ -226,10 +226,12 @@ class BoardController extends EventEmitter {
         this.draw();
     }
 
-    public stop() {
+    public stop(win:boolean = false) {
         this.isFinished = true;
         clearInterval(this.timer);
-        this.currentBoard.clearAll();
+        if (!win) {
+            this.currentBoard.clearAll();
+        }
         this.draw();
     }
 

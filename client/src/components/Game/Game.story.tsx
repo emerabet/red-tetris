@@ -44,6 +44,9 @@ storiesOf('Game', module)
       }
       pieces="ZOL"
       play={() => 'void'}
+      count={2}
+      username="test"
+      action="jpinec"
     />
   )).add('game', () => (
     <Game
@@ -86,6 +89,9 @@ storiesOf('Game', module)
       }
       pieces="ZOL"
       play={() => 'void'}
+      count={2}
+      username="test"
+      action="jpinec"
     />
   )).add('malus', () => (
     <Game
@@ -128,5 +134,8 @@ storiesOf('Game', module)
       }
       pieces="ZOL"
       play={() => 'void' }
+      count={2}
+      username="test"
+      action="jpinec"
     />
   ));

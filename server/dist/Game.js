@@ -17,6 +17,7 @@ class Game extends events_1.EventEmitter {
         this.boards = new Map();
         this.players = new Map();
         this.pieces = [];
+        this.mode = constants_1.GameMode.Solo;
     }
     get name() {
         return this.room;
@@ -33,7 +34,7 @@ class Game extends events_1.EventEmitter {
                 this.createSetOfPieces();
                 this.status = constants_1.GameState.OnGoing;
                 this.mode = this.players.size > 1 ? constants_1.GameMode.Multiplyaer : constants_1.GameMode.Solo;
-                this.boards.forEach((value, key) => {
+                this.boards.forEach((value) => {
                     value.run();
                 });
             }
@@ -42,7 +43,7 @@ class Game extends events_1.EventEmitter {
             const player = this.players.get(socketId);
             if (player !== undefined && player.isAdmin && this.status === constants_1.GameState.OnGoing) {
                 this.pieces.length = 0;
-                this.boards.forEach((value, key) => {
+                this.boards.forEach((value) => {
                     value.stop();
                 });
                 this.status = constants_1.GameState.Opened;
@@ -72,21 +73,32 @@ class Game extends events_1.EventEmitter {
                 this.emit('free_game', this.room);
                 this.removeAllListeners();
             }
+            else {
+                this.checkWinner();
+            }
             this.updateStatusGame(username, 'left');
         });
         board.on('game_over', ({ username }) => {
             this.updateStatusGame(username, 'lost');
-            const hasWinner = this.hasWinner();
-            if (hasWinner) {
-                this.updateStatusGame(hasWinner.username, 'win');
-            }
+            this.checkWinner();
         });
     }
+    checkWinner() {
+        const hasWinner = this.hasWinner();
+        if (this.status === constants_1.GameState.OnGoing && hasWinner) {
+            this.updateStatusGame(hasWinner.username, 'win');
+            const b = this.boards.get(hasWinner.id);
+            b.stop(true);
+        }
+    }
     hasWinner() {
+        if (this.mode === constants_1.GameMode.Solo) {
+            return null;
+        }
         let countNotFinishedGame = 0;
         let currentPlayerInfo = null;
         this.boards.forEach((v) => {
-            if (!v.getIsFinished) {
+            if (!v.getIsFinished()) {
                 countNotFinishedGame += 1;
                 currentPlayerInfo = v.getPlayerInfo();
             }
@@ -99,7 +111,7 @@ class Game extends events_1.EventEmitter {
         this.updateStatusGame(newAdmin.username, 'owner');
     }
     updateStatusGame(username, action) {
-        this.emit('update_player_count', {
+        this.emit('update_game_state', {
             username,
             action,
             count: this.players.size,

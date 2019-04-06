@@ -9,7 +9,6 @@ import './style.css';
 interface GamePageProps {
   nagivation: any;
   history: any;
-  socket: SocketIOClient.Socket;
   started: boolean;
   state: StateBoardI;
   startGame: Function;
@@ -25,7 +24,7 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
   const [room, setRoom] = useState('');
   const [player, setPlayer] = useState('');
   const [started, setStarted] = useState(false);
-  const [socket, setSocket] = useState(socketIOClient);
+  const [socket, setSocket] = useState<null | SocketIOClient.Socket>(null);
   const initialRowDestruction: number[] = [];
   const [row, setRow] = useState(initialRowDestruction);
 
@@ -44,12 +43,6 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
       }
     },
     []);
-
-  useEffect(
-    () => {
-      console.log("USE EFFECT", props.count, props.username, props.action)
-    },
-    [props.count, props.username, props.action]);
 
   useEffect(
     () => {
@@ -72,7 +65,7 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
 
   useEffect(
     () => {
-      if (started) {
+      if (started && socket !== null) {
         document.addEventListener('keyup', async (e) => {
           switch (e.key) {
             case 'ArrowLeft':
@@ -136,7 +129,7 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
   }
 
   const play = () => {
-    socket.emit('init');
+    socket !== null && socket.emit('init');
   };
 
   return (
@@ -162,8 +155,11 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
             pieces={props.state.pieces}
             play={play}
             started={props.started}
+            count={props.count}
+            username={props.username}
+            action={props.action}
           />
-          <UseSocket socket={socket} />
+          {socket !== null && <UseSocket socket={socket} />}
         </div>
 
       }

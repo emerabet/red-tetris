@@ -15,6 +15,9 @@ interface SectionLeftProps {
   level: number;
   score: number;
   play: () => void;
+  count: number;
+  username: string;
+  action: string;
 }
 
 const SectionLeft: React.SFC<SectionLeftProps> = (props) => {
@@ -26,6 +29,9 @@ const SectionLeft: React.SFC<SectionLeftProps> = (props) => {
         <Score
           level={props.level}
           score={props.score}
+          count={props.count}
+          username={props.username}
+          action={props.action}
         />
         <LabeledBox
           label="room:"
