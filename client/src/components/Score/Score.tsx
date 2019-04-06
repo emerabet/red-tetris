@@ -17,13 +17,17 @@ const Score: React.SFC<ScoreProps> = (props) => {
   useEffect(
     () => {
       setSnack('snackbar show');
-      setTimeout(() => setSnack('snackbar'), 2000);
+      const t = setTimeout(() => setSnack('snackbar'), 2000);
+      return function cleanUp() {
+        clearTimeout(t);
+      };
     },
-    [props.count, props.username, props.action]);
+    [props.username, props.action]);
 
   return (
     <div className={props.small ? 'scoreContainerSmall' : 'scoreContainer'}>
-      <div className={snack}>{`${props.username} has ${props.action}`}</div>
+      {props.username !== '' && props.action !== '' &&
+      <div className={snack}>{`${props.username} has ${props.action}`}</div>}
       <div>PLAYERS: {props.count}</div>
       <div>LEVEL: {props.level}</div>
       <div>SCORE: {props.score}</div>
