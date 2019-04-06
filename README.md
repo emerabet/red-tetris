@@ -8,5 +8,8 @@ Tetris multijoueur
     * Node JS
     * Socket IO
 
+## Diagram
+![Alt text](/screens/diagram.png?raw=true "Diagram")
+
 ## Install
-    `docker-compose up`
+`docker-compose up`
