@@ -17,6 +17,7 @@ class Game extends events_1.EventEmitter {
         this.boards = new Map();
         this.players = new Map();
         this.pieces = [];
+        this.mode = constants_1.GameMode.Solo;
     }
     get name() {
         return this.room;
@@ -33,7 +34,7 @@ class Game extends events_1.EventEmitter {
                 this.createSetOfPieces();
                 this.status = constants_1.GameState.OnGoing;
                 this.mode = this.players.size > 1 ? constants_1.GameMode.Multiplyaer : constants_1.GameMode.Solo;
-                this.boards.forEach((value, key) => {
+                this.boards.forEach((value) => {
                     value.run();
                 });
             }
@@ -42,7 +43,7 @@ class Game extends events_1.EventEmitter {
             const player = this.players.get(socketId);
             if (player !== undefined && player.isAdmin && this.status === constants_1.GameState.OnGoing) {
                 this.pieces.length = 0;
-                this.boards.forEach((value, key) => {
+                this.boards.forEach((value) => {
                     value.stop();
                 });
                 this.status = constants_1.GameState.Opened;
@@ -72,28 +73,34 @@ class Game extends events_1.EventEmitter {
                 this.emit('free_game', this.room);
                 this.removeAllListeners();
             }
+            else {
+                this.checkWinner();
+            }
             this.updateStatusGame(username, 'left');
         });
         board.on('game_over', ({ username }) => {
             this.updateStatusGame(username, 'lost');
-            const hasWinner = this.hasWinner();
-            if (hasWinner) {
-                console.log('Winner found:: ', hasWinner);
-                this.updateStatusGame(hasWinner.username, 'win');
-                const b = this.boards.get(hasWinner.id);
-                b.stop(true);
-            }
+            this.checkWinner();
         });
     }
+    checkWinner() {
+        const hasWinner = this.hasWinner();
+        if (this.status === constants_1.GameState.OnGoing && hasWinner) {
+            this.updateStatusGame(hasWinner.username, 'win');
+            const b = this.boards.get(hasWinner.id);
+            b.stop(true);
+        }
+    }
     hasWinner() {
+        if (this.mode === constants_1.GameMode.Solo) {
+            return null;
+        }
         let countNotFinishedGame = 0;
         let currentPlayerInfo = null;
-        console.log('in hasWinner');
         this.boards.forEach((v) => {
             if (!v.getIsFinished()) {
                 countNotFinishedGame += 1;
                 currentPlayerInfo = v.getPlayerInfo();
-                console.log('tttt:: ', countNotFinishedGame, currentPlayerInfo);
             }
         });
         return countNotFinishedGame === 1 ? currentPlayerInfo : null;
@@ -101,11 +108,10 @@ class Game extends events_1.EventEmitter {
     assignNewAdministrator() {
         const newAdmin = this.players.values().next().value;
         newAdmin.setRole(constants_1.PlayerType.Admin);
-        console.log('new admin assigned');
         this.updateStatusGame(newAdmin.username, 'owner');
     }
     updateStatusGame(username, action) {
-        this.emit('update_player_count', {
+        this.emit('update_game_state', {
             username,
             action,
             count: this.players.size,

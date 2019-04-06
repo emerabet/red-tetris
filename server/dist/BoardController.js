@@ -75,7 +75,6 @@ class BoardController extends events_1.EventEmitter {
             id: this.currentPlayer.id,
             username: this.currentPlayer.username,
         };
-        console.log('emit game over');
         this.emit('game_over', data);
     }
     getNextPieces() {

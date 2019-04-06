@@ -40,8 +40,8 @@ class GameServer {
                     game.on('free_game', (room) => {
                         this.games.delete(room);
                     });
-                    game.on('update_player_count', ({ count, username, action }) => {
-                        this.io.in(room).emit('update_player_count', count, username, action);
+                    game.on('update_game_state', ({ count, username, action }) => {
+                        this.io.in(room).emit('update_game_state', count, username, action);
                     });
                 }
                 const game = this.games.get(room);
