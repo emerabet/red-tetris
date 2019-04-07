@@ -25,7 +25,6 @@ interface NextPiecesProps {
 const NextPieces: React.SFC<NextPiecesProps> = (props) => {
   const pcs = props.pieces.split('');
   return (
-    <div className="nextPieces">
       <div className={props.vertical ? 'pieceColumn' : 'pieceRow'}>
         {
           pcs.map((piece:string, i:number) => {
@@ -35,8 +34,6 @@ const NextPieces: React.SFC<NextPiecesProps> = (props) => {
           })
         }
       </div>
-    </div>
-
   );
 };
 

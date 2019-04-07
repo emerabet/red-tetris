@@ -19,20 +19,26 @@ const Home: React.SFC<HomeProps> = (props) => {
 
   function roomShake() {
     setRoomClassName('shake');
-    setTimeout(
+    const t = setTimeout(
       () => {
         setRoomClassName('');
       },
       1000);
+      return function clearUp() {
+        clearTimeout(t);
+      }
   }
 
   function playerShake() {
     setPlayerClassName('shake');
-    setTimeout(
+    const t = setTimeout(
       () => {
         setPlayerClassName('');
       },
       1000);
+      return function clearUp() {
+        clearTimeout(t);
+      }
   }
 
   return (

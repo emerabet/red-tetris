@@ -19,6 +19,7 @@ const UseSocket: React.SFC<Props> = (props) => {
   });
 
   props.socket.on('spectre', (spectre:SpectreI) => {
+    console.log(spectre)
     props.updateSpectre(spectre);
   });
 
