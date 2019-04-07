@@ -15,13 +15,16 @@
     "testRegex": "src/__tests__/.*\\.(ts|tsx|js)$",
     "coverageReporters": [
       "text",
-      "html"
+      "html",
+      "json"
     ]
   },
   "scripts": {
     "test": "PORT=4000 jest",
     "coverage": "PORT=4000 jest --coverage",
     "dev": "concurrently -k -n \"Typescript,Node\" -p \"[{name}]\" -c \"blue, green\" \"tsc --watch\" \"PORT=4000 nodemon --inspect dist/index.js\"",
+    "tsc": "tsc",
+    "prod": "PORT=4000 node dist/index.js",
     "lint": "tslint --project tslint.json 'src/**/*.{ts,tsx}'"
   },
   "devDependencies": {
