@@ -1,25 +1,24 @@
-.nextPieces {
-    width: 100%;
-    -webkit-box-shadow: inset 0 0 1px 2px #cfd8dc;
-  box-shadow: inset 0 0 1px 2px #cfd8dc;
-  margin-top:10px;
-  margin-bottom: 20px;
-}
-
 .pieceRow {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding: 10px;
+    -webkit-box-shadow: inset 0 0 1px 2px #cfd8dc;
+    box-shadow: inset 0 0 1px 2px #cfd8dc;
+    margin-top:10px;
+    margin-bottom: 20px;
+    margin-left: 4vw;
 }
 
 .pieceColumn {
-  padding-top: 10px;
-  padding-bottom: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  -webkit-box-shadow: inset 0 0 1px 2px #cfd8dc;
+  box-shadow: inset 0 0 1px 2px #cfd8dc;
+  margin-top:10px;
+  margin-bottom: 20px;
+  padding: 10px;
 }
