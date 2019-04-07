@@ -2,6 +2,13 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "jest": {
+    "coverageReporters": [
+      "text",
+      "html",
+      "json"
+    ]
+  },
   "dependencies": {
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
