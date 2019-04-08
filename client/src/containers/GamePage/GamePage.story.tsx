@@ -1,7 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import GamePage from './GamePage';
-import socketIOClient from 'socket.io-client';
 
 storiesOf('GamePage', module)
   .add('start', () => (

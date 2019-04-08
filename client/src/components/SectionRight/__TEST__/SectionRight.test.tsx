@@ -17,6 +17,7 @@ it('renders correctly with defaults', () => {
       }]
     }
       pieces={'ZOL'}
+      started={true}
   />).toJSON();
   expect(sectionRight).toMatchSnapshot();
 });

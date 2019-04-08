@@ -404,3 +404,408 @@ exports[`renders correctly with defaults 1`] = `
   </div>
 </div>
 `;
+
+exports[`renders correctly with defaults 2`] = `
+<div>
+  <div
+    className="mainDivHome"
+  >
+    <div
+      className="redTetris "
+    >
+      <div
+        className="box boxR"
+      >
+        <div
+          className="boxCube boxR1"
+        />
+        <div
+          className="boxCube boxR2"
+        />
+        <div
+          className="boxCube boxR3"
+        />
+        <div
+          className="boxCube boxR4"
+        />
+        <div
+          className="boxCube boxR5"
+        />
+        <div
+          className="boxCube boxR6"
+        />
+        <div
+          className="boxCube boxR7"
+        />
+        <div
+          className="boxCube boxR8"
+        />
+        <div
+          className="boxCube boxR9"
+        />
+        <div
+          className="boxCube boxR10"
+        />
+        <div
+          className="boxCube boxR11"
+        />
+        <div
+          className="boxCube boxR12"
+        />
+        <div
+          className="boxCube boxR13"
+        />
+        <div
+          className="boxCube boxR14"
+        />
+      </div>
+      <div
+        className="box boxE"
+      >
+        <div
+          className="boxCube boxE1"
+        />
+        <div
+          className="boxCube boxE2"
+        />
+        <div
+          className="boxCube boxE3"
+        />
+        <div
+          className="boxCube boxE4"
+        />
+        <div
+          className="boxCube boxE5"
+        />
+        <div
+          className="boxCube boxE6"
+        />
+        <div
+          className="boxCube boxE7"
+        />
+        <div
+          className="boxCube boxE8"
+        />
+        <div
+          className="boxCube boxE9"
+        />
+        <div
+          className="boxCube boxE10"
+        />
+        <div
+          className="boxCube boxE11"
+        />
+        <div
+          className="boxCube boxE12"
+        />
+        <div
+          className="boxCube boxE13"
+        />
+      </div>
+      <div
+        className="box boxD"
+      >
+        <div
+          className="boxCube boxD1"
+        />
+        <div
+          className="boxCube boxD2"
+        />
+        <div
+          className="boxCube boxD3"
+        />
+        <div
+          className="boxCube boxD4"
+        />
+        <div
+          className="boxCube boxD5"
+        />
+        <div
+          className="boxCube boxD6"
+        />
+        <div
+          className="boxCube boxD7"
+        />
+        <div
+          className="boxCube boxD8"
+        />
+        <div
+          className="boxCube boxD9"
+        />
+        <div
+          className="boxCube boxD10"
+        />
+        <div
+          className="boxCube boxD11"
+        />
+        <div
+          className="boxCube boxD12"
+        />
+      </div>
+      <div
+        className="titleSpace"
+      />
+      <div
+        className="boxs boxT"
+      >
+        <div
+          className="boxCube boxT1"
+        />
+        <div
+          className="boxCube boxT2"
+        />
+        <div
+          className="boxCube boxT3"
+        />
+        <div
+          className="boxCube boxT4"
+        />
+        <div
+          className="boxCube boxT5"
+        />
+        <div
+          className="boxCube boxT6"
+        />
+        <div
+          className="boxCube boxT7"
+        />
+      </div>
+      <div
+        className="box boxE"
+      >
+        <div
+          className="boxCube boxE1"
+        />
+        <div
+          className="boxCube boxE2"
+        />
+        <div
+          className="boxCube boxE3"
+        />
+        <div
+          className="boxCube boxE4"
+        />
+        <div
+          className="boxCube boxE5"
+        />
+        <div
+          className="boxCube boxE6"
+        />
+        <div
+          className="boxCube boxE7"
+        />
+        <div
+          className="boxCube boxE8"
+        />
+        <div
+          className="boxCube boxE9"
+        />
+        <div
+          className="boxCube boxE10"
+        />
+        <div
+          className="boxCube boxE11"
+        />
+        <div
+          className="boxCube boxE12"
+        />
+        <div
+          className="boxCube boxE13"
+        />
+      </div>
+      <div
+        className="boxs boxT"
+      >
+        <div
+          className="boxCube boxT1"
+        />
+        <div
+          className="boxCube boxT2"
+        />
+        <div
+          className="boxCube boxT3"
+        />
+        <div
+          className="boxCube boxT4"
+        />
+        <div
+          className="boxCube boxT5"
+        />
+        <div
+          className="boxCube boxT6"
+        />
+        <div
+          className="boxCube boxT7"
+        />
+      </div>
+      <div
+        className="box boxR"
+      >
+        <div
+          className="boxCube boxR1"
+        />
+        <div
+          className="boxCube boxR2"
+        />
+        <div
+          className="boxCube boxR3"
+        />
+        <div
+          className="boxCube boxR4"
+        />
+        <div
+          className="boxCube boxR5"
+        />
+        <div
+          className="boxCube boxR6"
+        />
+        <div
+          className="boxCube boxR7"
+        />
+        <div
+          className="boxCube boxR8"
+        />
+        <div
+          className="boxCube boxR9"
+        />
+        <div
+          className="boxCube boxR10"
+        />
+        <div
+          className="boxCube boxR11"
+        />
+        <div
+          className="boxCube boxR12"
+        />
+        <div
+          className="boxCube boxR13"
+        />
+        <div
+          className="boxCube boxR14"
+        />
+      </div>
+      <div
+        className="boxs boxI"
+      >
+        <div
+          className="boxCube boxI1"
+        />
+        <div
+          className="boxCube boxI2"
+        />
+        <div
+          className="boxCube boxI3"
+        />
+        <div
+          className="boxCube boxI4"
+        />
+        <div
+          className="boxCube boxI5"
+        />
+        <div
+          className="boxCube boxI6"
+        />
+        <div
+          className="boxCube boxI7"
+        />
+        <div
+          className="boxCube boxI8"
+        />
+        <div
+          className="boxCube boxI9"
+        />
+      </div>
+      <div
+        className="box boxS"
+      >
+        <div
+          className="boxCube boxS1"
+        />
+        <div
+          className="boxCube boxS2"
+        />
+        <div
+          className="boxCube boxS3"
+        />
+        <div
+          className="boxCube boxS4"
+        />
+        <div
+          className="boxCube boxS5"
+        />
+        <div
+          className="boxCube boxS6"
+        />
+        <div
+          className="boxCube boxS7"
+        />
+        <div
+          className="boxCube boxS8"
+        />
+        <div
+          className="boxCube boxS9"
+        />
+        <div
+          className="boxCube boxS10"
+        />
+        <div
+          className="boxCube boxS11"
+        />
+        <div
+          className="boxCube boxS12"
+        />
+        <div
+          className="boxCube boxS13"
+        />
+        <div
+          className="boxCube boxS14"
+        />
+      </div>
+    </div>
+    <form
+      className="formFlex"
+      onSubmit={[Function]}
+    >
+      <div
+        className="namer"
+      >
+        <div
+          className="namer-input"
+        >
+          <input
+            className=""
+            name="room"
+            onBlur={[Function]}
+            onChange={[Function]}
+            placeholder="ROOM"
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+      <div
+        className="namer"
+      >
+        <div
+          className="namer-input"
+        >
+          <input
+            className=""
+            name="player"
+            onBlur={[Function]}
+            onChange={[Function]}
+            placeholder="PLAYER"
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+      <button
+        className="plus"
+        disabled={true}
+        type="submit"
+      />
+    </form>
+  </div>
+</div>
+`;
