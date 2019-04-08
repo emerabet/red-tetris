@@ -3,6 +3,7 @@
 exports[`renders correctly with defaults 1`] = `
 <div
   className="button-container button_start"
+  onClick={[Function]}
 >
   <div
     className="button-text shimmer_start"

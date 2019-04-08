@@ -2,7 +2,7 @@ import { getType } from 'typesafe-actions';
 import * as gameActions from '../actions/gameActions';
 import { GameState } from '../types/gameTypes';
 
-const initialState: GameState = {
+export const initialState: GameState = {
   started: false,
   room: '',
   player: '',

@@ -10,6 +10,10 @@ it('renders correctly with defaults', () => {
     status="start"
     level={2}
     score={8}
+    play={() => 'void' }
+    count={2}
+    username="test"
+    action="joined"
   />).toJSON();
   expect(sectionLeft).toMatchSnapshot();
 });

@@ -362,6 +362,15 @@ exports[`renders correctly with defaults 1`] = `
     <div
       className="scoreContainer"
     >
+      <div
+        className="snackbar"
+      >
+        test has joined
+      </div>
+      <div>
+        PLAYERS: 
+        2
+      </div>
       <div>
         LEVEL: 
         2
@@ -1525,6 +1534,7 @@ exports[`renders correctly with defaults 1`] = `
     </div>
     <div
       className="button-container button_start"
+      onClick={[Function]}
     >
       <div
         className="button-text shimmer_start"
