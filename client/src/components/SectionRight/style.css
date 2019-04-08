@@ -32,3 +32,8 @@
     align-items: center;
     transform: scale(0.7);
 }
+
+.lab {
+    font-family: 'Raleway Dots', cursive;
+    font-size: 30px;
+}

@@ -8,7 +8,6 @@ import GamePage from './containers/GamePage/';
 import './App.css';
 
 interface AppProps {
-  // socket: SocketIOClient.Socket
 }
 
 class App extends Component<AppProps> {
@@ -16,8 +15,6 @@ class App extends Component<AppProps> {
   render() {
     const routes = (
       <Switch>
-        {/* <Route path="/" exact component={HomePage} /> */}
-        {/* <Route path="/" exact component={GamePage} /> */}
         <Route path="/" exact component={GamePage} />
         <Route path="/:id" exact component={GamePage} />
         <Redirect from="/" to="/" />

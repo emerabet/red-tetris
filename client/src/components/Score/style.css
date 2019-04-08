@@ -1,13 +1,15 @@
 .scoreContainer {
     color: #fff;
-    font-family: 'Short Stack', cursive;
+    /* font-family: 'Short Stack', cursive; */
+    font-family: 'Nova Square', cursive;
     font-size: 28px;
     text-align: left;
 }
 
 .scoreContainerSmall {
     color: #fff;
-    font-family: 'Short Stack', cursive;
+    /* font-family: 'Short Stack', cursive; */
+    font-family: 'Nova Square', cursive;
     font-size: 14px;
     text-align: left;
 }

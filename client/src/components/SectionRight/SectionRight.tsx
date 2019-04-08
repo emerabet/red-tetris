@@ -21,15 +21,17 @@ const SectionRight: React.SFC<SectionRightProps> = (props) => {
   return (
     <div className="sectionRight">
       {props.started && <div className="sectionRightInside">
-        <SquareLabel
+        {/* <SquareLabel
           label="next pieces:"
-        />
+        /> */}
+        <div className="lab">NEXT PIECES</div>
         <NextPieces
           pieces={props.pieces}
         />
-        <SquareLabel
+        {/* <SquareLabel
           label="opponents:"
-        />
+        /> */}
+        <div className="lab">OPPONENTS</div>
         <div className="opponents">
           {
             props.spectres.map((spectre, i) => {
