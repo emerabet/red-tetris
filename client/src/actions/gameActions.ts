@@ -1,5 +1,5 @@
-import { createStandardAction, getType, createAsyncAction } from 'typesafe-actions';
-import { Position, StateBoardI, SpectreI } from '../types/gameTypes';
+import { createStandardAction, getType } from 'typesafe-actions';
+import { StateBoardI, SpectreI } from '../types/gameTypes';
 
 export const RESET = createStandardAction('RESET')<void>();
 export const START = createStandardAction('START')<void>();
