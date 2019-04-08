@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}",
+      "!src/**/*.story.tsx"
+    ],
     "coverageReporters": [
       "text",
       "html",
@@ -27,6 +31,7 @@
     "docker": "REACT_APP_STAGE=prod react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "coverage": "react-scripts test --coverage",
     "eject": "react-scripts eject",
     "lint": "tslint --project tslint.json 'src/**/*.{ts,tsx}'",
     "storybook": "start-storybook -p 9009 -s public",
