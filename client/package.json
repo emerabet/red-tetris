@@ -5,7 +5,8 @@
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{ts,tsx}",
-      "!src/**/*.story.tsx"
+      "!src/**/*.story.tsx",
+      "!src/serviceWorker.ts"
     ],
     "coverageReporters": [
       "text",
