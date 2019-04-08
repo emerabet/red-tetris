@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}",
+      "!src/**/*.story.tsx"
+    ],
     "coverageReporters": [
       "text",
       "html",
