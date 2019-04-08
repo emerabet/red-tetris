@@ -9,7 +9,6 @@ interface HomeProps {
   player: string;
   enterRoom: (event: any) => {};
   handleChange: (event: any) => void;
-
 }
 
 const Home: React.SFC<HomeProps> = (props) => {
