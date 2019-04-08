@@ -56,6 +56,7 @@
     "@types/redux-persist": "^4.3.1",
     "@types/socket.io-client": "^1.4.32",
     "@types/storybook__react": "^4.0.0",
+    "react-testing-library": "^6.1.2",
     "tslint": "^5.12.0",
     "tslint-config-airbnb": "^5.11.1",
     "typescript": "^3.4.2"

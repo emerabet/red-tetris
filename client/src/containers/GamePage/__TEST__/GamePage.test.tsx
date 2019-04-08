@@ -62,4 +62,3 @@ it('renders correctly with defaults', () => {
     />).toJSON();
   expect(gamePage).toMatchSnapshot();
 });
-
