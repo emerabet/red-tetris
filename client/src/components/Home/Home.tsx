@@ -50,7 +50,7 @@ const Home: React.SFC<HomeProps> = (props) => {
           <div className="namer-input">
             <input
               onBlur={roomShake}
-              className={roomClassName}
+              className={`${roomClassName} roomInput`}
               name="room"
               type="text"
               placeholder="ROOM"
@@ -63,7 +63,7 @@ const Home: React.SFC<HomeProps> = (props) => {
           <div className="namer-input">
             <input
               onBlur={playerShake}
-              className={playerClassName}
+              className={`${playerClassName} playerInput`}
               name="player"
               type="text"
               placeholder="PLAYER"
