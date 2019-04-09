@@ -3,10 +3,6 @@ import { shallow, configure, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import renderer from 'react-test-renderer';
 import GamePage from '../GamePage';
-import {io, serverSocket, cleanup } from './mockServer.js';
-import {render} from 'react-testing-library';
-import ReactDOM from 'react-dom';
-import { act } from 'react-dom/test-utils';
 
 configure({adapter: new Adapter()});
 
