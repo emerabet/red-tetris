@@ -2,9 +2,10 @@ import React from 'react';
 import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import renderer from 'react-test-renderer';
+import { act } from 'react-dom/test-utils';
 import Home from '../Home';
 
-configure({adapter: new Adapter()});
+configure({ adapter: new Adapter() });
 
 it('renders correctly with defaults', () => {
   const home = renderer.create(<Home
@@ -35,16 +36,10 @@ it('Test click event', () => {
     enterRoom={mockCallBack}
     handleChange={(_) => { return 'void'; }}
   />));
-  // button.find('.plus')
-  // expect(button.find('.plus')).to.have.lengthOf(1);
   expect(button.prop('onSubmit') === mockCallBack);
-  // button.find('button').simulate('click');
-  // expect(mockCallBack.mock.calls.length).toEqual(1);
 });
 
-// .simulate('keydown', { which: 'a' })
-
-it('fill input', () => {
+it('fill input', (done:any) => {
   let test = '';
   const mockCallBack = jest.fn();
 
@@ -58,10 +53,16 @@ it('fill input', () => {
     enterRoom={mockCallBack}
     handleChange={handleInput}
   />));
+  
   button.find('.roomInput').simulate('focus');
-  button.find('.roomInput').simulate('change');
+  button.find('.roomInput').simulate('change', { target: { value: 'Hello' } });
   button.find('.roomInput').simulate('blur');
+  setTimeout(()=>{ done(); }, 1500);
   button.find('.playerInput').simulate('focus');
-  button.find('.playerInput').simulate('change');
+  button.find('.playerInput').simulate('change', { target: { value: 'Hello' } });
   button.find('.playerInput').simulate('blur');
+  setTimeout(()=>{done();}, 1500);
+  act(() => {
+    window.dispatchEvent(new Event('resize'));
+  });
 });

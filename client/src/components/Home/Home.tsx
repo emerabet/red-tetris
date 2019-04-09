@@ -23,9 +23,9 @@ const Home: React.SFC<HomeProps> = (props) => {
         setRoomClassName('');
       },
       1000);
-      return function clearUp() {
-        clearTimeout(t);
-      }
+    return function clearUp() {
+      clearTimeout(t);
+    };
   }
 
   function playerShake() {
@@ -35,9 +35,9 @@ const Home: React.SFC<HomeProps> = (props) => {
         setPlayerClassName('');
       },
       1000);
-      return function clearUp() {
-        clearTimeout(t);
-      }
+    return function clearUp() {
+      clearTimeout(t);
+    };
   }
 
   return (
