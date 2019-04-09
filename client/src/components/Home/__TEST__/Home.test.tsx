@@ -62,7 +62,7 @@ it('fill input', (done:any) => {
   button.find('.playerInput').simulate('change', { target: { value: 'Hello' } });
   button.find('.playerInput').simulate('blur');
   setTimeout(()=>{done();}, 1500);
-  act(() => {
-    window.dispatchEvent(new Event('resize'));
-  });
+  // act(() => {
+  //   window.dispatchEvent(new Event('resize'));
+  // });
 });
