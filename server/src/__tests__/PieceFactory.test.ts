@@ -1,5 +1,4 @@
 import PieceFactory from './../PieceFactory';
-import Piece from './../Piece';
 
 const mockedPositions = [
     [
