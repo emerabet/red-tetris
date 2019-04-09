@@ -89,4 +89,25 @@ describe('store/topics/reducer', () => {
             action: 'test',});
   });
 
+  it('should not add', () => {
+
+    // it's empty on purpose because it's just starting to fetch posts
+    expect(gameReducer({...initialState, spectres: [{
+      id: 'oponent 1',
+      spectre: '0123456789',
+      username: 'aaaaa',
+    }]}, {type: getType(gameActions.UPDATE_SPECTRE),
+        payload: {
+          spectre: {
+            id: 'oponent 1',
+            spectre: '0123456789',
+            username: 'aaaaa',
+          }
+        },})).toEqual({...initialState, spectres: [{
+          id: 'oponent 1',
+          spectre: '0123456789',
+          username: 'aaaaa',
+        }]});
+  });
+
 });
