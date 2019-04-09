@@ -9,3 +9,11 @@ it('renders correctly with defaults', () => {
      />).toJSON();
   expect(squareLabel).toMatchSnapshot();
 });
+
+it('renders correctly with defaults red', () => {
+  const squareLabel = renderer.create(<SquareLabel
+    label="ABC"
+    red
+     />).toJSON();
+  expect(squareLabel).toMatchSnapshot();
+});

@@ -135,3 +135,139 @@ exports[`renders correctly with defaults 1`] = `
   </div>
 </div>
 `;
+
+exports[`renders correctly with defaults red 1`] = `
+<div
+  className="labelTitle "
+>
+  <div>
+     
+    <div
+      className="labelLetterM"
+    >
+      <div
+        className="labelCube redCube a1"
+      />
+      <div
+        className="labelCube redCube a2"
+      />
+      <div
+        className="labelCube redCube a3"
+      />
+      <div
+        className="labelCube redCube a4"
+      />
+      <div
+        className="labelCube redCube a5"
+      />
+      <div
+        className="labelCube redCube a6"
+      />
+      <div
+        className="labelCube redCube a7"
+      />
+      <div
+        className="labelCube redCube a8"
+      />
+      <div
+        className="labelCube redCube a9"
+      />
+      <div
+        className="labelCube redCube a10"
+      />
+      <div
+        className="labelCube redCube a11"
+      />
+      <div
+        className="labelCube redCube a12"
+      />
+      <div
+        className="labelCube redCube a13"
+      />
+    </div>
+     
+  </div>
+  <div>
+     
+    <div
+      className="labelLetterM"
+    >
+      <div
+        className="labelCube redCube b1"
+      />
+      <div
+        className="labelCube redCube b2"
+      />
+      <div
+        className="labelCube redCube b3"
+      />
+      <div
+        className="labelCube redCube b4"
+      />
+      <div
+        className="labelCube redCube b5"
+      />
+      <div
+        className="labelCube redCube b6"
+      />
+      <div
+        className="labelCube redCube b7"
+      />
+      <div
+        className="labelCube redCube b8"
+      />
+      <div
+        className="labelCube redCube b9"
+      />
+      <div
+        className="labelCube redCube b10"
+      />
+      <div
+        className="labelCube redCube b11"
+      />
+      <div
+        className="labelCube redCube b12"
+      />
+      <div
+        className="labelCube redCube b13"
+      />
+    </div>
+     
+  </div>
+  <div>
+     
+    <div
+      className="labelLetterM"
+    >
+      <div
+        className="labelCube redCube c1"
+      />
+      <div
+        className="labelCube redCube c2"
+      />
+      <div
+        className="labelCube redCube c3"
+      />
+      <div
+        className="labelCube redCube c4"
+      />
+      <div
+        className="labelCube redCube c5"
+      />
+      <div
+        className="labelCube redCube c6"
+      />
+      <div
+        className="labelCube redCube c7"
+      />
+      <div
+        className="labelCube redCube c8"
+      />
+      <div
+        className="labelCube redCube c9"
+      />
+    </div>
+     
+  </div>
+</div>
+`;

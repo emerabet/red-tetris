@@ -368,7 +368,7 @@ exports[`renders correctly with defaults 1`] = `
           className="namer-input"
         >
           <input
-            className=""
+            className=" roomInput"
             name="room"
             onBlur={[Function]}
             onChange={[Function]}
@@ -385,7 +385,7 @@ exports[`renders correctly with defaults 1`] = `
           className="namer-input"
         >
           <input
-            className=""
+            className=" playerInput"
             name="player"
             onBlur={[Function]}
             onChange={[Function]}
@@ -773,7 +773,7 @@ exports[`renders correctly with defaults 2`] = `
           className="namer-input"
         >
           <input
-            className=""
+            className=" roomInput"
             name="room"
             onBlur={[Function]}
             onChange={[Function]}
@@ -790,7 +790,7 @@ exports[`renders correctly with defaults 2`] = `
           className="namer-input"
         >
           <input
-            className=""
+            className=" playerInput"
             name="player"
             onBlur={[Function]}
             onChange={[Function]}

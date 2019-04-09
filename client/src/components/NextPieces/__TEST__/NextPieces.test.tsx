@@ -9,3 +9,11 @@ it('renders correctly with defaults', () => {
      />).toJSON();
   expect(nextPieces).toMatchSnapshot();
 });
+
+it('renders correctly with defaults vertical', () => {
+  const nextPieces = renderer.create(<NextPieces
+    pieces="ZOL"
+    vertical
+     />).toJSON();
+  expect(nextPieces).toMatchSnapshot();
+});
