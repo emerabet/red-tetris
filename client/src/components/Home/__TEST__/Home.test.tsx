@@ -2,7 +2,6 @@ import React from 'react';
 import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import renderer from 'react-test-renderer';
-import { act } from 'react-dom/test-utils';
 import Home from '../Home';
 
 configure({ adapter: new Adapter() });
@@ -42,27 +41,21 @@ it('Test click event', () => {
 it('fill input', (done:any) => {
   let test = '';
   const mockCallBack = jest.fn();
-
   const handleInput = (a: string) => {
     test = a;
-  }
-
+  };
   const button = shallow((<Home
     room="test"
     player="test"
     enterRoom={mockCallBack}
     handleChange={handleInput}
   />));
-  
   button.find('.roomInput').simulate('focus');
   button.find('.roomInput').simulate('change', { target: { value: 'Hello' } });
   button.find('.roomInput').simulate('blur');
-  setTimeout(()=>{ done(); }, 1500);
+  setTimeout(() => { done(); }, 1500);
   button.find('.playerInput').simulate('focus');
   button.find('.playerInput').simulate('change', { target: { value: 'Hello' } });
   button.find('.playerInput').simulate('blur');
-  setTimeout(()=>{done();}, 1500);
-  // act(() => {
-  //   window.dispatchEvent(new Event('resize'));
-  // });
+  setTimeout(() => { done(); }, 1500);
 });

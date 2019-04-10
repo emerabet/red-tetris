@@ -4,7 +4,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import renderer from 'react-test-renderer';
 import GamePage from '../GamePage';
 
-configure({adapter: new Adapter()});
+configure({ adapter: new Adapter() });
 
 it('renders correctly with defaults', () => {
   const gamePage = renderer.create(<GamePage
