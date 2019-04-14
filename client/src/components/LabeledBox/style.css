@@ -1,83 +1,41 @@
 .outerLabel {
-    border: dotted #f8b500 2px;
-    padding: 10px;
-    margin: 10px;
-    width: 80%;
-    /* font-family: 'Dokdo', cursive; */
-    font-family: 'Raleway Dots', cursive;
-    /* font-weight: 600; */
-    font-size: 30px;
+	border: dotted #f8b500 2px;
+	padding: 10px;
+	margin: 10px;
+	width: 80%;
+	font-family: 'Raleway Dots', cursive;
+	font-size: 30px;
 }
 
 .testLabel {
-    font-size: 60px;
-    position:relative;
-    display:inline-block;
+	font-size: 60px;
+	position: relative;
+	display: inline-block;
 }
 
 .testLabel:after {
-    /* content: ''; */
-    position:absolute;
-    left:0;
-    top:0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, transparent 50%, transparent 50%),
-    radial-gradient(circle, transparent 20%, white 50%) 30px 30px;
-    background-size:4px 4px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: radial-gradient(circle, transparent 50%, transparent 50%),
+		radial-gradient(circle, transparent 20%, white 50%) 30px 30px;
+	background-size: 4px 4px;
 }
 
-/* div {
-    font-size: 60px;
-    position:relative;
-    display:inline-block;
-} */
-/* .dottedText:after
-{
-    content: '';
-    position:absolute;
-    left:0;
-    top:0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, transparent 50%, transparent 50%),
-    radial-gradient(circle, transparent 20%, white 50%) 30px 30px;
-    background-size:4px 4px;
-} */
-
-/* @import url('https://fonts.googleapis.com/css?family=Sacramento'); */
-
-/* $text-color: pink; */
-
-/* // 1 to 7 shadow inner to outer order using cool SASS color function */
-/* $shadow-1: darken($text-color, 5%);
-$shadow-2: darken($text-color, 10%);
-$shadow-3: darken($text-color, 15%);
-$shadow-4: darken($text-color, 20%);
-$shadow-5: darken($text-color, 25%);
-$shadow-6: darken($text-color, 30%);
-$shadow-7: darken($text-color, 35%); */
-
-/* body {
-  background-color: black;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-} */
-
 .neon {
-  color: #ffebee;
-  font-family: 'Sacramento';
-  font-size: 30px;
-  text-shadow: 0 0 5px #ffcdd2, 0 0 10px #ef9a9a , 0 0 15px #e57373, 0 0 20px #ef5350 , 0 0 25px #f44336 , 0 0 30px #e53935 , 0 0 35px #d32f2f;
-  /* text-shadow: 0 0 5px #fff9c4, 0 0 10px #fff59d , 0 0 15px #fff176, 0 0 20px #ffee58 , 0 0 25px #ffeb3b , 0 0 30px #fdd835 , 0 0 35px #fbc02d; */
-  opacity: 1;
-  text-transform: lowercase;
+	color: #ffebee;
+	font-family: 'Sacramento';
+	font-size: 30px;
+	text-shadow: 0 0 5px #ffcdd2, 0 0 10px #ef9a9a, 0 0 15px #e57373, 0 0 20px #ef5350, 0 0 25px #f44336,
+		0 0 30px #e53935, 0 0 35px #d32f2f;
+	opacity: 1;
+	text-transform: lowercase;
 }
 
 .neon:hover {
-  cursor: none;
-  transition: all 0.2s ease-in-out;
-  opacity: 0.2;
+	cursor: none;
+	transition: all 0.2s ease-in-out;
+	opacity: 0.2;
 }

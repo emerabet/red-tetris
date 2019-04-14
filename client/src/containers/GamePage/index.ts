@@ -6,7 +6,7 @@ import rootReducer from '../../reducers/index';
 import { startGameAsync, endGameAsync, reset, updatePlayers }
   from '../../actions/gameActions';
 
-const mapStateToProps = (state: StateType<typeof rootReducer>) => ({
+export const mapStateToProps = (state: StateType<typeof rootReducer>) => ({
   state: state.game.state,
   started: state.game.started,
   room: state.game.room,
@@ -17,7 +17,7 @@ const mapStateToProps = (state: StateType<typeof rootReducer>) => ({
   action: state.game.action,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
+export const mapDispatchToProps = (dispatch: Dispatch) => ({
   resetGame: () => dispatch(reset()),
   startGame: (room: string, player: string) =>
     dispatch(startGameAsync({ room, player })),
