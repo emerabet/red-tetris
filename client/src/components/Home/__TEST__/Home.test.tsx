@@ -1,8 +1,9 @@
 import React from 'react';
 import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import renderer from 'react-test-renderer';
+import renderer, { act } from 'react-test-renderer';
 import Home from '../Home';
+import 'react-testing-library/cleanup-after-each';
 
 configure({ adapter: new Adapter() });
 
@@ -29,33 +30,19 @@ it('renders correctly with defaults', () => {
 it('Test click event', () => {
   const mockCallBack = jest.fn();
 
-  const button = shallow((<Home
+  const wrapper = shallow((<Home
     room="test"
     player="test"
     enterRoom={mockCallBack}
     handleChange={(_) => { return 'void'; }}
   />));
-  expect(button.prop('onSubmit') === mockCallBack);
-});
-
-it('fill input', (done:any) => {
-  let test = '';
-  const mockCallBack = jest.fn();
-  const handleInput = (a: string) => {
-    test = a;
-  };
-  const button = shallow((<Home
-    room="test"
-    player="test"
-    enterRoom={mockCallBack}
-    handleChange={handleInput}
-  />));
-  button.find('.roomInput').simulate('focus');
-  button.find('.roomInput').simulate('change', { target: { value: 'Hello' } });
-  button.find('.roomInput').simulate('blur');
-  setTimeout(() => { done(); }, 1500);
-  button.find('.playerInput').simulate('focus');
-  button.find('.playerInput').simulate('change', { target: { value: 'Hello' } });
-  button.find('.playerInput').simulate('blur');
-  setTimeout(() => { done(); }, 1500);
+  act(() => {
+    global.outerWidth = 200;
+    global.dispatchEvent(new Event('resize'));
+  });
+  act(() => {
+    global.outerWidth = 480;
+    global.dispatchEvent(new Event('resize'));
+  });
+  expect(wrapper.prop('onSubmit') === mockCallBack);
 });

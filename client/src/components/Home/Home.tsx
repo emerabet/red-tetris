@@ -16,30 +16,6 @@ const Home: React.SFC<HomeProps> = (props) => {
   const [playerClassName, setPlayerClassName] = useState('');
   const dim = useWindowSize();
 
-  function roomShake() {
-    setRoomClassName('shake');
-    const t = setTimeout(
-      () => {
-        setRoomClassName('');
-      },
-      1000);
-    return function clearUp() {
-      clearTimeout(t);
-    };
-  }
-
-  function playerShake() {
-    setPlayerClassName('shake');
-    const t = setTimeout(
-      () => {
-        setPlayerClassName('');
-      },
-      1000);
-    return function clearUp() {
-      clearTimeout(t);
-    };
-  }
-
   return (
     <div className="mainDivHome">
     <RedTetris additionalClassName={dim.outerWidth > 480 ? '' :
@@ -49,7 +25,6 @@ const Home: React.SFC<HomeProps> = (props) => {
         <div className="namer">
           <div className="namer-input">
             <input
-              onBlur={roomShake}
               className={`${roomClassName} roomInput`}
               name="room"
               type="text"
@@ -62,7 +37,6 @@ const Home: React.SFC<HomeProps> = (props) => {
         <div className="namer">
           <div className="namer-input">
             <input
-              onBlur={playerShake}
               className={`${playerClassName} playerInput`}
               name="player"
               type="text"
