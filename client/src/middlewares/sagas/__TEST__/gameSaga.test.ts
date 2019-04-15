@@ -7,5 +7,6 @@ test('end game saga', () => {
 });
 
 test('start game saga', () => {
-    expect(startGame({room: 'aaa', player: 'bbb'}).next().value).toEqual(put(gameActions.startGame('aaa', 'bbb')));
-  });
+  expect(startGame({ room: 'aaa', player: 'bbb' }).next().value)
+  .toEqual(put(gameActions.startGame('aaa', 'bbb')));
+});

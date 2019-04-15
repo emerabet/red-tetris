@@ -4,7 +4,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import renderer from 'react-test-renderer';
 import AdminButton from '../AdminButton';
 
-configure({adapter: new Adapter()});
+configure({ adapter: new Adapter() });
 
 it('renders correctly with defaults', () => {
   const button = renderer.create(<AdminButton text="start" play={() => {}}/>).toJSON();

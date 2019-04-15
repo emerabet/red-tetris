@@ -30,7 +30,6 @@ const Board: React.SFC<BoardProps> = (props) => {
     return (
       <div className="board">
         {props.board.map((d: any, i: number) => {
-          let r = 0;
           return (
             <div key={i} className={props.rowDestruction.includes(i - 1)
               ? 'boardRowDestructionOK' : 'boardRowDestruction'}>
@@ -39,12 +38,12 @@ const Board: React.SFC<BoardProps> = (props) => {
                   return (
                     <div key={j} className="destructionRow">
                       <div className="destructionCol">
-                        <div className={`boardCellDestruction effectL${r}`}>{}</div>
-                        <div className={`boardCellDestruction effectR${r}`}>{}</div>
+                        <div className={`boardCellDestruction effectL${j}`}>{}</div>
+                        <div className={`boardCellDestruction effectR${j}`}>{}</div>
                       </div>
                       <div className="destructionCol">
-                        <div className={`boardCellDestruction effectT${r}`}>{}</div>
-                        <div className={`boardCellDestruction effectB${r++}`}>{}</div>
+                        <div className={`boardCellDestruction effectT${j}`}>{}</div>
+                        <div className={`boardCellDestruction effectB${j}`}>{}</div>
                       </div>
                     </div>
                   );
