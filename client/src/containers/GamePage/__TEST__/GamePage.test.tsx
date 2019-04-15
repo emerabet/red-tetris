@@ -77,7 +77,7 @@ it('renders correctly with defaults', () => {
   expect(gamePage).toMatchSnapshot();
 });
 
-it('renders correctly with defaults mount', (done:any) => {
+it('change count player action props', (done:any) => {
   // act(() => {
     const mockHistory = {
       push: (url:string) => console.log(url),
@@ -108,10 +108,14 @@ it('renders correctly with defaults mount', (done:any) => {
       action="joined"
       updatePlayers={() => {}}
       /></Provider>));
-    wrapper.setProps({ username: 'test', action: 'test' });
+    wrapper.setProps({ username: 'test', action: 'test', count: 2 });
+    expect((wrapper).prop('username')).toEqual('test');
+    expect((wrapper).prop('action')).toEqual('test');
+    wrapper.props().children.props.updatePlayers(2, '', '');
     wrapper.find('.roomInput').simulate('focus');
     wrapper.find('.roomInput').simulate('change', { target: { value: 'Hello' } });
     wrapper.find('.roomInput').simulate('blur');
+    
     setTimeout(
       () => {
         setTimeout(
@@ -125,6 +129,7 @@ it('renders correctly with defaults mount', (done:any) => {
         );
       },
       1500);
+      
   // });
 });
 
