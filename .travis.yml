@@ -4,7 +4,7 @@ services:
 
 before_install:
   - docker build -t red-tetris/backend -f server/Dockerfile.dev server/
-  - docker build -t red-tetris/frontend -f server/Dockerfile.dev client/
+  - docker build -t red-tetris/frontend -f client/Dockerfile.dev client/
 
 script:
   - docker run red-tetris/backend npm run coverage
