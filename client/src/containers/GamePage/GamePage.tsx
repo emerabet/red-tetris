@@ -74,27 +74,33 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
     },
     [props.state.grid]);
 
+  function move(e: KeyboardEvent) {
+    if (socket !== null) {
+      switch (e.key) {
+        case 'ArrowLeft':
+          socket.emit('left');
+          return;
+        case 'ArrowRight':
+          socket.emit('right');
+          return;
+        case 'ArrowDown':
+          socket.emit('down');
+          return;
+        case 'ArrowUp':
+          socket.emit('up');
+          return;
+        default:
+          return;
+      }
+    }
+  }
+  
   useEffect(
     () => {
       if (started && socket !== null) {
-        document.addEventListener('keyup', async (e) => {
-          switch (e.key) {
-            case 'ArrowLeft':
-              socket.emit('left');
-              return;
-            case 'ArrowRight':
-              socket.emit('right');
-              return;
-            case 'ArrowDown':
-              socket.emit('down');
-              return;
-            case 'ArrowUp':
-              socket.emit('up');
-              return;
-          }
-        });
+        document.addEventListener('keyup', move);
         return function cleanup() {
-          document.removeEventListener('keydown', () => { });
+          document.removeEventListener('keyup', move);
         };
       }
     },
