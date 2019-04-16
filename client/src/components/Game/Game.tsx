@@ -129,11 +129,11 @@ const Game: React.SFC<GameProps> = (props) => {
     );
   }
 
-  function renderSmallMediumRight(showAdminButton: boolean) {
+  function renderSmallMediumRight(small: boolean) {
     return (
       <div className="flexColumnR">
         <Score
-          small
+          small={small}
           level={props.level}
           score={props.score}
           count={props.count}
@@ -148,7 +148,7 @@ const Game: React.SFC<GameProps> = (props) => {
             />
         }
         {
-          showAdminButton &&
+          small &&
             <div className="admBtnSmall">
               <AdminButton
                 text={props.started ? 'restart' : 'start'}
