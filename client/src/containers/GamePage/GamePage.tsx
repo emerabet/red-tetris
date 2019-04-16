@@ -41,11 +41,11 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
 
   useEffect(
     () => {
-      if (window.location.hash !== '') {
-        const reRoom = /#(.*)\[/g;
+      if (props.history.location.pathname !== '') {
+        const reRoom = /\/(.*)\[/g;
         const reUsername = /\[(.*)\]/g;
-        const rRoom = reRoom.exec(window.location.hash);
-        const rUsername = reUsername.exec(window.location.hash);
+        const rRoom = reRoom.exec(props.history.location.pathname);
+        const rUsername = reUsername.exec(props.history.location.pathname);
         if (rRoom !== null && rUsername !== null) {
           setRoom(rRoom[1]);
           setPlayer(rUsername[1]);
@@ -94,7 +94,7 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
       }
     }
   }
-  
+
   useEffect(
     () => {
       if (started && socket !== null) {
@@ -106,22 +106,7 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
     },
     [socket]);
 
-  const enterRoom = async (event: any) => {
-    event.preventDefault();
-    await props.resetGame();
-    await props.startGame(room, player);
-    const s = socketIOClient(socketUrl, {
-      query: {
-        room,
-        username: player,
-      },
-    });
-    setStarted(true);
-    setSocket(s);
-    props.history.push(`/#${room}[${player}]`);
-  };
-
-  const enterRoomUrl = async (r: string, p: string) => {
+  const prepareSocket = async (r:string, p:string) => {
     await props.resetGame();
     await props.startGame(room, player);
     const s = socketIOClient(socketUrl, {
@@ -133,6 +118,15 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
     setStarted(true);
     setSocket(s);
     props.history.push(`/#${r}[${p}]`);
+  };
+
+  const enterRoom = async (event: any) => {
+    event.preventDefault();
+    prepareSocket(room, player);
+  };
+
+  const enterRoomUrl = async (r: string, p: string) => {
+    prepareSocket(r, p);
   };
 
   function handleChange(event: any) {

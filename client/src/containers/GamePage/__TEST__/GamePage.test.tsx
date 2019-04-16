@@ -18,6 +18,11 @@ afterAll(() => React.useEffect.mockRestore());
 configure({ adapter: new Adapter() });
 
 it('renders correctly with defaults', () => {
+  const history = {
+    location: {
+      pathname: '',
+    },
+  };
   const gamePage = renderer.create(<GamePage
     state={{
       grid: [[]],
@@ -27,7 +32,7 @@ it('renders correctly with defaults', () => {
       spectre: '0000000000',
     }}
     nagivation={null}
-    history={null}
+    history={history}
     startGame={() => { }}
     endGame={() => { }}
     resetGame={() => { }}
@@ -48,6 +53,11 @@ it('renders correctly with defaults', () => {
 });
 
 it('renders correctly with defaults', () => {
+  const history = {
+    location: {
+      pathname: '',
+    },
+  };
   const gamePage = renderer.create(<GamePage
     state={{
       grid: [[]],
@@ -57,7 +67,7 @@ it('renders correctly with defaults', () => {
       spectre: '0000000000',
     }}
     nagivation={null}
-    history={null}
+    history={history}
     startGame={() => { }}
     endGame={() => { }}
     resetGame={() => { }}
@@ -81,6 +91,9 @@ it('change count player action props', (done:any) => {
   // act(() => {
     const mockHistory = {
       push: (url:string) => console.log(url),
+      location: {
+        pathname: '',
+      },
     }
     const wrapper = mount((<Provider store={store}><GamePage
       state={{
@@ -136,7 +149,11 @@ it('change count player action props', (done:any) => {
 it('renders correctly with defaults mount', () => {
   // act(() => {
     window.history.pushState({}, 'test', '/#test[test]');
-
+  const history = {
+    location: {
+      pathname: '',
+    },
+  };
   const wrapper = shallow((<GamePage
     state={{
       grid: [[]],
@@ -146,7 +163,7 @@ it('renders correctly with defaults mount', () => {
       spectre: '0000000000',
     }}
     nagivation={null}
-    history={null}
+    history={history}
     startGame={() => { }}
     endGame={() => { }}
     resetGame={() => { }}
