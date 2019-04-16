@@ -24,7 +24,7 @@
     "coverage": "PORT=4000 jest --coverage",
     "dev": "concurrently -k -n \"Typescript,Node\" -p \"[{name}]\" -c \"blue, green\" \"tsc --watch\" \"PORT=4000 nodemon --inspect dist/index.js\"",
     "tsc": "tsc",
-    "prod": "PORT=4000 node dist/index.js",
+    "prod": "NODE_ENV=production PORT=4000 node dist/index.js",
     "lint": "tslint --project tslint.json 'src/**/*.{ts,tsx}'"
   },
   "devDependencies": {
