@@ -20,12 +20,6 @@ class GameServer {
         this.io = socketIo(this.server, { pingTimeout: 60000 });
 
         this.app.use(cors());
-
-        this.app.use(express.static('public'));
-
-        this.app.get('/', (req, res) => {
-            res.sendFile(path.join(__dirname, '../public/test.html'));
-        });
     }
 
     public async start() {
