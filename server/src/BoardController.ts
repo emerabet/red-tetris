@@ -5,7 +5,6 @@ import Piece from './Piece';
 import PieceFactory from './PieceFactory';
 import { Direction, CellState, IPlayerInfo } from './constants';
 import { deepCopy } from './utils';
-
 import { Socket } from 'socket.io';
 
 class BoardController extends EventEmitter {

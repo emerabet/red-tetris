@@ -2,8 +2,6 @@ import express from 'express';
 import cors from 'cors';
 import http from 'http';
 import socketIo from 'socket.io';
-import path from 'path';
-
 import Game from './Game';
 
 class GameServer {

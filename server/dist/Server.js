@@ -15,7 +15,6 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const http_1 = __importDefault(require("http"));
 const socket_io_1 = __importDefault(require("socket.io"));
-const path_1 = __importDefault(require("path"));
 const Game_1 = __importDefault(require("./Game"));
 class GameServer {
     constructor(port) {
@@ -24,10 +23,6 @@ class GameServer {
         this.server = http_1.default.createServer(this.app);
         this.io = socket_io_1.default(this.server, { pingTimeout: 60000 });
         this.app.use(cors_1.default());
-        this.app.use(express_1.default.static('public'));
-        this.app.get('/', (req, res) => {
-            res.sendFile(path_1.default.join(__dirname, '../public/test.html'));
-        });
     }
     start() {
         return __awaiter(this, void 0, void 0, function* () {

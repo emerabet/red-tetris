@@ -30,7 +30,7 @@
   "scripts": {
     "start": "REACT_APP_STAGE=dev react-scripts start",
     "docker": "REACT_APP_STAGE=prod react-scripts start",
-    "build": "react-scripts build",
+    "build": "REACT_APP_STAGE=prod react-scripts build",
     "test": "react-scripts test",
     "coverage": "react-scripts test --coverage",
     "eject": "react-scripts eject",
