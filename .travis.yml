@@ -11,10 +11,10 @@ script:
   - docker run red-tetris/frontend npm run coverage
 
 after_success:
-  - docker build -t red-tetris/proxy proxy/
-  - docker build -t red-tetris/backend -f server/Dockerfile.prod server/
-  - docker build -t red-tetris/frontend -f client/Dockerfile.prod client/
+  - docker build -t emerabet/red-tetris-frontend -f client/Dockerfile.prod client/
+  - docker build -t emerabet/red-tetris-proxy proxy/
+  - docker build -t emerabet/red-tetris-backend -f server/Dockerfile.prod server/
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push red-tetris/proxy
-  - docker push red-tetris/backend
-  - docker push red-tetris/frontend
+  - docker push emerabet/red-tetris-proxy
+  - docker push emerabet/red-tetris-backend
+  - docker push emerabet/red-tetris-frontend
