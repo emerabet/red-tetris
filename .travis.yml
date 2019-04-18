@@ -9,3 +9,12 @@ before_install:
 script:
   - docker run red-tetris/backend npm run coverage
   - docker run red-tetris/frontend npm run coverage
+
+after_success:
+  - docker build -t red-tetris/proxy proxy/
+  - docker build -t red-tetris/backend -f server/Dockerfile.prod server/
+  - docker build -t red-tetris/frontend -f client/Dockerfile.prod client/
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push red-tetris/proxy
+  - docker push red-tetris/backend
+  - docker push red-tetris/frontend
