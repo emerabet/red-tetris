@@ -4,13 +4,15 @@
             "name": "client",
             "image": "emerabet/red-tetris-frontend",
             "hostname": "client",
-            "essential": false
+            "essential": false,
+            "memory": 128
         },
         {
             "name": "back",
             "image": "emerabet/red-tetris-backend",
             "hostname": "back",
-            "essential": false
+            "essential": false,
+            "memory": 128
         },
         {
             "name": "proxy",
@@ -22,7 +24,8 @@
                     "containerPort": 80
                 }
             ],
-            "links": ["client", "back"]
+            "links": ["client", "back"],
+            "memory": 128
         }
     ]
 }
