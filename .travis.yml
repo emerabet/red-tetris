@@ -18,3 +18,16 @@ after_success:
   - docker push emerabet/red-tetris-proxy
   - docker push emerabet/red-tetris-backend
   - docker push emerabet/red-tetris-frontend
+
+deploy:
+  provider: elasticbeanstalk
+  region: eu-west-3
+  app: red-tetris
+  env: RedTetris-env
+  bucket_name: elasticbeanstalk-eu-west-3-048253481248
+  bucket_path: red-tetris
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
