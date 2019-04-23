@@ -140,15 +140,17 @@ class BoardController extends EventEmitter {
     }
 
     private checkLine() {
+        let count: number = 0;
         for (let i = this.currentBoard.grid.length - 1; i >= 0; i -= 1) {
             if (this.currentBoard.isFull(i)) {
                 this.currentBoard.removeRowAt(i);
                 this.currentBoard.addEmptyRow();
-                this.addMalusToOther();
+                count += 1;
                 this.lines += 1;
                 i += 1;
             }
         }
+        this.addMalusToOther(count - 1);
         this.updateScore();
     }
 
@@ -175,18 +177,20 @@ class BoardController extends EventEmitter {
         }
     }
 
-    public takeMalus() {
+    public takeMalus(nb: number) {
         if (this.isFinished) {
             return ;
         }
         this.moveSide(Direction.Up);
         this.currentBoard.clear(this.currentPiece);
-        this.currentBoard.addLockedRow();
+        for (let i = 0; i < nb; i++) {
+            this.currentBoard.addLockedRow();
+        }
         this.draw();
     }
 
-    private addMalusToOther() {
-        this.emit('malus', this.socket.id);
+    private addMalusToOther(nbLine: number) {
+        this.emit('malus', this.socket.id, nbLine);
     }
 
     private askPiece() {

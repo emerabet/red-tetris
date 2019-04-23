@@ -19,6 +19,8 @@ class GameServer {
         this.io = socketIo(this.server, { pingTimeout: 60000 });
 
         this.app.use(cors());
+
+        this.app.use(express.static('build'));
     }
 
     public async start() {

@@ -23,6 +23,7 @@ class GameServer {
         this.server = http_1.default.createServer(this.app);
         this.io = socket_io_1.default(this.server, { pingTimeout: 60000 });
         this.app.use(cors_1.default());
+        this.app.use(express_1.default.static('build'));
     }
     start() {
         return __awaiter(this, void 0, void 0, function* () {

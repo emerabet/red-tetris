@@ -49,10 +49,13 @@ class Game extends events_1.EventEmitter {
                 this.status = constants_1.GameState.Opened;
             }
         });
-        board.on('malus', (socketId) => {
+        board.on('malus', (socketId, nbLine) => {
+            if (nbLine <= 0) {
+                return;
+            }
             this.boards.forEach((value, key) => {
                 if (key !== socketId) {
-                    value.takeMalus();
+                    value.takeMalus(nbLine);
                 }
             });
         });

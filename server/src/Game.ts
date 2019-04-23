@@ -57,10 +57,14 @@ class Game extends EventEmitter {
             }
         });
 
-        board.on('malus', (socketId:string) => {
+        board.on('malus', (socketId:string, nbLine: number) => {
+            if (nbLine <= 0) {
+                return ;
+            }
+
             this.boards.forEach((value, key) => {
                 if (key !== socketId) {
-                    value.takeMalus();
+                    value.takeMalus(nbLine);
                 }
             });
         });
