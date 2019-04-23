@@ -3,6 +3,11 @@ export interface IPlayerInfo {
     username: string;
 }
 
+export interface IQuery {
+    room:string;
+    username:string;
+}
+
 export enum Direction {
     Down,
     Left,

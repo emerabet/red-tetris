@@ -3,6 +3,7 @@ import cors from 'cors';
 import http from 'http';
 import socketIo from 'socket.io';
 import Game from './Game';
+import { IQuery } from './constants';
 
 class GameServer {
     private app:express.Application;
@@ -24,7 +25,7 @@ class GameServer {
         this.games = new Map<string, Game>();
 
         this.io.on('connection', (socket:SocketIO.Socket) => {
-            const { room, username } = socket.handshake.query;
+            const { room, username } :IQuery = socket.handshake.query;
             if (!this.games.has(room)) {
                 const game = new Game(room);
                 this.games.set(room, game);
