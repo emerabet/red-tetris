@@ -92,11 +92,11 @@ class Game extends EventEmitter {
                 this.checkWinner();
             }
 
-            this.updateStatusGame(username, 'left');
+            this.updateStatusGame(socketId, username, 'left');
         });
 
-        board.on('game_over', ({ username }) => {
-            this.updateStatusGame(username, 'lost');
+        board.on('game_over', ({ id, username }) => {
+            this.updateStatusGame(id, username, 'lost');
             this.checkWinner();
         });
     }
@@ -104,7 +104,7 @@ class Game extends EventEmitter {
     private checkWinner() {
         const hasWinner = this.hasWinner();
         if (this.status === GameState.OnGoing && hasWinner) {
-            this.updateStatusGame(hasWinner.username, 'win');
+            this.updateStatusGame(hasWinner.id, hasWinner.username, 'win');
             const b: BoardController = <BoardController>this.boards.get(hasWinner.id);
             b.stop(true);
             this.status = GameState.Opened;
@@ -131,13 +131,14 @@ class Game extends EventEmitter {
         const newAdmin = this.players.values().next().value;
         newAdmin.setRole(PlayerType.Admin);
 
-        this.updateStatusGame(newAdmin.username, 'owner');
+        this.updateStatusGame(newAdmin.id, newAdmin.username, 'owner');
     }
 
-    private updateStatusGame(username: string, action:string) {
+    private updateStatusGame(socketId: string, username: string, action:string) {
         this.emit('update_game_state', {
             username,
             action,
+            id: socketId,
             count: this.players.size,
         });
     }
@@ -158,7 +159,7 @@ class Game extends EventEmitter {
                 socket,
                 this.pieces);
 
-            this.updateStatusGame(username, 'joined');
+            this.updateStatusGame(player.id, username, 'joined');
 
             this.initListeners(boardController);
             this.boards.set(socket.id, boardController);

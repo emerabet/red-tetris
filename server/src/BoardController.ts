@@ -183,7 +183,7 @@ class BoardController extends EventEmitter {
         }
         this.moveSide(Direction.Up);
         this.currentBoard.clear(this.currentPiece);
-        for (let i = 0; i < nb; i++) {
+        for (let i = 0; i < nb; i += 1) {
             this.currentBoard.addLockedRow();
         }
         this.draw();
