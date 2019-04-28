@@ -49,10 +49,10 @@ class Game extends EventEmitter {
         board.on('stop', (socketId:string) => {
             const player:Player|undefined = this.players.get(socketId);
             if (player !== undefined && player.isAdmin && this.status === GameState.OnGoing) {
-                this.pieces.length = 0;
                 this.boards.forEach((value) => {
                     value.stop();
                 });
+                this.pieces.length = 0;
                 this.status = GameState.Opened;
             }
         });
