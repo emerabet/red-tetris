@@ -145,11 +145,11 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
   }
 
   const play = () => {
-    socket !== null && socket.emit('init');
-  };
-
-  const restart = () => {
-    socket !== null && socket.emit('restart');
+    if (props.started === true) {
+      socket !== null && socket.emit('restart');
+    } else {
+      socket !== null && socket.emit('init');
+    }
   };
 
   return (
@@ -174,7 +174,6 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
             spectres={props.spectres}
             pieces={props.state.pieces}
             play={play}
-            restart={restart}
             started={props.started}
             count={props.count}
             username={props.username}
