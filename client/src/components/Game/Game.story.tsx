@@ -44,6 +44,7 @@ storiesOf('Game', module)
       }
       pieces="ZOL"
       play={() => 'void'}
+      restart={() => 'void'}
       count={2}
       username="test"
       action="jpinec"
@@ -89,6 +90,7 @@ storiesOf('Game', module)
       }
       pieces="ZOL"
       play={() => 'void'}
+      restart={() => 'void'}
       count={2}
       username="test"
       action="jpinec"
@@ -134,6 +136,7 @@ storiesOf('Game', module)
       }
       pieces="ZOL"
       play={() => 'void' }
+      restart={() => 'void'}
       count={2}
       username="test"
       action="jpinec"
