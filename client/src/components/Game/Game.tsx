@@ -23,6 +23,7 @@ interface GameProps {
   score: number;
   pieces: string;
   play: () => void;
+  restart: () => void;
   started: boolean;
   count: number;
   username: string;
@@ -105,7 +106,7 @@ const Game: React.SFC<GameProps> = (props) => {
         <div className="admBtnSmall">
       <AdminButton
       text={props.started ? 'restart' : 'start'}
-      play={props.play}
+      play={props.started ? props.restart : props.play}
     />
     </div>
         </div>}

@@ -32,7 +32,7 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
 
   useEffect(
     () => {
-      const t = setTimeout(() => props.updatePlayers(props.count, '', ''), 2000);
+      const t = setTimeout(() => props.updatePlayers(props.count, '', '', ''), 2000);
       return function cleanUp() {
         clearTimeout(t);
       };
@@ -94,7 +94,7 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
       }
     }
   }
-  
+
   useEffect(
     () => {
       if (started && socket !== null) {
@@ -116,6 +116,7 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
         username: player,
       },
     });
+    setStarted(true);
     setStarted(true);
     setSocket(s);
     props.history.push(`/#${room}[${player}]`);
@@ -147,6 +148,10 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
     socket !== null && socket.emit('init');
   };
 
+  const restart = () => {
+    socket !== null && socket.emit('restart');
+  };
+
   return (
     <div>
       {!started
@@ -169,6 +174,7 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
             spectres={props.spectres}
             pieces={props.state.pieces}
             play={play}
+            restart={restart}
             started={props.started}
             count={props.count}
             username={props.username}

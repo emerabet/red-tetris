@@ -52,9 +52,17 @@ export default function (state: GameState = initialState, action: any) {
         spectres,
       };
     case getType(gameActions.UPDATE_PLAYERS):
+      const spectresUpdate = [...state.spectres];
+      if (action.payload.action === 'left') {
+        const index = spectresUpdate.findIndex(s => s.id === action.payload.id);
+        if (index >= 0) {
+          spectresUpdate.splice(index, 1);
+        }
+      }
       return {
         ...state,
         ...action.payload,
+        spectres: spectresUpdate,
       };
 
     default:

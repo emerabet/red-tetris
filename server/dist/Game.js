@@ -79,17 +79,17 @@ class Game extends events_1.EventEmitter {
             else {
                 this.checkWinner();
             }
-            this.updateStatusGame(username, 'left');
+            this.updateStatusGame(socketId, username, 'left');
         });
-        board.on('game_over', ({ username }) => {
-            this.updateStatusGame(username, 'lost');
+        board.on('game_over', ({ id, username }) => {
+            this.updateStatusGame(id, username, 'lost');
             this.checkWinner();
         });
     }
     checkWinner() {
         const hasWinner = this.hasWinner();
         if (this.status === constants_1.GameState.OnGoing && hasWinner) {
-            this.updateStatusGame(hasWinner.username, 'win');
+            this.updateStatusGame(hasWinner.id, hasWinner.username, 'win');
             const b = this.boards.get(hasWinner.id);
             b.stop(true);
             this.status = constants_1.GameState.Opened;
@@ -112,12 +112,13 @@ class Game extends events_1.EventEmitter {
     assignNewAdministrator() {
         const newAdmin = this.players.values().next().value;
         newAdmin.setRole(constants_1.PlayerType.Admin);
-        this.updateStatusGame(newAdmin.username, 'owner');
+        this.updateStatusGame(newAdmin.id, newAdmin.username, 'owner');
     }
-    updateStatusGame(username, action) {
+    updateStatusGame(socketId, username, action) {
         this.emit('update_game_state', {
             username,
             action,
+            id: socketId,
             count: this.players.size,
         });
     }
@@ -129,7 +130,7 @@ class Game extends events_1.EventEmitter {
             this.players.set(socket.id, player);
             const board = new Board_1.default(height, width);
             const boardController = new BoardController_1.default(player, board, socket, this.pieces);
-            this.updateStatusGame(username, 'joined');
+            this.updateStatusGame(player.id, username, 'joined');
             this.initListeners(boardController);
             this.boards.set(socket.id, boardController);
         }

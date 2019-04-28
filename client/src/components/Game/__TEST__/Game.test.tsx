@@ -50,6 +50,7 @@ it('renders correctly with defaults', () => {
     }
     pieces="ZOL"
     play={() => 'void' }
+    restart={() => 'void'}
     count={2}
     username="test"
     action="jpinec"
@@ -104,6 +105,7 @@ it('renders correctly with defaults', () => {
     }
     pieces="ZOL"
     play={() => 'void' }
+    restart={() => 'void'}
     count={3}
     username="tdaest"
     action="win"
@@ -157,6 +159,7 @@ it('renders correctly with defaults', () => {
     }
     pieces="ZOL"
     play={() => 'void' }
+    restart={() => 'void'}
     count={3}
     username="tdaest"
     action="win"
@@ -210,6 +213,7 @@ it('renders correctly with defaults second', () => {
     }
     pieces="ZOL"
     play={() => 'void' }
+    restart={() => 'void'}
     count={3}
     username="tdaest"
     action="win"
