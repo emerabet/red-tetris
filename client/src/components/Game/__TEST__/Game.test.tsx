@@ -50,7 +50,6 @@ it('renders correctly with defaults', () => {
     }
     pieces="ZOL"
     play={() => 'void' }
-    restart={() => 'void'}
     count={2}
     username="test"
     action="jpinec"
@@ -105,7 +104,6 @@ it('renders correctly with defaults', () => {
     }
     pieces="ZOL"
     play={() => 'void' }
-    restart={() => 'void'}
     count={3}
     username="tdaest"
     action="win"
@@ -159,7 +157,6 @@ it('renders correctly with defaults', () => {
     }
     pieces="ZOL"
     play={() => 'void' }
-    restart={() => 'void'}
     count={3}
     username="tdaest"
     action="win"
@@ -196,15 +193,15 @@ it('renders correctly with defaults second', () => {
     room="SUPERROOM"
     player="BIG BOSS"
     spectres={
-      [{
-        id: 'oponent 1',
-        spectre: '0123456789',
-        username: 'aaaaa',
-      }, {
-        id: 'oponent 2',
-        spectre: '0123456789',
-        username: 'bbb',
-      },
+    [{
+      id: 'oponent 1',
+      spectre: '0123456789',
+      username: 'aaaaa',
+    }, {
+      id: 'oponent 2',
+      spectre: '0123456789',
+      username: 'bbb',
+    },
       {
         id: 'oponent 3',
         spectre: '0123456789',
@@ -213,12 +210,11 @@ it('renders correctly with defaults second', () => {
     }
     pieces="ZOL"
     play={() => 'void' }
-    restart={() => 'void'}
     count={3}
     username="tdaest"
     action="win"
   />));
-  button.setProps({spectres: 
+  button.setProps({spectres:
     [{
       id: 'oponent 1',
       spectre: '0123456789',
@@ -232,6 +228,6 @@ it('renders correctly with defaults second', () => {
       id: 'oponent 3',
       spectre: '0123456789',
       username: 'bbb',
-    }], started: true})
+    }], started: true}),
   button.unmount();
 });
