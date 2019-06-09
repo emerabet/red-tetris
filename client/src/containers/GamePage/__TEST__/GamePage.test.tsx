@@ -18,6 +18,11 @@ afterAll(() => React.useEffect.mockRestore());
 configure({ adapter: new Adapter() });
 
 it('renders correctly with defaults', () => {
+  const history = {
+    location: {
+      pathname: '',
+    },
+  };
   const gamePage = renderer.create(<GamePage
     state={{
       grid: [[]],
@@ -27,7 +32,7 @@ it('renders correctly with defaults', () => {
       spectre: '0000000000',
     }}
     nagivation={null}
-    history={null}
+    history={history}
     startGame={() => { }}
     endGame={() => { }}
     resetGame={() => { }}
@@ -48,6 +53,11 @@ it('renders correctly with defaults', () => {
 });
 
 it('renders correctly with defaults', () => {
+  const history = {
+    location: {
+      pathname: '',
+    },
+  };
   const gamePage = renderer.create(<GamePage
     state={{
       grid: [[]],
@@ -57,7 +67,7 @@ it('renders correctly with defaults', () => {
       spectre: '0000000000',
     }}
     nagivation={null}
-    history={null}
+    history={history}
     startGame={() => { }}
     endGame={() => { }}
     resetGame={() => { }}
@@ -77,10 +87,13 @@ it('renders correctly with defaults', () => {
   expect(gamePage).toMatchSnapshot();
 });
 
-it('renders correctly with defaults mount', (done:any) => {
+it('change count player action props', (done:any) => {
   // act(() => {
     const mockHistory = {
       push: (url:string) => console.log(url),
+      location: {
+        pathname: '',
+      },
     }
     const wrapper = mount((<Provider store={store}><GamePage
       state={{
@@ -108,10 +121,14 @@ it('renders correctly with defaults mount', (done:any) => {
       action="joined"
       updatePlayers={() => {}}
       /></Provider>));
-    wrapper.setProps({ username: 'test', action: 'test' });
+    wrapper.setProps({ username: 'test', action: 'test', count: 2 });
+    expect((wrapper).prop('username')).toEqual('test');
+    expect((wrapper).prop('action')).toEqual('test');
+    wrapper.props().children.props.updatePlayers(2, '', '');
     wrapper.find('.roomInput').simulate('focus');
     wrapper.find('.roomInput').simulate('change', { target: { value: 'Hello' } });
     wrapper.find('.roomInput').simulate('blur');
+    
     setTimeout(
       () => {
         setTimeout(
@@ -125,13 +142,18 @@ it('renders correctly with defaults mount', (done:any) => {
         );
       },
       1500);
+      
   // });
 });
 
 it('renders correctly with defaults mount', () => {
   // act(() => {
     window.history.pushState({}, 'test', '/#test[test]');
-
+  const history = {
+    location: {
+      pathname: '',
+    },
+  };
   const wrapper = shallow((<GamePage
     state={{
       grid: [[]],
@@ -141,7 +163,7 @@ it('renders correctly with defaults mount', () => {
       spectre: '0000000000',
     }}
     nagivation={null}
-    history={null}
+    history={history}
     startGame={() => { }}
     endGame={() => { }}
     resetGame={() => { }}

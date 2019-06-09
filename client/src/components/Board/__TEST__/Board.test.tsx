@@ -25,6 +25,6 @@ it('renders correctly with defaults', () => {
     [0, 0, 0, 5, 5, 5, 0, 0, 0, 0],
     [0, 5, 0, 0, 0, 4, 0, 0, 0, 0],
     [5, 5, 5, 4, 4, 4, 0, 0, 0, 0]]}
-    rowDestruction={[4]} />).toJSON();
+     />).toJSON();
   expect(board).toMatchSnapshot();
 });
