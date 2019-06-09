@@ -35,11 +35,12 @@ export default function (state: GameState = initialState, action: any) {
       };
     case getType(gameActions.UPDATE_STATE):
       const updatedState = action.payload.state;
-      updatedState.pieces = action.payload.state.pieces.substr(1);
+      if (updatedState != null)
+        updatedState.pieces = action.payload.state != null ? action.payload.state.pieces.substr(1) : '';
       return {
         ...state,
         started: true,
-        state: updatedState,
+        state: updatedState != null ? updatedState : initialState.state,
       };
     case getType(gameActions.UPDATE_SPECTRE):
       const spectres = [...state.spectres];
