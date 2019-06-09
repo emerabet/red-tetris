@@ -2,7 +2,7 @@ import io from 'socket.io-client';
 import GameServer from './../Server';
 import BoardController from './../BoardController';
 import Player from './../Player';
-import { PlayerType, IPlayerInfo, GameState, GameMode } from './../constants';
+import { PlayerType, GameState, GameMode } from './../constants';
 import Board from './../Board';
 import PieceFactory from '../PieceFactory';
 import Game from '../Game';
@@ -212,7 +212,7 @@ it('should add locked row to the board', () => {
         value: PieceFactory.createPiece('O'),
     });
 
-    boardController.takeMalus();
+    boardController.takeMalus(1);
     board.fill(Reflect.get(boardController, 'currentPiece'));
 
     expect(Reflect.get(board, 'playfield')).toEqual(expected);
@@ -272,7 +272,7 @@ it('should not add locked row to the board', () => {
         value: true,
     });
 
-    boardController.takeMalus();
+    boardController.takeMalus(4);
     board.fill(Reflect.get(boardController, 'currentPiece'));
 
     expect(Reflect.get(board, 'playfield')).toEqual(expected);

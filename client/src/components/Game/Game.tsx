@@ -12,11 +12,9 @@ import { useWindowSize } from '../../effects/useWindowSize';
 import { SpectreI } from '../../types/gameTypes';
 
 import './style.css';
-import { dirname } from 'path';
 
 interface GameProps {
   board: number[][];
-  row: number[];
   room: string;
   player: string;
   spectres: SpectreI[];
@@ -108,7 +106,6 @@ const Game: React.SFC<GameProps> = (props) => {
     return (
       <Board
         board={props.board}
-        rowDestruction={props.row}
       />
     );
   }

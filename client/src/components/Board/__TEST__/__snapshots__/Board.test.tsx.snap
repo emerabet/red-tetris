@@ -1954,7 +1954,7 @@ exports[`renders correctly with defaults 1`] = `
           </div>
         </div>
         <div
-          className="boardRowDestructionOK"
+          className="boardRowDestruction"
         >
           <div
             className="destructionRow"

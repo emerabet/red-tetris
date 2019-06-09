@@ -34,7 +34,6 @@ it('renders correctly with defaults started', () => {
     [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
     [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
     [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1]]}
-    row={[4]}
     room="SUPERROOM"
     player="BIG BOSS"
     spectres={
@@ -82,7 +81,6 @@ it('renders correctly with defaults not started', () => {
     [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
     [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
     [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1]]}
-    row={[5]}
     room="SUPERROOM"
     player="BIG BOSS"
     spectres={
@@ -135,7 +133,6 @@ it('renders correctly with defaults', () => {
     [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
     [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
     [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1]]}
-    row={[5]}
     room="SUPERROOM"
     player="BIG BOSS"
     spectres={
@@ -188,7 +185,6 @@ it('renders correctly with defaults and unmount', () => {
     [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
     [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
     [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1]]}
-    row={[5]}
     room="SUPERROOM"
     player="BIG BOSS"
     spectres={
@@ -260,7 +256,6 @@ it('renders correctly with defaults small screen', () => {
     [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
     [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
     [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1]]}
-    row={[4]}
     room="SUPERROOM"
     player="BIG BOSS"
     spectres={
@@ -312,7 +307,6 @@ it('renders correctly with defaults medium screen', () => {
     [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
     [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
     [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1]]}
-    row={[4]}
     room="SUPERROOM"
     player="BIG BOSS"
     spectres={
@@ -364,7 +358,6 @@ it('renders correctly with defaults big screen', () => {
     [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
     [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
     [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1]]}
-    row={[4]}
     room="SUPERROOM"
     player="BIG BOSS"
     spectres={

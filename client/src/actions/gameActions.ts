@@ -45,13 +45,14 @@ export const updateSpectre = (spectre: SpectreI) => {
   };
 };
 
-export const updatePlayers = (count: number, username: string, action: string) => {
+export const updatePlayers = (count: number, username: string, action: string, id: string) => {
   return {
     type: getType(UPDATE_PLAYERS),
     payload: {
       count,
       username,
       action,
+      id,
     },
   };
 };

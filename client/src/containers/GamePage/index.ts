@@ -22,8 +22,8 @@ export const mapDispatchToProps = (dispatch: Dispatch) => ({
   startGame: (room: string, player: string) =>
     dispatch(startGameAsync({ room, player })),
   endGame: () => dispatch(endGameAsync()),
-  updatePlayers: (count:number, username: string, action: string) =>
-  dispatch(updatePlayers(count, username, action)),
+  updatePlayers: (count:number, username: string, action: string, id:string) =>
+  dispatch(updatePlayers(count, username, action, id)),
 });
 
 export default connect(

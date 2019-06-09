@@ -2616,7 +2616,7 @@ exports[`renders correctly with defaults 1`] = `
             </div>
           </div>
           <div
-            className="boardRowDestructionOK"
+            className="boardRowDestruction"
           >
             <div
               className="destructionRow"
@@ -9177,7 +9177,7 @@ exports[`renders correctly with defaults big screen 1`] = `
                   </div>
                 </div>
                 <div
-                  className="boardRowDestructionOK"
+                  className="boardRowDestruction"
                 >
                   <div
                     className="destructionRow"
@@ -15771,7 +15771,7 @@ exports[`renders correctly with defaults medium screen 1`] = `
                   </div>
                 </div>
                 <div
-                  className="boardRowDestructionOK"
+                  className="boardRowDestruction"
                 >
                   <div
                     className="destructionRow"
@@ -22679,7 +22679,7 @@ exports[`renders correctly with defaults not started 1`] = `
             </div>
           </div>
           <div
-            className="boardRowDestructionOK"
+            className="boardRowDestruction"
           >
             <div
               className="destructionRow"
@@ -28420,7 +28420,7 @@ exports[`renders correctly with defaults small screen 1`] = `
                   </div>
                 </div>
                 <div
-                  className="boardRowDestructionOK"
+                  className="boardRowDestruction"
                 >
                   <div
                     className="destructionRow"
@@ -35084,7 +35084,7 @@ exports[`renders correctly with defaults started 1`] = `
             </div>
           </div>
           <div
-            className="boardRowDestructionOK"
+            className="boardRowDestruction"
           >
             <div
               className="destructionRow"

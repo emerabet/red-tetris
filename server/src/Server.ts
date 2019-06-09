@@ -2,9 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import http from 'http';
 import socketIo from 'socket.io';
-import path from 'path';
-
 import Game from './Game';
+import { IQuery } from './constants';
 
 class GameServer {
     private app:express.Application;
@@ -21,26 +20,22 @@ class GameServer {
 
         this.app.use(cors());
 
-        this.app.use(express.static('public'));
-
-        this.app.get('/', (req, res) => {
-            res.sendFile(path.join(__dirname, '../public/test.html'));
-        });
+        this.app.use(express.static('build'));
     }
 
     public async start() {
         this.games = new Map<string, Game>();
 
         this.io.on('connection', (socket:SocketIO.Socket) => {
-            const { room, username } = socket.handshake.query;
+            const { room, username } :IQuery = socket.handshake.query;
             if (!this.games.has(room)) {
                 const game = new Game(room);
                 this.games.set(room, game);
                 game.on('free_game', (room) => {
                     this.games.delete(room);
                 });
-                game.on('update_game_state', ({ count, username, action }) => {
-                    this.io.in(room).emit('update_game_state', count, username, action);
+                game.on('update_game_state', ({ count, username, action, id }) => {
+                    this.io.in(room).emit('update_game_state', count, username, action, id);
                 });
             }
             const game = this.games.get(room) as Game;

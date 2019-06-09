@@ -27,12 +27,10 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
   const [player, setPlayer] = useState('');
   const [started, setStarted] = useState(false);
   const [socket, setSocket] = useState<null | SocketIOClient.Socket>(null);
-  const initialRowDestruction: number[] = [];
-  const [row, setRow] = useState(initialRowDestruction);
 
   useEffect(
     () => {
-      const t = setTimeout(() => props.updatePlayers(props.count, '', ''), 2000);
+      const t = setTimeout(() => props.updatePlayers(props.count, '', '', ''), 2000);
       return function cleanUp() {
         clearTimeout(t);
       };
@@ -54,25 +52,6 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
       }
     },
     []);
-
-  useEffect(
-    () => {
-      if (props.state.grid && props.state.grid !== undefined) {
-        setRow([]);
-        for (let i = 0; i < props.state.grid.length; i += 1) {
-          let nbEmpty = 0;
-          for (let j = 0; j < props.state.grid[i].length; j += 1) {
-            if (props.state.grid[i][j] === 0) {
-              nbEmpty += 1;
-            }
-          }
-          if (nbEmpty === 0) {
-            setRow([...row, i]);
-          }
-        }
-      }
-    },
-    [props.state.grid]);
 
   function move(e: KeyboardEvent) {
     if (socket !== null) {
@@ -138,7 +117,11 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
   }
 
   const play = () => {
-    socket !== null && socket.emit('init');
+    if (props.started === true) {
+      socket !== null && socket.emit('restart');
+    } else {
+      socket !== null && socket.emit('init');
+    }
   };
 
   return (
@@ -157,7 +140,6 @@ const GamePage: React.SFC<GamePageProps> = (props) => {
             level={props.state.level}
             score={props.state.score}
             board={props.state.grid}
-            row={row}
             room={room}
             player={player}
             spectres={props.spectres}

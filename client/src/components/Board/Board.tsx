@@ -5,7 +5,6 @@ import './style.css';
 
 interface BoardProps {
   board: number[][];
-  rowDestruction: number[];
 }
 
 const Board: React.SFC<BoardProps> = (props) => {
@@ -31,8 +30,7 @@ const Board: React.SFC<BoardProps> = (props) => {
       <div className="board">
         {props.board.map((d: any, i: number) => {
           return (
-            <div key={i} className={props.rowDestruction.includes(i - 1)
-              ? 'boardRowDestructionOK' : 'boardRowDestruction'}>
+            <div key={i} className="boardRowDestruction">
               {
                 d.map((c: any, j: number) => {
                   return (

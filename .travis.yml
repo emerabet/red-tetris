@@ -9,3 +9,25 @@ before_install:
 script:
   - docker run red-tetris/backend npm run coverage
   - docker run red-tetris/frontend npm run coverage
+
+after_success:
+  - docker build -t emerabet/red-tetris-frontend -f client/Dockerfile.prod client/
+  - docker build -t emerabet/red-tetris-proxy proxy/
+  - docker build -t emerabet/red-tetris-backend -f server/Dockerfile.prod server/
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push emerabet/red-tetris-proxy
+  - docker push emerabet/red-tetris-backend
+  - docker push emerabet/red-tetris-frontend
+
+deploy:
+  provider: elasticbeanstalk
+  region: eu-west-3
+  app: red-tetris
+  env: RedTetris-env
+  bucket_name: elasticbeanstalk-eu-west-3-048253481248
+  bucket_path: red-tetris
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY

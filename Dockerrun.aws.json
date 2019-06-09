@@ -1,0 +1,30 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [{
+        "name": "client",
+        "image": "emerabet/red-tetris-frontend",
+        "hostname": "client",
+        "essential": false,
+        "memory": 128
+    },
+    {
+        "name": "back",
+        "image": "emerabet/red-tetris-backend",
+        "hostname": "back",
+        "essential": false,
+        "memory": 128
+    },
+    {
+        "name": "proxy",
+        "image": "emerabet/red-tetris-proxy",
+        "hostname": "proxy",
+        "essential": true,
+        "portMappings": [{
+                "hostPort": 80,
+                "containerPort": 80
+            }
+        ],
+        "links": ["client", "back"],
+        "memory": 128
+    }]
+}

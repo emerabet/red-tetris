@@ -28,7 +28,6 @@ storiesOf('Game', module)
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]}
-      row={[]}
       room="SUPERROOM"
       player="BIG BOSS"
       spectres={
@@ -73,7 +72,6 @@ storiesOf('Game', module)
       [0, 0, 0, 5, 5, 5, 0, 0, 0, 0],
       [0, 5, 0, 0, 0, 4, 0, 0, 0, 0],
       [5, 5, 5, 4, 4, 4, 0, 0, 0, 0]]}
-      row={[4]}
       room="SUPERROOM"
       player="BIG BOSS"
       spectres={
@@ -118,7 +116,6 @@ storiesOf('Game', module)
       [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
       [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
       [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1]]}
-      row={[4]}
       room="SUPERROOM"
       player="BIG BOSS"
       spectres={
