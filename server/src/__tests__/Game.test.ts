@@ -1,6 +1,6 @@
 import Game from './../Game';
 import BoardController from './../BoardController';
-import { GameState } from './../constants';
+import { GameState, IWaitlist } from './../constants';
 
 it('create game instance with the rigth name', () => {
     const game: Game = new Game('RoomName');
@@ -55,7 +55,8 @@ it('should not create a new boardController in not opened Game', () => {
     socket.join = jest.fn().mockImplementation();
     game.createBoard(8, 10, socket, 'playerName');
     const boards = Reflect.get(game, 'boards') as Map<string, BoardController>;
-    expect(socket.join).toHaveBeenCalledTimes(0);
+    const waitlist = Reflect.get(game, 'waitlist') as IWaitlist[];
+    expect(waitlist.length).toEqual(1);
     expect(boards.size).toEqual(0);
 });
 

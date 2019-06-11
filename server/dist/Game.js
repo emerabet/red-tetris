@@ -17,6 +17,7 @@ class Game extends events_1.EventEmitter {
         this.boards = new Map();
         this.players = new Map();
         this.pieces = [];
+        this.waitlist = [];
         this.mode = constants_1.GameMode.Solo;
     }
     get name() {
@@ -31,12 +32,17 @@ class Game extends events_1.EventEmitter {
         board.on('start', (socketId) => {
             const player = this.players.get(socketId);
             if (player !== undefined && player.isAdmin) {
+                console.log('WaitList: ', this.waitlist);
+                this.waitlist.forEach((value) => {
+                    this.boardAssign(value.player, value.socket, value.height, value.width);
+                });
                 this.createSetOfPieces();
                 this.status = constants_1.GameState.OnGoing;
                 this.mode = this.players.size > 1 ? constants_1.GameMode.Multiplyaer : constants_1.GameMode.Solo;
                 this.boards.forEach((value) => {
                     value.run();
                 });
+                this.waitlist.length = 0;
             }
         });
         board.on('stop', (socketId) => {
@@ -123,17 +129,37 @@ class Game extends events_1.EventEmitter {
         });
     }
     createBoard(height, width, socket, username) {
+        socket.join(this.room);
+        const role = this.players.size === 0 ? constants_1.PlayerType.Admin : constants_1.PlayerType.Player;
+        const player = new Player_1.default(socket.id, username, this.room, role);
         if (this.status === constants_1.GameState.Opened) {
-            socket.join(this.room);
-            const role = this.players.size === 0 ? constants_1.PlayerType.Admin : constants_1.PlayerType.Player;
-            const player = new Player_1.default(socket.id, username, this.room, role);
-            this.players.set(socket.id, player);
-            const board = new Board_1.default(height, width);
-            const boardController = new BoardController_1.default(player, board, socket, this.pieces);
-            this.updateStatusGame(player.id, username, 'joined');
-            this.initListeners(boardController);
-            this.boards.set(socket.id, boardController);
+            this.boardAssign(player, socket, height, width);
+            // const board:Board = new Board(height, width);
+            // const boardController = new BoardController(
+            //     player,
+            //     board,
+            //     socket,
+            //     this.pieces);
+            // this.updateStatusGame(player.id, username, 'joined');
+            // this.initListeners(boardController);
+            // this.boards.set(socket.id, boardController);
         }
+        else {
+            this.waitlist.push({
+                player,
+                socket,
+                width,
+                height,
+            });
+        }
+    }
+    boardAssign(player, socket, height, width) {
+        this.players.set(socket.id, player);
+        const board = new Board_1.default(height, width);
+        const boardController = new BoardController_1.default(player, board, socket, this.pieces);
+        this.updateStatusGame(player.id, player.username, 'joined');
+        this.initListeners(boardController);
+        this.boards.set(socket.id, boardController);
     }
 }
 exports.default = Game;

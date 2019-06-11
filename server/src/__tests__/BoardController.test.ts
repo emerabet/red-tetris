@@ -431,6 +431,32 @@ describe('socket restart', () => {
             const gams = Reflect.get(ser, 'games') as Map<string, Game>;
             const g = gams.values().next().value as Game;
 
+            const player = new Player('socketId',
+                                      'fake',
+                                      'roomName',
+                                      PlayerType.Player);
+
+            const socket:SocketIO.Socket = {
+                id: 'socketId',
+            } as SocketIO.Socket;
+
+            socket.on = jest.fn().mockImplementation();
+            socket.emit = jest.fn().mockImplementation();
+            socket.to = jest.fn().mockImplementation(() => {
+                return {
+                    emit: () => null,
+                };
+            });
+
+            const waitlist = [{
+                player,
+                socket,
+                height: 20,
+                width: 10,
+            }];
+            Object.defineProperty(g, 'waitlist', {
+                value: waitlist,
+            });
             const b = Reflect.get(g, 'boards');
             const bc = b.values().next().value as BoardController;
             const s = Reflect.get(bc, 'socket') as SocketIO.Socket;

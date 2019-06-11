@@ -3,7 +3,7 @@ import Player from './Player';
 import Board from './Board';
 import BoardController from './BoardController';
 import PieceFactory from './PieceFactory';
-import { PlayerType, GameState, GameMode, IPlayerInfo } from './constants';
+import { PlayerType, GameState, GameMode, IPlayerInfo, IWaitlist } from './constants';
 
 class Game extends EventEmitter {
     private room: string;
@@ -12,6 +12,7 @@ class Game extends EventEmitter {
     private pieces: string[];
     private status: GameState;
     private mode: GameMode;
+    private waitlist: IWaitlist[];
 
     constructor(room:string) {
         super();
@@ -20,6 +21,7 @@ class Game extends EventEmitter {
         this.boards = new Map<string, BoardController>();
         this.players = new Map<string, Player>();
         this.pieces = [];
+        this.waitlist = [];
         this.mode = GameMode.Solo;
     }
 
@@ -37,12 +39,18 @@ class Game extends EventEmitter {
         board.on('start', (socketId:string) => {
             const player:Player|undefined = this.players.get(socketId);
             if (player !== undefined && player.isAdmin) {
+                this.waitlist.forEach((value) => {
+                    this.boardAssign(value.player, value.socket, value.height, value.width);
+                });
+
                 this.createSetOfPieces();
                 this.status = GameState.OnGoing;
                 this.mode = this.players.size > 1 ? GameMode.Multiplyaer : GameMode.Solo;
                 this.boards.forEach((value) => {
                     value.run();
                 });
+
+                this.waitlist.length = 0;
             }
         });
 
@@ -147,23 +155,44 @@ class Game extends EventEmitter {
                        width:number,
                        socket:SocketIO.Socket,
                        username: string): void {
+
+        socket.join(this.room);
+        const role: number = this.players.size === 0 ? PlayerType.Admin : PlayerType.Player;
+        const player = new Player(socket.id, username, this.room, role);
         if (this.status === GameState.Opened) {
-            socket.join(this.room);
-            const role: number = this.players.size === 0 ? PlayerType.Admin : PlayerType.Player;
-            const player = new Player(socket.id, username, this.room, role);
-            this.players.set(socket.id, player);
-            const board:Board = new Board(height, width);
-            const boardController = new BoardController(
+            this.boardAssign(player, socket, height, width);
+            // const board:Board = new Board(height, width);
+            // const boardController = new BoardController(
+            //     player,
+            //     board,
+            //     socket,
+            //     this.pieces);
+
+            // this.updateStatusGame(player.id, username, 'joined');
+
+            // this.initListeners(boardController);
+            // this.boards.set(socket.id, boardController);
+        } else {
+            this.waitlist.push({
                 player,
-                board,
                 socket,
-                this.pieces);
-
-            this.updateStatusGame(player.id, username, 'joined');
-
-            this.initListeners(boardController);
-            this.boards.set(socket.id, boardController);
+                width,
+                height,
+            });
         }
+    }
+
+    private boardAssign(player: Player, socket: SocketIO.Socket, height: number, width: number) {
+        this.players.set(socket.id, player);
+        const board:Board = new Board(height, width);
+        const boardController = new BoardController(
+            player,
+            board,
+            socket,
+            this.pieces);
+        this.updateStatusGame(player.id, player.username, 'joined');
+        this.initListeners(boardController);
+        this.boards.set(socket.id, boardController);
     }
 }
 

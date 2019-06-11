@@ -1,6 +1,15 @@
+import Player from './Player';
+
 export interface IPlayerInfo {
     id: string;
     username: string;
+}
+
+export interface IWaitlist {
+    player: Player;
+    socket: SocketIO.Socket;
+    width: number;
+    height: number;
 }
 
 export interface IQuery {
